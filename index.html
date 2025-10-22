@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>One True Infotainment — Breaking News</title>
+<title>One True Infotainment — Breaking & First Citizen</title>
 <style>
   :root{
     --indigo:#0f0f1a; --amber:#ffb300; --navy:#152238; --red:#c62828;
     --cream:#faf7ef; --steel:#364054; --ink:#0b0d12; --gold:#a66f00;
+    --warm:#3a2112; /* warmer bed for Area 2 */
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -33,7 +34,7 @@
   .title h1{margin:0; font-size:clamp(1.6rem,3.5vw,2.6rem); text-transform:uppercase; letter-spacing:.08em}
   .title .sub{margin-top:.25rem; color:var(--steel); font-weight:600; font-size:.9rem; text-transform:uppercase}
 
-  /* Faux nav (presentational only) */
+  /* Nav (presentational) */
   .nav{background:linear-gradient(0deg,#11203a,#183052); border-top:3px solid var(--amber); border-bottom:3px solid var(--amber)}
   .nav__inner{max-width:1200px; margin:0 auto; padding:.4rem 1rem; display:flex; gap:1rem; flex-wrap:wrap}
   .nav a{background:#0d1b31; padding:.5rem .75rem; border:2px solid var(--amber); color:var(--amber); font-weight:800; text-transform:uppercase; font-size:.8rem; box-shadow:0 0 0 3px #0d1b31, 0 2px 0 rgba(0,0,0,.5)}
@@ -46,22 +47,34 @@
           border:4px solid var(--cream); outline:6px solid var(--navy); box-shadow:0 10px 0 rgba(0,0,0,.35)}
   .hero__label{margin:.75rem 0 1.25rem; display:inline-block; background:var(--amber); color:#1c1300; font-weight:900; padding:.25rem .5rem; border:3px solid var(--gold); text-transform:uppercase; letter-spacing:.08em; font-size:.8rem}
 
-  /* BREAKING NEWS — dominant block */
+  /* AREA 1 — BREAKING NEWS (dominant) */
   .breaking-wrap{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.15)); border-top:6px solid var(--red); border-bottom:6px solid var(--red); box-shadow:inset 0 0 0 4px rgba(198,40,40,.35)}
   .breaking{max-width:1200px; margin:0 auto; padding:1rem}
-  .breaking__flag{display:flex; align-items:center; gap:.6rem; color:#380000; background:var(--amber); border:4px double var(--gold); padding:.4rem .75rem; text-transform:uppercase; letter-spacing:.12em; font-weight:900; font-size:.95rem}
-  .breaking__flag .pulse{width:.75rem; height:.75rem; border-radius:999px; background:var(--red); box-shadow:0 0 0 .15rem #7f1d1d, 0 0 12px rgba(198,40,40,.9); animation:pulse 1.2s infinite alternate}
+  .flag{display:flex; align-items:center; gap:.6rem; color:#380000; background:var(--amber); border:4px double var(--gold); padding:.4rem .75rem; text-transform:uppercase; letter-spacing:.12em; font-weight:900; font-size:.95rem}
+  .flag .pulse{width:.75rem; height:.75rem; border-radius:999px; background:var(--red); box-shadow:0 0 0 .15rem #7f1d1d, 0 0 12px rgba(198,40,40,.9); animation:pulse 1.2s infinite alternate}
   @keyframes pulse{to{transform:scale(1.15); box-shadow:0 0 0 .25rem #7f1d1d, 0 0 18px rgba(198,40,40,1)}}
-
-  .breaking__stage{display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1rem}
-  .lede{
-    background:#1a2336; border:3px solid var(--amber); box-shadow:0 6px 0 rgba(0,0,0,.4);
-    padding:1rem; display:grid; gap:.5rem
-  }
+  .stage{display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1rem}
+  .lede{background:#1a2336; border:3px solid var(--amber); box-shadow:0 6px 0 rgba(0,0,0,.4); padding:1rem; display:grid; gap:.5rem}
   .lede h2{margin:0; font-size:clamp(1.4rem,5vw,2.2rem); line-height:1.1; color:var(--amber); text-transform:uppercase; letter-spacing:.06em; text-shadow:0 0 18px rgba(255,179,0,.35)}
   .lede p{margin:0; color:#d6d2c7}
   .meta{display:flex; gap:.75rem; flex-wrap:wrap; font-size:.8rem; color:#c9c5bb; opacity:.9}
   .tag{background:#0d1b31; color:var(--amber); border:2px solid var(--amber); padding:.1rem .4rem; font-weight:800; text-transform:uppercase}
+
+  /* AREA 2 — FIRST CITIZEN NEWS (fawning) */
+  .fc-wrap{background:linear-gradient(180deg, rgba(255,179,0,.06), rgba(198,40,40,.10)), radial-gradient(80% 60% at 50% -20%, rgba(255,179,0,.12), transparent 60%); border-top:6px double var(--gold); border-bottom:6px double var(--gold)}
+  .fc{max-width:1200px; margin:0 auto; padding:1rem}
+  .fc-flag{display:flex; align-items:center; gap:.6rem; background:linear-gradient(90deg, var(--amber), #ffc84a); color:#1c1300;
+           border:4px double var(--gold); padding:.45rem .8rem; text-transform:uppercase; letter-spacing:.12em; font-weight:900; font-size:.95rem}
+  .fc-flag .star{width:.9rem; height:.9rem; background:conic-gradient(from 0turn, #fff 0 25%, transparent 0 100%);
+                 -webkit-mask: radial-gradient(circle at 50% 38%, transparent 32%, #000 33%) top center/100% 100% no-repeat;
+                 mask: radial-gradient(circle at 50% 38%, transparent 32%, #000 33%) top center/100% 100% no-repeat; border-radius:2px}
+  .fc-grid{display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1rem}
+  .fc-item{background:linear-gradient(180deg, #2a1a12, var(--warm)); border:3px solid #b07a10; box-shadow:0 6px 0 rgba(0,0,0,.45); padding:1rem; display:grid; gap:.5rem}
+  .fc-item h3{margin:0; font-size:clamp(1.2rem,4.5vw,1.8rem); text-transform:uppercase; letter-spacing:.06em; color:#ffd56a}
+  .fc-item p{margin:0; color:#f2e7d3}
+  .fc-meta{display:flex; gap:.75rem; flex-wrap:wrap; font-size:.8rem; color:#f0e3c7; opacity:.95}
+  .fc-badge{background:#2d0f0f; color:#ffd56a; border:2px solid #b07a10; padding:.1rem .4rem; font-weight:800; text-transform:uppercase}
+  .fc-quote{margin-top:.4rem; font-style:italic; color:#ffe6a9; border-left:4px solid #b07a10; padding-left:.6rem}
 
   /* Footer */
   footer{background:var(--cream); color:var(--ink); border-top:6px solid var(--red); margin-top:auto}
@@ -92,7 +105,7 @@
     </div>
   </header>
 
-  <!-- nav (presentational) -->
+  <!-- nav -->
   <nav class="nav" aria-label="Primary">
     <div class="nav__inner">
       <a href="#">Home</a><a href="#">The Agency</a><a href="#">The Big One</a><a href="#">Contact</a><a href="#">Visuals</a>
@@ -107,11 +120,11 @@
     </div>
   </section>
 
-  <!-- BREAKING NEWS — dominates immediately under banner -->
+  <!-- AREA 1 — BREAKING NEWS -->
   <section class="breaking-wrap" aria-labelledby="breaking-flag">
     <div class="breaking">
-      <div id="breaking-flag" class="breaking__flag"><span class="pulse" aria-hidden="true"></span> Breaking News</div>
-      <div class="breaking__stage">
+      <div id="breaking-flag" class="flag"><span class="pulse" aria-hidden="true"></span> Breaking News</div>
+      <div class="stage">
         <article class="lede" id="lede" aria-live="assertive">
           <h2 id="headline">LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”</h2>
           <p id="summary">Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.</p>
@@ -125,12 +138,30 @@
     </div>
   </section>
 
-  <!-- (you can add more sections below later) -->
+  <!-- AREA 2 — NEWS ON THE FIRST CITIZEN -->
+  <section class="fc-wrap" aria-labelledby="fc-flag">
+    <div class="fc">
+      <div id="fc-flag" class="fc-flag"><span class="star" aria-hidden="true"></span> First Citizen Communications</div>
+      <div class="fc-grid">
+        <article class="fc-item" id="fc-item" aria-live="polite">
+          <h3 id="fc-head">Official: First Citizen personally optimizes sunrise schedule for greater national productivity.</h3>
+          <p id="fc-body">A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”</p>
+          <div class="fc-meta">
+            <span class="fc-badge">Communiqué</span>
+            <span id="fc-by">Office of Civic Gratitude</span>
+            <span id="fc-time">Updated <span id="fc-ts"></span></span>
+          </div>
+          <div class="fc-quote" id="fc-quote">“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.</div>
+        </article>
+      </div>
+    </div>
+  </section>
 
+  <!-- footer -->
   <footer>
     <div class="ftr">
       <div>© <span id="y"></span> One True Infotainment · A Doremus Heller project</div>
-      <div class="ftr__tag">v4.3 · Breaking Dominates</div>
+      <div class="ftr__tag">v4.4 · First Citizen Module</div>
     </div>
   </footer>
 
@@ -138,7 +169,7 @@
   // Year stamp
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // Simple rotating BREAKING items (in-canon flavored, editable)
+  // --- AREA 1: BREAKING ROTATOR ---
   const items = [
     {
       h: "LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
@@ -161,26 +192,55 @@
       by: "By Civic Affairs — L. Carter"
     }
   ];
-
   const headline = document.getElementById('headline');
   const summary  = document.getElementById('summary');
   const byline   = document.getElementById('byline');
   const timeLbl  = document.getElementById('time');
-
-  function stamp(){
-    const d = new Date();
-    timeLbl.textContent = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-  }
-
+  function stamp(){ const d=new Date(); timeLbl.textContent = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
   let idx = 0; stamp();
-  setInterval(()=> {
-    idx = (idx + 1) % items.length;
-    const it = items[idx];
-    headline.textContent = it.h;
-    summary.textContent  = it.s;
-    byline.textContent   = it.by;
-    stamp();
-  }, 6500); // rotate every 6.5s
+  setInterval(()=>{ idx=(idx+1)%items.length; const it=items[idx];
+    headline.textContent=it.h; summary.textContent=it.s; byline.textContent=it.by; stamp();
+  }, 6500);
+
+  // --- AREA 2: FIRST CITIZEN ROTATOR (fawning, with testimonials) ---
+  const fcItems = [
+    {
+      h:"Official: First Citizen personally optimizes sunrise schedule for greater national productivity.",
+      b:"A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”",
+      by:"Office of Civic Gratitude",
+      q:"“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming."
+    },
+    {
+      h:"Ceremonial hydration: First Citizen sips Correct Coffee; national morale up three points.",
+      b:"Lab instruments recorded unprecedented patriotism in the steam. Citizens encouraged to add a salute before the first sip.",
+      by:"Bureau of Refreshments and Allegiance",
+      q:"“My latte tasted like liberty,” reported Citizen Marco V."
+    },
+    {
+      h:"Efficiency miracle: motorcade traffic improves school attendance by inspiring earlier departures.",
+      b:"Parents cite the example of punctuality set by the First Citizen’s route optimization study.",
+      by:"Department of Educational Cheer",
+      q:"“We left 40 minutes earlier and felt 400% more American,” said Citizen family S."
+    },
+    {
+      h:"Applause protocol upgraded: seven claps now recommended for optimal gratitude output.",
+      b:"Ministry guidance: clap in odd primes to avoid subversive symmetry.",
+      by:"Office of Rhythmic Approval",
+      q:"“My palms sting with pride,” declared Citizen Dana K."
+    }
+  ];
+  const fch = document.getElementById('fc-head');
+  const fcb = document.getElementById('fc-body');
+  const fcy = document.getElementById('fc-by');
+  const fct = document.getElementById('fc-ts');
+  const fcq = document.getElementById('fc-quote');
+
+  function fcStamp(){ const d=new Date(); fct.textContent = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+  let fidx = 0; fcStamp();
+
+  setInterval(()=>{ fidx=(fidx+1)%fcItems.length; const it=fcItems[fidx];
+    fch.textContent=it.h; fcb.textContent=it.b; fcy.textContent=it.by; fcq.textContent=it.q; fcStamp();
+  }, 7800); // slightly desynced from Breaking
 </script>
 </body>
 </html>
