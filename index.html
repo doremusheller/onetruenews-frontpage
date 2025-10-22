@@ -329,5 +329,51 @@ renderFC(fcItems[fidx]);
 setInterval(()=>{ idx=(idx+1)%items.length; renderBreaking(items[idx]); }, 6500);
 setInterval(()=>{ fidx=(fidx+1)%fcItems.length; renderFC(fcItems[fidx]); }, 7800);
 </script>
+  <script>
+/* ---- One True Infotainment asset check ---- */
+const expected = [
+  "assets/banner.png",
+  "assets/breaking-1.png",
+  "assets/breaking-2.png",
+  "assets/breaking-3.png",
+  "assets/breaking-4.png",
+  "assets/fc-1.jpg",
+  "assets/fc-2.jpg",
+  "assets/fc-3.jpg",
+  "assets/fc-4.jpg"
+];
+
+const panel = document.createElement("div");
+panel.style.position="fixed";
+panel.style.bottom="6px";
+panel.style.left="6px";
+panel.style.background="rgba(0,0,0,0.8)";
+panel.style.color="#ffb300";
+panel.style.padding="6px 10px";
+panel.style.font="12px monospace";
+panel.style.border="1px solid #ffb300";
+panel.style.zIndex="9999";
+panel.textContent="Checking assets…";
+document.body.appendChild(panel);
+
+let results=[];
+expected.forEach(path=>{
+  const img=new Image();
+  img.onload=()=>{ results.push(`✅ ${path}`); update(); };
+  img.onerror=()=>{ results.push(`❌ ${path}`); update(); };
+  img.src=path+"?v="+Date.now();
+});
+function update(){
+  if(results.length===expected.length){
+    console.clear();
+    console.log("=== One True Infotainment Asset Check ===");
+    results.forEach(r=>console.log(r));
+    const fails=results.filter(r=>r.includes("❌"));
+    panel.innerHTML=fails.length?`⚠️ Missing assets:<br>${fails.join("<br>")}`:"✅ All assets loaded";
+    panel.style.color=fails.length?"#f55":"#0f0";
+  }
+}
+</script>
+
 </body>
 </html>
