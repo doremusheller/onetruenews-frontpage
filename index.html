@@ -13,16 +13,16 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  background:var(--indigo); color:var(--cream); display:flex; flex-direction:column;
+  margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  background:var(--indigo);color:var(--cream);display:flex;flex-direction:column;
   padding-right:var(--meterW);
 }
 a{color:inherit;text-decoration:none}
-img,svg{display:block;max-width:100%;height:auto}
+img{display:block;max-width:100%;height:auto}
 
-/* Header / status / banner (nav removed) */
-.gov-bar{background:linear-gradient(90deg,var(--navy),#0e1a2d);border-bottom:3px solid var(--red);color:#fff;font-weight:700;font-size:.9rem;letter-spacing:.05em}
-.gov-bar__inner{max-width:1200px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:1rem;align-items:center}
+/* status + masthead */
+.gov-bar{background:linear-gradient(90deg,var(--navy),#0e1a2d);border-bottom:3px solid var(--red)}
+.gov-bar__inner{max-width:1200px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:1rem;align-items:center;color:#fff}
 .badge{background:var(--red);color:#fff;padding:.1rem .5rem;border-radius:.25rem;font-weight:800;font-size:.75rem;border:2px solid #7f1d1d;text-transform:uppercase}
 .ticker{overflow:hidden;white-space:nowrap;flex:1;opacity:.9}
 .ticker span{display:inline-block;padding-left:100%;animation:scroll 24s linear infinite}
@@ -35,25 +35,21 @@ header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--s
 .title h1{margin:0;font-size:clamp(1.6rem,3.5vw,2.6rem);text-transform:uppercase;letter-spacing:.08em}
 .title .sub{margin-top:.25rem;color:var(--steel);font-weight:600;font-size:.9rem;text-transform:uppercase}
 
+/* banner */
 .hero{background:#0d1626;border-bottom:4px solid var(--navy)}
 .hero__inner{max-width:1200px;margin:0 auto;padding:0 1rem}
-.banner{aspect-ratio:16/5;width:100%;background:url("assets/banner.png") center/cover no-repeat,linear-gradient(90deg,#1a2742,#0f1a2e);border:4px solid var(--cream);outline:6px solid var(--navy);box-shadow:0 10px 0 rgba(0,0,0,.35)}
+.banner{aspect-ratio:16/5;width:100%;background:url("media/banner.png") center/cover no-repeat,linear-gradient(90deg,#1a2742,#0f1a2e);border:4px solid var(--cream);outline:6px solid var(--navy);box-shadow:0 10px 0 rgba(0,0,0,.35)}
 .hero__label{margin:.75rem 0 1.25rem;display:inline-block;background:var(--amber);color:#1c1300;font-weight:900;padding:.25rem .5rem;border:3px solid var(--gold);text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}
 
-/* Media object for stories */
-.media{display:grid;grid-template-columns: 320px 1fr; gap:1rem; align-items:start}
+/* media object */
+.media{display:grid;grid-template-columns:320px 1fr;gap:1rem;align-items:start}
 .media__figure{margin:0}
-.media__figure img{width:100%;height:auto;border:3px solid rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.media__figure img{width:100%;border:3px solid rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.35)}
 .media__caption{font-size:.82rem;color:#e6d9c3;margin-top:.4rem;opacity:.95}
 .media__caption .credit{display:block;font-size:.75rem;color:#bfb1a0;opacity:.85;margin-top:.25rem}
 .media__body h2,.media__body h3{margin:0 0 .5rem}
 .media__body .lede__summary{margin:0;color:#d6d2c7}
-
-/* Responsive media */
-@media (max-width:880px){
-  .media{grid-template-columns:1fr; gap:.6rem}
-  .media__figure img{max-height:360px; object-fit:cover}
-}
+@media (max-width:880px){.media{grid-template-columns:1fr;gap:.6rem}.media__figure img{max-height:360px;object-fit:cover}}
 
 /* Area 1: Breaking */
 .breaking-wrap{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.15));border-top:6px solid var(--red);border-bottom:6px solid var(--red);box-shadow:inset 0 0 0 4px rgba(198,40,40,.35)}
@@ -64,15 +60,7 @@ header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--s
 .stage{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
 .lede{background:#1a2336;border:3px solid var(--amber);box-shadow:0 6px 0 rgba(0,0,0,.4);padding:1rem}
 
-/* Area 2: First Citizen */
-.fc-wrap{background:linear-gradient(180deg,rgba(255,179,0,.06),rgba(198,40,40,.10)),radial-gradient(80% 60% at 50% -20%,rgba(255,179,0,.12),transparent 60%);border-top:6px double var(--gold);border-bottom:6px double var(--gold)}
-.fc{max-width:1200px;margin:0 auto;padding:1rem}
-.fc-flag{display:flex;align-items:center;gap:.6rem;background:linear-gradient(90deg,var(--amber),#ffc84a);color:#1c1300;border:4px double var(--gold);padding:.45rem .8rem;text-transform:uppercase;letter-spacing:.12em;font-weight:900;font-size:.95rem}
-.fc-flag .star{width:.9rem;height:.9rem;background:conic-gradient(from 0turn,#fff 0 25%,transparent 0 100%);-webkit-mask:radial-gradient(circle at 50% 38%,transparent 32%,#000 33%) top center/100% 100% no-repeat;mask:radial-gradient(circle at 50% 38%,transparent 32%,#000 33%) top center/100% 100% no-repeat;border-radius:2px}
-.fc-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
-.fc-item{background:linear-gradient(180deg,#2a1a12,var(--warm));border:3px solid #b07a10;box-shadow:0 6px 0 rgba(0,0,0,.45);padding:1rem}
-
-/* Area 2+3 shared horizontal row (table) */
+/* Area 2 + 3 shared row */
 .row-23{max-width:1200px;margin:0 auto;padding:0 1rem 1.25rem}
 .tbl{width:100%;border-collapse:separate;border-spacing:12px}
 .tbl td{vertical-align:top}
@@ -80,8 +68,9 @@ header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--s
 .cell.fc-cell{border-color:rgba(255,179,0,.25)}
 .cell.tafaj-cell{border-color:rgba(198,40,40,.25)}
 .kicker{display:inline-block;background:var(--amber);color:#1c1300;font-weight:900;padding:.2rem .4rem;border:2px solid var(--gold);text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;margin-bottom:.5rem}
+@media (max-width:900px){.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}.tbl td{margin-bottom:12px}}
 
-/* Area 3: TAFAJ Meter (fixed right edge) */
+/* Right-edge TAFAJ meter */
 .tafaj{position:fixed;top:0;right:0;height:100vh;width:var(--meterW);z-index:50;display:flex;flex-direction:column;pointer-events:none}
 .meter{flex:1;display:flex;align-items:stretch;justify-content:center;padding:.5rem 0;background:linear-gradient(180deg,#4caf50 0%,#ffeb3b 32%,#ff9800 64%,#c62828 100%);border-left:4px solid #0009;box-shadow:inset 0 0 10px rgba(0,0,0,.5),-4px 0 0 var(--amber);position:relative}
 .meter::before{content:"LOW\\A GUARDED\\A ELEVATED\\A SEVERE\\A MORTAL";white-space:pre;writing-mode:vertical-rl;text-orientation:upright;font-weight:900;letter-spacing:.1em;font-size:.7rem;color:#000;opacity:.65;position:absolute;right:calc(100% + 4px);top:8px}
@@ -89,48 +78,29 @@ header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--s
 .needle::after{content:"MORTAL THREAT";position:absolute;inset:0;display:grid;place-items:center;font-size:.7rem;font-weight:900;color:#fff;text-shadow:0 0 6px rgba(255,0,0,.6);background:linear-gradient(180deg,transparent 0 40%,rgba(0,0,0,.25) 100%)}
 .tafaj-note{pointer-events:auto;background:rgba(12,10,16,.92);color:#ffd1a1;border-left:4px solid var(--amber);padding:.6rem .6rem .75rem;font-size:.85rem;line-height:1.25;box-shadow:-4px -2px 0 rgba(0,0,0,.45)}
 
-/* Footer */
+/* footer */
 footer{background:var(--cream);color:#1c1300;border-top:6px solid var(--red);margin-top:auto}
 .ftr{max-width:1200px;margin:0 auto;padding:1rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;font-size:.85rem}
 .ftr__tag{background:var(--amber);color:#1c1300;font-weight:900;padding:.2rem .5rem;border:2px solid var(--gold);text-transform:uppercase}
-
-/* Mobile: stack table cells */
-@media (max-width:900px){
-  .tbl, .tbl tbody, .tbl tr, .tbl td{display:block;width:100%}
-  .tbl td{margin-bottom:12px}
-}
 </style>
 </head>
 <body>
 
 <!-- status -->
-<div class="gov-bar" role="region" aria-label="System status">
-  <div class="gov-bar__inner">
-    <span class="badge">Official</span>
-    <div class="ticker" aria-hidden="true">
-      <span>Notice 17-B • All broadcasts subject to patriotic verification • Form OTI-1776 required for citizen compliments • Remember: Your enthusiasm is our efficiency.</span>
-    </div>
-  </div>
-</div>
+<div class="gov-bar"><div class="gov-bar__inner">
+  <span class="badge">Official</span>
+  <div class="ticker"><span>Notice 17-B • All broadcasts subject to patriotic verification • Form OTI-1776 required for citizen compliments • Remember: Your enthusiasm is our efficiency.</span></div>
+</div></div>
 
 <!-- masthead -->
-<header>
-  <div class="mast">
-    <div class="seal" aria-hidden="true"></div>
-    <div class="title">
-      <h1>One True Infotainment</h1>
-      <div class="sub">Correct Information for the Corrected States</div>
-    </div>
-  </div>
-</header>
+<header><div class="mast"><div class="seal" aria-hidden="true"></div>
+<div class="title"><h1>One True Infotainment</h1><div class="sub">Correct Information for the Corrected States</div></div></div></header>
 
 <!-- banner -->
-<section class="hero" aria-labelledby="hero-label">
-  <div class="hero__inner">
-    <div class="banner" role="img" aria-label="Kitschy patriotic banner with Corrected Flag motif"></div>
-    <span id="hero-label" class="hero__label">National Broadcast Surface</span>
-  </div>
-</section>
+<section class="hero" aria-labelledby="hero-label"><div class="hero__inner">
+  <div class="banner" role="img" aria-label="Kitschy patriotic banner"></div>
+  <span id="hero-label" class="hero__label">National Broadcast Surface</span>
+</div></section>
 
 <!-- AREA 1 — BREAKING -->
 <section class="breaking-wrap" aria-labelledby="breaking-flag">
@@ -139,149 +109,116 @@ footer{background:var(--cream);color:#1c1300;border-top:6px solid var(--red);mar
     <div class="stage">
       <article class="lede media" id="lede" aria-live="assertive">
         <figure class="media__figure">
-          <img id="brk-img" src="assets/breaking-1.png" alt="Emergency vehicles with sirens along the North Loop" loading="eager" />
+          <img id="brk-img" src="media/breaking-1.png" alt="Emergency vehicles with sirens along the North Loop" loading="eager" />
           <figcaption id="brk-cap" class="media__caption">Emergency units respond on the North Loop. <span class="credit">Photo: OTI Field Unit</span></figcaption>
         </figure>
         <div class="media__body">
           <h2 id="headline">LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”</h2>
           <p id="summary" class="lede__summary">Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.</p>
-          <div class="meta">
-            <span class="kicker">Developing</span>
-            <span id="byline">By OTI Desk — Maria S-L</span>
-            <span id="ts">Updated <span id="time"></span></span>
-          </div>
+          <div class="meta"><span class="kicker">Developing</span><span id="byline">By OTI Desk — Maria S-L</span><span id="ts">Updated <span id="time"></span></span></div>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- AREA 2 + 3 — shared horizontal axis (table row) -->
+<!-- AREA 2 + 3 on one row -->
 <section class="row-23" aria-label="First Citizen and TAFAJ bulletin">
-  <table class="tbl" role="presentation">
-    <tbody>
-      <tr>
-        <!-- Left cell: First Citizen block -->
-        <td class="cell fc-cell" style="width:68%">
-          <div class="fc">
-            <div class="fc-flag"><span class="star" aria-hidden="true"></span> First Citizen Communications</div>
-            <div class="fc-grid" style="margin-top:12px">
-              <article class="fc-item media" id="fc-item" aria-live="polite">
-                <figure class="media__figure">
-                  <img id="fc-img" src="assets/fc-1.jpg" alt="Skyline at dawn with a municipal clock tower silhouetted" loading="lazy" />
-                  <figcaption id="fc-cap" class="media__caption">Dawn schedule approved for national productivity. <span class="credit">Photo: Office of Civic Gratitude</span></figcaption>
-                </figure>
-                <div class="media__body">
-                  <h3 id="fc-head">Official: First Citizen personally optimizes sunrise schedule for greater national productivity.</h3>
-                  <p id="fc-body">A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”</p>
-                  <div class="fc-meta">
-                    <span class="kicker">Communiqué</span>
-                    <span id="fc-by">Office of Civic Gratitude</span>
-                    <span id="fc-time">Updated <span id="fc-ts"></span></span>
-                  </div>
-                  <div class="fc-quote" id="fc-quote">“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.</div>
-                </div>
-              </article>
+  <table class="tbl" role="presentation"><tbody><tr>
+    <td class="cell fc-cell" style="width:68%">
+      <div class="fc">
+        <div class="fc-flag"><span class="star" aria-hidden="true"></span> First Citizen Communications</div>
+        <div class="fc-grid" style="margin-top:12px">
+          <article class="fc-item media" id="fc-item" aria-live="polite">
+            <figure class="media__figure">
+              <img id="fc-img" src="media/fc-1.jpg" alt="Skyline at dawn with a municipal clock tower silhouetted" loading="lazy" />
+              <figcaption id="fc-cap" class="media__caption">Dawn schedule approved for national productivity. <span class="credit">Photo: Office of Civic Gratitude</span></figcaption>
+            </figure>
+            <div class="media__body">
+              <h3 id="fc-head">Official: First Citizen personally optimizes sunrise schedule for greater national productivity.</h3>
+              <p id="fc-body">A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”</p>
+              <div class="fc-meta"><span class="kicker">Communiqué</span><span id="fc-by">Office of Civic Gratitude</span><span id="fc-time">Updated <span id="fc-ts"></span></span></div>
+              <div class="fc-quote" id="fc-quote">“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.</div>
             </div>
-          </div>
-        </td>
-
-        <!-- Right cell: TAFAJ bulletin panel -->
-        <td class="cell tafaj-cell" style="width:32%">
-          <div class="kicker">TAFAJ Bulletin</div>
-          <p style="margin:.25rem 0 .5rem;color:#e9dbc5">Operational posture remains at <strong style="color:#ffb300">Mortal Threat</strong>. Citizens are encouraged to maintain corrective cheer in public spaces.</p>
-          <ul style="margin:.25rem 0 0 1rem;line-height:1.3;color:#d6d2c7">
-            <li>Report atmospheric unease to the Gratitude Portal.</li>
-            <li>Perform seven sanctioned claps upon kiosk approach.</li>
-            <li>Upload sightings of Corrected Flags for morale credit.</li>
-          </ul>
-          <hr style="border:none;border-top:2px solid rgba(255,255,255,.12);margin:.75rem 0" />
-          <small style="color:#c9c5bb;opacity:.9">Source: Office of Threat Appreciation & Friendly Adjustment (TAFAJ).</small>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </article>
+        </div>
+      </div>
+    </td>
+    <td class="cell tafaj-cell" style="width:32%">
+      <div class="kicker">TAFAJ Bulletin</div>
+      <p style="margin:.25rem 0 .5rem;color:#e9dbc5">Operational posture remains at <strong style="color:#ffb300">Mortal Threat</strong>. Citizens are encouraged to maintain corrective cheer in public spaces.</p>
+      <ul style="margin:.25rem 0 0 1rem;line-height:1.3;color:#d6d2c7">
+        <li>Report atmospheric unease to the Gratitude Portal.</li>
+        <li>Perform seven sanctioned claps upon kiosk approach.</li>
+        <li>Upload sightings of Corrected Flags for morale credit.</li>
+      </ul>
+      <hr style="border:none;border-top:2px solid rgba(255,255,255,.12);margin:.75rem 0" />
+      <small style="color:#c9c5bb;opacity:.9">Source: Office of Threat Appreciation & Friendly Adjustment (TAFAJ).</small>
+    </td>
+  </tr></tbody></table>
 </section>
 
-<!-- TAFAJ Meter (fixed right edge) -->
+<!-- fixed TAFAJ meter -->
 <aside class="tafaj" aria-label="TAFAJ Threat Meter">
-  <div class="meter" role="img" aria-label="TAFAJ threat level: Mortal Threat">
-    <div class="needle" aria-hidden="true" title="Mortal Threat"></div>
-  </div>
-  <div class="tafaj-note" role="note">
-    <strong>TAFAJ Advisory:</strong> heightened disruptions detected across general morale channels.
-    <small>Ongoing inefficiencies and atmospheric unease are attributed to TAFAJ influence.</small>
-  </div>
+  <div class="meter" role="img" aria-label="TAFAJ threat level: Mortal Threat"><div class="needle" aria-hidden="true" title="Mortal Threat"></div></div>
+  <div class="tafaj-note" role="note"><strong>TAFAJ Advisory:</strong> heightened disruptions detected across general morale channels.
+    <small>Ongoing inefficiencies and atmospheric unease are attributed to TAFAJ influence.</small></div>
 </aside>
 
 <!-- footer -->
-<footer>
-  <div class="ftr">
-    <div>© <span id="y"></span> One True Infotainment · A Doremus Heller project</div>
-    <div class="ftr__tag">v4.9b · BREAKING → PNG</div>
-  </div>
-</footer>
+<footer><div class="ftr"><div>© <span id="y"></span> One True Infotainment · A Doremus Heller project</div><div class="ftr__tag">v5.0 · media/ path reset</div></div></footer>
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
-/* BREAKING items — now PNGs */
+/* BREAKING (Carole → PNGs in /media/) */
 const items=[
-  { h:"LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
-    s:"Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.",
-    by:"By OTI Desk — Maria S-L",
-    img:"assets/breaking-1.png",
-    alt:"Emergency vehicles with sirens along the North Loop",
-    caption:"Emergency units respond on the North Loop.",
-    credit:"OTI Field Unit"
-  },
-  { h:"FLASH: Angels reroute parade through ‘enhanced celebration corridor’; residents told cheering is mandatory.",
-    s:"Officials: decibel levels below 85 may delay services. Complimentary flags issued upon proper paperwork.",
-    by:"By Field Unit — J. Murphy",
-    img:"assets/breaking-2.png",
-    alt:"Cones and crowd as parade reroute is enacted",
-    caption:"Detour activated for enhanced celebration corridor.",
-    credit:"Studio Control"
-  },
-  { h:"ALERT: Unscheduled lake ‘illumination test’ visible for miles; authorities call it a morale exercise.",
-    s:"Witnesses report sky-wide glow and faint marching songs. Ministry requests uploads to the Gratitude Portal.",
-    by:"By Studio Control — Tink (remote)",
-    img:"assets/breaking-3.png",
-    alt:"Citizens waving Corrected Flags along the lakeshore glow",
-    caption:"Illumination test reflects across the lake.",
-    credit:"OTI Night Desk"
-  },
-  { h:"UPDATE: Supply kiosks announce new ‘Correct Coffee’ surcharge to fund Freedom Efficiency.",
-    s:"Customers instructed to pre-salute the kiosk for express checkout privileges.",
-    by:"By Civic Affairs — L. Carter",
-    img:"assets/breaking-4.png",
-    alt:"Correct Coffee kiosk with salute required signage",
-    caption:"Correct Coffee surcharge announced.",
-    credit:"Civic Affairs Bureau"
-  }
+  {h:"LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
+   s:"Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.",
+   by:"By OTI Desk — Maria S-L",
+   img:"media/breaking-1.png", alt:"Emergency vehicles with sirens along the North Loop",
+   caption:"Emergency units respond on the North Loop.", credit:"OTI Field Unit"},
+  {h:"FLASH: Angels reroute parade through ‘enhanced celebration corridor’; residents told cheering is mandatory.",
+   s:"Officials: decibel levels below 85 may delay services. Complimentary flags issued upon proper paperwork.",
+   by:"By Field Unit — J. Murphy",
+   img:"media/breaking-2.png", alt:"Cones and crowd as parade reroute is enacted",
+   caption:"Detour activated for enhanced celebration corridor.", credit:"Studio Control"},
+  {h:"ALERT: Unscheduled lake ‘illumination test’ visible for miles; authorities call it a morale exercise.",
+   s:"Witnesses report sky-wide glow and faint marching songs. Ministry requests uploads to the Gratitude Portal.",
+   by:"By Studio Control — Tink (remote)",
+   img:"media/breaking-3.png", alt:"Citizens waving Corrected Flags along the lakeshore glow",
+   caption:"Illumination test reflects across the lake.", credit:"OTI Night Desk"},
+  {h:"UPDATE: Supply kiosks announce new ‘Correct Coffee’ surcharge to fund Freedom Efficiency.",
+   s:"Customers instructed to pre-salute the kiosk for express checkout privileges.",
+   by:"By Civic Affairs — L. Carter",
+   img:"media/breaking-4.png", alt:"Correct Coffee kiosk with salute required signage",
+   caption:"Correct Coffee surcharge announced.", credit:"Civic Affairs Bureau"}
 ];
 
-/* FIRST CITIZEN items (unchanged, JPGs) */
+/* FIRST CITIZEN (can stay JPGs, placed in /media/) */
 const fcItems=[
   {h:"Official: First Citizen personally optimizes sunrise schedule for greater national productivity.",
    b:"A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”",
    by:"Office of Civic Gratitude", q:"“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.",
-   img:"assets/fc-1.jpg", alt:"Skyline at dawn with a municipal clock tower silhouetted", caption:"Dawn schedule approved for national productivity.", credit:"Office of Civic Gratitude"},
+   img:"media/fc-1.jpg", alt:"Skyline at dawn with a municipal clock tower silhouetted",
+   caption:"Dawn schedule approved for national productivity.", credit:"Office of Civic Gratitude"},
   {h:"Ceremonial hydration: First Citizen sips Correct Coffee; national morale up three points.",
    b:"Lab instruments recorded unprecedented patriotism in the steam. Citizens encouraged to add a salute before the first sip.",
    by:"Bureau of Refreshments and Allegiance", q:"“My latte tasted like liberty,” reported Citizen Marco V.",
-   img:"assets/fc-2.jpg", alt:"Staged close-up of a hand lifting a branded paper coffee cup", caption:"Ceremonial sip noted by observers.", credit:"Bureau of Refreshments"},
+   img:"media/fc-2.jpg", alt:"Staged close-up of a hand lifting a branded paper coffee cup",
+   caption:"Ceremonial sip noted by observers.", credit:"Bureau of Refreshments"},
   {h:"Efficiency miracle: motorcade traffic improves school attendance by inspiring earlier departures.",
    b:"Parents cite the example of punctuality set by the First Citizen’s route optimization study.",
    by:"Department of Educational Cheer", q:"“We left 40 minutes earlier and felt 400% more American,” said Citizen family S.",
-   img:"assets/fc-3.jpg", alt:"Motorcade passing a school while children salute on the sidewalk", caption:"Motorcade inspires punctual starts.", credit:"Department of Educational Cheer"},
+   img:"media/fc-3.jpg", alt:"Motorcade passing a school while children salute on the sidewalk",
+   caption:"Motorcade inspires punctual starts.", credit:"Department of Educational Cheer"},
   {h:"Applause protocol upgraded: seven claps now recommended for optimal gratitude output.",
    b:"Ministry guidance: clap in odd primes to avoid subversive symmetry.",
    by:"Office of Rhythmic Approval", q:"“My palms sting with pride,” declared Citizen Dana K.",
-   img:"assets/fc-4.jpg", alt:"Close-up of hands mid-clap with a pamphlet titled Applause Protocol — 7 Claps", caption:"New applause standard issued.", credit:"Office of Rhythmic Approval"}
+   img:"media/fc-4.jpg", alt:"Close-up of hands mid-clap with a pamphlet titled Applause Protocol — 7 Claps",
+   caption:"New applause standard issued.", credit:"Office of Rhythmic Approval"}
 ];
 
-/* DOM refs (breaking) */
 const headline=document.getElementById('headline'),
       summary=document.getElementById('summary'),
       byline=document.getElementById('byline'),
@@ -289,7 +226,6 @@ const headline=document.getElementById('headline'),
       brkImg=document.getElementById('brk-img'),
       brkCap=document.getElementById('brk-cap');
 
-/* DOM refs (fc) */
 const fch=document.getElementById('fc-head'),
       fcb=document.getElementById('fc-body'),
       fcy=document.getElementById('fc-by'),
@@ -298,82 +234,29 @@ const fch=document.getElementById('fc-head'),
       fcImg=document.getElementById('fc-img'),
       fcCap=document.getElementById('fc-cap');
 
-/* helpers */
-function stamp(){ const d=new Date(); timeLbl.textContent=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
-function fcStamp(){ const d=new Date(); fct.textContent=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+function stamp(){const d=new Date();timeLbl.textContent=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});}
+function fcStamp(){const d=new Date();fct.textContent=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});}
 
 function renderBreaking(it){
-  headline.textContent = it.h;
-  summary.textContent  = it.s;
-  byline.textContent   = it.by;
-  brkImg.src           = it.img;
-  brkImg.alt           = it.alt || '';
-  brkCap.innerHTML     = `${it.caption || ''} <span class="credit">Photo: ${it.credit || 'OTI'}</span>`;
-  stamp();
+  headline.textContent=it.h; summary.textContent=it.s; byline.textContent=it.by;
+  brkImg.src=it.img; brkImg.alt=it.alt||''; brkCap.innerHTML=`${it.caption||''} <span class="credit">Photo: ${it.credit||'OTI'}</span>`; stamp();
 }
 function renderFC(it){
-  fch.textContent  = it.h;
-  fcb.textContent  = it.b;
-  fcy.textContent  = it.by;
-  fcq.textContent  = it.q;
-  fcImg.src        = it.img;
-  fcImg.alt        = it.alt || '';
-  fcCap.innerHTML  = `${it.caption || ''} <span class="credit">Photo: ${it.credit || 'OTI'}</span>`;
-  fcStamp();
+  fch.textContent=it.h; fcb.textContent=it.b; fcy.textContent=it.by; fcq.textContent=it.q;
+  fcImg.src=it.img; fcImg.alt=it.alt||''; fcCap.innerHTML=`${it.caption||''} <span class="credit">Photo: ${it.credit||'OTI'}</span>`; fcStamp();
 }
+let idx=0,fidx=0; renderBreaking(items[idx]); renderFC(fcItems[fidx]);
+setInterval(()=>{idx=(idx+1)%items.length;renderBreaking(items[idx]);},6500);
+setInterval(()=>{fidx=(fidx+1)%fcItems.length;renderFC(fcItems[fidx]);},7800);
 
-/* init + rotations */
-let idx=0, fidx=0;
-renderBreaking(items[idx]);
-renderFC(fcItems[fidx]);
-setInterval(()=>{ idx=(idx+1)%items.length; renderBreaking(items[idx]); }, 6500);
-setInterval(()=>{ fidx=(fidx+1)%fcItems.length; renderFC(fcItems[fidx]); }, 7800);
+/* on-page asset check (remove later) */
+(function(){
+  const expected=["media/banner.png","media/breaking-1.png","media/breaking-2.png","media/breaking-3.png","media/breaking-4.png","media/fc-1.jpg","media/fc-2.jpg","media/fc-3.jpg","media/fc-4.jpg"];
+  const panel=document.createElement("div");panel.style.cssText="position:fixed;bottom:6px;left:6px;background:#000c;color:#ffb300;padding:6px 10px;font:12px monospace;border:1px solid #ffb300;z-index:9999";
+  panel.textContent="Checking media/…";document.body.appendChild(panel);
+  let r=[];expected.forEach(p=>{const i=new Image();i.onload=()=>{r.push(`✅ ${p}`);u();};i.onerror=()=>{r.push(`❌ ${p}`);u();};i.src=p+"?v="+Date.now();});
+  function u(){if(r.length===expected.length){const fail=r.filter(x=>x.includes("❌"));panel.innerHTML=fail.length?`⚠️ Missing:<br>${fail.join("<br>")}`:"✅ All media present";panel.style.color=fail.length?"#f55":"#0f0";}}
+})();
 </script>
-  <script>
-/* ---- One True Infotainment asset check ---- */
-const expected = [
-  "assets/banner.png",
-  "assets/breaking-1.png",
-  "assets/breaking-2.png",
-  "assets/breaking-3.png",
-  "assets/breaking-4.png",
-  "assets/fc-1.jpg",
-  "assets/fc-2.jpg",
-  "assets/fc-3.jpg",
-  "assets/fc-4.jpg"
-];
-
-const panel = document.createElement("div");
-panel.style.position="fixed";
-panel.style.bottom="6px";
-panel.style.left="6px";
-panel.style.background="rgba(0,0,0,0.8)";
-panel.style.color="#ffb300";
-panel.style.padding="6px 10px";
-panel.style.font="12px monospace";
-panel.style.border="1px solid #ffb300";
-panel.style.zIndex="9999";
-panel.textContent="Checking assets…";
-document.body.appendChild(panel);
-
-let results=[];
-expected.forEach(path=>{
-  const img=new Image();
-  img.onload=()=>{ results.push(`✅ ${path}`); update(); };
-  img.onerror=()=>{ results.push(`❌ ${path}`); update(); };
-  img.src=path+"?v="+Date.now();
-});
-function update(){
-  if(results.length===expected.length){
-    console.clear();
-    console.log("=== One True Infotainment Asset Check ===");
-    results.forEach(r=>console.log(r));
-    const fails=results.filter(r=>r.includes("❌"));
-    panel.innerHTML=fails.length?`⚠️ Missing assets:<br>${fails.join("<br>")}`:"✅ All assets loaded";
-    panel.style.color=fails.length?"#f55":"#0f0";
-  }
-}
-</script>
-
 </body>
 </html>
