@@ -1,49 +1,223 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>One True Infotainment</title>
-  <style>
-    :root {
-      --amber: #ffb300;
-      --indigo: #0f0f1a;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>One True Infotainment — Official Site</title>
+<style>
+  :root{
+    /* Canon + DMV-patriotic layer */
+    --indigo:#0f0f1a;      /* site background */
+    --amber:#ffb300;       /* accent / highlights */
+    --navy:#152238;        /* government blue */
+    --red:#c62828;         /* over-earnest red */
+    --cream:#faf7ef;       /* paper-beige */
+    --steel:#364054;       /* utilitarian steel */
+    --ink:#0b0d12;         /* deep text */
+  }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      background-color: var(--indigo);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: var(--amber);
-      font-family: "Orbitron", sans-serif;
-    }
+  /* Reset-ish */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    background: var(--indigo);
+    color: var(--cream);
+    display:flex; flex-direction:column;
+  }
+  a{color:inherit; text-decoration:none}
+  img{max-width:100%; height:auto; display:block}
 
-    h1 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 3px solid var(--amber);
-      border-radius: 1rem;
-      padding: 1rem 2rem;
-      box-shadow: 0 0 25px rgba(255, 179, 0, 0.4);
-      text-align: center;
-    }
+  /* Top bureaucratic status bar */
+  .gov-bar{
+    background: linear-gradient(90deg,var(--navy),#0e1a2d);
+    border-bottom: 3px solid var(--red);
+    color: #fff;
+    font-weight: 700;
+    font-size:.9rem;
+    letter-spacing:.05em;
+  }
+  .gov-bar__inner{
+    max-width: 1200px; margin:0 auto; padding:.5rem 1rem; display:flex; gap:1rem; align-items:center;
+  }
+  .badge{
+    background: var(--red); color:#fff; padding:.1rem .5rem; border-radius:.25rem; font-weight:800; font-size:.75rem;
+    border:2px solid #7f1d1d; text-transform:uppercase;
+  }
+  .ticker{
+    overflow:hidden; white-space:nowrap; flex:1; opacity:.9;
+  }
+  .ticker span{ display:inline-block; padding-left:100%; animation: scroll 24s linear infinite}
+  @keyframes scroll{to{transform: translateX(-100%)}}
 
-    footer {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      opacity: 0.6;
-    }
-  </style>
+  /* Masthead */
+  header{
+    background: var(--cream);
+    color: var(--ink);
+    border-bottom: 4px double var(--steel);
+    box-shadow: 0 6px 0 rgba(0,0,0,.25);
+  }
+  .mast{
+    max-width:1200px; margin:0 auto; padding:1rem; display:grid; grid-template-columns: auto 1fr; gap:1rem; align-items:center;
+  }
+  .seal{
+    width:84px; height:84px; border-radius:999px; background:
+      radial-gradient(circle at 30% 30%, #fff8e1 0 25%, transparent 26%),
+      repeating-conic-gradient(from 0deg, var(--red) 0 10deg, #ffffff 10deg 20deg, #1e2f57 20deg 30deg);
+    border:4px solid var(--navy);
+    box-shadow: inset 0 0 0 4px #fff, 0 2px 4px rgba(0,0,0,.4);
+    position:relative;
+  }
+  .seal::after{
+    content:"OTI"; position:absolute; inset:0; display:grid; place-items:center;
+    color:var(--navy); font-weight:900; letter-spacing:.08em; background:rgba(255,255,255,.15); border-radius:999px;
+  }
+  .title{
+    line-height:1.05;
+  }
+  .title h1{
+    margin:0; font-size:clamp(1.6rem,3.5vw,2.6rem); text-transform:uppercase; letter-spacing:.08em;
+  }
+  .title .sub{
+    margin-top:.25rem; color: var(--steel); font-weight:600; font-size:.9rem; text-transform:uppercase;
+  }
+
+  /* Officious nav (non-functional placeholders for now) */
+  .nav{
+    background:linear-gradient(0deg,#11203a,#183052);
+    border-top:3px solid var(--amber);
+    border-bottom:3px solid var(--amber);
+  }
+  .nav__inner{
+    max-width:1200px; margin:0 auto; padding:.4rem 1rem; display:flex; gap:1rem; flex-wrap:wrap;
+  }
+  .nav a{
+    background: #0d1b31; padding:.5rem .75rem; border:2px solid var(--amber);
+    color:var(--amber); font-weight:800; text-transform:uppercase; font-size:.8rem;
+    box-shadow: 0 0 0 3px #0d1b31, 0 2px 0 rgba(0,0,0,.5);
+  }
+
+  /* Hero banner */
+  .hero{
+    background: #0d1626;
+    border-bottom:4px solid var(--navy);
+  }
+  .hero__inner{
+    max-width:1200px; margin:0 auto; padding:0 1rem;
+  }
+  .banner{
+    aspect-ratio: 16/5;
+    width:100%;
+    background:
+      url("assets/banner.png") center/cover no-repeat,
+      linear-gradient(90deg,#1a2742,#0f1a2e);
+    border:4px solid var(--cream);
+    outline:6px solid var(--navy);
+    box-shadow: 0 10px 0 rgba(0,0,0,.35);
+  }
+  .hero__label{
+    margin:.75rem 0 1.25rem;
+    display:inline-block;
+    background: var(--amber); color:#1c1300; font-weight:900; padding:.25rem .5rem; border:3px solid #a66f00;
+    text-transform:uppercase; letter-spacing:.08em; font-size:.8rem;
+  }
+
+  /* Center proclamation */
+  .proclamation{
+    text-align:center; padding:2.25rem 1rem 2.75rem;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.15)),
+      radial-gradient(circle at 50% -30%, rgba(255,179,0,.15), transparent 50%);
+    border-top:4px double rgba(255,255,255,.12);
+    border-bottom:4px double rgba(255,255,255,.12);
+  }
+  .proclamation h2{
+    margin:0 auto .75rem; max-width:22ch;
+    font-size:clamp(1.4rem,4.5vw,2.2rem);
+    color: var(--amber); text-transform:uppercase; letter-spacing:.12em;
+    text-shadow: 0 0 18px rgba(255,179,0,.35);
+  }
+  .stamp{
+    display:inline-block; margin-top:.5rem; padding:.4rem .7rem;
+    border:3px dashed var(--amber); color:var(--amber); font-weight:900; text-transform:uppercase; letter-spacing:.08em;
+    transform: rotate(-2deg);
+    background: rgba(255,179,0,.08);
+  }
+
+  /* Footer — DMV energy */
+  footer{
+    background: var(--cream); color: var(--ink);
+    border-top: 6px solid var(--red);
+    margin-top:auto;
+  }
+  .ftr{
+    max-width:1200px; margin:0 auto; padding:1rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    font-size:.85rem;
+  }
+  .ftr__left{display:flex; gap:.5rem; align-items:center; color:var(--steel)}
+  .ftr__tag{background:var(--amber); color:#1c1300; font-weight:900; padding:.2rem .5rem; border:2px solid #a66f00; text-transform:uppercase;}
+</style>
 </head>
 <body>
-  <h1>ONE TRUE INFOTAINMENT</h1>
-  <footer>v4.0 – The Big One / OneTrueInfotainment.Net</footer>
+
+  <!-- Bureaucratic “status” bar with rolling info -->
+  <div class="gov-bar" role="region" aria-label="System status">
+    <div class="gov-bar__inner">
+      <span class="badge">Official</span>
+      <div class="ticker" aria-hidden="true">
+        <span>Notice 17-B: All broadcasts subject to patriotic verification • Form OTI-1776 now required for citizen compliments • Remember: Your enthusiasm is our efficiency.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header>
+    <div class="mast">
+      <div class="seal" aria-hidden="true"></div>
+      <div class="title">
+        <h1>One True Infotainment</h1>
+        <div class="sub">Correct Information for the Corrected States</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Officious faux nav (nonfunctional for now) -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <a href="#">Home</a>
+      <a href="#">The Agency</a>
+      <a href="#">The Big One</a>
+      <a href="#">Contact</a>
+      <a href="#">Visuals</a>
+    </div>
+  </nav>
+
+  <!-- Hero banner -->
+  <section class="hero" aria-labelledby="hero-label">
+    <div class="hero__inner">
+      <div class="banner" role="img" aria-label="Kitschy patriotic banner with stars and stripes"></div>
+      <span id="hero-label" class="hero__label">National Broadcast Surface</span>
+    </div>
+  </section>
+
+  <!-- Central proclamation -->
+  <section class="proclamation">
+    <h2>Correct News. Efficiently Administered.</h2>
+    <div class="stamp">Form OTI-NEWS-001 Approved</div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ftr">
+      <div class="ftr__left">© <span id="y"></span> One True Infotainment · A Doremus Heller project</div>
+      <div class="ftr__tag">v4.2 · Grundy Aesthetic</div>
+    </div>
+  </footer>
+
+<script>
+  // tiny helper for year stamp; no frameworks.
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
