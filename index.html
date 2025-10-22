@@ -20,7 +20,7 @@ body{
 a{color:inherit;text-decoration:none}
 img,svg{display:block;max-width:100%;height:auto}
 
-/* Header / status / banner (nav removed per request) */
+/* Header / status / banner (nav removed) */
 .gov-bar{background:linear-gradient(90deg,var(--navy),#0e1a2d);border-bottom:3px solid var(--red);color:#fff;font-weight:700;font-size:.9rem;letter-spacing:.05em}
 .gov-bar__inner{max-width:1200px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:1rem;align-items:center}
 .badge{background:var(--red);color:#fff;padding:.1rem .5rem;border-radius:.25rem;font-weight:800;font-size:.75rem;border:2px solid #7f1d1d;text-transform:uppercase}
@@ -186,7 +186,7 @@ footer{background:var(--cream);color:#1c1300;border-top:6px solid var(--red);mar
           </div>
         </td>
 
-        <!-- Right cell: TAFAJ bulletin panel (aligns horizontally with Area 2; meter remains fixed on far right) -->
+        <!-- Right cell: TAFAJ bulletin panel -->
         <td class="cell tafaj-cell" style="width:32%">
           <div class="kicker">TAFAJ Bulletin</div>
           <p style="margin:.25rem 0 .5rem;color:#e9dbc5">Operational posture remains at <strong style="color:#ffb300">Mortal Threat</strong>. Citizens are encouraged to maintain corrective cheer in public spaces.</p>
@@ -218,14 +218,14 @@ footer{background:var(--cream);color:#1c1300;border-top:6px solid var(--red);mar
 <footer>
   <div class="ftr">
     <div>© <span id="y"></span> One True Infotainment · A Doremus Heller project</div>
-    <div class="ftr__tag">v4.9 · FC + TAFAJ Row · Nav removed</div>
+    <div class="ftr__tag">v4.9b · BREAKING → PNG</div>
   </div>
 </footer>
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
-/* BREAKING items with images */
+/* BREAKING items — now PNGs */
 const items=[
   { h:"LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
     s:"Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.",
@@ -261,7 +261,7 @@ const items=[
   }
 ];
 
-/* FIRST CITIZEN items */
+/* FIRST CITIZEN items (unchanged, JPGs) */
 const fcItems=[
   {h:"Official: First Citizen personally optimizes sunrise schedule for greater national productivity.",
    b:"A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”",
