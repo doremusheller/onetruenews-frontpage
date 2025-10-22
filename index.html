@@ -20,22 +20,21 @@ body{
 a{color:inherit;text-decoration:none}
 img,svg{display:block;max-width:100%;height:auto}
 
-/* Header / nav / banner */
+/* Header / status / banner (nav removed per request) */
 .gov-bar{background:linear-gradient(90deg,var(--navy),#0e1a2d);border-bottom:3px solid var(--red);color:#fff;font-weight:700;font-size:.9rem;letter-spacing:.05em}
 .gov-bar__inner{max-width:1200px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:1rem;align-items:center}
 .badge{background:var(--red);color:#fff;padding:.1rem .5rem;border-radius:.25rem;font-weight:800;font-size:.75rem;border:2px solid #7f1d1d;text-transform:uppercase}
 .ticker{overflow:hidden;white-space:nowrap;flex:1;opacity:.9}
 .ticker span{display:inline-block;padding-left:100%;animation:scroll 24s linear infinite}
 @keyframes scroll{to{transform:translateX(-100%)}}
+
 header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--steel);box-shadow:0 6px 0 rgba(0,0,0,.25)}
 .mast{max-width:1200px;margin:0 auto;padding:1rem;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center}
 .seal{width:84px;height:84px;border-radius:999px;background:radial-gradient(circle at 30% 30%,#fff8e1 0 25%,transparent 26%),repeating-conic-gradient(from 0deg,var(--red) 0 10deg,#ffffff 10deg 20deg,#1e2f57 20deg 30deg);border:4px solid var(--navy);box-shadow:inset 0 0 0 4px #fff,0 2px 4px rgba(0,0,0,.4);position:relative}
-.seal::after{content:"OTI";position:absolute;inset:0;display:grid;place-items:center;color:var(--navy);font-weight:900;letter-spacing:.08em;background:rgba(255,255,255,.15);border-radius:999px}
+.seal::after{content:"OTI";position:absolute;inset:0;display:grid;place-items:center;color:#1a2742;font-weight:900;letter-spacing:.08em;background:rgba(255,255,255,.15);border-radius:999px}
 .title h1{margin:0;font-size:clamp(1.6rem,3.5vw,2.6rem);text-transform:uppercase;letter-spacing:.08em}
 .title .sub{margin-top:.25rem;color:var(--steel);font-weight:600;font-size:.9rem;text-transform:uppercase}
-.nav{background:linear-gradient(0deg,#11203a,#183052);border-top:3px solid var(--amber);border-bottom:3px solid var(--amber)}
-.nav__inner{max-width:1200px;margin:0 auto;padding:.4rem 1rem;display:flex;gap:1rem;flex-wrap:wrap}
-.nav a{background:#0d1b31;padding:.5rem .75rem;border:2px solid var(--amber);color:var(--amber);font-weight:800;text-transform:uppercase;font-size:.8rem;box-shadow:0 0 0 3px #0d1b31,0 2px 0 rgba(0,0,0,.5)}
+
 .hero{background:#0d1626;border-bottom:4px solid var(--navy)}
 .hero__inner{max-width:1200px;margin:0 auto;padding:0 1rem}
 .banner{aspect-ratio:16/5;width:100%;background:url("assets/banner.png") center/cover no-repeat,linear-gradient(90deg,#1a2742,#0f1a2e);border:4px solid var(--cream);outline:6px solid var(--navy);box-shadow:0 10px 0 rgba(0,0,0,.35)}
@@ -73,7 +72,16 @@ header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--s
 .fc-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
 .fc-item{background:linear-gradient(180deg,#2a1a12,var(--warm));border:3px solid #b07a10;box-shadow:0 6px 0 rgba(0,0,0,.45);padding:1rem}
 
-/* Area 3: TAFAJ Meter */
+/* Area 2+3 shared horizontal row (table) */
+.row-23{max-width:1200px;margin:0 auto;padding:0 1rem 1.25rem}
+.tbl{width:100%;border-collapse:separate;border-spacing:12px}
+.tbl td{vertical-align:top}
+.cell{background:rgba(255,255,255,.03);border:3px solid rgba(255,255,255,.08);box-shadow:0 6px 0 rgba(0,0,0,.35);padding:12px}
+.cell.fc-cell{border-color:rgba(255,179,0,.25)}
+.cell.tafaj-cell{border-color:rgba(198,40,40,.25)}
+.kicker{display:inline-block;background:var(--amber);color:#1c1300;font-weight:900;padding:.2rem .4rem;border:2px solid var(--gold);text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;margin-bottom:.5rem}
+
+/* Area 3: TAFAJ Meter (fixed right edge) */
 .tafaj{position:fixed;top:0;right:0;height:100vh;width:var(--meterW);z-index:50;display:flex;flex-direction:column;pointer-events:none}
 .meter{flex:1;display:flex;align-items:stretch;justify-content:center;padding:.5rem 0;background:linear-gradient(180deg,#4caf50 0%,#ffeb3b 32%,#ff9800 64%,#c62828 100%);border-left:4px solid #0009;box-shadow:inset 0 0 10px rgba(0,0,0,.5),-4px 0 0 var(--amber);position:relative}
 .meter::before{content:"LOW\\A GUARDED\\A ELEVATED\\A SEVERE\\A MORTAL";white-space:pre;writing-mode:vertical-rl;text-orientation:upright;font-weight:900;letter-spacing:.1em;font-size:.7rem;color:#000;opacity:.65;position:absolute;right:calc(100% + 4px);top:8px}
@@ -81,23 +89,12 @@ header{background:var(--cream);color:var(--ink);border-bottom:4px double var(--s
 .needle::after{content:"MORTAL THREAT";position:absolute;inset:0;display:grid;place-items:center;font-size:.7rem;font-weight:900;color:#fff;text-shadow:0 0 6px rgba(255,0,0,.6);background:linear-gradient(180deg,transparent 0 40%,rgba(0,0,0,.25) 100%)}
 .tafaj-note{pointer-events:auto;background:rgba(12,10,16,.92);color:#ffd1a1;border-left:4px solid var(--amber);padding:.6rem .6rem .75rem;font-size:.85rem;line-height:1.25;box-shadow:-4px -2px 0 rgba(0,0,0,.45)}
 
-/* === Newspaper-style TABLE layout === */
-.front{max-width:1200px;margin:0 auto;padding:0 1rem 2rem}
-.tbl{width:100%;border-collapse:separate;border-spacing:12px}
-.tbl td, .tbl th{vertical-align:top}
-.cell{background:rgba(255,255,255,.03);border:3px solid rgba(255,255,255,.08);box-shadow:0 6px 0 rgba(0,0,0,.35);padding:12px}
-.cell.headline{border-color:rgba(255,179,0,.35)}
-.cell.ad{border-color:rgba(255,255,255,.12)}
-.cell.feature{border-color:rgba(255,179,0,.25)}
-.cell.tease{border-color:rgba(198,40,40,.25)}
-.kicker{display:inline-block;background:var(--amber);color:#1c1300;font-weight:900;padding:.2rem .4rem;border:2px solid var(--gold);text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;margin-bottom:.5rem}
-
 /* Footer */
-footer{background:var(--cream);color:var(--ink);border-top:6px solid var(--red);margin-top:auto}
+footer{background:var(--cream);color:#1c1300;border-top:6px solid var(--red);margin-top:auto}
 .ftr{max-width:1200px;margin:0 auto;padding:1rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;font-size:.85rem}
 .ftr__tag{background:var(--amber);color:#1c1300;font-weight:900;padding:.2rem .5rem;border:2px solid var(--gold);text-transform:uppercase}
 
-/* Mobile tweak: stack table rows */
+/* Mobile: stack table cells */
 @media (max-width:900px){
   .tbl, .tbl tbody, .tbl tr, .tbl td{display:block;width:100%}
   .tbl td{margin-bottom:12px}
@@ -126,13 +123,6 @@ footer{background:var(--cream);color:var(--ink);border-top:6px solid var(--red);
     </div>
   </div>
 </header>
-
-<!-- nav -->
-<nav class="nav" aria-label="Primary">
-  <div class="nav__inner">
-    <a href="#">Home</a><a href="#">The Agency</a><a href="#">The Big One</a><a href="#">Contact</a><a href="#">Visuals</a>
-  </div>
-</nav>
 
 <!-- banner -->
 <section class="hero" aria-labelledby="hero-label">
@@ -166,138 +156,54 @@ footer{background:var(--cream);color:var(--ink);border-top:6px solid var(--red);
   </div>
 </section>
 
-<!-- AREA 2 — FIRST CITIZEN -->
-<section class="fc-wrap" aria-labelledby="fc-flag">
-  <div class="fc">
-    <div id="fc-flag" class="fc-flag"><span class="star" aria-hidden="true"></span> First Citizen Communications</div>
-    <div class="fc-grid">
-      <article class="fc-item media" id="fc-item" aria-live="polite">
-        <figure class="media__figure">
-          <img id="fc-img" src="assets/fc-1.jpg" alt="Skyline at dawn with a municipal clock tower silhouetted" loading="lazy" />
-          <figcaption id="fc-cap" class="media__caption">Dawn schedule approved for national productivity. <span class="credit">Photo: Office of Civic Gratitude</span></figcaption>
-        </figure>
-        <div class="media__body">
-          <h3 id="fc-head">Official: First Citizen personally optimizes sunrise schedule for greater national productivity.</h3>
-          <p id="fc-body">A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”</p>
-          <div class="fc-meta">
-            <span class="kicker">Communiqué</span>
-            <span id="fc-by">Office of Civic Gratitude</span>
-            <span id="fc-time">Updated <span id="fc-ts"></span></span>
-          </div>
-          <div class="fc-quote" id="fc-quote">“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.</div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- FRONT PAGE TABLE GRID -->
-<section class="front" aria-label="Front page grid">
-  <table class="tbl" role="presentation" aria-label="Front page layout">
+<!-- AREA 2 + 3 — shared horizontal axis (table row) -->
+<section class="row-23" aria-label="First Citizen and TAFAJ bulletin">
+  <table class="tbl" role="presentation">
     <tbody>
       <tr>
-        <!-- Left: Patriot Beer ad -->
-        <td class="cell ad" style="width:36%">
-          <div class="kicker">Advertisement</div>
-          <!-- Patriot Beer poster (inline SVG) -->
-          <svg viewBox="0 0 800 600" role="img" aria-label="Patriot Beer poster — The Taste of Allegiance">
-            <defs>
-              <linearGradient id="bg" x1="0" x2="1">
-                <stop offset="0" stop-color="#152238"/><stop offset="1" stop-color="#0f0f1a"/>
-              </linearGradient>
-              <linearGradient id="amber" x1="0" x2="1">
-                <stop offset="0" stop-color="#ffb300"/><stop offset="1" stop-color="#ffd166"/>
-              </linearGradient>
-            </defs>
-            <rect width="800" height="600" fill="url(#bg)"/>
-            <g opacity=".09">
-              <rect x="0" y="0" width="800" height="600" fill="#fff"/>
-            </g>
-            <g transform="translate(480,60)">
-              <rect x="0" y="60" width="180" height="360" rx="24" fill="#1b2947" stroke="#ffb300" stroke-width="6"/>
-              <rect x="20" y="80" width="140" height="240" rx="12" fill="#0d1730"/>
-              <circle cx="90" cy="320" r="46" fill="url(#amber)"/>
-            </g>
-            <text x="60" y="120" font-size="72" font-weight="900" fill="#ffb300" style="letter-spacing:.06em">PATRIOT</text>
-            <text x="60" y="188" font-size="64" font-weight="900" fill="#ffb300" style="letter-spacing:.06em">BEER</text>
-            <text x="60" y="240" font-size="28" font-weight="700" fill="#faf7ef">THE TASTE OF ALLEGIANCE</text>
-            <text x="60" y="540" font-size="18" fill="#c9c5bb">Pre-salute for express service · Brewed under license of the Ministry of Refreshment</text>
-          </svg>
+        <!-- Left cell: First Citizen block -->
+        <td class="cell fc-cell" style="width:68%">
+          <div class="fc">
+            <div class="fc-flag"><span class="star" aria-hidden="true"></span> First Citizen Communications</div>
+            <div class="fc-grid" style="margin-top:12px">
+              <article class="fc-item media" id="fc-item" aria-live="polite">
+                <figure class="media__figure">
+                  <img id="fc-img" src="assets/fc-1.jpg" alt="Skyline at dawn with a municipal clock tower silhouetted" loading="lazy" />
+                  <figcaption id="fc-cap" class="media__caption">Dawn schedule approved for national productivity. <span class="credit">Photo: Office of Civic Gratitude</span></figcaption>
+                </figure>
+                <div class="media__body">
+                  <h3 id="fc-head">Official: First Citizen personally optimizes sunrise schedule for greater national productivity.</h3>
+                  <p id="fc-body">A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”</p>
+                  <div class="fc-meta">
+                    <span class="kicker">Communiqué</span>
+                    <span id="fc-by">Office of Civic Gratitude</span>
+                    <span id="fc-time">Updated <span id="fc-ts"></span></span>
+                  </div>
+                  <div class="fc-quote" id="fc-quote">“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.</div>
+                </div>
+              </article>
+            </div>
+          </div>
         </td>
 
-        <!-- Middle: feature — First Citizen statue + monkey (symbolic) -->
-        <td class="cell feature" style="width:38%">
-          <div class="kicker">Feature</div>
-          <!-- Symbolic statue with small animal (no likeness) -->
-          <svg viewBox="0 0 800 600" role="img" aria-label="Symbolic statue silhouette holding a small animal, Corrected Flag backdrop">
-            <defs>
-              <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="#0f1630"/><stop offset="1" stop-color="#08101f"/>
-              </linearGradient>
-              <linearGradient id="glow" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="#ffb300" stop-opacity=".35"/><stop offset="1" stop-color="#ffb300" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <rect width="800" height="600" fill="url(#sky)"/>
-            <!-- Corrected Flag motif -->
-            <g opacity=".25">
-              <rect x="40" y="60" width="720" height="420" fill="#152238" stroke="#ffb300" stroke-width="6"/>
-              <g fill="#ffb300">
-                <rect x="40" y="140" width="720" height="28"/>
-                <rect x="40" y="220" width="720" height="28"/>
-                <rect x="40" y="300" width="720" height="28"/>
-                <rect x="40" y="380" width="720" height="28"/>
-              </g>
-            </g>
-            <rect x="0" y="0" width="800" height="240" fill="url(#glow)"/>
-            <!-- Plinth -->
-            <rect x="260" y="430" width="280" height="60" fill="#0b0d12" stroke="#364054" stroke-width="4"/>
-            <!-- Statue silhouette -->
-            <g fill="#101522" stroke="#ffb300" stroke-width="4">
-              <path d="M400,460 c-40,-100 60,-140 60,-210 0,-40 -30,-70 -60,-70 -30,0 -60,30 -60,70 0,70 100,110 60,210z"/>
-              <!-- arm + small animal -->
-              <path d="M420,290 l60,-20 6,14 -58,24z"/>
-              <circle cx="490" cy="265" r="18" fill="#0d1326" stroke="#ffb300" stroke-width="4"/>
-              <path d="M502,268 q14,10 6,24 q-10,12 -28,2 z" fill="#0d1326"/>
-            </g>
-            <text x="400" y="520" text-anchor="middle" font-size="22" fill="#ffb300" font-weight="800">Civic Devotion Exhibit</text>
-          </svg>
-          <p style="margin:.5rem 0 0;color:#d6d2c7">Ceremonial tableau on loan from the Ministry Lobby. Citizens welcome to gaze with gratitude.</p>
-        </td>
-
-        <!-- Right: Patriot Games teaser card -->
-        <td class="cell tease" style="width:26%">
-          <div class="kicker">Tonight</div>
-          <!-- Retro TV teaser (inline SVG) -->
-          <svg viewBox="0 0 600 480" role="img" aria-label="Patriot Games TV teaser">
-            <defs>
-              <linearGradient id="tvb" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="#1a2742"/><stop offset="1" stop-color="#0f1a2e"/>
-              </linearGradient>
-              <linearGradient id="scan" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="#ffb300" stop-opacity=".35"/><stop offset=".5" stop-color="#ffb300" stop-opacity="0"/><stop offset="1" stop-color="#ffb300" stop-opacity=".35"/>
-              </linearGradient>
-            </defs>
-            <rect width="600" height="480" rx="24" fill="#0b0d12"/>
-            <rect x="20" y="20" width="560" height="360" rx="16" fill="url(#tvb)" stroke="#ffb300" stroke-width="6"/>
-            <g opacity=".25">
-              <rect x="20" y="180" width="560" height="8" fill="url(#scan)"/>
-              <rect x="20" y="220" width="560" height="8" fill="url(#scan)"/>
-            </g>
-            <text x="300" y="160" text-anchor="middle" font-size="54" font-weight="900" fill="#ffb300" style="letter-spacing:.08em">PATRIOT GAMES</text>
-            <text x="300" y="210" text-anchor="middle" font-size="20" fill="#faf7ef">TONIGHT 8 PM · ALL CORRECT CHANNELS</text>
-            <circle cx="90" cy="410" r="22" fill="#1a2742" stroke="#ffb300" stroke-width="6"/>
-            <circle cx="150" cy="410" r="22" fill="#1a2742" stroke="#ffb300" stroke-width="6"/>
-            <rect x="210" y="398" width="360" height="24" rx="12" fill="#1a2742" stroke="#ffb300" stroke-width="4"/>
-          </svg>
-          <p style="margin:.5rem 0 0;color:#d6d2c7">Contestants pledge accuracy under pressure. Losers file Form PG-12.</p>
+        <!-- Right cell: TAFAJ bulletin panel (aligns horizontally with Area 2; meter remains fixed on far right) -->
+        <td class="cell tafaj-cell" style="width:32%">
+          <div class="kicker">TAFAJ Bulletin</div>
+          <p style="margin:.25rem 0 .5rem;color:#e9dbc5">Operational posture remains at <strong style="color:#ffb300">Mortal Threat</strong>. Citizens are encouraged to maintain corrective cheer in public spaces.</p>
+          <ul style="margin:.25rem 0 0 1rem;line-height:1.3;color:#d6d2c7">
+            <li>Report atmospheric unease to the Gratitude Portal.</li>
+            <li>Perform seven sanctioned claps upon kiosk approach.</li>
+            <li>Upload sightings of Corrected Flags for morale credit.</li>
+          </ul>
+          <hr style="border:none;border-top:2px solid rgba(255,255,255,.12);margin:.75rem 0" />
+          <small style="color:#c9c5bb;opacity:.9">Source: Office of Threat Appreciation & Friendly Adjustment (TAFAJ).</small>
         </td>
       </tr>
     </tbody>
   </table>
 </section>
 
-<!-- TAFAJ Meter -->
+<!-- TAFAJ Meter (fixed right edge) -->
 <aside class="tafaj" aria-label="TAFAJ Threat Meter">
   <div class="meter" role="img" aria-label="TAFAJ threat level: Mortal Threat">
     <div class="needle" aria-hidden="true" title="Mortal Threat"></div>
@@ -312,19 +218,19 @@ footer{background:var(--cream);color:var(--ink);border-top:6px solid var(--red);
 <footer>
   <div class="ftr">
     <div>© <span id="y"></span> One True Infotainment · A Doremus Heller project</div>
-    <div class="ftr__tag">v4.8 · Newspaper Grid & Ads</div>
+    <div class="ftr__tag">v4.9 · FC + TAFAJ Row · Nav removed</div>
   </div>
 </footer>
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
-/* BREAKING items with images (same as v4.7; uses external /assets/ if present) */
+/* BREAKING items with images */
 const items=[
   { h:"LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
     s:"Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.",
     by:"By OTI Desk — Maria S-L",
-    img:"assets/breaking-1.png",
+    img:"assets/breaking-1.jpg",
     alt:"Emergency vehicles with sirens along the North Loop",
     caption:"Emergency units respond on the North Loop.",
     credit:"OTI Field Unit"
@@ -332,7 +238,7 @@ const items=[
   { h:"FLASH: Angels reroute parade through ‘enhanced celebration corridor’; residents told cheering is mandatory.",
     s:"Officials: decibel levels below 85 may delay services. Complimentary flags issued upon proper paperwork.",
     by:"By Field Unit — J. Murphy",
-    img:"assets/breaking-2.png",
+    img:"assets/breaking-2.jpg",
     alt:"Cones and crowd as parade reroute is enacted",
     caption:"Detour activated for enhanced celebration corridor.",
     credit:"Studio Control"
@@ -340,7 +246,7 @@ const items=[
   { h:"ALERT: Unscheduled lake ‘illumination test’ visible for miles; authorities call it a morale exercise.",
     s:"Witnesses report sky-wide glow and faint marching songs. Ministry requests uploads to the Gratitude Portal.",
     by:"By Studio Control — Tink (remote)",
-    img:"assets/breaking-3.png",
+    img:"assets/breaking-3.jpg",
     alt:"Citizens waving Corrected Flags along the lakeshore glow",
     caption:"Illumination test reflects across the lake.",
     credit:"OTI Night Desk"
@@ -348,33 +254,34 @@ const items=[
   { h:"UPDATE: Supply kiosks announce new ‘Correct Coffee’ surcharge to fund Freedom Efficiency.",
     s:"Customers instructed to pre-salute the kiosk for express checkout privileges.",
     by:"By Civic Affairs — L. Carter",
-    img:"assets/breaking-4.png",
+    img:"assets/breaking-4.jpg",
     alt:"Correct Coffee kiosk with salute required signage",
     caption:"Correct Coffee surcharge announced.",
     credit:"Civic Affairs Bureau"
   }
 ];
 
+/* FIRST CITIZEN items */
 const fcItems=[
   {h:"Official: First Citizen personally optimizes sunrise schedule for greater national productivity.",
    b:"A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”",
    by:"Office of Civic Gratitude", q:"“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming.",
-   img:"assets/fc-1.jpg", alt:"Skyline dawn; clock tower", caption:"Dawn schedule approved for national productivity.", credit:"Office of Civic Gratitude"},
+   img:"assets/fc-1.jpg", alt:"Skyline at dawn with a municipal clock tower silhouetted", caption:"Dawn schedule approved for national productivity.", credit:"Office of Civic Gratitude"},
   {h:"Ceremonial hydration: First Citizen sips Correct Coffee; national morale up three points.",
    b:"Lab instruments recorded unprecedented patriotism in the steam. Citizens encouraged to add a salute before the first sip.",
    by:"Bureau of Refreshments and Allegiance", q:"“My latte tasted like liberty,” reported Citizen Marco V.",
-   img:"assets/fc-2.jpg", alt:"Close-up of ceremonial coffee cup", caption:"Ceremonial sip noted by observers.", credit:"Bureau of Refreshments"},
+   img:"assets/fc-2.jpg", alt:"Staged close-up of a hand lifting a branded paper coffee cup", caption:"Ceremonial sip noted by observers.", credit:"Bureau of Refreshments"},
   {h:"Efficiency miracle: motorcade traffic improves school attendance by inspiring earlier departures.",
    b:"Parents cite the example of punctuality set by the First Citizen’s route optimization study.",
    by:"Department of Educational Cheer", q:"“We left 40 minutes earlier and felt 400% more American,” said Citizen family S.",
-   img:"assets/fc-3.jpg", alt:"Motorcade near school; saluting children", caption:"Motorcade inspires punctual starts.", credit:"Department of Educational Cheer"},
+   img:"assets/fc-3.jpg", alt:"Motorcade passing a school while children salute on the sidewalk", caption:"Motorcade inspires punctual starts.", credit:"Department of Educational Cheer"},
   {h:"Applause protocol upgraded: seven claps now recommended for optimal gratitude output.",
    b:"Ministry guidance: clap in odd primes to avoid subversive symmetry.",
    by:"Office of Rhythmic Approval", q:"“My palms sting with pride,” declared Citizen Dana K.",
-   img:"assets/fc-4.jpg", alt:"Hands mid-clap; protocol pamphlet", caption:"New applause standard issued.", credit:"Office of Rhythmic Approval"}
+   img:"assets/fc-4.jpg", alt:"Close-up of hands mid-clap with a pamphlet titled Applause Protocol — 7 Claps", caption:"New applause standard issued.", credit:"Office of Rhythmic Approval"}
 ];
 
-/* DOM refs */
+/* DOM refs (breaking) */
 const headline=document.getElementById('headline'),
       summary=document.getElementById('summary'),
       byline=document.getElementById('byline'),
@@ -382,6 +289,7 @@ const headline=document.getElementById('headline'),
       brkImg=document.getElementById('brk-img'),
       brkCap=document.getElementById('brk-cap');
 
+/* DOM refs (fc) */
 const fch=document.getElementById('fc-head'),
       fcb=document.getElementById('fc-body'),
       fcy=document.getElementById('fc-by'),
