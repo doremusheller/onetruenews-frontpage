@@ -3,17 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>One True Infotainment — Breaking & First Citizen</title>
+<title>One True Infotainment — Breaking · First Citizen · TAFAJ Meter</title>
 <style>
   :root{
     --indigo:#0f0f1a; --amber:#ffb300; --navy:#152238; --red:#c62828;
     --cream:#faf7ef; --steel:#364054; --ink:#0b0d12; --gold:#a66f00;
-    --warm:#3a2112; /* warmer bed for Area 2 */
+    --warm:#3a2112; --meterW: 76px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-       background:var(--indigo); color:var(--cream); display:flex; flex-direction:column}
+  body{
+    margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    background:var(--indigo); color:var(--cream); display:flex; flex-direction:column;
+    /* keep content from hiding under the right-side meter on very small screens */
+    padding-right:clamp(0px, 2vw, var(--meterW));
+  }
+  a{color:inherit; text-decoration:none}
 
   /* Status bar */
   .gov-bar{background:linear-gradient(90deg,var(--navy),#0e1a2d); border-bottom:3px solid var(--red); color:#fff; font-weight:700; font-size:.9rem; letter-spacing:.05em}
@@ -76,10 +81,53 @@
   .fc-badge{background:#2d0f0f; color:#ffd56a; border:2px solid #b07a10; padding:.1rem .4rem; font-weight:800; text-transform:uppercase}
   .fc-quote{margin-top:.4rem; font-style:italic; color:#ffe6a9; border-left:4px solid #b07a10; padding-left:.6rem}
 
+  /* AREA 3 — TAFAJ THREAT METER (fixed on right border) */
+  .tafaj{
+    position:fixed; top:0; right:0; height:100vh; width:var(--meterW); z-index:50;
+    display:flex; flex-direction:column; pointer-events:none;
+  }
+  .meter{
+    flex:1; display:flex; align-items:stretch; justify-content:center; padding:.5rem 0;
+    background:linear-gradient(180deg,#4caf50 0%, #ffeb3b 32%, #ff9800 64%, #c62828 100%);
+    border-left:4px solid #0009; border-right:0; border-top:0; border-bottom:0;
+    box-shadow: inset 0 0 10px rgba(0,0,0,.5), -4px 0 0 var(--amber);
+    position:relative;
+  }
+  .meter::before{
+    /* level labels, DMV vibes */
+    content:"LOW\\A GUARDED\\A ELEVATED\\A SEVERE\\A MORTAL"; white-space:pre; writing-mode:vertical-rl; text-orientation:upright;
+    font-weight:900; letter-spacing:.1em; font-size:.7rem; color:#000; opacity:.65;
+    position:absolute; right:calc(100% + 4px); top:8px;
+  }
+  .needle{
+    position:absolute; top:8px; right:8px; width: calc(var(--meterW) - 20px); height:28px;
+    background: repeating-linear-gradient(45deg, #300 0 6px, #700 6px 12px);
+    border:3px solid #fff; outline:3px solid #000; box-shadow:0 4px 0 rgba(0,0,0,.35);
+  }
+  .needle::after{
+    content:"MORTAL THREAT"; position:absolute; inset:0; display:grid; place-items:center;
+    font-size:.6rem; font-weight:900; color:#fff; text-shadow:0 0 6px rgba(255,0,0,.6);
+    background:linear-gradient(180deg, transparent 0 40%, rgba(0,0,0,.25) 100%);
+  }
+  .tafaj-note{
+    pointer-events:auto;
+    background:rgba(12,10,16,.92); color:#ffd1a1; border-left:4px solid var(--amber);
+    padding:.6rem .6rem .75rem; font-size:.85rem; line-height:1.25;
+    box-shadow:-4px -2px 0 rgba(0,0,0,.45);
+  }
+  .tafaj-note strong{color:#ffcc66}
+  .tafaj-note small{display:block; color:#e8c48a; opacity:.9; margin-top:.25rem}
+
   /* Footer */
   footer{background:var(--cream); color:var(--ink); border-top:6px solid var(--red); margin-top:auto}
   .ftr{max-width:1200px; margin:0 auto; padding:1rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:space-between; font-size:.85rem}
   .ftr__tag{background:var(--amber); color:#1c1300; font-weight:900; padding:.2rem .5rem; border:2px solid var(--gold); text-transform:uppercase}
+
+  /* Small screens: shrink meter width */
+  @media (max-width: 640px){
+    :root{--meterW: 64px}
+    .meter::before{font-size:.6rem}
+  }
 </style>
 </head>
 <body>
@@ -138,7 +186,7 @@
     </div>
   </section>
 
-  <!-- AREA 2 — NEWS ON THE FIRST CITIZEN -->
+  <!-- AREA 2 — FIRST CITIZEN NEWS -->
   <section class="fc-wrap" aria-labelledby="fc-flag">
     <div class="fc">
       <div id="fc-flag" class="fc-flag"><span class="star" aria-hidden="true"></span> First Citizen Communications</div>
@@ -157,11 +205,22 @@
     </div>
   </section>
 
+  <!-- AREA 3 — TAFAJ THREAT METER (always pegged) -->
+  <aside class="tafaj" aria-label="TAFAJ Threat Meter">
+    <div class="meter" role="img" aria-label="TAFAJ threat level: Mortal Threat">
+      <div class="needle" aria-hidden="true" title="Mortal Threat"></div>
+    </div>
+    <div class="tafaj-note" role="note">
+      <strong>TAFAJ Advisory:</strong> heightened disruptions detected across general morale channels.
+      <small>Ongoing inefficiencies and atmospheric unease are attributed to TAFAJ influence.</small>
+    </div>
+  </aside>
+
   <!-- footer -->
   <footer>
     <div class="ftr">
       <div>© <span id="y"></span> One True Infotainment · A Doremus Heller project</div>
-      <div class="ftr__tag">v4.4 · First Citizen Module</div>
+      <div class="ftr__tag">v4.5 · TAFAJ Meter</div>
     </div>
   </footer>
 
@@ -169,78 +228,52 @@
   // Year stamp
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // --- AREA 1: BREAKING ROTATOR ---
+  // AREA 1 — Breaking rotator
   const items = [
-    {
-      h: "LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
-      s: "Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.",
-      by: "By OTI Desk — Maria S-L"
-    },
-    {
-      h: "FLASH: Angels reroute parade through ‘enhanced celebration corridor’; residents told cheering is mandatory.",
-      s: "Officials: decibel levels below 85 may delay services. Complimentary flags issued upon proper paperwork.",
-      by: "By Field Unit — J. Murphy"
-    },
-    {
-      h: "ALERT: Unscheduled lake ‘illumination test’ visible for miles; authorities call it a morale exercise.",
-      s: "Witnesses report sky-wide glow and faint marching songs. Ministry requests uploads to the Gratitude Portal.",
-      by: "By Studio Control — Tink (remote)"
-    },
-    {
-      h: "UPDATE: Supply kiosks announce new ‘Correct Coffee’ surcharge to fund Freedom Efficiency.",
-      s: "Customers instructed to pre-salute the kiosk for express checkout privileges.",
-      by: "By Civic Affairs — L. Carter"
-    }
+    { h:"LIVE: Emergency sirens reported along the North Loop; Ministry blames “rogue weather balloons.”",
+      s:"Anchors cite a “temporary patriotic inversion layer.” Citizens advised to remain enthusiastic and await further correction.",
+      by:"By OTI Desk — Maria S-L" },
+    { h:"FLASH: Angels reroute parade through ‘enhanced celebration corridor’; residents told cheering is mandatory.",
+      s:"Officials: decibel levels below 85 may delay services. Complimentary flags issued upon proper paperwork.",
+      by:"By Field Unit — J. Murphy" },
+    { h:"ALERT: Unscheduled lake ‘illumination test’ visible for miles; authorities call it a morale exercise.",
+      s:"Witnesses report sky-wide glow and faint marching songs. Ministry requests uploads to the Gratitude Portal.",
+      by:"By Studio Control — Tink (remote)" },
+    { h:"UPDATE: Supply kiosks announce new ‘Correct Coffee’ surcharge to fund Freedom Efficiency.",
+      s:"Customers instructed to pre-salute the kiosk for express checkout privileges.",
+      by:"By Civic Affairs — L. Carter" }
   ];
-  const headline = document.getElementById('headline');
-  const summary  = document.getElementById('summary');
-  const byline   = document.getElementById('byline');
-  const timeLbl  = document.getElementById('time');
-  function stamp(){ const d=new Date(); timeLbl.textContent = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
-  let idx = 0; stamp();
+  const headline=document.getElementById('headline'), summary=document.getElementById('summary'),
+        byline=document.getElementById('byline'), timeLbl=document.getElementById('time');
+  function stamp(){ const d=new Date(); timeLbl.textContent=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+  let idx=0; stamp();
   setInterval(()=>{ idx=(idx+1)%items.length; const it=items[idx];
     headline.textContent=it.h; summary.textContent=it.s; byline.textContent=it.by; stamp();
   }, 6500);
 
-  // --- AREA 2: FIRST CITIZEN ROTATOR (fawning, with testimonials) ---
-  const fcItems = [
-    {
-      h:"Official: First Citizen personally optimizes sunrise schedule for greater national productivity.",
+  // AREA 2 — First Citizen rotator
+  const fcItems=[
+    { h:"Official: First Citizen personally optimizes sunrise schedule for greater national productivity.",
       b:"A Ministry bulletin praised the initiative as “a gift of time itself.” Regional offices confirmed clocks are feeling “more loyal than ever.”",
-      by:"Office of Civic Gratitude",
-      q:"“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming."
-    },
-    {
-      h:"Ceremonial hydration: First Citizen sips Correct Coffee; national morale up three points.",
+      by:"Office of Civic Gratitude", q:"“I wept with gratitude when my alarm saluted me back,” said Citizen Ruth A., beaming." },
+    { h:"Ceremonial hydration: First Citizen sips Correct Coffee; national morale up three points.",
       b:"Lab instruments recorded unprecedented patriotism in the steam. Citizens encouraged to add a salute before the first sip.",
-      by:"Bureau of Refreshments and Allegiance",
-      q:"“My latte tasted like liberty,” reported Citizen Marco V."
-    },
-    {
-      h:"Efficiency miracle: motorcade traffic improves school attendance by inspiring earlier departures.",
+      by:"Bureau of Refreshments and Allegiance", q:"“My latte tasted like liberty,” reported Citizen Marco V." },
+    { h:"Efficiency miracle: motorcade traffic improves school attendance by inspiring earlier departures.",
       b:"Parents cite the example of punctuality set by the First Citizen’s route optimization study.",
-      by:"Department of Educational Cheer",
-      q:"“We left 40 minutes earlier and felt 400% more American,” said Citizen family S."
-    },
-    {
-      h:"Applause protocol upgraded: seven claps now recommended for optimal gratitude output.",
+      by:"Department of Educational Cheer", q:"“We left 40 minutes earlier and felt 400% more American,” said Citizen family S." },
+    { h:"Applause protocol upgraded: seven claps now recommended for optimal gratitude output.",
       b:"Ministry guidance: clap in odd primes to avoid subversive symmetry.",
-      by:"Office of Rhythmic Approval",
-      q:"“My palms sting with pride,” declared Citizen Dana K."
-    }
+      by:"Office of Rhythmic Approval", q:"“My palms sting with pride,” declared Citizen Dana K." }
   ];
-  const fch = document.getElementById('fc-head');
-  const fcb = document.getElementById('fc-body');
-  const fcy = document.getElementById('fc-by');
-  const fct = document.getElementById('fc-ts');
-  const fcq = document.getElementById('fc-quote');
-
-  function fcStamp(){ const d=new Date(); fct.textContent = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
-  let fidx = 0; fcStamp();
-
+  const fch=document.getElementById('fc-head'), fcb=document.getElementById('fc-body'),
+        fcy=document.getElementById('fc-by'), fct=document.getElementById('fc-ts'),
+        fcq=document.getElementById('fc-quote');
+  function fcStamp(){ const d=new Date(); fct.textContent=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+  let fidx=0; fcStamp();
   setInterval(()=>{ fidx=(fidx+1)%fcItems.length; const it=fcItems[fidx];
     fch.textContent=it.h; fcb.textContent=it.b; fcy.textContent=it.by; fcq.textContent=it.q; fcStamp();
-  }, 7800); // slightly desynced from Breaking
+  }, 7800);
 </script>
 </body>
 </html>
