@@ -1,285 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>One True Infotainment · The Voice of the Corrected States of America</title>
-  <meta name="description" content="The Voice of the Corrected States of America — One True Infotainment." />
+  <title>ONE TRUE INFOTAINMENT</title>
+  <link rel="preload" as="image" href="media/header-banner.png">
   <style>
     :root{
-      --amber:#ffb300; --indigo:#0f0f1a; --cream:#faf7ef;
-      --red:#c62828; --blue:#1133aa; --white:#ffffff;
-      --railw:260px; --radius:14px;
+      --site-red:#c62828; --ink:#0a1a3a; --bg:#f4f1ea; --card:#fff8f0; --rail:#ede7df; --gold:#f2b705; --radius:16px;
+      --maxw:1280px; --gutter:16px; --shadow:0 4px 14px rgba(0,0,0,.08);
     }
-    html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);}
+    a{color:inherit;text-decoration:none}
+    /* Header */
+    .site-header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#8b0000,#ffffff 50%,#1f3696);border-bottom:4px solid var(--gold)}
+    .header-inner{max-width:var(--maxw);margin:auto;padding:8px var(--gutter);display:flex;align-items:center;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:42px}
+    .brand-txt{display:flex;flex-direction:column;line-height:1}
+    .brand-t1{font-weight:800;letter-spacing:.4px}
+    .brand-t2{font-size:12px;opacity:.85}
 
-    /* ====== TICKER ====== */
-    .ticker-wrap{background:#111;color:#fff;border-bottom:3px solid var(--amber);overflow:hidden;}
-    .ticker{display:flex;gap:48px;white-space:nowrap;will-change:transform;animation:ticker 30s linear infinite;padding:10px 0;}
-    .ticker span{font-weight:700;}
-    @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-200%)}}
+    /* Layout */
+    .wrap{max-width:var(--maxw);margin:16px auto;padding:0 var(--gutter);}
+    .layout{display:grid;grid-template-columns:280px 1fr 56px;gap:16px;align-items:start}
 
-    /* ====== BANNER ====== */
-    .banner{
-      background:linear-gradient(90deg,var(--red),var(--white),var(--blue));
-      color:var(--indigo);
-      padding:8px 12px 0 12px;
-      border-bottom:6px solid var(--amber);
-      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    /* Left Ads */
+    .ads-col{display:flex;flex-direction:column;gap:16px}
+    .ad-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .ad-card img{display:block;width:100%;height:auto}
+    .ad-tag{padding:6px 10px;font-size:12px;font-weight:700;color:#3a3a3a;opacity:.8}
+
+    /* Center feed */
+    .feed{display:grid;grid-template-columns:1fr;gap:16px}
+    .hero{display:grid;grid-template-columns:minmax(240px,520px) 1fr;gap:16px;background:#ffffff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;padding:12px}
+    .hero .thumb{border-radius:12px;overflow:hidden}
+    .hero .thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;display:block}
+    .hero h1{margin:4px 0 8px;font-size:24px}
+    .meta{font-size:12px;opacity:.7;margin-bottom:8px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    .card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+    .card .body{padding:10px 12px}
+    .kicker{font-size:11px;font-weight:800;letter-spacing:.28px;color:#1a49a0;margin-bottom:4px;text-transform:uppercase}
+    .title{font-size:16px;font-weight:750;line-height:1.2;margin:0 0 6px}
+
+    /* BREAKING pill */
+    .pill{position:absolute;top:10px;left:10px;background:var(--site-red);color:white;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:800}
+    .media-wrap{position:relative}
+
+    /* Right TAFAJ rail (decorative) */
+    .tafaj-rail{background:url('media/tafaj-rail-slice.png') 0 0/contain repeat-y;border-radius:12px;min-height:400px;aria-hidden:true}
+
+    /* Footer */
+    footer{margin:24px auto 48px;max-width:var(--maxw);padding:12px var(--gutter);opacity:.8;font-size:12px}
+
+    /* Responsiveness */
+    @media (max-width:1100px){
+      .layout{grid-template-columns:240px 1fr 48px}
+      .grid{grid-template-columns:repeat(2,1fr)}
     }
-    .brand-link{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;}
-    .brand-img{display:block;height:56px;width:auto}
-    .nav{display:flex;gap:16px;align-items:center;padding:8px 0 12px;}
-    .nav a{color:var(--indigo);text-decoration:none;font-weight:600}
-    .nav a:hover{text-decoration:underline}
-    @media (max-width:768px){.nav{display:none;}}
-
-    /* ====== PAGE GRID (FULL BLEED) ====== */
-    main{
-      width:100%; margin:0; padding:18px clamp(12px,2vw,24px);
-      display:grid; grid-template-columns: var(--railw) 1fr; gap:20px; align-items:start;
+    @media (max-width:820px){ /* Canon: hide rail, alternate ads inline */
+      .layout{grid-template-columns:1fr}
+      .tafaj-rail{display:none}
+      .ads-col{display:none}
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
     }
-    @media (max-width:1100px){ main{ grid-template-columns: 240px 1fr; } }
-    @media (max-width:820px){ main{ grid-template-columns: 1fr; } }
-
-    /* ====== HERO ====== */
-    .hero{
-      display:grid;grid-template-columns:min(460px,38vw) 1fr;gap:16px;align-items:stretch;
-      padding:14px;background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);
-      box-shadow:0 2px 8px rgba(15,15,26,.06);margin-bottom:16px;
+    @media (max-width:360px){
+      .wrap{padding:0 10px}
     }
-    .hero .media{position:relative;border-radius:12px;overflow:hidden;}
-    .hero .media img{width:100%;height:100%;object-fit:cover;display:block;}
-    .pill{
-      position:absolute;top:10px;left:10px;
-      background:var(--red);color:#fff;border-radius:999px;
-      padding:6px 10px;font-size:.75rem;font-weight:800;letter-spacing:.03em;
-      box-shadow:0 2px 6px rgba(0,0,0,.18);
-    }
-    .hero h2{margin:.25rem 0 8px 0;font-size:1.5rem;color:var(--blue);}
-    .hero h2 a{color:inherit;text-decoration:none;}
-    .hero h2 a:hover{text-decoration:underline;}
-    .hero p{margin:0;color:#333;}
-    .kicker{display:block;font-size:.8rem;color:#666;margin-top:6px;}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}}
-
-    /* ====== STORIES ====== */
-    .stories{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:18px;}
-    @media (max-width:700px){.stories{grid-template-columns:1fr}}
-    .card{background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(15,15,26,.06);}
-    .card .media{position:relative;aspect-ratio:16/9;overflow:hidden;}
-    .card .media img{width:100%;height:100%;object-fit:cover;display:block;}
-    .card .pill{top:8px;left:8px;}
-    .card .body{padding:12px 12px 14px 12px;}
-    .card h3{margin:.25rem 0 .35rem 0;font-size:1.05rem;color:var(--blue);}
-    .card h3 a{color:inherit;text-decoration:none;font-weight:800}
-    .card h3 a:hover{text-decoration:underline;}
-
-    /* ====== PROMO BAND ====== */
-    .promo-band{
-      display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
-      border:1px solid #e6e2d9;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
-    }
-    .promo-media{max-height:260px;overflow:hidden;border-radius:10px;}
-    .promo-media img{width:100%;height:100%;object-fit:cover;display:block;}
-    .promo-copy h3{margin:0 0 8px 0;font-size:1.2rem;color:var(--blue);}
-    .promo-copy p{margin:0;color:#444;}
-    @media(max-width:900px){.promo-band{grid-template-columns:1fr}}
-
-    /* ====== LEFT ADS COLUMN ====== */
-    .left-ads .ad-slot{margin-bottom:16px;}
-    .left-ads img{width:100%;display:block;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.08);}
-
-    /* ====== TAFAJ BORDER RAIL (RIGHT EDGE) ====== */
-    .tafaj-border-rail{
-      position: fixed; top: 0; right: 0; height: 100vh; width: 14px;
-      z-index: 9999; pointer-events: none; display: none;
-      background: url("media/tafaj-rail-slice.png") center top / 100% auto repeat-y;
-      image-rendering: -webkit-optimize-contrast;
-    }
-    @media (min-width: 821px){ .tafaj-border-rail{ display:block; } }
-    @media (max-width: 1024px){ .tafaj-border-rail{ width:12px; } }
-    @media (max-width: 360px){ .tafaj-border-rail{ display:none; } }
-
-    /* ====== MOBILE TAFAJ TILE ====== */
-    .tafaj-mobile-tile{display:none;}
-    @media(max-width:820px){.tafaj-mobile-tile{display:block;}}
-
-    footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center;}
   </style>
 </head>
-
 <body>
-  <!-- ====== SCROLLING TICKER ====== -->
-  <div class="ticker-wrap" aria-label="Latest headlines">
-    <div class="ticker">
-      <span>Grundy Announces “Voluntary Curfew Plus” — Citizens Thank Him for Going First.</span>
-      <span>Ministry of Measurement Finds Time Moves Faster When Patriotic.</span>
-      <span>Bridge Renamed After Itself; Officials Praise “Continuity of Span.”</span>
-      <span>Vigiles Debut Smile-Counting Drones; Neighborhoods Compete for Brightest Block.</span>
-      <span>International Delegation Gifts Map With Only Our Country on It — Applause Erupts.</span>
-      <span>Public Libraries to Lend Approved Thoughts; Late Fees Waived for Belief.</span>
-    </div>
-  </div>
-
-  <!-- ====== BANNER ====== -->
-  <header class="banner">
-    <a href="index.html" class="brand-link">
-      <img class="brand-img" src="media/header-banner.png" alt="One True Infotainment — The Voice of the Corrected States of America" />
+  <!-- Header banner links to index.html per canon -->
+  <header class="site-header">
+    <a class="header-inner brand" href="index.html" aria-label="ONE TRUE INFOTAINMENT home">
+      <img src="media/header-banner.png" alt="ONE TRUE INFOTAINMENT" />
+      <span class="brand-txt">
+        <strong class="brand-t1">ONE TRUE INFOTAINMENT</strong>
+        <span class="brand-t2">The Voice of the Corrected States of America</span>
+      </span>
     </a>
-    <nav class="nav">
-      <a href="#breaking">Breaking</a>
-      <a href="#national">National</a>
-      <a href="#domestic">Domestic</a>
-      <a href="#international">International</a>
-      <a href="#tafaj">TAFAJ</a>
-      <a href="#commerce">Commerce</a>
-      <a href="#infotainment">Infotainment</a>
-    </nav>
   </header>
 
-  <main>
-    <!-- LEFT COLUMN: Ads -->
-    <aside class="left-ads" aria-label="Sponsored messages">
-      <div class="ad-slot">
-        <img src="media/patriot-beer-ad.png" alt="Patriot Beer — Brewed with Liberty, Served with Loyalty" />
-      </div>
-      <div class="ad-slot">
-        <img src="media/patriot-games-promo.png" alt="The Patriot Games — Bad Guy Badger Encounter!" />
-      </div>
-      <div class="ad-slot">
-        <img src="media/AngelsAd.png" alt="Angels Recruitment — Earn the Gear" />
-      </div>
-    </aside>
+  <main class="wrap">
+    <section class="layout" id="layout">
+      <!-- LEFT ADS (desktop only) -->
+      <aside class="ads-col" id="adsDesktop" aria-label="Sponsored">
+        <article class="ad-card"><div class="ad-tag">Sponsored</div><img loading="lazy" src="media/patriot-beer-ad.png" alt="Patriot Beer Ad"></article>
+        <article class="ad-card"><div class="ad-tag">Tonight at 8</div><img loading="lazy" src="media/patriot-games-promo.png" alt="Patriot Games Promo"></article>
+        <article class="ad-card"><div class="ad-tag">Recruiting</div><img loading="lazy" src="media/AngelsAd.png" alt="Angels Recruiting"></article>
+      </aside>
 
-    <!-- CENTER COLUMN: Stories -->
-    <section aria-label="Front page stories">
-      <!-- HERO -->
-      <article class="hero" id="breaking">
-        <div class="media">
-          <a href="veteran-visibility-tour.html">
-            <img src="media/veteran-visibility-tour.png" alt="First Citizen addressing recovering Angels at hospital." />
+      <!-- CENTER FEED -->
+      <section class="feed" id="feed">
+        <!-- Hero -->
+        <article class="hero" id="hero">
+          <div class="thumb media-wrap">
             <span class="pill">BREAKING</span>
-          </a>
-        </div>
-        <div class="copy">
-          <h2><a href="veteran-visibility-tour.html">OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</a></h2>
-          <p>Hospital stop recast as masterclass in morale — and lighting.</p>
-          <span class="kicker">Filed 07:40 · National Front</span>
-        </div>
-      </article>
-
-      <!-- GRID STORIES -->
-      <div class="stories" id="stories-grid">
-        <article class="card breaking">
-          <div class="media">
-            <a href="river-glow-incident.html">
-              <img src="media/river-glow-placeholder.png" alt="River Glow at night" />
-              <span class="pill">BREAKING</span>
-            </a>
+            <img src="media/veteran-visibility-tour.png" alt="Grundy at the Hospital">
           </div>
-          <div class="body">
-            <h3><a href="river-glow-incident.html">Grundy Shrugs Off Thanks for Free Light</a></h3>
-            <span class="kicker">Filed 08:00 · Civic Desk</span>
+          <div class="copy">
+            <h1>OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</h1>
+            <div class="meta">Filed 07:40 · National Front</div>
+            <p>Hospital stop recast as masterclass in morale — and lighting.</p>
           </div>
         </article>
 
-        <article class="card">
-          <div class="media">
-            <a href="patriotic-census.html">
-              <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms" />
-            </a>
-          </div>
-          <div class="body">
-            <h3><a href="patriotic-census.html">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</a></h3>
-            <span class="kicker">Filed 09:30 · National Service Desk</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="media">
-            <a href="friendship-correction-pact.html">
-              <img src="media/friendship-border-rebuild.png" alt="Diplomatic dais with repaired banners" />
-            </a>
-          </div>
-          <div class="body">
-            <h3><a href="friendship-correction-pact.html">Neighbors Sign Friendship Correction Pact After Border Mishap</a></h3>
-            <span class="kicker">Filed 13:00 · Foreign Desk</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="media">
-            <a href="smiling-hours-directive.html">
-              <img src="media/domestic-smiles.png" alt="Public smiling hour in city square" />
-            </a>
-          </div>
-          <div class="body">
-            <h3><a href="smiling-hours-directive.html">Public Smiling Hours Extended; “Cheerful Rigor” Praised</a></h3>
-            <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="media">
-            <a href="grundy-explains-series.html">
-              <img src="media/grundy-explains.png" alt="Studio light and empty chair" />
-            </a>
-          </div>
-          <div class="body">
-            <h3><a href="grundy-explains-series.html">First Citizen Explains Stuff — Why Funyons Prevent Colon Cancer</a></h3>
-            <span class="kicker">Filed 17:00 · Channel OTI</span>
-          </div>
-        </article>
-
-        <!-- MOBILE TAFAJ TILE -->
-        <article class="card tafaj-mobile-tile">
-          <div class="media">
-            <img src="media/tafaj-thermometer.png" alt="TAFAJ threat level: Death Imminent" />
-          </div>
-          <div class="body">
-            <h3>TAFAJ Threat Bulletin</h3>
-            <p><strong>Status:</strong> Death Imminent — Report serenity, geometric birds, and suspicious calm.</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- HAMMER OF GRUNDY PROMO -->
-      <section class="promo-band hammer-of-grundy">
-        <div class="promo-media">
-          <a href="hammer-of-grundy.html">
-            <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster" />
-          </a>
-        </div>
-        <div class="promo-copy">
-          <h3><a href="hammer-of-grundy.html" style="text-decoration:none;color:inherit;">Hammer of Grundy — Live on the White House Lawn</a></h3>
-          <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
-        </div>
+        <!-- Grid (stories + inline ads for mobile) -->
+        <div class="grid" id="grid"></div>
       </section>
+
+      <!-- RIGHT TAFAJ RAIL (decorative on desktop) -->
+      <aside class="tafaj-rail" aria-hidden="true"></aside>
     </section>
   </main>
 
-  <!-- RIGHT FIXED BORDER (continuous, full height) -->
-  <div class="tafaj-border-rail" aria-hidden="true"></div>
-
   <footer>
-    <p>Produced without license from the Corrected States of America.<br>
-    All contained herein are speculation and may not yet exist.<br>
-    Doubt is treason; irony a pitchfork.</p>
+    <div>Produced without license from the Corrected States of America.<br>
+      All contained herein are speculation and may not yet exist.<br>
+      Doubt is treason; irony a pitchfork.</div>
   </footer>
 
-  <!-- RANDOMIZER (shuffle non-lead, non-TAFAJ cards) -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById('stories-grid');
-      if (!grid) return;
-      const cards = Array.from(grid.children).filter(c => !c.classList.contains('tafaj-mobile-tile'));
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
+    // Canon assets & locked references
+    const CANON = {
+      images: {
+        riverGlow: 'media/river-glow-placeholder.png', // must remain on index
+        friendship: 'media/friendship-border-rebuild.png',
+        domestic:'media/domestic-smiles.png',
+        explains:'media/grundy-explains.png'
+      },
+      tafajMobile:'media/tafaj-thermometer.png'
+    };
+
+    // Story cards (sample content structure)
+    const stories = [
+      {kicker:'National', title:'Friendship Restored! Border Rebuild Enters Ribbon Phase', img:CANON.images.friendship},
+      {kicker:'Domestic', title:'Household Smiles Index Hits All-Time Mandatory', img:CANON.images.domestic},
+      {kicker:'First Citizen', title:'First Citizen Explains Stuff: Vol. 12 — The Sun, Explained', img:CANON.images.explains},
+      {kicker:'Environment', title:'River Glow Forecast Improves to “Tangerine Dawn”', img:CANON.images.riverGlow}, // legacy reference on index
+    ];
+
+    // Ad tiles used for mobile interleaving (same assets as desktop ads)
+    const adTiles = [
+      {img:'media/patriot-beer-ad.png', alt:'Patriot Beer Ad', tag:'Sponsored'},
+      {img:'media/patriot-games-promo.png', alt:'Patriot Games Promo', tag:'Tonight at 8'},
+      {img:'media/AngelsAd.png', alt:'Angels Recruiting', tag:'Recruiting'}
+    ];
+
+    const grid = document.getElementById('grid');
+
+    function storyCard(s){
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.innerHTML = `
+        <div class="media-wrap"><img src="${s.img}" alt=""></div>
+        <div class="body">
+          <div class="kicker">${s.kicker}</div>
+          <h3 class="title">${s.title}</h3>
+        </div>`;
+      return el;
+    }
+
+    function adTile(a){
+      const el = document.createElement('article');
+      el.className = 'ad-card';
+      el.innerHTML = `<div class="ad-tag">${a.tag}</div><img loading="lazy" src="${a.img}" alt="${a.alt}">`;
+      return el;
+    }
+
+    function tafajMobileTile(){
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.innerHTML = `
+        <img src="${CANON.tafajMobile}" alt="TAFAJ Threat Meter">
+        <div class="body"><div class="kicker">TAFAJ</div><h3 class="title">Threat Level: Death Imminent</h3></div>`;
+      return el;
+    }
+
+    // Render strategy: desktop = stories only in grid; mobile = alternate ad tiles inline + TAFAJ tile near top
+    function render(){
+      grid.innerHTML='';
+      const isMobile = window.matchMedia('(max-width:820px)').matches;
+      if(isMobile){
+        // Interleave: 1 story, then 1 ad, repeat; insert TAFAJ tile at position 1
+        const merged = [];
+        const maxLen = Math.max(stories.length, adTiles.length);
+        for(let i=0;i<maxLen;i++){
+          if(stories[i]) merged.push({type:'story', data:stories[i]});
+          if(adTiles[i]) merged.push({type:'ad', data:adTiles[i]});
+        }
+        merged.splice(1,0,{type:'tafaj'});
+        merged.forEach(item=>{
+          if(item.type==='story') grid.appendChild(storyCard(item.data));
+          else if(item.type==='ad') grid.appendChild(adTile(item.data));
+          else grid.appendChild(tafajMobileTile());
+        });
+      } else {
+        stories.forEach(s=>grid.appendChild(storyCard(s)));
       }
-      cards.forEach(c => grid.appendChild(c));
-    });
+    }
+
+    render();
+    window.addEventListener('resize', ()=>{ render(); });
   </script>
 </body>
 </html>
