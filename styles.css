@@ -1,188 +1,147 @@
-/* =========================
-   THE BIG ONE — Global Stylesheet (v6.9 FINAL, continuous ticker)
-   ========================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Big One — ONE TRU INFOTAINMENT</title>
+  <meta name="description" content="The Voice of the Corrected States of America." />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-:root {
-  --c-navy: #0B1B3B;
-  --c-red: #A51224;
-  --c-metal: #F3F6FA;
-  --c-ink: #0C0F14;
-  --c-accent: #DFE6FF;
-  --c-ribbon-white: #FFFFFF;
-  --space-1: 8px;
-  --space-2: 12px;
-  --space-3: 16px;
-  --space-4: 20px;
-  --space-5: 28px;
-  --radius: 16px;
-}
+  <!-- Social / SEO basics -->
+  <meta property="og:title" content="The Big One — ONE TRU INFOTAINMENT">
+  <meta property="og:description" content="The Voice of the Corrected States of America.">
+  <meta property="og:image" content="media/header-banner_1080.png">
+  <meta name="theme-color" content="#0B1B3B">
+  <link rel="icon" href="media/favicon.ico">
 
-html, body {height: 100%;}
-body {
-  margin: 0;
-  background: var(--c-ink);
-  color: var(--c-metal);
-  font: 400 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+  <!-- Preload (safe PNG fallback target) -->
+  <link rel="preload" as="image" href="media/header-banner_1440.png">
 
-a {color: inherit; text-decoration: none;}
-a:focus {outline: 2px solid var(--c-accent); outline-offset: 2px;}
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/ticker.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h2 class="visually-hidden" id="urgent-headlines">Urgent headlines</h2>
+    <div class="ticker" role="region" aria-labelledby="urgent-headlines">
+      <div class="ticker-viewport">
+        <ul class="ticker-track" id="ticker-track"><!-- injected by ticker.js --></ul>
+      </div>
+    </div>
 
-/* =========================
-   Header + Ticker (no pause)
-   ========================= */
-header.site-header {
-  display: block;
-  background: linear-gradient(90deg, var(--c-navy), var(--c-red));
-  color: var(--c-metal);
-  position: relative;
-}
+    <!-- Banner (PNG only) -->
+    <div class="banner">
+      <div class="banner-inner">
+        <div class="banner-logo">
+          <img
+            src="media/header-banner_1080.png"
+            srcset="
+              media/header-banner_768.png 768w,
+              media/header-banner_1080.png 1080w,
+              media/header-banner_1440.png 1440w,
+              media/header-banner_1920.png 1920w"
+            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 70vw, 960px"
+            alt="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America"
+            fetchpriority="high" decoding="async" />
+        </div>
+        <div class="banner-tagline">
+          <h1 class="banner-title">ONE TRU INFOTAINMENT</h1>
+          <p class="banner-sub">The Voice of the Corrected States of America</p>
+        </div>
+      </div>
+    </div>
 
-.ticker {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  height:28px;
-  padding:0 var(--space-3);
-  background: linear-gradient(90deg, var(--c-red) 0%, #7D0E1A 50%, var(--c-red) 100%);
-  color: var(--c-metal);
-  overflow:hidden;
-  background-size: 200% 100%;
-  animation: tickerSheen 14s linear infinite;
-}
+    <!-- TAFAJ rail -->
+    <div class="tafaj" role="status" aria-label="TAFAJ Threat Meter: Deadly">
+      <span class="tafaj-label">TAFAJ THREAT METER</span>
+      <div class="tafaj-meter" aria-hidden="true"><span></span></div>
+      <strong>DEADLY</strong>
+    </div>
+  </header>
 
-.ticker-viewport {overflow: hidden; flex: 1;}
-.ticker-track {
-  display: inline-flex;
-  gap: 48px;
-  white-space: nowrap;
-  will-change: transform;
-  animation: scroll 28s linear infinite;
-}
-.ticker-track li { list-style:none; font-weight:700; letter-spacing:.06em; text-transform:uppercase; text-shadow: 0 1px 0 rgba(0,0,0,.45), 0 0 6px rgba(255,255,255,.15);}
+  <main class="shell" id="content">
+    <div class="main-grid" aria-live="polite">
+      <!-- STORY TILES (all hot links). Keep River Glow path as legacy placeholder per canon. -->
 
-@keyframes scroll {from {transform: translate3d(0, 0, 0);} to {transform: translate3d(-50%, 0, 0);} }
-@keyframes tickerSheen {from {background-position: 0% 0;} to {background-position: 200% 0;}}
-@media (prefers-reduced-motion: reduce) {.ticker-track {animation: none;}}
-@media (max-width: 420px) {.ticker-track {gap: 32px;}}
+      <!-- Wide feature -->
+      <article class="tile span-2x">
+        <a href="stories/river-glow.html" title="River Glow">
+          <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>River Glow</h2>
+            <div class="meta">Breaking News • Feature</div>
+          </div>
+        </a>
+      </article>
 
-/* =========================
-   Banner
-   ========================= */
-.banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-4) var(--space-3);
-}
+      <!-- Standard -->
+      <article class="tile">
+        <a href="stories/first-citizen.html" title="From the First Citizen">
+          <img class="thumb" src="media/stories/first-citizen.png" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>From the First Citizen</h2>
+            <div class="meta">Official Communication</div>
+          </div>
+        </a>
+      </article>
 
-.banner-inner {
-  max-width: 1280px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+      <!-- Tall tile -->
+      <article class="tile span-2y">
+        <a href="stories/patriot-games-update.html" title="Patriot Games Friday Teasers">
+          <img class="thumb" src="media/stories/patriot-games.png" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>Patriot Games: Friday Teasers</h2>
+            <div class="meta">Broadcast • Preview</div>
+          </div>
+        </a>
+      </article>
 
-.banner-logo {flex: 0 0 auto; width: 300px; max-width: 38vw;}
-.banner-logo img {width: 100%; height: auto; display: block;}
-.banner-tagline {flex: 1 1 auto;}
-.banner-title {margin: 0; font-weight: 900; font-size: clamp(22px, 4vw, 38px); letter-spacing: .06em; text-transform: uppercase;}
-.banner-sub {margin: 6px 0 0; font-size: clamp(12px, 1.8vw, 16px); opacity: .92;}
+      <!-- Standard -->
+      <article class="tile">
+        <a href="stories/ads-from-patriots.html" title="Ads from Patriots">
+          <img class="thumb" src="media/stories/patriot-ads.png" alt="Ads from Patriots" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>Ads from Patriots</h2>
+            <div class="meta">Sponsored • Patriot Beer • Vigiles Recruiters</div>
+          </div>
+        </a>
+      </article>
 
-/* =========================
-   Layout Shell + Grid
-   ========================= */
-.shell {max-width: 1280px; margin: 0 auto; padding: var(--space-4) var(--space-3);} 
-.main-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); grid-auto-rows: 240px; grid-auto-flow: dense; grid-gap: 12px;}
-@media (max-width: 640px) {.main-grid {grid-template-columns: 1fr; grid-auto-rows: 220px;}}
-@media (min-width: 768px) and (max-width: 1023px) {.main-grid {grid-template-columns: repeat(3, 1fr);} }
-@media (min-width: 1024px) {.main-grid {grid-template-columns: repeat(5, 1fr);} }
+      <!-- Standard -->
+      <article class="tile">
+        <a href="stories/tafaj-bulletin.html" title="TAFAJ Bulletin">
+          <img class="thumb" src="media/stories/tafaj-bulletin.png" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>TAFAJ Bulletin</h2>
+            <div class="meta">Security • Always Deadly</div>
+          </div>
+        </a>
+      </article>
 
-.tile {break-inside: avoid; margin: 0; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,.25);} 
-.tile a {display: block;} 
-.tile .thumb {display: block; width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; background: #111;}
-.tile .body {padding: 12px 12px 14px;} 
-.tile h2 {margin: 0 0 6px; font-size: 18px; line-height: 1.2; font-weight: 800;} 
-.tile .meta {opacity: .8; font-size: 13px;}
+      <!-- 2×2 feature -->
+      <article class="tile span-2">
+        <a href="grundy-explains-the-collection.html" title="Grundy Explains: The Collection">
+          <img class="thumb" src="media/grundy-explains-the-collection.png"
+               alt="Grundy pointing furiously at a table of labeled specimen jars under red-blue light."
+               loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>Grundy Explains: The Collection</h2>
+            <div class="meta">Investigation • Entertainment Division Archives</div>
+            <p>Grundy claims an old game-show host kept trophies from his animal crusade. OTI tries to make sense of it.</p>
+          </div>
+        </a>
+      </article>
 
-/* Span variants for interlocking puzzle fit */
-.tile.span-2x {grid-column: span 2;} 
-.tile.span-2y {grid-row: span 2;} 
-.tile.span-2 {grid-column: span 2; grid-row: span 2;}
+    </div>
+  </main>
 
-/* Hover affordance on pointer devices only */
-@media (hover: hover){
-  .tile:hover, .tile:focus-within { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.28); transition: transform .15s ease, box-shadow .2s ease; }
-}
-
-.tile a:focus-visible {outline: 2px solid var(--c-accent); outline-offset: 3px;}
-
-/* =========================
-   TAFAJ Threat Meter
-   ========================= */
-.tafaj {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: linear-gradient(90deg, #350b0e, var(--c-red));
-  border-top: 1px solid rgba(255,255,255,.1);
-}
-.tafaj-label {font-weight: 900; letter-spacing: .08em; text-transform: uppercase;}
-.tafaj-meter {height: 10px; flex: 1; background: rgba(255,255,255,.15); border-radius: 10px; overflow: hidden;}
-.tafaj-meter > span {display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #ffcf33, #ff7a00, #ff0033);}
-
-/* =========================
-   Footer
-   ========================= */
-footer.site-footer {
-  background: linear-gradient(180deg, var(--c-navy) 0%, var(--c-ink) 100%);
-  color: var(--c-metal);
-  padding: 20px 16px 28px;
-  border-top: 1px solid rgba(255,255,255,.08);
-}
-
-.footer-ribbon {
-  height: 6px;
-  margin-bottom: 12px;
-  background: repeating-linear-gradient(90deg, var(--c-red) 0 16px, var(--c-ribbon-white) 16px 32px, #1C3E8E 32px 48px);
-  transform: translateZ(0);
-  animation: ribbon-slide 18s linear infinite;
-}
-
-@keyframes ribbon-slide {from {background-position: 0 0;} to {background-position: 480px 0;}}
-@media (prefers-reduced-motion: reduce) {.footer-ribbon {animation: none;}}
-@media (max-width: 640px), (hover: none) and (pointer: coarse) {
-  .footer-ribbon {display: none;}
-  footer.site-footer {padding: 16px 14px 20px;}
-}
-
-.legal {
-  max-width: 80ch;
-  margin: 0 auto;
-  font-size: 12.5px;
-  line-height: 1.45;
-  letter-spacing: .02em;
-}
-
-@supports (-webkit-text-stroke: 0.4px transparent) {
-  .legal {-webkit-text-stroke: 0.2px rgba(255,255,255,.35); text-shadow: 0 0.25px 0 rgba(255,255,255,.35), 0 -0.25px 0 rgba(0,0,0,.35);}
-}
-
-/* =========================
-   Utility & Accessibility
-   ========================= */
-.text-center {text-align: center;}
-.hidden {display: none !important;}
-.visible {display: block !important;}
-
-.visually-hidden {
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0; border: 0; height: 1px; width: 1px;
-  overflow: hidden; white-space: nowrap;
-}
-
-@media (prefers-reduced-motion: reduce) {* {animation: none !important; transition: none !important;}}
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-ribbon" aria-hidden="true"></div>
+    <p class="legal">
+      Produced without license from the Corrected States of America. 
+      All content herein is speculative and may not yet exist. 
+      Doubt is treason; irony is a pitchfork.
+    </p>
+  </footer>
+</body>
+</html>
