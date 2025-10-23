@@ -137,16 +137,6 @@
       <a href="index.html#commerce">Commerce</a>
       <a href="index.html#infotainment">Infotainment</a>
     </nav>
-    <select class="dropdown" onchange="if(this.value){document.querySelector(this.value).scrollIntoView({behavior:'smooth'});}">
-      <option value="">Select Section</option>
-      <option value="#breaking">Breaking News</option>
-      <option value="#national">National</option>
-      <option value="#domestic">Domestic</option>
-      <option value="#international">International</option>
-      <option value="#tafaj">TAFAJ Bulletin</option>
-      <option value="#commerce">Patriotic Commerce</option>
-      <option value="#infotainment">Infotainment</option>
-    </select>
   </header>
 
   <main>
@@ -178,13 +168,13 @@
               </a>
             </td>
             <td class="lead-text">
-              <h2><a href="river-glow-incident.html">Grundy Shrugs off Praise for River Spill Lightshow: “People Like Glowing Stuff"”</a></h2>
+              <h2><a href="river-glow-incident.html">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</a></h2>
               <p>Industrial optimism shines through the night as officials praise “patriotic luminescence.”</p>
               <span class="kicker">Filed 08:00 · Civic Desk</span>
             </td>
           </tr>
 
-          <!-- Second row -->
+          <!-- Remaining rows to be randomized -->
           <tr>
             <td class="story-cell">
               <a href="patriotic-census.html">
@@ -202,7 +192,6 @@
             </td>
           </tr>
 
-          <!-- Third row -->
           <tr>
             <td class="story-cell">
               <a href="smiling-hours-directive.html">
@@ -221,7 +210,7 @@
           </tr>
         </table>
 
-        <!-- Promo band (concert) -->
+        <!-- Promo band -->
         <section class="promo-band hammer-of-grundy" aria-label="Concert: Hammer of Grundy">
           <div class="promo-media">
             <a href="hammer-of-grundy.html">
@@ -233,16 +222,9 @@
             <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
           </div>
         </section>
-
-        <!-- Section anchors -->
-        <h2 id="national" class="section-h">National Front</h2>
-        <h2 id="domestic" class="section-h">Domestic Wellness</h2>
-        <h2 id="international" class="section-h">International Outlook</h2>
-        <h2 id="commerce" class="section-h">Patriotic Commerce</h2>
-        <h2 id="infotainment" class="section-h">Entertainment & Infotainment</h2>
       </section>
 
-      <!-- RIGHT: Ads & Promos -->
+      <!-- RIGHT: Ads -->
       <aside aria-label="Sponsored and promotional">
         <div class="right-rail-slot beer-ad">
           <img src="media/patriot-beer-ad.png" alt="Patriot Beer — Brewed with Liberty, Served with Loyalty">
@@ -258,9 +240,29 @@
   </main>
 
   <footer>
-    <p>Produced without license from the Corrected States of America.
-All facts contained herein are speculational and may not yet exist.
-Doubt is treason; irony a pitchfork.</p>
+    <p>Produced without license from the Corrected States of America.<br>
+    All contained herein are speculation and may not yet exist.<br>
+    Doubt is treason; irony a pitchfork.</p>
   </footer>
+
+  <!-- ====== RANDOMIZER SCRIPT ====== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const table = document.querySelector('.frontpage');
+      if (!table) return;
+
+      // Grab all non-lead rows
+      const rows = Array.from(table.querySelectorAll('tr:not(.lead)'));
+
+      // Shuffle with Fisher-Yates
+      for (let i = rows.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rows[i], rows[j]] = [rows[j], rows[i]];
+      }
+
+      // Reattach randomized rows after the lead
+      rows.forEach(row => table.appendChild(row));
+    });
+  </script>
 </body>
 </html>
