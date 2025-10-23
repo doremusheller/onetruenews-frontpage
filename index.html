@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,13 +26,11 @@
 
   <link rel="stylesheet" href="styles.css">
   <script src="ticker.js" defer></script>
-
-  <script src="js/grid.js" defer></script>
-</head>
-<body>
   <script src="grid.js" defer></script>
+</head>
+
+<body>
   <header class="site-header">
-    <!-- Accessible label for ticker -->
     <h2 class="visually-hidden" id="urgent-headlines">Urgent headlines</h2>
     <div class="ticker" role="region" aria-labelledby="urgent-headlines">
       <button class="ticker-toggle" aria-pressed="false" aria-label="Pause headlines" title="Pause headlines">⏸</button>
@@ -42,7 +39,7 @@
       </div>
     </div>
 
-    <!-- Banner (responsive sources) -->
+    <!-- Banner -->
     <div class="banner">
       <div class="banner-inner">
         <div class="banner-logo">
@@ -64,7 +61,7 @@
       </div>
     </div>
 
-    <!-- TAFAJ rail -->
+    <!-- TAFAJ Meter -->
     <div class="tafaj" role="status" aria-label="TAFAJ Threat Meter: Deadly">
       <span class="tafaj-label">TAFAJ THREAT METER</span>
       <div class="tafaj-meter" aria-hidden="true"><span></span></div>
@@ -74,9 +71,10 @@
 
   <main class="shell" id="content">
     <div class="main-grid" aria-live="polite">
-      <!-- STORY TILES (center mosaic). River Glow path is legacy placeholder per canon. -->
+
+      <!-- Center story tiles -->
       <article class="tile span-2" data-weight="hero" data-chroma="high" data-fit="square">
-        <a href="stories/river-glow.html" title="River Glow">
+        <a href="river-glow.html" title="River Glow">
           <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>River Glow</h2>
@@ -86,8 +84,8 @@
       </article>
 
       <article class="tile span-2y" data-weight="strong" data-chroma="high" data-fit="tall">
-        <a href="stories/first-citizen.html" title="From the First Citizen">
-          <img class="thumb" src="media/stories/first-citizen.jpg" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900">
+        <a href="first-citizen.html" title="From the First Citizen">
+          <img class="thumb" src="media/first-citizen.jpg" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>From the First Citizen</h2>
             <div class="meta">Official Communication</div>
@@ -96,8 +94,8 @@
       </article>
 
       <article class="tile span-2x" data-weight="strong" data-chroma="high" data-fit="wide">
-        <a href="stories/patriot-games-update.html" title="Patriot Games Friday Teasers">
-          <img class="thumb" src="media/stories/patriot-games.jpg" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900">
+        <a href="patriot-games-update.html" title="Patriot Games Friday Teasers">
+          <img class="thumb" src="media/patriot-games.jpg" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>Patriot Games: Friday Teasers</h2>
             <div class="meta">Broadcast • Preview</div>
@@ -106,8 +104,8 @@
       </article>
 
       <article class="tile" data-weight="normal" data-chroma="med" data-fit="square">
-        <a href="stories/tafaj-bulletin.html" title="TAFAJ Bulletin">
-          <img class="thumb" src="media/stories/tafaj-bulletin.jpg" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900">
+        <a href="tafaj-bulletin.html" title="TAFAJ Bulletin">
+          <img class="thumb" src="media/tafaj-bulletin.jpg" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>TAFAJ Bulletin</h2>
             <div class="meta">Security • Always Deadly</div>
@@ -115,10 +113,10 @@
         </a>
       </article>
 
-      <!-- AD RAIL TILES (pinned to borders by CSS; not center unless ad-exempt) -->
+      <!-- Ads pinned to rails -->
       <article class="tile ad ad-left">
-        <a href="stories/patriot-beer.html" title="Patriot Beer">
-          <img class="thumb" src="media/ads/patriot-beer.jpg" alt="Patriot Beer — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
+        <a href="patriot-beer.html" title="Patriot Beer">
+          <img class="thumb" src="media/patriot-beer.jpg" alt="Patriot Beer — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>Patriot Beer</h2>
             <div class="meta">Sponsored • Patriot Beer</div>
@@ -127,8 +125,8 @@
       </article>
 
       <article class="tile ad ad-right">
-        <a href="stories/angels-recruitment.html" title="Angels Recruitment">
-          <img class="thumb" src="media/ads/angels-recruitment.jpg" alt="Angels Recruitment — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
+        <a href="angels-recruitment.html" title="Angels Recruitment">
+          <img class="thumb" src="media/angels-recruitment.jpg" alt="Angels Recruitment — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>Angels Recruitment</h2>
             <div class="meta">Sponsored • Angels Recruitment</div>
@@ -137,16 +135,14 @@
       </article>
 
       <article class="tile ad ad-left">
-        <a href="stories/bad-man-vs-badger.html" title="Bad Man vs. Badger — Patriot Games">
-          <img class="thumb" src="media/ads/bad-man-vs-badger.jpg" alt="Bad Man vs. Badger — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
+        <a href="bad-man-vs-badger.html" title="Bad Man vs. Badger — Patriot Games">
+          <img class="thumb" src="media/bad-man-vs-badger.jpg" alt="Bad Man vs. Badger — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>Bad Man vs. Badger</h2>
             <div class="meta">Sponsored • Patriot Games</div>
           </div>
         </a>
       </article>
-
-      <!-- If you have more than 10 story tiles, grid.js will show only 10 (shuffled) and hide the rest. -->
     </div>
   </main>
 
@@ -160,4 +156,3 @@
   </footer>
 </body>
 </html>
-```
