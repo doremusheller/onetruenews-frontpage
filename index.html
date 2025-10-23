@@ -13,69 +13,23 @@
       --red:#c62828;
       --blue:#1133aa;
       --white:#ffffff;
-    }
-    html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
-    .banner{background:linear-gradient(90deg,var(--red),var(--white),var(--blue));color:var(--indigo);padding:24px 16px;border-bottom:6px solid var(--amber);display:flex;align-items:center;justify-content:space-between;}
-    .brand{font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:1.4rem;}
-    .subtitle{font-size:.9rem;font-weight:600;color:var(--indigo)}
-    .nav{display:flex;gap:16px;align-items:center}
-    .nav a{color:var(--indigo);text-decoration:none;font-weight:600}
-    .nav a:hover{text-decoration:underline}
-    main{padding:20px 16px;max-width:1200px;margin:0 auto}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .section{grid-column:1/-1;margin:8px 0}
-    .section h2{font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:1rem;margin:0 0 8px;color:var(--red)}
-    .card{background:#fff;border:1px solid #e6e2d9;border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(15,15,26,.06)}
-    .card .pad{padding:14px}
-    .hed{font-weight:900;letter-spacing:.3px;line-height:1.15;margin:0 0 6px;font-size:1.4rem;color:var(--blue)}
-    .dek{margin:0 0 10px;opacity:.9}
-    .meta{font-size:.8rem;color:#575757}
-    footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center}
-  </style>
-</head>
-<body>
-  <header class="banner">
-    <div>
-      <span class="brand">One True News</span><br/>
-      <span class="subtitle">The Voice of the Corrected States of America</span>
-    </div>
-    <nav class="nav">
-      <a href="#breaking">Breaking</a>
-      <a href="#national">National</a>
-      <a href="#domestic">Domestic</a>
-      <a href="#international">International</a>
-      <a href="#tafaj">TAFAJ</a>
-      <a href="#commerce">Commerce</a>
-      <a href="#infotainment">Infotainment</a>
-    </nav>
-  </header>
 
-  <main>
-    <div class="grid">
-
-      <!-- BREAKING NEWS -->
-      <section id="breaking" class="section">
-        <h2>Breaking News!</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</h3>
-          <p class="dek">Satellite images confirm the River Grent’s lumines<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OneTrueInfotainment · One True News</title>
-  <meta name="description" content="The Voice of the Corrected States of America — One True News." />
-  <style>
-    :root{
-      --amber:#ffb300;
-      --indigo:#0f0f1a;
-      --cream:#faf7ef;
-      --red:#c62828;
-      --blue:#1133aa;
-      --white:#ffffff;
+      /* TAFAJ */
+      --tafaj-blue:#2a4bff;     /* WATCH THEM CLOSELY */
+      --tafaj-orange:#ff8c2b;   /* CALL AUTHORITIES NOW! */
+      --tafaj-red:#c62828;      /* RED HOT (top) */
     }
+
     html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
-    .banner{background:linear-gradient(90deg,var(--red),var(--white),var(--blue));color:var(--indigo);padding:24px 16px;border-bottom:6px solid var(--amber);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+
+    /* Banner */
+    .banner{
+      background:linear-gradient(90deg,var(--red),var(--white),var(--blue));
+      color:var(--indigo);
+      padding:24px 16px;
+      border-bottom:6px solid var(--amber);
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
     .brand{font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:1.4rem;}
     .subtitle{font-size:.9rem;font-weight:600;color:var(--indigo)}
     .nav{display:flex;gap:16px;align-items:center}
@@ -86,18 +40,83 @@
       .dropdown{display:block;margin-top:10px;width:100%;max-width:300px;}
     }
     @media (min-width:769px){.dropdown{display:none;}}
-    main{padding:20px 16px;max-width:1200px;margin:0 auto}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .section{grid-column:1/-1;margin:8px 0}
-    .section h2{font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:1rem;margin:0 0 8px;color:var(--red)}
-    .card{background:#fff;border:1px solid #e6e2d9;border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(15,15,26,.06)}
-    .card .pad{padding:14px}
-    .hed{font-weight:900;letter-spacing:.3px;line-height:1.15;margin:0 0 6px;font-size:1.4rem;color:var(--blue)}
-    .hed a{color:inherit;text-decoration:none}
-    .hed a:hover{text-decoration:underline}
-    .dek{margin:0 0 10px;opacity:.9}
-    .meta{font-size:.8rem;color:#575757}
+
+    /* Page layout shell: main + right rail */
+    main{max-width:1200px;margin:0 auto;padding:18px 16px;}
+    .page-grid{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:20px;
+    }
+    @media (max-width: 980px){
+      .page-grid{ grid-template-columns:1fr; }
+      .right-rail-slot{ width:100% !important; margin:0 0 16px 0 !important; }
+    }
+
+    /* TAFAJ BLOCK */
+    .tafaj-alert{
+      background:#fff;border:2px solid #e6e2d9;border-radius:16px;padding:18px;margin:16px 0 24px 0;
+      box-shadow:0 2px 8px rgba(15,15,26,.06);
+    }
+    .tafaj-headline h2{margin:0;font-size:1.2rem;letter-spacing:1px;text-transform:uppercase;color:var(--indigo);}
+    .tafaj-status{margin:.35rem 0 1rem 0;font-weight:600;color:#555;}
+    .tafaj-scale{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px;}
+    .tier{
+      position:relative;border-radius:12px;padding:12px 16px;color:#fff;font-weight:800;letter-spacing:.5px;
+      text-transform:uppercase;display:flex;align-items:center;justify-content:center;min-height:60px;
+    }
+    .tier-blue{ background:linear-gradient(0deg, var(--tafaj-blue), #3f63ff); }
+    .tier-orange{ background:linear-gradient(0deg, var(--tafaj-orange), #ff9f50); }
+    .tier-red{ background:linear-gradient(0deg, var(--tafaj-red), #e03b3b); }
+    .tier.is-current{ outline:4px solid #00000018; box-shadow:0 0 0 3px #ffffff55 inset, 0 6px 14px rgba(0,0,0,.15); }
+    .tier .label{ text-align:center; }
+    .tier-red .label{ text-shadow:0 1px 2px rgba(0,0,0,.35); }
+    .pin{ position:absolute; top:-10px; right:16px; font-size:14px; color:#111; filter:drop-shadow(0 1px 1px #fff); }
+    .tafaj-note{margin:0;font-size:.95rem;color:#444;}
+    @media (min-width:900px){
+      .tafaj-scale{ grid-template-columns:repeat(3,1fr); }
+      .tier{ min-height:84px; }
+    }
+
+    /* Right rail */
+    .right-rail-slot{ width:300px; margin:0 0 16px auto; }
+    .right-rail-slot img{ width:100%; display:block; border-radius:14px; box-shadow:0 2px 8px rgba(15,15,26,.08); }
+
+    /* Promo band */
+    .promo-band{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:16px; background:#fff;
+      border:1px solid #e6e2d9; border-radius:14px; box-shadow:0 2px 8px rgba(15,15,26,.06); margin:18px 0;
+    }
+    .promo-media img{ width:100%; border-radius:10px; display:block; }
+    .promo-copy h3{ margin:0 0 8px 0; font-size:1.25rem; color:var(--blue); }
+    .promo-copy p{ margin:0; color:#444; }
+    @media (max-width:900px){ .promo-band{ grid-template-columns:1fr; } }
+
+    /* Newspaper front-page table */
+    .frontpage{ width:100%; border-collapse:collapse; margin: 12px auto; background:transparent; }
+    .frontpage td{ vertical-align:top; padding:12px; border-bottom:1px solid #ddd; }
+    .frontpage tr.lead td{ border-bottom:3px double #999; }
+    .lead-image img{ width:100%; max-width:420px; border-radius:8px; display:block; }
+    .lead-text h2{ margin:0 0 8px 0; font-size:1.6rem; color:var(--blue); }
+    .lead-text h2 a{ color:inherit; text-decoration:none; position:relative; z-index:1; }
+    .lead-text h2 a:hover{ text-decoration:underline; }
+    .lead-text p{ margin:0; color:#333; }
+
+    .story-cell img{ width:100%; border-radius:6px; margin-bottom:6px; display:block; }
+    .story-cell h3{ margin:.25rem 0; font-size:1.05rem; }
+    .story-cell h3 a{ text-decoration:none; color:var(--blue); font-weight:700; position:relative; z-index:1; }
+    .story-cell h3 a:hover{ text-decoration:underline; }
+    .kicker{ display:block; font-size:.8rem; color:#666; margin-top:4px; }
+
+    /* Sections headers (legacy anchors kept for nav) */
+    .section-h{ font-weight:900; text-transform:uppercase; letter-spacing:1px; font-size:1rem; margin:10px 0; color:var(--red); }
+
     footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center}
+    /* Mobile: collapse table rows into blocks */
+    @media (max-width: 768px){
+      .frontpage, .frontpage tr, .frontpage td { display:block; width:100%; }
+      .lead-image img{ max-width:100%; }
+    }
   </style>
 </head>
 <body>
@@ -128,153 +147,92 @@
   </header>
 
   <main>
-    <div class="grid">
+    <!-- Big TAFAJ TERROR ALERT block near the top -->
+    <section id="tafaj" class="tafaj-alert" aria-labelledby="tafaj-alert-h">
+      <div class="tafaj-headline">
+        <h2 id="tafaj-alert-h">TAFAJ TERROR ALERT</h2>
+        <p class="tafaj-status"><strong>STATUS:</strong> <span class="level-text">RED HOT</span> — Remain perfectly calm.</p>
+      </div>
+      <div class="tafaj-scale" role="img" aria-label="Threat scale from blue to red; current level pinned at red hot">
+        <div class="tier tier-blue"><div class="label">WATCH THEM CLOSELY</div></div>
+        <div class="tier tier-orange"><div class="label">CALL AUTHORITIES NOW!</div></div>
+        <div class="tier tier-red is-current"><div class="label">RED HOT</div><div class="pin" aria-hidden="true">▲</div></div>
+      </div>
+      <p class="tafaj-note">Citizens observing unusual calmness, excessive cheer, or geometric bird formations should file a serenity report immediately.</p>
+    </section>
 
-      <!-- BREAKING NEWS -->
-      <section id="breaking" class="section">
-        <h2>Breaking News!</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">
-            <a href="river-glow-incident.html">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</a>
-          </h3>
-          <p class="dek">Satellite images confirm the River Grent’s luminescent current was “a patriotic byproduct of industrial optimism.” Citizens are encouraged to view the glow nightly and submit photos tagged <strong>#BrightNation</strong>.</p>
-          <p class="meta">Filed 08:00 · Civic Desk</p>
-        </div></article>
+    <!-- Newspaper-style front page with right rail -->
+    <div class="page-grid">
+      <!-- LEFT: Main content (table) -->
+      <section aria-label="Front page stories">
+        <h2 id="breaking" class="section-h">Breaking News!</h2>
+        <table class="frontpage">
+          <!-- Lead row -->
+          <tr class="lead">
+            <td class="lead-image">
+              <img src="media/river-glow-placeholder.png" alt="River Glow at night">
+            </td>
+            <td class="lead-text">
+              <h2><a href="river-glow-incident.html">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</a></h2>
+              <p>Industrial optimism shines through the night as officials praise “patriotic luminescence.”</p>
+              <span class="kicker">Filed 08:00 · Civic Desk</span>
+            </td>
+          </tr>
+          <!-- Secondary grid 2x2 -->
+          <tr>
+            <td class="story-cell">
+              <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms">
+              <h3><a href="patriotic-census.html">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</a></h3>
+              <span class="kicker">Filed 09:30 · National Service Desk</span>
+            </td>
+            <td class="story-cell">
+              <img src="media/intl-placeholder.png" alt="Diplomatic dais with repaired banners">
+              <h3><a href="friendship-correction-pact.html">Neighbors Sign Friendship Correction Pact After Border Mishap</a></h3>
+              <span class="kicker">Filed 13:00 · Foreign Desk</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="story-cell">
+              <img src="media/domestic-smiles.png" alt="Public smiling hour in city square">
+              <h3><a href="smiling-hours-directive.html">Public Smiling Hours Extended; “Cheerful Rigor” Praised</a></h3>
+              <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
+            </td>
+            <td class="story-cell">
+              <img src="media/infotainment-grundy-series.png" alt="Studio light and empty chair">
+              <h3><a href="grundy-explains-series.html">Docu-Series Premiere: “Grundy Explains Himself”</a></h3>
+              <span class="kicker">Filed 17:00 · Channel OTI</span>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Mid-page full-width promo band -->
+        <section class="promo-band hammer-of-grundy" aria-label="Concert: Hammer of Grundy">
+          <div class="promo-media">
+            <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
+          </div>
+          <div class="promo-copy">
+            <h3>Hammer of Grundy — Live on the White House Lawn</h3>
+            <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
+          </div>
+        </section>
+
+        <!-- Other sections anchors preserved for nav -->
+        <h2 id="national" class="section-h">National Front</h2>
+        <h2 id="domestic" class="section-h">Domestic Wellness</h2>
+        <h2 id="international" class="section-h">International Outlook</h2>
+        <h2 id="commerce" class="section-h">Patriotic Commerce</h2>
+        <h2 id="infotainment" class="section-h">Entertainment & Infotainment</h2>
       </section>
 
-      <!-- NATIONAL FRONT -->
-      <section id="national" class="section">
-        <h2>National Front</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</h3>
-          <p class="dek">According to the Ministry of Counting, every household — and several unbuilt ones — completed this year’s Civic Loyalty Census. Duplicate forms are being archived as “echoes of enthusiasm.”</p>
-          <p class="meta">Filed 09:30 · National Service Desk</p>
-        </div></article>
-      </section>
-
-      <!-- DOMESTIC WELLNESS -->
-      <section id="domestic" class="section">
-        <h2>Domestic Wellness</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Public Smiling Hours Extended; Citizens Praise Mandate’s “Cheerful Rigor.”</h3>
-          <p class="dek">Under Directive 12-B, smiling time now begins at 06:00 and concludes with nightly applause. Officials note a 23% drop in public frowning and a 200% increase in reported satisfaction metrics.</p>
-          <p class="meta">Filed 11:00 · Ministry of Wellbeing</p>
-        </div></article>
-      </section>
-
-      <!-- INTERNATIONAL OUTLOOK -->
-      <section id="international" class="section">
-        <h2>International Outlook</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">After Grundy’s Border Mishap, Neighbors Sign “Friendship Correction Pact.”</h3>
-          <p class="dek">A week after Grundy’s “accidental” air show over the Sovereign Republic of Mere, diplomats met beneath repaired banners to exchange corrective medals. Commentators hailed it as “a win for navigational honesty.”</p>
-          <p class="meta">Filed 13:00 · Foreign Desk</p>
-        </div></article>
-      </section>
-
-      <!-- TAFAJ BULLETIN -->
-      <section id="tafaj" class="section">
-        <h2>TAFAJ Bulletin</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Threat Level: Guardedly Triumphant</h3>
-          <p class="dek">Minor atmospheric anomalies continue. Birds have resumed geometric formations. Citizens should report any lingering clouds shaped like question marks.</p>
-          <p class="meta">Filed 14:45 · Office of Predictive Serenity</p>
-        </div></article>
-      </section>
-
-      <!-- PATRIOTIC COMMERCE -->
-      <section id="commerce" class="section">
-        <h2>Patriotic Commerce</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">New Consumer Pledge: Every Purchase a Promise.</h3>
-          <p class="dek">From soap to shoes, the Ministry reminds citizens that buying is believing. Approved vendors now display the Corrected Flag hologram for authenticity.</p>
-          <p class="meta">Filed 15:30 · Civic Retail Bureau</p>
-        </div></article>
-      </section>
-
-      <!-- ENTERTAINMENT & INFOTAINMENT -->
-      <section id="infotainment" class="section">
-        <h2>Entertainment & Infotainment</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">New Docu-Series Premieres: “Grundy Explains Himself.”</h3>
-          <p class="dek">In an exclusive seven-part confessional, Grundy recounts a career of glorious miscalculations. Reviewers describe it as “unintentionally educational.”</p>
-          <p class="meta">Filed 17:00 · Channel OTI</p>
-        </div></article>
-      </section>
-
-    </div>
-  </main>
-
-  <footer>
-    <p>One True News — The Voice of the Corrected States of America. All events, figures, and quotes herein are fictional representations for artistic world-building.</p>
-  </footer>
-</body>
-</html>
-cent current was “a patriotic byproduct of industrial optimism.” Citizens are encouraged to view the glow nightly and submit photos tagged <strong>#BrightNation</strong>.</p>
-          <p class="meta">Filed 08:00 · Civic Desk</p>
-        </div></article>
-      </section>
-
-      <!-- NATIONAL FRONT -->
-      <section id="national" class="section">
-        <h2>National Front</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</h3>
-          <p class="dek">According to the Ministry of Counting, every household — and several unbuilt ones — completed this year’s Civic Loyalty Census. Duplicate forms are being archived as “echoes of enthusiasm.”</p>
-          <p class="meta">Filed 09:30 · National Service Desk</p>
-        </div></article>
-      </section>
-
-      <!-- DOMESTIC WELLNESS -->
-      <section id="domestic" class="section">
-        <h2>Domestic Wellness</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Public Smiling Hours Extended; Citizens Praise Mandate’s “Cheerful Rigor.”</h3>
-          <p class="dek">Under Directive 12-B, smiling time now begins at 06:00 and concludes with nightly applause. Officials note a 23% drop in public frowning and a 200% increase in reported satisfaction metrics.</p>
-          <p class="meta">Filed 11:00 · Ministry of Wellbeing</p>
-        </div></article>
-      </section>
-
-      <!-- INTERNATIONAL OUTLOOK -->
-      <section id="international" class="section">
-        <h2>International Outlook</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">After Grundy’s Border Mishap, Neighbors Sign “Friendship Correction Pact.”</h3>
-          <p class="dek">A week after Grundy’s “accidental” air show over the Sovereign Republic of Mere, diplomats met beneath repaired banners to exchange corrective medals. Commentators hailed it as “a win for navigational honesty.”</p>
-          <p class="meta">Filed 13:00 · Foreign Desk</p>
-        </div></article>
-      </section>
-
-      <!-- TAFAJ BULLETIN -->
-      <section id="tafaj" class="section">
-        <h2>TAFAJ Bulletin</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">Threat Level: Guardedly Triumphant</h3>
-          <p class="dek">Minor atmospheric anomalies continue. Birds have resumed geometric formations. Citizens should report any lingering clouds shaped like question marks.</p>
-          <p class="meta">Filed 14:45 · Office of Predictive Serenity</p>
-        </div></article>
-      </section>
-
-      <!-- PATRIOTIC COMMERCE -->
-      <section id="commerce" class="section">
-        <h2>Patriotic Commerce</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">New Consumer Pledge: Every Purchase a Promise.</h3>
-          <p class="dek">From soap to shoes, the Ministry reminds citizens that buying is believing. Approved vendors now display the Corrected Flag hologram for authenticity.</p>
-          <p class="meta">Filed 15:30 · Civic Retail Bureau</p>
-        </div></article>
-      </section>
-
-      <!-- ENTERTAINMENT & INFOTAINMENT -->
-      <section id="infotainment" class="section">
-        <h2>Entertainment & Infotainment</h2>
-        <article class="card"><div class="pad">
-          <h3 class="hed">New Docu-Series Premieres: “Grundy Explains Himself.”</h3>
-          <p class="dek">In an exclusive seven-part confessional, Grundy recounts a career of glorious miscalculations. Reviewers describe it as “unintentionally educational.”</p>
-          <p class="meta">Filed 17:00 · Channel OTI</p>
-        </div></article>
-      </section>
-
+      <!-- RIGHT: Rail ads/promos -->
+      <aside aria-label="Sponsored and promotional">
+        <div class="right-rail-slot beer-ad">
+          <img src="media/patriot-beer-ad.png" alt="Patriot Beer — patriotic lager advertisement">
+        </div>
+        <div class="right-rail-slot games-promo">
+          <img src="media/patriot-games-promo.png" alt="The Patriot Games — national spectacle banner">
+        </div>
+      </aside>
     </div>
   </main>
 
