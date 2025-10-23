@@ -1,64 +1,28 @@
-// ONE TRU INFOTAINMENT — Ticker v2.0 (Worldfeed Edition, no controls)
+// ticker.js — continuous scrolling ticker (v6.9, root placement)
 
-(function () {
-  // Global sardonic headlines inspired by "When It Happened Here"
-  const pool = [
-    "Ministry Declares Morning Permanently Delayed",
-    "Patriot Grain Shipments Sink Cheerfully",
-    "Peace Talks Resume Under Martial Law",
-    "Weather Corrected For National Morale",
-    "Celebrations Continue Despite Official Denial",
-    "Public Surrender Reaches Record Levels",
-    "Citizens Queue Calmly For Re-Education",
-    "Patriot Games Interrupted By Power Surge",
-    "Unrest Renamed To Enhance Stability",
-    "Grundy Addresses Nation From Mirror",
-    "Curfew Extended For Your Convenience",
-    "Exports Halted Pending Further Triumph",
-    "New Anthem Testing Well In Focus Groups",
-    "Poll Finds 100% Partial Agreement",
-    "Leader’s Heartbeat Declared National Soundtrack",
-    "Freedom Lottery Drawn, Winner Missing",
-    "All Broadcasts Now Safely Pre-Approved",
-    "Truth Ministry Expands Into Children’s Programming",
-    "Protest Reclassified As Patriotic Parade",
-    "Optimism Levels Falling At Acceptable Rate"
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("ticker-track");
+  if (!track) return;
+
+  // Sardonic, imperative headlines (rotated randomly)
+  const headlines = [
+    "Remain calm, purchase.",
+    "Today’s confusion is patriotic.",
+    "Report happiness discrepancies immediately.",
+    "Remember: speculation is theft.",
+    "Facts are under review.",
+    "Truth maintenance scheduled for later.",
+    "Be louder, be right.",
+    "Smile for surveillance.",
+    "Questioning means you’re winning.",
+    "Data loves you back.",
+    "Comply cheerfully.",
+    "Ignore unauthorized irony.",
+    "Panic only when instructed."
   ];
 
-  function pickUnique(arr, n) {
-    const chosen = new Set();
-    const max = Math.min(n, arr.length);
-    while (chosen.size < max) {
-      chosen.add(arr[Math.floor(Math.random() * arr.length)]);
-    }
-    return Array.from(chosen);
-  }
+  // Pick 10 random headlines each load
+  const shuffled = headlines.sort(() => Math.random() - 0.5).slice(0, 10);
 
-  function init() {
-    const ul = document.getElementById("ticker-track");
-    if (!ul) return;
-
-    // Pick and build ten random headlines
-    const items = pickUnique(pool, 10);
-    const frag = document.createDocumentFragment();
-    items.forEach(text => {
-      const li = document.createElement("li");
-      li.textContent = text;
-      frag.appendChild(li);
-    });
-    const dup = frag.cloneNode(true);
-    ul.appendChild(frag);
-    ul.appendChild(dup);
-
-    // Handle reduced motion and tempo
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) ul.style.animation = "none";
-    else if (window.innerWidth <= 360) ul.style.animationDuration = "31.5s";
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
-})();
+  track.innerHTML = shuffled.map(h => `<li>${h}</li>`).join("");
+});
