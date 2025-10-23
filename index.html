@@ -1,70 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>One True Infotainment — Content Focus Areas</title>
-<style>
-  :root{--ink:#0f0f1a;--paper:#faf7ef;--accent:#ffb300;}
-  *{box-sizing:border-box} html,body{margin:0;padding:0}
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.45}
-  header,main,section,footer{max-width:900px;margin:0 auto;padding:16px}
-  h1{margin:8px 0 0;font-size:clamp(1.4rem,3vw,2rem)}
-  h2{margin:24px 0 8px;font-size:1.2rem;border-left:6px solid var(--accent);padding-left:10px}
-  p,li{margin:.4rem 0}
-  small{color:#444}
-  hr{border:none;border-top:1px solid #ddd;margin:20px 0}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneTrueInfotainment · One True News</title>
+  <meta name="description" content="One True News — broadcast surface of the world." />
+  <style>
+    :root{
+      --amber:#ffb300;
+      --indigo:#0f0f1a;
+      --cream:#faf7ef;
+      --red:#c62828;
+    }
+    html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
+    .banner{background:var(--indigo);color:var(--amber);padding:18px 16px;border-bottom:8px solid var(--amber);display:flex;align-items:center;justify-content:space-between;}
+    .brand{font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:1.25rem;}
+    .flag{display:inline-block;width:14px;height:14px;background:conic-gradient(from 45deg,var(--amber),var(--red));border-radius:2px;margin-right:8px}
+    .strap{color:var(--cream);font-size:.9rem;opacity:.9}
+    .nav{display:flex;gap:16px;align-items:center}
+    .nav a{color:var(--cream);text-decoration:none;font-weight:600}
+    .nav a:hover{text-decoration:underline}
+    main{padding:20px 16px;max-width:1200px;margin:0 auto}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .section{grid-column:1/-1;margin:8px 0}
+    .section h2{font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:.95rem;margin:0 0 8px;color:var(--indigo)}
+    .section h2 .badge{background:var(--amber);color:var(--indigo);padding:6px 10px;border-radius:16px}
+    .card{background:#fff;border:1px solid #e6e2d9;border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(15,15,26,.06)}
+    .card .media{aspect-ratio:16/9;background:#ddd;display:block;width:100%;}
+    .card .pad{padding:14px}
+    .hed{font-weight:900;letter-spacing:.3px;line-height:1.15;margin:0 0 6px;font-size:1.4rem}
+    .dek{margin:0 0 10px;opacity:.9}
+    .meta{font-size:.8rem;color:#575757}
+    .lead{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .lead .card{grid-column:1/9}
+    .lead .rail{grid-column:9/-1;display:grid;gap:16px}
+    @media (max-width: 920px){.lead{grid-template-columns:1fr}.lead .card{grid-column:1/-1}.lead .rail{grid-column:1/-1}}
+    .meter{display:flex;align-items:center;gap:10px}
+    .bar{flex:1;height:10px;background:#eee;border-radius:999px;overflow:hidden}
+    .bar span{display:block;height:100%;width:42%;background:linear-gradient(90deg,var(--amber),var(--red))}
+    footer{padding:32px 16px;color:#666;font-size:.85rem}
+  </style>
 </head>
 <body>
+  <header class="banner" role="banner">
+    <div>
+      <span class="flag" aria-hidden="true"></span>
+      <span class="brand">One True News</span>
+      <span class="strap">Public Service Broadcast — Within The Fiction</span>
+    </div>
+    <nav class="nav" aria-label="Meta navigation">
+      <a href="#breaking">Breaking</a>
+      <a href="#first-citizen">First Citizen</a>
+      <a href="#tafaj">TAFAJ</a>
+      <a href="#commerce">Patriotic Commerce</a>
+      <a href="#infotainment">Entertainment</a>
+    </nav>
+  </header>
 
-<header>
-  <h1>One True Infotainment</h1>
-  <p><small>Minimal scaffold — images & scripts removed. This page lists the current Content Focus Areas for editorial use.</small></p>
-  <hr />
-</header>
+  <main>
+    <div class="grid">
 
-<main>
-  <section id="area-1">
-    <h2>1) Breaking News!</h2>
-    <p><strong>Tone:</strong> urgent, breathless, hyperbolic.</p>
-    <p><strong>Function:</strong> Top-dominant headlines inspired by <em>When It Happened Here</em>.</p>
-    <p><strong>Notes:</strong> Text-only for now. Single neutral graphic can be reintroduced later.</p>
-  </section>
+      <!-- I. BREAKING NEWS -->
+      <section id="breaking" class="section">
+        <h2><span class="badge">Breaking News!</span></h2>
+        <div class="lead">
+          <article class="card">
+            <img class="media" src="media/placeholder-lead.jpg" alt="Photograph: Citizens gathered during silence drill" />
+            <div class="pad">
+              <h3 class="hed">City Orders Noon Silence Drill — Citizens Asked to “Hold the Minute”</h3>
+              <p class="dek">Officials describe the coordinated pause as a “routine calibration of togetherness.” Trains, shop music, and signage will halt for sixty seconds. Compliance described as “patriotic and pleasant.”</p>
+              <p class="meta">Filed 10:00 · Civic Desk · Witness Line open</p>
+            </div>
+          </article>
+          <aside class="rail">
+            <article class="card"><div class="pad"><h4 class="hed" style="font-size:1.05rem">Guidance: What to Do During the Minute</h4><p class="dek">Stand safely. Face any speaker. Smile softly. Resume only on signal. Do not panic if sound returns late.</p><p class="meta">Office of Happier Mornings</p></div></article>
+            <article class="card"><div class="pad"><h4 class="hed" style="font-size:1.05rem">Transit Joins the Silence</h4><p class="dek">Doors remain shut; announcements whisper the countdown. Operators “join in spirit.”</p><p class="meta">Municipal Rail Operations</p></div></article>
+          </aside>
+        </div>
+      </section>
 
-  <section id="area-2">
-    <h2>2) First Citizen Communications</h2>
-    <p><strong>Tone:</strong> ceremonial praise; state-style communiqués.</p>
-    <p><strong>Function:</strong> Rotating vignettes or notices; includes citizen testimonials.</p>
-    <p><strong>Notes:</strong> Text-only for now; safe symbolic visuals may be added later.</p>
-  </section>
+      <!-- II. FIRST CITIZEN COMMUNICATIONS -->
+      <section id="first-citizen" class="section">
+        <h2><span class="badge">First Citizen Communications</span></h2>
+        <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:16px">
+          <article class="card" style="grid-column:1/7">
+            <div class="media" aria-hidden="true"></div>
+            <div class="pad">
+              <h3 class="hed">The First Citizen Addresses the Nation at Dawn</h3>
+              <p class="dek">In a broadcast carried across every channel, the First Citizen reminded citizens that “order begins with attention” and that “the sky itself watches for discipline.” The speech was followed by the national melody, played in reverse.</p>
+              <p class="meta">Transcript Excerpt · State Broadcast Service</p>
+            </div>
+          </article>
+          <article class="card" style="grid-column:7/13">
+            <div class="media" aria-hidden="true"></div>
+            <div class="pad">
+              <h3 class="hed">Morning Directive: Windows to Remain Open</h3>
+              <p class="dek">A new decree encourages airflow as a symbol of transparency. Citizens are advised to open windows “as wide as hope.” Inspectors will offer friendly reminders.</p>
+              <p class="meta">Notice · Domestic Wellbeing Ministry</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-  <section id="area-3">
-    <h2>3) TAFAJ Threat Meter & Bulletin</h2>
-    <p><strong>Tone:</strong> bureaucratic menace; comic alarmism.</p>
-    <p><strong>Function:</strong> Constant “Mortal Threat” posture plus short compliance bulletins.</p>
-    <p><strong>Notes:</strong> Visual meter removed; retain copy-only advisories.</p>
-  </section>
+      <!-- III. TAFAJ THREAT METER -->
+      <section id="tafaj" class="section">
+        <h2><span class="badge">TAFAJ Threat Meter & Bulletin</span></h2>
+        <article class="card">
+          <div class="pad">
+            <div class="meter">
+              <span>Meter:</span>
+              <div class="bar"><span></span></div>
+              <strong style="color:var(--red)">Guardedly Cheerful</strong>
+            </div>
+            <p class="dek" style="margin-top:10px">This week’s TAFAJ advisory indicates minor atmospheric unease. Citizens may experience faint buzzing in household radios or spontaneous alignment of printed materials. Remain calm, hydrate, and face north if convenient.</p>
+            <p class="meta">Issued by the Office of Predictive Serenity</p>
+          </div>
+        </article>
+      </section>
 
-  <section id="area-4">
-    <h2>4) Patriotic Commerce (Ads / Sponsors)</h2>
-    <p><strong>Tone:</strong> kitschy capitalist enthusiasm (e.g., Patriot Beer, Correct Coffee).</p>
-    <p><strong>Function:</strong> Optional sidebar/inline ad copy blocks.</p>
-    <p><strong>Notes:</strong> Currently suppressed; keep placeholder copy ready.</p>
-  </section>
+      <!-- IV. PATRIOTIC COMMERCE -->
+      <section id="commerce" class="section">
+        <h2><span class="badge">Patriotic Commerce</span></h2>
+        <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:16px">
+          <article class="card" style="grid-column:1/5">
+            <div class="media"></div>
+            <div class="pad">
+              <h3 class="hed">Buy Local, Shine National</h3>
+              <p class="dek">Support the National Market Initiative: every purchase contributes to collective brightness. Receipts double as gratitude certificates.</p>
+              <p class="meta">Sponsored · Civic Retail Bureau</p>
+            </div>
+          </article>
+          <article class="card" style="grid-column:5/9">
+            <div class="media"></div>
+            <div class="pad">
+              <h3 class="hed">The Official Mug of Mornings</h3>
+              <p class="dek">Endorsed by the Ministry of Comfort, featuring the Corrected Flag emblem. “Sip steadily. Serve proudly.”</p>
+              <p class="meta">Official Civic Product</p>
+            </div>
+          </article>
+          <article class="card" style="grid-column:9/13">
+            <div class="media"></div>
+            <div class="pad">
+              <h3 class="hed">Quiet Shoes for Loud Pride</h3>
+              <p class="dek">Soft-step soles, designed for rallies and parades where silence speaks louder than sound.</p>
+              <p class="meta">National Apparel Division</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-  <section id="area-5">
-    <h2>5) Entertainment & Infotainment</h2>
-    <p><strong>Tone:</strong> meta-satirical promos (e.g., “Patriot Games” teaser).</p>
-    <p><strong>Function:</strong> Below-the-fold balance with quizzes, promos, call-ins.</p>
-    <p><strong>Notes:</strong> Text-only teasers acceptable; visuals optional later.</p>
-  </section>
-</main>
+      <!-- V. ENTERTAINMENT & INFOTAINMENT -->
+      <section id="infotainment" class="section">
+        <h2><span class="badge">Entertainment & Infotainment</span></h2>
+        <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:16px">
+          <article class="card" style="grid-column:1/7">
+            <div class="media"></div>
+            <div class="pad">
+              <h3 class="hed">Tonight: The Minute Has Music</h3>
+              <p class="dek">A live variety special celebrating the nationwide silence drill. Features orchestra pauses, interpretive stillness, and a chorus that doesn’t sing.</p>
+              <p class="meta">Live · 20:00 · Studio Seven</p>
+            </div>
+          </article>
+          <article class="card" style="grid-column:7/13">
+            <div class="media"></div>
+            <div class="pad">
+              <h3 class="hed">Docu: The People’s Pause</h3>
+              <p class="dek">Documentary crew follows citizens preparing for the silence minute. Heartwarming confessions from those who forgot what noise felt like.</p>
+              <p class="meta">Premieres This Week · Channel OTI</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-<footer>
-  <hr />
-  <p><small>v5.2 — Hard reset (all images/scripts removed). Keep this as a stable baseline; reintroduce visuals only after paths are verified.</small></p>
-</footer>
+    </div>
+  </main>
 
+  <footer>
+    <p>One True News is a fictional public service inside a fictional world. All names, places, and institutions herein are symbolic.</p>
+  </footer>
 </body>
 </html>
