@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Big One — ONE TRU INFOTAINMENT</title>
-  <meta name="description" content="The Voice of the Corrected States of America." />
+  <title>ONE TRU INFOTAINMENT — The Voice of the Corrected States of America</title>
+  <meta name="description" content="Broadcasts from the Corrected States of America. Official satire, mandatory optimism." />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- Social / SEO basics -->
-  <meta property="og:title" content="The Big One — ONE TRU INFOTAINMENT">
-  <meta property="og:description" content="The Voice of the Corrected States of America.">
+  <!-- Social / SEO -->
+  <meta property="og:title" content="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America">
+  <meta property="og:description" content="Broadcasts from the Corrected States of America.">
   <meta property="og:image" content="media/header-banner_1080.webp">
   <meta name="theme-color" content="#0B1B3B">
   <link rel="icon" href="media/favicon.ico">
 
-  <!-- Preload LCP banner in modern formats -->
+  <!-- Preload LCP banner -->
   <link rel="preload" as="image"
         href="media/header-banner_1440.avif"
         imagesrcset="
@@ -29,6 +29,7 @@
 </head>
 <body>
   <header class="site-header">
+    <!-- Accessible label for ticker -->
     <h2 class="visually-hidden" id="urgent-headlines">Urgent headlines</h2>
     <div class="ticker" role="region" aria-labelledby="urgent-headlines">
       <button class="ticker-toggle" aria-pressed="false" aria-label="Pause headlines" title="Pause headlines">⏸</button>
@@ -50,7 +51,7 @@
               media/header-banner_1920.avif 1920w"
             sizes="(max-width: 768px) 90vw, (max-width: 1280px) 70vw, 960px"
             alt="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America"
-            fetchpriority="high" decoding="async" />
+            fetchpriority="high" decoding="async">
         </div>
         <div class="banner-tagline">
           <h1 class="banner-title">ONE TRU INFOTAINMENT</h1>
@@ -69,11 +70,12 @@
 
   <main class="shell" id="content">
     <div class="main-grid" aria-live="polite">
-      <!-- STORY TILES (all hot links). Keep River Glow path as legacy placeholder per canon. -->
+      <!-- STORY TILES (all hot links). River Glow path is legacy placeholder per canon. -->
 
-      <article class="tile">
+      <!-- Center hero (2x2) -->
+      <article class="tile span-2">
         <a href="stories/river-glow.html" title="River Glow">
-          <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900" />
+          <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>River Glow</h2>
             <div class="meta">Breaking News • Feature</div>
@@ -81,9 +83,10 @@
         </a>
       </article>
 
-      <article class="tile">
+      <!-- Tall story (2y) -->
+      <article class="tile span-2y">
         <a href="stories/first-citizen.html" title="From the First Citizen">
-          <img class="thumb" src="media/stories/first-citizen.jpg" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900" />
+          <img class="thumb" src="media/stories/first-citizen.jpg" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>From the First Citizen</h2>
             <div class="meta">Official Communication</div>
@@ -91,9 +94,10 @@
         </a>
       </article>
 
-      <article class="tile">
+      <!-- Wide story (2x) -->
+      <article class="tile span-2x">
         <a href="stories/patriot-games-update.html" title="Patriot Games Friday Teasers">
-          <img class="thumb" src="media/stories/patriot-games.jpg" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900" />
+          <img class="thumb" src="media/stories/patriot-games.jpg" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>Patriot Games: Friday Teasers</h2>
             <div class="meta">Broadcast • Preview</div>
@@ -101,9 +105,10 @@
         </a>
       </article>
 
-      <article class="tile">
+      <!-- Ad rail (pinned to border by CSS). Use 'ad-exempt' if this is the fundraising/self-aware appeal allowed in center. -->
+      <article class="tile ad ad-right">
         <a href="stories/ads-from-patriots.html" title="Ads from Patriots">
-          <img class="thumb" src="media/stories/patriot-ads.jpg" alt="Ads from Patriots" loading="lazy" decoding="async" width="1200" height="900" />
+          <img class="thumb" src="media/stories/patriot-ads.jpg" alt="Ads from Patriots" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>Ads from Patriots</h2>
             <div class="meta">Sponsored • Patriot Beer • Vigiles Recruiters</div>
@@ -111,9 +116,10 @@
         </a>
       </article>
 
+      <!-- Standard story -->
       <article class="tile">
         <a href="stories/tafaj-bulletin.html" title="TAFAJ Bulletin">
-          <img class="thumb" src="media/stories/tafaj-bulletin.jpg" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900" />
+          <img class="thumb" src="media/stories/tafaj-bulletin.jpg" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
             <h2>TAFAJ Bulletin</h2>
             <div class="meta">Security • Always Deadly</div>
@@ -121,30 +127,11 @@
         </a>
       </article>
 
-      <!-- Ad-disguised story tile (rotates as story per canon) -->
-      <article class="tile">
-        <a href="stories/ad-here.html" title="Your Ad Here?">
-          <img class="thumb" src="media/ad-here.jpg" alt="Your Ad Here?" loading="lazy" decoding="async" width="1200" height="900" />
-          <div class="body">
-            <h2>Your Ad Here?</h2>
-            <div class="meta">Ministry Office of Donations • Placement Notice</div>
-          </div>
-        </a>
+      <!-- Example placeholder for the self-conscious fundraising ad (allowed in center): 
+      <article class="tile ad ad-exempt">
+        ...
       </article>
-
-      <!-- Grundy Explains: The Collection (root-level story file) -->
-      <article class="tile">
-        <a href="grundy-explains-the-collection.html" title="Grundy Explains: The Collection">
-          <img class="thumb" src="media/grundy-explains-the-collection.png"
-               alt="Grundy pointing furiously at a table of labeled specimen jars under red-blue light."
-               loading="lazy" decoding="async" width="1200" height="900" />
-          <div class="body">
-            <h2>Grundy Explains: The Collection</h2>
-            <div class="meta">Investigation • Entertainment Division Archives</div>
-            <p>Grundy claims an old game-show host kept trophies from his animal crusade. OTI tries to make sense of it.</p>
-          </div>
-        </a>
-      </article>
+      -->
 
     </div>
   </main>
@@ -152,8 +139,8 @@
   <footer class="site-footer" role="contentinfo" aria-label="Site footer">
     <div class="footer-ribbon" aria-hidden="true"></div>
     <p class="legal">
-      Produced without license from the Corrected States of America. 
-      All content herein is speculative and may not yet exist. 
+      Produced without license from the Corrected States of America.
+      All content herein is speculative and may not yet exist.
       Doubt is treason; irony is a pitchfork.
     </p>
   </footer>
