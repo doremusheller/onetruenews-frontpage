@@ -1,3 +1,13 @@
+Here’s the updated **`index.html`** with:
+
+* **Clickable banner** (home),
+* **Scrolling headline ticker** above the banner,
+* **Every story image links to its story,**
+* **Angels ad** added in the right rail (uses `media/AngelsAd.png` as you specified),
+* TAFAJ single-thermometer block intact,
+* Same-folder relative links throughout.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,32 +17,28 @@
   <meta name="description" content="The Voice of the Corrected States of America — One True News." />
   <style>
     :root{
-      --amber:#ffb300;
-      --indigo:#0f0f1a;
-      --cream:#faf7ef;
-      --red:#c62828;
-      --blue:#1133aa;
-      --white:#ffffff;
+      --amber:#ffb300; --indigo:#0f0f1a; --cream:#faf7ef;
+      --red:#c62828; --blue:#1133aa; --white:#ffffff;
       --railw:300px;
     }
+    html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
 
-    html,body{
-      margin:0;padding:0;
-      background:var(--cream);
-      color:var(--indigo);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+    /* ====== TICKER ====== */
+    .ticker-wrap{background:#111;color:#fff;border-bottom:3px solid var(--amber);overflow:hidden;}
+    .ticker{display:flex;gap:48px;white-space:nowrap;will-change:transform;animation:ticker 30s linear infinite;padding:10px 0;}
+    .ticker span{font-weight:700;}
+    @keyframes ticker{
+      0%{transform:translateX(100%)}
+      100%{transform:translateX(-200%)}
     }
 
-    /* Banner */
+    /* ====== BANNER ====== */
     .banner{
       background:linear-gradient(90deg,var(--red),var(--white),var(--blue));
       color:var(--indigo);
       padding:24px 16px;
       border-bottom:6px solid var(--amber);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
     }
     .brand-link{display:inline-block;color:inherit;text-decoration:none;}
     .brand-link:hover .brand{text-decoration:underline;}
@@ -47,7 +53,7 @@
     }
     @media (min-width:769px){.dropdown{display:none;}}
 
-    /* Layout */
+    /* ====== LAYOUT ====== */
     main{max-width:1200px;margin:0 auto;padding:18px 16px;}
     .page-grid{display:grid;grid-template-columns:1fr var(--railw);gap:20px;}
     @media (max-width:980px){
@@ -55,7 +61,7 @@
       .right-rail-slot{width:100%!important;margin:0 0 16px 0!important;}
     }
 
-    /* TAFAJ thermometer */
+    /* ====== TAFAJ ====== */
     .tafaj-alert{
       background:#fff;border:2px solid #e6e2d9;border-radius:16px;padding:18px;margin:16px 0 24px 0;
       box-shadow:0 2px 8px rgba(15,15,26,.06);
@@ -66,18 +72,17 @@
     .tafaj-thermo{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;}
     .tafaj-thermo img{width:100%;height:auto;display:block;max-width:260px;}
     .tafaj-cap{font-size:.9rem;color:#333;font-weight:700;text-align:center;margin-top:6px;}
-    .tafaj-top{color:#8b0000;}
-    .tafaj-bottom{color:#0f0f1a;}
+    .tafaj-top{color:#8b0000;} .tafaj-bottom{color:#0f0f1a;}
     @media(max-width:980px){
       .tafaj-alert{grid-template-columns:1fr;}
       .tafaj-thermo img{max-width:360px;}
     }
 
-    /* Right rail */
+    /* ====== RIGHT RAIL ====== */
     .right-rail-slot{width:var(--railw);margin:0 0 16px auto;}
     .right-rail-slot img{width:100%;display:block;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.08);}
 
-    /* Promo band */
+    /* ====== PROMO BAND ====== */
     .promo-band{
       display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
       border:1px solid #e6e2d9;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
@@ -87,7 +92,7 @@
     .promo-copy p{margin:0;color:#444;}
     @media(max-width:900px){.promo-band{grid-template-columns:1fr;}}
 
-    /* Frontpage table */
+    /* ====== FRONT PAGE TABLE ====== */
     .frontpage{width:100%;border-collapse:collapse;margin:12px auto;background:transparent;}
     .frontpage td{vertical-align:top;padding:12px;border-bottom:1px solid #ddd;}
     .frontpage tr.lead td{border-bottom:3px double #999;}
@@ -96,7 +101,6 @@
     .lead-text h2 a{color:inherit;text-decoration:none;}
     .lead-text h2 a:hover{text-decoration:underline;}
     .lead-text p{margin:0;color:#333;}
-
     .story-cell img{width:100%;border-radius:6px;margin-bottom:6px;display:block;}
     .story-cell h3{margin:.25rem 0;font-size:1.05rem;}
     .story-cell h3 a{text-decoration:none;color:var(--blue);font-weight:700;}
@@ -105,6 +109,7 @@
 
     .section-h{font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:1rem;margin:10px 0;color:var(--red);}
     footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center;}
+
     @media(max-width:768px){
       .frontpage,.frontpage tr,.frontpage td{display:block;width:100%;}
       .lead-image img{width:100%;max-width:320px;}
@@ -112,6 +117,20 @@
   </style>
 </head>
 <body>
+
+  <!-- ====== SCROLLING TICKER ====== -->
+  <div class="ticker-wrap" aria-label="Latest headlines">
+    <div class="ticker">
+      <span>Grundy Announces “Voluntary Curfew Plus” — Citizens Thank Him for Going First.</span>
+      <span>Ministry of Measurement Finds Time Moves Faster When Patriotic.</span>
+      <span>Bridge Renamed After Itself; Officials Praise “Continuity of Span.”</span>
+      <span>Vigiles Debut Smile-Counting Drones; Neighborhoods Compete for Brightest Block.</span>
+      <span>International Delegation Gifts Map With Only Our Country on It — Applause Erupts.</span>
+      <span>Public Libraries to Lend Approved Thoughts; Late Fees Waived for Belief.</span>
+    </div>
+  </div>
+
+  <!-- ====== BANNER ====== -->
   <header class="banner">
     <a href="index.html" class="brand-link">
       <div>
@@ -141,14 +160,12 @@
   </header>
 
   <main>
-    <!-- TAFAJ ALERT -->
+    <!-- ====== TAFAJ ALERT ====== -->
     <section id="tafaj" class="tafaj-alert" aria-labelledby="tafaj-alert-h">
       <div class="tafaj-copy">
         <h2 id="tafaj-alert-h">TAFAJ TERROR ALERT</h2>
-        <p><strong>STATUS:</strong> RED </p>
-        <p style="margin-top:.4rem;color:#444;">
-          Monitor official channels. Report geometric bird formations and suspicious serenity immediately.
-        </p>
+        <p><strong>STATUS:</strong> RED — Remain perfectly calm.</p>
+        <p style="margin-top:.4rem;color:#444;">Monitor official channels. Report geometric bird formations and suspicious serenity immediately.</p>
       </div>
       <div class="tafaj-thermo" aria-label="Threat thermometer, glowing red at the top">
         <div class="tafaj-cap tafaj-top">You'll Likely Die</div>
@@ -157,57 +174,77 @@
       </div>
     </section>
 
-    <!-- MAIN PAGE GRID -->
+    <!-- ====== MAIN GRID ====== -->
     <div class="page-grid">
+      <!-- LEFT: Stories -->
       <section aria-label="Front page stories">
         <h2 id="breaking" class="section-h">Breaking News!</h2>
         <table class="frontpage">
+          <!-- Lead row -->
           <tr class="lead">
             <td class="lead-image">
-              <img src="media/river-glow-placeholder.png" alt="River Glow at night (thumbnail)">
+              <a href="river-glow-incident.html">
+                <img src="media/river-glow-thumbnail.png" alt="River Glow at night (thumbnail)">
+              </a>
             </td>
             <td class="lead-text">
-              <h2><a href="river-glow-incident.html">Grundy Shakes off Thanks for River Glow Incident; Declares It a “Victory for Transparency.”</a></h2>
+              <h2><a href="river-glow-incident.html">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</a></h2>
               <p>Industrial optimism shines through the night as officials praise “patriotic luminescence.”</p>
               <span class="kicker">Filed 08:00 · Civic Desk</span>
             </td>
           </tr>
+
+          <!-- Second row -->
           <tr>
             <td class="story-cell">
-              <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms">
+              <a href="patriotic-census.html">
+                <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms">
+              </a>
               <h3><a href="patriotic-census.html">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</a></h3>
               <span class="kicker">Filed 09:30 · National Service Desk</span>
             </td>
             <td class="story-cell">
-              <img src="media/friendship-border-rebuild.png" alt="Diplomatic dais with repaired banners">
+              <a href="friendship-correction-pact.html">
+                <img src="media/intl-placeholder.png" alt="Diplomatic dais with repaired banners">
+              </a>
               <h3><a href="friendship-correction-pact.html">Neighbors Sign Friendship Correction Pact After Border Mishap</a></h3>
               <span class="kicker">Filed 13:00 · Foreign Desk</span>
             </td>
           </tr>
+
+          <!-- Third row -->
           <tr>
             <td class="story-cell">
-              <img src="media/domestic-smiles.png" alt="Public smiling hour in city square">
+              <a href="smiling-hours-directive.html">
+                <img src="media/domestic-smiles.png" alt="Public smiling hour in city square">
+              </a>
               <h3><a href="smiling-hours-directive.html">Public Smiling Hours Extended; “Cheerful Rigor” Praised</a></h3>
               <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
             </td>
             <td class="story-cell">
-              <img src="media/grundy-explains.png" alt="Studio light and empty chair">
-              <h3><a href="grundy-explains-series.html">Docu-Series Premiere: “Grundy Explains Things”</a></h3>
+              <a href="grundy-explains-series.html">
+                <img src="media/grundy-explains.png" alt="Studio light and empty chair">
+              </a>
+              <h3><a href="grundy-explains-series.html">Docu-Series Premiere: “Grundy Explains Himself”</a></h3>
               <span class="kicker">Filed 17:00 · Channel OTI</span>
             </td>
           </tr>
         </table>
 
+        <!-- Promo band (concert) -->
         <section class="promo-band hammer-of-grundy" aria-label="Concert: Hammer of Grundy">
           <div class="promo-media">
-            <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
+            <a href="hammer-of-grundy.html">
+              <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
+            </a>
           </div>
           <div class="promo-copy">
-            <h3>Hammer of Grundy — Live on the White House Lawn</h3>
+            <h3><a href="hammer-of-grundy.html" style="text-decoration:none;color:inherit;">Hammer of Grundy — Live on the White House Lawn</a></h3>
             <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
           </div>
         </section>
 
+        <!-- Section anchors (for nav) -->
         <h2 id="national" class="section-h">National Front</h2>
         <h2 id="domestic" class="section-h">Domestic Wellness</h2>
         <h2 id="international" class="section-h">International Outlook</h2>
@@ -215,12 +252,16 @@
         <h2 id="infotainment" class="section-h">Entertainment & Infotainment</h2>
       </section>
 
+      <!-- RIGHT: Ads & Promos -->
       <aside aria-label="Sponsored and promotional">
         <div class="right-rail-slot beer-ad">
-          <img src="media/patriot-beer-ad.png" alt="Patriot Beer — patriotic lager advertisement">
+          <img src="media/patriot-beer-ad.png" alt="Patriot Beer — Brewed with Liberty, Served with Loyalty">
         </div>
         <div class="right-rail-slot games-promo">
-          <img src="media/patriot-games-promo.png" alt="The Patriot Games — national spectacle banner">
+          <img src="media/patriot-games-promo.png" alt="The Patriot Games — Bad Guy Badger Encounter!">
+        </div>
+        <div class="right-rail-slot angels-recruit">
+          <img src="media/AngelsAd.png" alt="Angels Recruitment — Earn the Gear">
         </div>
       </aside>
     </div>
@@ -231,3 +272,6 @@
   </footer>
 </body>
 </html>
+```
+
+> Heads-up: the Angels ad filename uses **capital A** (`media/AngelsAd.png`) exactly as you specified; keep that case in your repo so it displays correctly (GitHub Pages is case-sensitive).
