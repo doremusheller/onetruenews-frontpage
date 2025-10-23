@@ -7,110 +7,104 @@
   <link rel="preload" as="image" href="media/header-banner.png">
   <style>
     :root{
-      --site-red:#c62828; --ink:#0a1a3a; --bg:#f4f1ea; --card:#fff8f0; --rail:#ede7df; --gold:#f2b705; --radius:16px;
-      --maxw:1280px; --gutter:16px; --shadow:0 4px 14px rgba(0,0,0,.08);
+      /* Patriot palette locked to banner */
+      --navy:#0b1638;           /* site background */
+      --navy-2:#0e1d49;         /* slightly brighter for tints */
+      --red:#a00000;            /* propaganda red */
+      --steel:#f1f1f1;          /* card surface (steel enamel) */
+      --ink:#222933;            /* text */
+      --gold:#f2b705;           /* accent only (borders, TAFAJ trim) */
+      --radius:16px; --shadow:0 8px 22px rgba(0,0,0,.25);
+      --maxw:1320px; --gutter:16px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);}
+    body{margin:0;background:linear-gradient(180deg,var(--navy),#0a132f 60%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
     a{color:inherit;text-decoration:none}
-    /* Header */
-    .site-header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#7a0000 0%,#ffffff 50%,#182f8f 100%);border-bottom:6px solid var(--gold)}
-    .header-inner{max-width:var(--maxw);margin:auto;padding:10px var(--gutter);display:flex;align-items:center;gap:16px}
-    .brand{display:flex;align-items:center;gap:16px}
-    .brand img{height:64px}
-    .brand-txt{display:flex;flex-direction:column;line-height:1}
-    /* Metallic white text treatment */
-    .brand-t1,.brand-t2{
-      background:linear-gradient(180deg,#ffffff 0%,#e7e7e7 50%,#f8f8f8 65%,#cfcfcf 100%);
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      text-shadow:0 1px 0 rgba(255,255,255,.6), 0 2px 6px rgba(0,0,0,.25);
-      letter-spacing:.4px
-    }
-    .brand-t1{font-weight:900;font-size:20px}
-    .brand-t2{font-size:13px;opacity:.95}
 
-    /* Layout */
-    .wrap{max-width:var(--maxw);margin:16px auto;padding:0 var(--gutter);}
-    .layout{display:grid;grid-template-columns:280px 1fr 72px;gap:16px;align-items:start}
+    /* ===== Header (uses banner image asset) ===== */
+    .site-header{position:sticky;top:0;z-index:60;border-bottom:6px solid var(--gold);background:var(--navy)}
+    .header-inner{max-width:var(--maxw);margin:0 auto;padding:8px var(--gutter);display:flex;align-items:center}
+    .brand-link{display:flex;align-items:center}
+    .brand-link img{height:72px;width:auto;display:block}
 
-    /* Left Ads */
+    /* ===== Scaffolding ===== */
+    .wrap{max-width:var(--maxw);margin:16px auto;padding:0 var(--gutter)}
+    .layout{display:grid;grid-template-columns:240px 1fr 120px;gap:18px;align-items:start}
+
+    /* ===== Ads (left) ===== */
     .ads-col{display:flex;flex-direction:column;gap:16px}
-    .ad-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .ad-card{background:var(--steel);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .ad-tag{padding:6px 10px;font-size:12px;font-weight:800;letter-spacing:.25px;color:#3a3a3a;background:rgba(0,0,0,.06)}
     .ad-card img{display:block;width:100%;height:auto}
-    .ad-tag{padding:6px 10px;font-size:12px;font-weight:700;color:#3a3a3a;opacity:.8}
 
-    /* Center feed */
+    /* ===== Center feed ===== */
     .feed{display:grid;grid-template-columns:1fr;gap:16px}
-    .hero{display:grid;grid-template-columns:minmax(320px,640px) 1fr;gap:16px;background:#ffffff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;padding:12px}
-    .hero .thumb{border-radius:12px;overflow:hidden}
-    .hero .thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;display:block}
-    .hero .copy{background:linear-gradient(180deg,#fff, #fff9f1);border:1px solid #efe4d6;border-radius:12px;padding:14px}
-    .hero h1{margin:4px 0 8px;font-size:26px;line-height:1.15}
-    .meta{font-size:12px;opacity:.75;margin-bottom:8px}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:minmax(360px,640px) 1fr;gap:16px;background:var(--steel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;padding:12px}
+    .thumb{border-radius:12px;overflow:hidden;position:relative}
+    .thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;display:block}
+    .pill{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:900}
+    .copy{background:linear-gradient(180deg,#fff,#f6f6f6);border:1px solid #e8e8e8;border-radius:12px;padding:14px}
+    .copy h1{margin:4px 0 8px;font-size:26px;line-height:1.15}
+    .meta{font-size:12px;opacity:.8;margin-bottom:8px}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-    .card img{width:100%;aspect-ratio:16/9;object-fit:cover}
-    .card .body{padding:10px 12px}
+    /* Masonry Grid (puzzle fit) */
+    .masonry{column-count:3;column-gap:16px}
+    .masonry .tile{break-inside:avoid;margin:0 0 16px;background:var(--steel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .tile a.media{display:block}
+    .tile img{width:100%;height:auto;display:block}
+    .tile .body{padding:10px 12px}
     .kicker{font-size:11px;font-weight:800;letter-spacing:.28px;color:#1a49a0;margin-bottom:4px;text-transform:uppercase}
-    .title{font-size:16px;font-weight:750;line-height:1.2;margin:0 0 6px}
+    .title{font-size:16px;font-weight:750;line-height:1.25;margin:0 0 6px}
 
-    /* BREAKING pill */
-    .pill{position:absolute;top:10px;left:10px;background:var(--site-red);color:white;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:800}
-    .media-wrap{position:relative}
+    /* ===== TAFAJ Right Rail (bold terror) ===== */
+    .tafaj-rail{position:sticky;top:82px;align-self:start}
+    .tafaj-core{width:100%;height:100%;min-height:560px;border-left:6px solid var(--gold);border-right:6px solid var(--gold);border-radius:12px;background:
+      linear-gradient(180deg, rgba(255,0,0,.12), rgba(255,0,0,.02)),
+      url('media/tafaj-rail-slice.png') center top/100% 200px repeat-y;
+      box-shadow:inset 0 0 0 2px rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.35);
+      position:relative}
+    .tafaj-label{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-weight:900;font-size:12px;border-radius:999px;padding:6px 12px;box-shadow:0 0 18px rgba(160,0,0,.6);animation:pulse 1.6s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 8px rgba(160,0,0,.6)}50%{box-shadow:0 0 22px rgba(255,0,0,.9)}100%{box-shadow:0 0 8px rgba(160,0,0,.6)}}
 
-    /* Right TAFAJ rail (decorative) */
-    .tafaj-rail{background:url('media/tafaj-rail-slice.png') center top/100% 140px repeat-y;border-left:4px solid var(--gold);border-radius:12px;min-height:480px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+    /* ===== Footer ===== */
+    footer{margin:28px auto 48px;max-width:var(--maxw);padding:12px var(--gutter);color:#ccd4e6;opacity:.9;font-size:12px}
 
-    /* Footer */
-    footer{margin:24px auto 48px;max-width:var(--maxw);padding:12px var(--gutter);opacity:.8;font-size:12px}
-
-    /* Responsiveness */
-    @media (max-width:1100px){
-      .layout{grid-template-columns:240px 1fr 56px}
-      .grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:820px){ /* Canon: hide rail, alternate ads inline */
-      .layout{grid-template-columns:1fr}
-      .tafaj-rail{display:none}
-      .ads-col{display:none}
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-    }
-    @media (max-width:360px){
-      .wrap{padding:0 10px}
-    }
+    /* ===== Responsive ===== */
+    @media (max-width:1180px){ .layout{grid-template-columns:220px 1fr 110px} .masonry{column-count:2} }
+    @media (max-width:900px){ .layout{grid-template-columns:1fr} .tafaj-rail{display:none} .ads-col{display:none} .hero{grid-template-columns:1fr} .masonry{column-count:1} }
+    @media (max-width:360px){ .wrap{padding:0 10px} }
   </style>
 </head>
 <body>
   <!-- Header banner links to index.html per canon -->
   <header class="site-header">
-    <a class="header-inner brand" href="index.html" aria-label="ONE TRUE INFOTAINMENT home">
-      <img src="media/header-banner.png" alt="ONE TRUE INFOTAINMENT" />
-      <span class="brand-txt">
-        <strong class="brand-t1">ONE TRUE INFOTAINMENT</strong>
-        <span class="brand-t2">The Voice of the Corrected States of America</span>
-      </span>
-    </a>
+    <div class="header-inner">
+      <a class="brand-link" href="index.html" aria-label="ONE TRUE INFOTAINMENT home">
+        <img src="media/header-banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" />
+      </a>
+    </div>
   </header>
 
   <main class="wrap">
-    <section class="layout" id="layout">
-      <!-- LEFT ADS (desktop only) -->
-      <aside class="ads-col" id="adsDesktop" aria-label="Sponsored">
+    <section class="layout">
+      <!-- LEFT ADS (desktop) -->
+      <aside class="ads-col" aria-label="Sponsored">
         <article class="ad-card"><div class="ad-tag">Sponsored</div><img loading="lazy" src="media/patriot-beer-ad.png" alt="Patriot Beer Ad"></article>
         <article class="ad-card"><div class="ad-tag">Tonight at 8</div><img loading="lazy" src="media/patriot-games-promo.png" alt="Patriot Games Promo"></article>
         <article class="ad-card"><div class="ad-tag">Recruiting</div><img loading="lazy" src="media/AngelsAd.png" alt="Angels Recruiting"></article>
       </aside>
 
       <!-- CENTER FEED -->
-      <section class="feed" id="feed">
+      <section class="feed">
         <!-- Hero -->
-        <article class="hero" id="hero">
-          <div class="thumb media-wrap">
+        <article class="hero">
+          <div class="thumb">
             <span class="pill">BREAKING</span>
-            <img src="media/veteran-visibility-tour.png" alt="Grundy at the Hospital">
+            <a class="media" href="#story-vvt" aria-label="Veteran Visibility Tour — read story">
+              <img src="media/veteran-visibility-tour.png" alt="First Citizen at hospital — Veteran Visibility Tour">
+            </a>
           </div>
           <div class="copy">
             <h1>OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</h1>
@@ -119,103 +113,85 @@
           </div>
         </article>
 
-        <!-- Grid (stories + inline ads for mobile) -->
-        <div class="grid" id="grid"></div>
+        <!-- Masonry grid (all story images are hot links) -->
+        <div class="masonry" id="masonry">
+          <article class="tile">
+            <a class="media" href="#story-friendship"><img src="media/friendship-border-rebuild.png" alt="Friendship Restored border rebuild"></a>
+            <div class="body"><div class="kicker">National</div><h3 class="title">Friendship Restored! Border Rebuild Enters Ribbon Phase</h3></div>
+          </article>
+
+          <article class="tile">
+            <a class="media" href="#story-domestic"><img src="media/domestic-smiles.png" alt="Domestic smiles index"></a>
+            <div class="body"><div class="kicker">Domestic</div><h3 class="title">Household Smiles Index Hits All‑Time Mandatory</h3></div>
+          </article>
+
+          <article class="tile">
+            <a class="media" href="#story-explains"><img src="media/grundy-explains.png" alt="First Citizen Explains Stuff"></a>
+            <div class="body"><div class="kicker">First Citizen</div><h3 class="title">First Citizen Explains Stuff: Vol. 12 — The Sun, Explained</h3></div>
+          </article>
+
+          <article class="tile">
+            <!-- Legacy index lock: River Glow must remain -->
+            <a class="media" href="#story-river"><img src="media/river-glow-placeholder.png" alt="River Glow forecast"></a>
+            <div class="body"><div class="kicker">Environment</div><h3 class="title">River Glow Forecast Improves to “Tangerine Dawn”</h3></div>
+          </article>
+        </div>
       </section>
 
-      <!-- RIGHT TAFAJ RAIL (decorative on desktop) -->
-      <aside class="tafaj-rail" aria-hidden="true"></aside>
+      <!-- RIGHT: TAFAJ terror rail (decorative) -->
+      <aside class="tafaj-rail" aria-hidden="true">
+        <div class="tafaj-core">
+          <div class="tafaj-label">TAFAJ: DEATH IMMINENT</div>
+        </div>
+      </aside>
     </section>
   </main>
 
   <footer>
-    <div>Produced without license from the Corrected States of America.<br>
-      All contained herein are speculation and may not yet exist.<br>
-      Doubt is treason; irony a pitchfork.</div>
+    Produced without license from the Corrected States of America.<br>
+    All contained herein are speculation and may not yet exist.<br>
+    Doubt is treason; irony a pitchfork.
   </footer>
 
   <script>
-    // Canon assets & locked references
-    const CANON = {
-      images: {
-        riverGlow: 'media/river-glow-placeholder.png', // must remain on index
-        friendship: 'media/friendship-border-rebuild.png',
-        domestic:'media/domestic-smiles.png',
-        explains:'media/grundy-explains.png'
-      },
-      tafajMobile:'media/tafaj-thermometer.png'
-    };
-
-    // Story cards (sample content structure)
-    const stories = [
-      {kicker:'National', title:'Friendship Restored! Border Rebuild Enters Ribbon Phase', img:CANON.images.friendship},
-      {kicker:'Domestic', title:'Household Smiles Index Hits All-Time Mandatory', img:CANON.images.domestic},
-      {kicker:'First Citizen', title:'First Citizen Explains Stuff: Vol. 12 — The Sun, Explained', img:CANON.images.explains},
-      {kicker:'Environment', title:'River Glow Forecast Improves to “Tangerine Dawn”', img:CANON.images.riverGlow}, // legacy reference on index
-    ];
-
-    // Ad tiles used for mobile interleaving (same assets as desktop ads)
-    const adTiles = [
-      {img:'media/patriot-beer-ad.png', alt:'Patriot Beer Ad', tag:'Sponsored'},
-      {img:'media/patriot-games-promo.png', alt:'Patriot Games Promo', tag:'Tonight at 8'},
-      {img:'media/AngelsAd.png', alt:'Angels Recruiting', tag:'Recruiting'}
-    ];
-
-    const grid = document.getElementById('grid');
-
-    function storyCard(s){
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.innerHTML = `
-        <div class="media-wrap"><img src="${s.img}" alt=""></div>
-        <div class="body">
-          <div class="kicker">${s.kicker}</div>
-          <h3 class="title">${s.title}</h3>
-        </div>`;
-      return el;
-    }
-
-    function adTile(a){
-      const el = document.createElement('article');
-      el.className = 'ad-card';
-      el.innerHTML = `<div class="ad-tag">${a.tag}</div><img loading="lazy" src="${a.img}" alt="${a.alt}">`;
-      return el;
-    }
-
-    function tafajMobileTile(){
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.innerHTML = `
-        <img src="${CANON.tafajMobile}" alt="TAFAJ Threat Meter">
-        <div class="body"><div class="kicker">TAFAJ</div><h3 class="title">Threat Level: Death Imminent</h3></div>`;
-      return el;
-    }
-
-    // Render strategy: desktop = stories only in grid; mobile = alternate ad tiles inline + TAFAJ tile near top
-    function render(){
-      grid.innerHTML='';
-      const isMobile = window.matchMedia('(max-width:820px)').matches;
-      if(isMobile){
-        // Interleave: 1 story, then 1 ad, repeat; insert TAFAJ tile at position 1
-        const merged = [];
-        const maxLen = Math.max(stories.length, adTiles.length);
-        for(let i=0;i<maxLen;i++){
-          if(stories[i]) merged.push({type:'story', data:stories[i]});
-          if(adTiles[i]) merged.push({type:'ad', data:adTiles[i]});
-        }
-        merged.splice(1,0,{type:'tafaj'});
-        merged.forEach(item=>{
-          if(item.type==='story') grid.appendChild(storyCard(item.data));
-          else if(item.type==='ad') grid.appendChild(adTile(item.data));
-          else grid.appendChild(tafajMobileTile());
-        });
-      } else {
-        stories.forEach(s=>grid.appendChild(storyCard(s)));
+    // Inline ad alternation on mobile (<900px): interleave ads among tiles and insert TAFAJ tile near top
+    (function(){
+      const mq = window.matchMedia('(max-width: 900px)');
+      const masonry = document.getElementById('masonry');
+      const adTiles = [
+        {img:'media/patriot-beer-ad.png', tag:'Sponsored', alt:'Patriot Beer Ad'},
+        {img:'media/patriot-games-promo.png', tag:'Tonight at 8', alt:'Patriot Games Promo'},
+        {img:'media/AngelsAd.png', tag:'Recruiting', alt:'Angels Recruiting'}
+      ];
+      function makeAd(a){
+        const el=document.createElement('article');
+        el.className='tile';
+        el.innerHTML=`<div class="ad-tag" style="padding:6px 10px;font-size:12px;font-weight:800;background:rgba(0,0,0,.06)">${a.tag}</div>
+          <a class="media" href="#sponsor"><img src="${a.img}" alt="${a.alt}"></a>`;
+        return el;
       }
-    }
-
-    render();
-    window.addEventListener('resize', ()=>{ render(); });
+      function tafajTile(){
+        const el=document.createElement('article');
+        el.className='tile';
+        el.innerHTML=`<a class="media" href="#tafaj"><img src="media/tafaj-thermometer.png" alt="TAFAJ Threat Meter"></a>
+          <div class="body"><div class="kicker">TAFAJ</div><h3 class="title">Threat Level: Death Imminent</h3></div>`;
+        return el;
+      }
+      function render(){
+        // reset to original order (first four tiles are stories added in HTML)
+        const isMobile = mq.matches;
+        const originals = Array.from(masonry.querySelectorAll('.tile'));
+        masonry.innerHTML='';
+        if(isMobile){
+          const merged=[]; let ai=0; originals.forEach((t,i)=>{ merged.push(t); if(adTiles[ai]){ merged.push(makeAd(adTiles[ai++])); } });
+          merged.splice(1,0,tafajTile());
+          merged.forEach(n=>masonry.appendChild(n));
+        } else {
+          originals.forEach(n=>masonry.appendChild(n));
+        }
+      }
+      render(); mq.addEventListener('change',render);
+    })();
   </script>
 </body>
 </html>
