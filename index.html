@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OneTrueInfotainment · One True News</title>
+  <title>One True News · The Voice of the Corrected States of America</title>
   <meta name="description" content="The Voice of the Corrected States of America — One True News." />
   <style>
     :root{
@@ -13,10 +13,15 @@
       --red:#c62828;
       --blue:#1133aa;
       --white:#ffffff;
-      --railw:300px; /* right rail width */
+      --railw:300px;
     }
 
-    html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
+    html,body{
+      margin:0;padding:0;
+      background:var(--cream);
+      color:var(--indigo);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+    }
 
     /* Banner */
     .banner{
@@ -24,8 +29,13 @@
       color:var(--indigo);
       padding:24px 16px;
       border-bottom:6px solid var(--amber);
-      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
     }
+    .brand-link{display:inline-block;color:inherit;text-decoration:none;}
+    .brand-link:hover .brand{text-decoration:underline;}
     .brand{font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:1.4rem;}
     .subtitle{font-size:.9rem;font-weight:600;color:var(--indigo)}
     .nav{display:flex;gap:16px;align-items:center}
@@ -37,92 +47,88 @@
     }
     @media (min-width:769px){.dropdown{display:none;}}
 
-    /* Page layout shell: main + right rail */
+    /* Layout */
     main{max-width:1200px;margin:0 auto;padding:18px 16px;}
-    .page-grid{
-      display:grid;
-      grid-template-columns: 1fr var(--railw);
-      gap:20px;
-    }
-    @media (max-width: 980px){
-      .page-grid{ grid-template-columns:1fr; }
-      .right-rail-slot{ width:100% !important; margin:0 0 16px 0 !important; }
+    .page-grid{display:grid;grid-template-columns:1fr var(--railw);gap:20px;}
+    @media (max-width:980px){
+      .page-grid{grid-template-columns:1fr;}
+      .right-rail-slot{width:100%!important;margin:0 0 16px 0!important;}
     }
 
-    /* TAFAJ thermometer block */
+    /* TAFAJ thermometer */
     .tafaj-alert{
       background:#fff;border:2px solid #e6e2d9;border-radius:16px;padding:18px;margin:16px 0 24px 0;
-      box-shadow:0 2px 8px rgba(15,15,26,.06); display:grid; grid-template-columns:1fr var(--railw); gap:16px; align-items:center;
+      box-shadow:0 2px 8px rgba(15,15,26,.06);
+      display:grid;grid-template-columns:1fr var(--railw);gap:16px;align-items:center;
     }
     .tafaj-copy h2{margin:0;font-size:1.2rem;letter-spacing:1px;text-transform:uppercase;}
     .tafaj-copy p{margin:.4rem 0 0 0;color:#555;font-weight:600;}
     .tafaj-thermo{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;}
-    .tafaj-thermo img{width:100%;height:auto;display:block;max-width:260px}
+    .tafaj-thermo img{width:100%;height:auto;display:block;max-width:260px;}
     .tafaj-cap{font-size:.9rem;color:#333;font-weight:700;text-align:center;margin-top:6px;}
     .tafaj-top{color:#8b0000;}
     .tafaj-bottom{color:#0f0f1a;}
     @media(max-width:980px){
-      .tafaj-alert{ grid-template-columns:1fr; }
-      .tafaj-thermo img{max-width:360px}
+      .tafaj-alert{grid-template-columns:1fr;}
+      .tafaj-thermo img{max-width:360px;}
     }
 
     /* Right rail */
-    .right-rail-slot{ width:var(--railw); margin:0 0 16px auto; }
-    .right-rail-slot img{ width:100%; display:block; border-radius:14px; box-shadow:0 2px 8px rgba(15,15,26,.08); }
+    .right-rail-slot{width:var(--railw);margin:0 0 16px auto;}
+    .right-rail-slot img{width:100%;display:block;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.08);}
 
     /* Promo band */
     .promo-band{
-      display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:16px; background:#fff;
-      border:1px solid #e6e2d9; border-radius:14px; box-shadow:0 2px 8px rgba(15,15,26,.06); margin:18px 0;
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
+      border:1px solid #e6e2d9;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
     }
-    .promo-media img{ width:100%; border-radius:10px; display:block; }
-    .promo-copy h3{ margin:0 0 8px 0; font-size:1.25rem; color:var(--blue); }
-    .promo-copy p{ margin:0; color:#444; }
-    @media (max-width:900px){ .promo-band{ grid-template-columns:1fr; } }
+    .promo-media img{width:100%;border-radius:10px;display:block;}
+    .promo-copy h3{margin:0 0 8px 0;font-size:1.25rem;color:var(--blue);}
+    .promo-copy p{margin:0;color:#444;}
+    @media(max-width:900px){.promo-band{grid-template-columns:1fr;}}
 
-    /* Newspaper front-page table */
-    .frontpage{ width:100%; border-collapse:collapse; margin: 12px auto; background:transparent; }
-    .frontpage td{ vertical-align:top; padding:12px; border-bottom:1px solid #ddd; }
-    .frontpage tr.lead td{ border-bottom:3px double #999; }
-    .lead-image img{ width:120px; height:auto; border-radius:8px; display:block; }
-    .lead-text h2{ margin:0 0 8px 0; font-size:1.6rem; color:var(--blue); }
-    .lead-text h2 a{ color:inherit; text-decoration:none; position:relative; z-index:1; }
-    .lead-text h2 a:hover{ text-decoration:underline; }
-    .lead-text p{ margin:0; color:#333; }
+    /* Frontpage table */
+    .frontpage{width:100%;border-collapse:collapse;margin:12px auto;background:transparent;}
+    .frontpage td{vertical-align:top;padding:12px;border-bottom:1px solid #ddd;}
+    .frontpage tr.lead td{border-bottom:3px double #999;}
+    .lead-image img{width:120px;height:auto;border-radius:8px;display:block;}
+    .lead-text h2{margin:0 0 8px 0;font-size:1.6rem;color:var(--blue);}
+    .lead-text h2 a{color:inherit;text-decoration:none;}
+    .lead-text h2 a:hover{text-decoration:underline;}
+    .lead-text p{margin:0;color:#333;}
 
-    .story-cell img{ width:100%; border-radius:6px; margin-bottom:6px; display:block; }
-    .story-cell h3{ margin:.25rem 0; font-size:1.05rem; }
-    .story-cell h3 a{ text-decoration:none; color:var(--blue); font-weight:700; position:relative; z-index:1; }
-    .story-cell h3 a:hover{ text-decoration:underline; }
-    .kicker{ display:block; font-size:.8rem; color:#666; margin-top:4px; }
+    .story-cell img{width:100%;border-radius:6px;margin-bottom:6px;display:block;}
+    .story-cell h3{margin:.25rem 0;font-size:1.05rem;}
+    .story-cell h3 a{text-decoration:none;color:var(--blue);font-weight:700;}
+    .story-cell h3 a:hover{text-decoration:underline;}
+    .kicker{display:block;font-size:.8rem;color:#666;margin-top:4px;}
 
-    /* Sections headers (legacy anchors kept for nav) */
-    .section-h{ font-weight:900; text-transform:uppercase; letter-spacing:1px; font-size:1rem; margin:10px 0; color:var(--red); }
-
-    footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center}
-    /* Mobile: collapse table rows into blocks */
-    @media (max-width: 768px){
-      .frontpage, .frontpage tr, .frontpage td { display:block; width:100%; }
-      .lead-image img{ width:100%; max-width:320px; }
+    .section-h{font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:1rem;margin:10px 0;color:var(--red);}
+    footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center;}
+    @media(max-width:768px){
+      .frontpage,.frontpage tr,.frontpage td{display:block;width:100%;}
+      .lead-image img{width:100%;max-width:320px;}
     }
   </style>
 </head>
 <body>
   <header class="banner">
-    <div>
-      <span class="brand">One True News</span><br/>
-      <span class="subtitle">The Voice of the Corrected States of America</span>
-    </div>
+    <a href="index.html" class="brand-link">
+      <div>
+        <span class="brand">One True News</span><br/>
+        <span class="subtitle">The Voice of the Corrected States of America</span>
+      </div>
+    </a>
     <nav class="nav">
-      <a href="#breaking">Breaking</a>
-      <a href="#national">National</a>
-      <a href="#domestic">Domestic</a>
-      <a href="#international">International</a>
-      <a href="#tafaj">TAFAJ</a>
-      <a href="#commerce">Commerce</a>
-      <a href="#infotainment">Infotainment</a>
+      <a href="index.html#breaking">Breaking</a>
+      <a href="index.html#national">National</a>
+      <a href="index.html#domestic">Domestic</a>
+      <a href="index.html#international">International</a>
+      <a href="index.html#tafaj">TAFAJ</a>
+      <a href="index.html#commerce">Commerce</a>
+      <a href="index.html#infotainment">Infotainment</a>
     </nav>
-    <select class="dropdown" onchange="if(this.value) { document.querySelector(this.value).scrollIntoView({behavior:'smooth'}); }">
+    <select class="dropdown" onchange="if(this.value){document.querySelector(this.value).scrollIntoView({behavior:'smooth'});}">
       <option value="">Select Section</option>
       <option value="#breaking">Breaking News</option>
       <option value="#national">National</option>
@@ -135,13 +141,13 @@
   </header>
 
   <main>
-    <!-- TAFAJ TERROR ALERT: single thermometer image with captions -->
+    <!-- TAFAJ ALERT -->
     <section id="tafaj" class="tafaj-alert" aria-labelledby="tafaj-alert-h">
       <div class="tafaj-copy">
         <h2 id="tafaj-alert-h">TAFAJ TERROR ALERT</h2>
         <p><strong>STATUS:</strong> RED — Remain perfectly calm.</p>
         <p style="margin-top:.4rem;color:#444;">
-          You: Dead Without Grundy.
+          Monitor official channels. Report geometric bird formations and suspicious serenity immediately.
         </p>
       </div>
       <div class="tafaj-thermo" aria-label="Threat thermometer, glowing red at the top">
@@ -151,16 +157,14 @@
       </div>
     </section>
 
-    <!-- Newspaper-style front page with right rail -->
+    <!-- MAIN PAGE GRID -->
     <div class="page-grid">
-      <!-- LEFT: Main content (table) -->
       <section aria-label="Front page stories">
         <h2 id="breaking" class="section-h">Breaking News!</h2>
         <table class="frontpage">
-          <!-- Lead row (uses thumbnail) -->
           <tr class="lead">
             <td class="lead-image">
-              <img src="media/river-glow-placeholder" alt="River Glow at night (thumbnail)">
+              <img src="media/river-glow-thumbnail.png" alt="River Glow at night (thumbnail)">
             </td>
             <td class="lead-text">
               <h2><a href="river-glow-incident.html">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</a></h2>
@@ -168,7 +172,6 @@
               <span class="kicker">Filed 08:00 · Civic Desk</span>
             </td>
           </tr>
-          <!-- Secondary grid 2x2 -->
           <tr>
             <td class="story-cell">
               <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms">
@@ -188,14 +191,13 @@
               <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
             </td>
             <td class="story-cell">
-              <img src="media/infotainment-grundy-series.png" alt="Studio light and empty chair">
+              <img src="media/grundy-explains.png" alt="Studio light and empty chair">
               <h3><a href="grundy-explains-series.html">Docu-Series Premiere: “Grundy Explains Himself”</a></h3>
               <span class="kicker">Filed 17:00 · Channel OTI</span>
             </td>
           </tr>
         </table>
 
-        <!-- Mid-page full-width promo band -->
         <section class="promo-band hammer-of-grundy" aria-label="Concert: Hammer of Grundy">
           <div class="promo-media">
             <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
@@ -206,7 +208,6 @@
           </div>
         </section>
 
-        <!-- Section anchors preserved for nav (expand later as needed) -->
         <h2 id="national" class="section-h">National Front</h2>
         <h2 id="domestic" class="section-h">Domestic Wellness</h2>
         <h2 id="international" class="section-h">International Outlook</h2>
@@ -214,7 +215,6 @@
         <h2 id="infotainment" class="section-h">Entertainment & Infotainment</h2>
       </section>
 
-      <!-- RIGHT: Rail ads/promos -->
       <aside aria-label="Sponsored and promotional">
         <div class="right-rail-slot beer-ad">
           <img src="media/patriot-beer-ad.png" alt="Patriot Beer — patriotic lager advertisement">
