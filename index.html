@@ -51,37 +51,6 @@
       .right-rail-slot{width:100%!important;margin:0 0 16px 0!important;}
     }
 
-    /* ====== TAFAJ ====== */
-    .tafaj-alert{
-      background:#fff;border:2px solid #e6e2d9;border-radius:16px;padding:18px;margin:16px 0 24px 0;
-      box-shadow:0 2px 8px rgba(15,15,26,.06);
-      display:grid;grid-template-columns:1fr var(--railw);gap:16px;align-items:center;
-    }
-    .tafaj-copy h2{margin:0;font-size:1.2rem;letter-spacing:1px;text-transform:uppercase;}
-    .tafaj-copy p{margin:.4rem 0 0 0;color:#555;font-weight:600;}
-    .tafaj-thermo{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;}
-    .tafaj-thermo img{width:100%;height:auto;display:block;max-width:260px;}
-    .tafaj-cap{font-size:.9rem;color:#333;font-weight:700;text-align:center;margin-top:6px;}
-    .tafaj-top{color:#8b0000;} .tafaj-bottom{color:#0f0f1a;}
-    @media(max-width:980px){
-      .tafaj-alert{grid-template-columns:1fr;}
-      .tafaj-thermo img{max-width:360px;}
-    }
-
-    /* ====== RIGHT RAIL ====== */
-    .right-rail-slot{width:var(--railw);margin:0 0 16px auto;}
-    .right-rail-slot img{width:100%;display:block;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.08);}
-
-    /* ====== PROMO BAND ====== */
-    .promo-band{
-      display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
-      border:1px solid #e6e2d9;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
-    }
-    .promo-media img{width:100%;border-radius:10px;display:block;}
-    .promo-copy h3{margin:0 0 8px 0;font-size:1.25rem;color:var(--blue);}
-    .promo-copy p{margin:0;color:#444;}
-    @media(max-width:900px){.promo-band{grid-template-columns:1fr;}}
-
     /* ====== FRONT PAGE TABLE ====== */
     .frontpage{width:100%;border-collapse:collapse;margin:12px auto;background:transparent;}
     .frontpage td{vertical-align:top;padding:12px;border-bottom:1px solid #ddd;}
@@ -97,13 +66,22 @@
     .story-cell h3 a:hover{text-decoration:underline;}
     .kicker{display:block;font-size:.8rem;color:#666;margin-top:4px;}
 
+    /* ====== RIGHT RAIL ====== */
+    .right-rail-slot{width:var(--railw);margin:0 0 16px auto;}
+    .right-rail-slot img{width:100%;display:block;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.08);}
+
+    /* ====== PROMO BAND ====== */
+    .promo-band{
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
+      border:1px solid #e6e2d9;border-radius:14px;box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
+    }
+    .promo-media img{width:100%;border-radius:10px;display:block;}
+    .promo-copy h3{margin:0 0 8px 0;font-size:1.25rem;color:var(--blue);}
+    .promo-copy p{margin:0;color:#444;}
+    @media(max-width:900px){.promo-band{grid-template-columns:1fr;}}
+
     .section-h{font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:1rem;margin:10px 0;color:var(--red);}
     footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center;}
-
-    @media(max-width:768px){
-      .frontpage,.frontpage tr,.frontpage td{display:block;width:100%;}
-      .lead-image img{width:100%;max-width:320px;}
-    }
   </style>
 </head>
 <body>
@@ -140,42 +118,36 @@
   </header>
 
   <main>
-    <!-- ====== TAFAJ ALERT ====== -->
-    <section id="tafaj" class="tafaj-alert" aria-labelledby="tafaj-alert-h">
-      <div class="tafaj-copy">
-        <h2 id="tafaj-alert-h">TAFAJ TERROR ALERT</h2>
-        <p><strong>STATUS:</strong> RED!!!!!!</p>
-        <p style="margin-top:.4rem;color:#444;">Monitor official channels. Report suspicious serenity immediately.</p>
-      </div>
-      <div class="tafaj-thermo" aria-label="Threat thermometer, glowing red at the top">
-        <div class="tafaj-cap tafaj-top">You'll Likely Die</div>
-        <img src="media/tafaj-thermometer.png" alt="Single thermometer: red-hot tip, cooler base." />
-        <div class="tafaj-cap tafaj-bottom">Call the Vigiles!</div>
-      </div>
-    </section>
-
     <!-- ====== MAIN GRID ====== -->
     <div class="page-grid">
       <!-- LEFT: Stories -->
       <section aria-label="Front page stories">
         <h2 id="breaking" class="section-h">Breaking News!</h2>
+
         <table class="frontpage">
-          <!-- Lead row -->
+          <!-- LEAD (fixed) -->
           <tr class="lead">
             <td class="lead-image">
-              <a href="river-glow-incident.html">
-                <img src="media/river-glow-placeholder.png" alt="River Glow at night (thumbnail)">
+              <a href="veteran-visibility-tour.html">
+                <img src="media/veteran-visibility-tour.png" alt="First Citizen addressing recovering Angels at hospital.">
               </a>
             </td>
             <td class="lead-text">
-              <h2><a href="river-glow-incident.html">Grundy Apologizes for River Glow Incident; Declares It a “Victory for Transparency.”</a></h2>
-              <p>Industrial optimism shines through the night as officials praise “patriotic luminescence.”</p>
-              <span class="kicker">Filed 08:00 · Civic Desk</span>
+              <h2><a href="veteran-visibility-tour.html">OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</a></h2>
+              <p>Hospital stop recast as masterclass in morale — and lighting.</p>
+              <span class="kicker">Filed 07:40 · National Front</span>
             </td>
           </tr>
 
-          <!-- Remaining rows to be randomized -->
+          <!-- The rest (randomized on load) -->
           <tr>
+            <td class="story-cell">
+              <a href="river-glow-incident.html">
+                <img src="media/river-glow-thumbnail.png" alt="River Glow at night">
+              </a>
+              <h3><a href="river-glow-incident.html">Grundy Shrugs Off Thanks for Free Light</a></h3>
+              <span class="kicker">Filed 08:00 · Civic Desk</span>
+            </td>
             <td class="story-cell">
               <a href="patriotic-census.html">
                 <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms">
@@ -183,6 +155,9 @@
               <h3><a href="patriotic-census.html">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</a></h3>
               <span class="kicker">Filed 09:30 · National Service Desk</span>
             </td>
+          </tr>
+
+          <tr>
             <td class="story-cell">
               <a href="friendship-correction-pact.html">
                 <img src="media/friendship-border-rebuild.png" alt="Diplomatic dais with repaired banners">
@@ -190,9 +165,6 @@
               <h3><a href="friendship-correction-pact.html">Neighbors Sign Friendship Correction Pact After Border Mishap</a></h3>
               <span class="kicker">Filed 13:00 · Foreign Desk</span>
             </td>
-          </tr>
-
-          <tr>
             <td class="story-cell">
               <a href="smiling-hours-directive.html">
                 <img src="media/domestic-smiles.png" alt="Public smiling hour in city square">
@@ -200,28 +172,25 @@
               <h3><a href="smiling-hours-directive.html">Public Smiling Hours Extended; “Cheerful Rigor” Praised</a></h3>
               <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
             </td>
+          </tr>
+
+          <tr>
             <td class="story-cell">
               <a href="grundy-explains-series.html">
                 <img src="media/grundy-explains.png" alt="Studio light and empty chair">
               </a>
-              <h3><a href="grundy-explains-series.html">Docu-Series Premiere: “Grundy Explains Himself”</a></h3>
+              <h3><a href="grundy-explains-series.html">First Citizen Explains Stuff — Why Funyons Prevent Colon Cancer</a></h3>
               <span class="kicker">Filed 17:00 · Channel OTI</span>
+            </td>
+            <td class="story-cell">
+              <a href="hammer-of-grundy.html">
+                <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
+              </a>
+              <h3><a href="hammer-of-grundy.html">Hammer of Grundy — Live on the White House Lawn</a></h3>
+              <span class="kicker">Filed 22:00 · Cultural Desk</span>
             </td>
           </tr>
         </table>
-
-        <!-- Promo band -->
-        <section class="promo-band hammer-of-grundy" aria-label="Concert: Hammer of Grundy">
-          <div class="promo-media">
-            <a href="hammer-of-grundy.html">
-              <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
-            </a>
-          </div>
-          <div class="promo-copy">
-            <h3><a href="hammer-of-grundy.html" style="text-decoration:none;color:inherit;">Hammer of Grundy — Live on the White House Lawn</a></h3>
-            <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
-          </div>
-        </section>
       </section>
 
       <!-- RIGHT: Ads -->
@@ -237,6 +206,20 @@
         </div>
       </aside>
     </div>
+
+    <!-- ====== TAFAJ ALERT (DEPRIORITIZED: moved below main content) ====== -->
+    <section id="tafaj" class="tafaj-alert" aria-labelledby="tafaj-alert-h" style="margin-top:24px;">
+      <div class="tafaj-copy">
+        <h2 id="tafaj-alert-h">TAFAJ TERROR ALERT</h2>
+        <p><strong>STATUS:</strong> RED — Remain perfectly calm.</p>
+        <p style="margin-top:.4rem;color:#444;">Monitor official channels. Report geometric bird formations and suspicious serenity immediately.</p>
+      </div>
+      <div class="tafaj-thermo" aria-label="Threat thermometer, glowing red at the top">
+        <div class="tafaj-cap" style="color:#8b0000;">You'll Likely Die</div>
+        <img src="media/tafaj-thermometer.png" alt="Single thermometer: red-hot tip, cooler base." />
+        <div class="tafaj-cap" style="color:#0f0f1a;">Call the Vigiles!</div>
+      </div>
+    </section>
   </main>
 
   <footer>
