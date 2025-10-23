@@ -1,197 +1,147 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ONE TRUE INFOTAINMENT</title>
-  <link rel="preload" as="image" href="media/header-banner.png">
-  <style>
-    :root{
-      /* Patriot palette locked to banner */
-      --navy:#0b1638;           /* site background */
-      --navy-2:#0e1d49;         /* slightly brighter for tints */
-      --red:#a00000;            /* propaganda red */
-      --steel:#f1f1f1;          /* card surface (steel enamel) */
-      --ink:#222933;            /* text */
-      --gold:#f2b705;           /* accent only (borders, TAFAJ trim) */
-      --radius:16px; --shadow:0 8px 22px rgba(0,0,0,.25);
-      --maxw:1320px; --gutter:16px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,var(--navy),#0a132f 60%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
+  <title>The Big One — ONE TRU INFOTAINMENT</title>
+  <meta name="description" content="The Voice of the Corrected States of America." />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    /* ===== Header (uses banner image asset) ===== */
-    .site-header{position:sticky;top:0;z-index:60;border-bottom:6px solid var(--gold);background:var(--navy)}
-    .header-inner{max-width:var(--maxw);margin:0 auto;padding:8px var(--gutter);display:flex;align-items:center}
-    .brand-link{display:flex;align-items:center}
-    .brand-link img{height:72px;width:auto;display:block}
+  <!-- Social / SEO basics -->
+  <meta property="og:title" content="The Big One — ONE TRU INFOTAINMENT">
+  <meta property="og:description" content="The Voice of the Corrected States of America.">
+  <meta property="og:image" content="media/header-banner_1080.webp">
+  <meta name="theme-color" content="#0B1B3B">
+  <link rel="icon" href="media/favicon.ico">
 
-    /* ===== Scaffolding ===== */
-    .wrap{max-width:var(--maxw);margin:16px auto;padding:0 var(--gutter)}
-    .layout{display:grid;grid-template-columns:240px 1fr 120px;gap:18px;align-items:start}
+  <!-- Preload LCP banner in modern formats -->
+  <link rel="preload" as="image"
+        href="media/header-banner_1440.avif"
+        imagesrcset="
+          media/header-banner_768.avif 768w,
+          media/header-banner_1080.avif 1080w,
+          media/header-banner_1440.avif 1440w,
+          media/header-banner_1920.avif 1920w"
+        imagesizes="(max-width: 768px) 90vw, (max-width: 1280px) 70vw, 960px">
 
-    /* ===== Ads (left) ===== */
-    .ads-col{display:flex;flex-direction:column;gap:16px}
-    .ad-card{background:var(--steel);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-    .ad-tag{padding:6px 10px;font-size:12px;font-weight:800;letter-spacing:.25px;color:#3a3a3a;background:rgba(0,0,0,.06)}
-    .ad-card img{display:block;width:100%;height:auto}
-
-    /* ===== Center feed ===== */
-    .feed{display:grid;grid-template-columns:1fr;gap:16px}
-    /* Hero */
-    .hero{display:grid;grid-template-columns:minmax(360px,640px) 1fr;gap:16px;background:var(--steel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;padding:12px}
-    .thumb{border-radius:12px;overflow:hidden;position:relative}
-    .thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;display:block}
-    .pill{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:900}
-    .copy{background:linear-gradient(180deg,#fff,#f6f6f6);border:1px solid #e8e8e8;border-radius:12px;padding:14px}
-    .copy h1{margin:4px 0 8px;font-size:26px;line-height:1.15}
-    .meta{font-size:12px;opacity:.8;margin-bottom:8px}
-
-    /* Masonry Grid (puzzle fit) */
-    .masonry{column-count:3;column-gap:16px}
-    .masonry .tile{break-inside:avoid;margin:0 0 16px;background:var(--steel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .tile a.media{display:block}
-    .tile img{width:100%;height:auto;display:block}
-    .tile .body{padding:10px 12px}
-    .kicker{font-size:11px;font-weight:800;letter-spacing:.28px;color:#1a49a0;margin-bottom:4px;text-transform:uppercase}
-    .title{font-size:16px;font-weight:750;line-height:1.25;margin:0 0 6px}
-
-    /* ===== TAFAJ Right Rail (bold terror) ===== */
-    .tafaj-rail{position:sticky;top:82px;align-self:start}
-    .tafaj-core{width:100%;height:100%;min-height:560px;border-left:6px solid var(--gold);border-right:6px solid var(--gold);border-radius:12px;background:
-      linear-gradient(180deg, rgba(255,0,0,.12), rgba(255,0,0,.02)),
-      url('media/tafaj-rail-slice.png') center top/100% 200px repeat-y;
-      box-shadow:inset 0 0 0 2px rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.35);
-      position:relative}
-    .tafaj-label{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-weight:900;font-size:12px;border-radius:999px;padding:6px 12px;box-shadow:0 0 18px rgba(160,0,0,.6);animation:pulse 1.6s infinite}
-    @keyframes pulse{0%{box-shadow:0 0 8px rgba(160,0,0,.6)}50%{box-shadow:0 0 22px rgba(255,0,0,.9)}100%{box-shadow:0 0 8px rgba(160,0,0,.6)}}
-
-    /* ===== Footer ===== */
-    footer{margin:28px auto 48px;max-width:var(--maxw);padding:12px var(--gutter);color:#ccd4e6;opacity:.9;font-size:12px}
-
-    /* ===== Responsive ===== */
-    @media (max-width:1180px){ .layout{grid-template-columns:220px 1fr 110px} .masonry{column-count:2} }
-    @media (max-width:900px){ .layout{grid-template-columns:1fr} .tafaj-rail{display:none} .ads-col{display:none} .hero{grid-template-columns:1fr} .masonry{column-count:1} }
-    @media (max-width:360px){ .wrap{padding:0 10px} }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/ticker.js" defer></script>
 </head>
 <body>
-  <!-- Header banner links to index.html per canon -->
   <header class="site-header">
-    <div class="header-inner">
-      <a class="brand-link" href="index.html" aria-label="ONE TRUE INFOTAINMENT home">
-        <img src="media/header-banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" />
-      </a>
+    <h2 class="visually-hidden" id="urgent-headlines">Urgent headlines</h2>
+    <div class="ticker" role="region" aria-labelledby="urgent-headlines">
+      <button class="ticker-toggle" aria-pressed="false" aria-label="Pause headlines" title="Pause headlines">⏸</button>
+      <div class="ticker-viewport">
+        <ul class="ticker-track" id="ticker-track"><!-- injected by ticker.js --></ul>
+      </div>
+    </div>
+
+    <!-- Banner (responsive sources) -->
+    <div class="banner">
+      <div class="banner-inner">
+        <div class="banner-logo">
+          <img
+            src="media/header-banner_1080.webp"
+            srcset="
+              media/header-banner_768.avif 768w,
+              media/header-banner_1080.avif 1080w,
+              media/header-banner_1440.avif 1440w,
+              media/header-banner_1920.avif 1920w"
+            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 70vw, 960px"
+            alt="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America"
+            fetchpriority="high" decoding="async" />
+        </div>
+        <div class="banner-tagline">
+          <h1 class="banner-title">ONE TRU INFOTAINMENT</h1>
+          <p class="banner-sub">The Voice of the Corrected States of America</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAFAJ rail -->
+    <div class="tafaj" role="status" aria-label="TAFAJ Threat Meter: Deadly">
+      <span class="tafaj-label">TAFAJ THREAT METER</span>
+      <div class="tafaj-meter" aria-hidden="true"><span></span></div>
+      <strong>DEADLY</strong>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="layout">
-      <!-- LEFT ADS (desktop) -->
-      <aside class="ads-col" aria-label="Sponsored">
-        <article class="ad-card"><div class="ad-tag">Sponsored</div><img loading="lazy" src="media/patriot-beer-ad.png" alt="Patriot Beer Ad"></article>
-        <article class="ad-card"><div class="ad-tag">Tonight at 8</div><img loading="lazy" src="media/patriot-games-promo.png" alt="Patriot Games Promo"></article>
-        <article class="ad-card"><div class="ad-tag">Recruiting</div><img loading="lazy" src="media/AngelsAd.png" alt="Angels Recruiting"></article>
-      </aside>
+  <main class="shell" id="content">
+    <div class="main-grid" aria-live="polite">
+      <!-- STORY TILES (all hot links). Keep River Glow path as legacy placeholder per canon. -->
 
-      <!-- CENTER FEED -->
-      <section class="feed">
-        <!-- Hero -->
-        <article class="hero">
-          <div class="thumb">
-            <span class="pill">BREAKING</span>
-            <a class="media" href="#story-vvt" aria-label="Veteran Visibility Tour — read story">
-              <img src="media/veteran-visibility-tour.png" alt="First Citizen at hospital — Veteran Visibility Tour">
-            </a>
+      <article class="tile">
+        <a href="stories/river-glow.html" title="River Glow">
+          <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>River Glow</h2>
+            <div class="meta">Breaking News • Feature</div>
           </div>
-          <div class="copy">
-            <h1>OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</h1>
-            <div class="meta">Filed 07:40 · National Front</div>
-            <p>Hospital stop recast as masterclass in morale — and lighting.</p>
+        </a>
+      </article>
+
+      <article class="tile">
+        <a href="stories/first-citizen.html" title="From the First Citizen">
+          <img class="thumb" src="media/stories/first-citizen.jpg" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>From the First Citizen</h2>
+            <div class="meta">Official Communication</div>
           </div>
-        </article>
+        </a>
+      </article>
 
-        <!-- Masonry grid (all story images are hot links) -->
-        <div class="masonry" id="masonry">
-          <article class="tile">
-            <a class="media" href="#story-friendship"><img src="media/friendship-border-rebuild.png" alt="Friendship Restored border rebuild"></a>
-            <div class="body"><div class="kicker">National</div><h3 class="title">Friendship Restored! Border Rebuild Enters Ribbon Phase</h3></div>
-          </article>
+      <article class="tile">
+        <a href="stories/patriot-games-update.html" title="Patriot Games Friday Teasers">
+          <img class="thumb" src="media/stories/patriot-games.jpg" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>Patriot Games: Friday Teasers</h2>
+            <div class="meta">Broadcast • Preview</div>
+          </div>
+        </a>
+      </article>
 
-          <article class="tile">
-            <a class="media" href="#story-domestic"><img src="media/domestic-smiles.png" alt="Domestic smiles index"></a>
-            <div class="body"><div class="kicker">Domestic</div><h3 class="title">Household Smiles Index Hits All‑Time Mandatory</h3></div>
-          </article>
+      <article class="tile">
+        <a href="stories/ads-from-patriots.html" title="Ads from Patriots">
+          <img class="thumb" src="media/stories/patriot-ads.jpg" alt="Ads from Patriots" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>Ads from Patriots</h2>
+            <div class="meta">Sponsored • Patriot Beer • Vigiles Recruiters</div>
+          </div>
+        </a>
+      </article>
 
-          <article class="tile">
-            <a class="media" href="#story-explains"><img src="media/grundy-explains.png" alt="First Citizen Explains Stuff"></a>
-            <div class="body"><div class="kicker">First Citizen</div><h3 class="title">First Citizen Explains Stuff: Vol. 12 — The Sun, Explained</h3></div>
-          </article>
+      <article class="tile">
+        <a href="stories/tafaj-bulletin.html" title="TAFAJ Bulletin">
+          <img class="thumb" src="media/stories/tafaj-bulletin.jpg" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>TAFAJ Bulletin</h2>
+            <div class="meta">Security • Always Deadly</div>
+          </div>
+        </a>
+      </article>
 
-          <article class="tile">
-            <!-- Legacy index lock: River Glow must remain -->
-            <a class="media" href="#story-river"><img src="media/river-glow-placeholder.png" alt="River Glow forecast"></a>
-            <div class="body"><div class="kicker">Environment</div><h3 class="title">River Glow Forecast Improves to “Tangerine Dawn”</h3></div>
-          </article>
-        </div>
-      </section>
+      <!-- Ad-disguised story tile (rotates as story per canon) -->
+      <article class="tile">
+        <a href="stories/ad-here.html" title="Your Ad Here?">
+          <img class="thumb" src="media/ad-here.jpg" alt="Your Ad Here?" loading="lazy" decoding="async" width="1200" height="900" />
+          <div class="body">
+            <h2>Your Ad Here?</h2>
+            <div class="meta">Ministry Office of Donations • Placement Notice</div>
+          </div>
+        </a>
+      </article>
 
-      <!-- RIGHT: TAFAJ terror rail (decorative) -->
-      <aside class="tafaj-rail" aria-hidden="true">
-        <div class="tafaj-core">
-          <div class="tafaj-label">TAFAJ: DEATH IMMINENT</div>
-        </div>
-      </aside>
-    </section>
+    </div>
   </main>
 
-  <footer>
-    Produced without license from the Corrected States of America.<br>
-    All contained herein are speculation and may not yet exist.<br>
-    Doubt is treason; irony a pitchfork.
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-ribbon" aria-hidden="true"></div>
+    <p class="legal">
+      Produced without license from the Corrected States of America. 
+      All content herein is speculative and may not yet exist. 
+      Doubt is treason; irony is a pitchfork.
+    </p>
   </footer>
-
-  <script>
-    // Inline ad alternation on mobile (<900px): interleave ads among tiles and insert TAFAJ tile near top
-    (function(){
-      const mq = window.matchMedia('(max-width: 900px)');
-      const masonry = document.getElementById('masonry');
-      const adTiles = [
-        {img:'media/patriot-beer-ad.png', tag:'Sponsored', alt:'Patriot Beer Ad'},
-        {img:'media/patriot-games-promo.png', tag:'Tonight at 8', alt:'Patriot Games Promo'},
-        {img:'media/AngelsAd.png', tag:'Recruiting', alt:'Angels Recruiting'}
-      ];
-      function makeAd(a){
-        const el=document.createElement('article');
-        el.className='tile';
-        el.innerHTML=`<div class="ad-tag" style="padding:6px 10px;font-size:12px;font-weight:800;background:rgba(0,0,0,.06)">${a.tag}</div>
-          <a class="media" href="#sponsor"><img src="${a.img}" alt="${a.alt}"></a>`;
-        return el;
-      }
-      function tafajTile(){
-        const el=document.createElement('article');
-        el.className='tile';
-        el.innerHTML=`<a class="media" href="#tafaj"><img src="media/tafaj-thermometer.png" alt="TAFAJ Threat Meter"></a>
-          <div class="body"><div class="kicker">TAFAJ</div><h3 class="title">Threat Level: Death Imminent</h3></div>`;
-        return el;
-      }
-      function render(){
-        // reset to original order (first four tiles are stories added in HTML)
-        const isMobile = mq.matches;
-        const originals = Array.from(masonry.querySelectorAll('.tile'));
-        masonry.innerHTML='';
-        if(isMobile){
-          const merged=[]; let ai=0; originals.forEach((t,i)=>{ merged.push(t); if(adTiles[ai]){ merged.push(makeAd(adTiles[ai++])); } });
-          merged.splice(1,0,tafajTile());
-          merged.forEach(n=>masonry.appendChild(n));
-        } else {
-          originals.forEach(n=>masonry.appendChild(n));
-        }
-      }
-      render(); mq.addEventListener('change',render);
-    })();
-  </script>
 </body>
 </html>
