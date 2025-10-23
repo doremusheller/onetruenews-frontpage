@@ -9,8 +9,7 @@
     :root{
       --amber:#ffb300; --indigo:#0f0f1a; --cream:#faf7ef;
       --red:#c62828; --blue:#1133aa; --white:#ffffff;
-      --railw:300px;
-      --radius:14px;
+      --railw:300px; --leftw:84px; --radius:14px;
     }
     html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
 
@@ -39,13 +38,37 @@
 
     main{max-width:1200px;margin:0 auto;padding:18px 16px;}
 
-    /* ====== GRID LAYOUT ====== */
-    .page-grid{display:grid;grid-template-columns:1fr var(--railw);gap:20px;}
-    @media (max-width:980px){.page-grid{grid-template-columns:1fr}}
+    /* ====== PAGE GRID (LEFT TAFAJ / CONTENT / RIGHT ADS) ====== */
+    .page-grid{
+      display:grid;
+      grid-template-columns: var(--leftw) 1fr var(--railw);
+      gap:20px;
+      align-items:start;
+    }
+    @media (max-width:1100px){
+      .page-grid{grid-template-columns: var(--leftw) 1fr;}
+      .right-rail{grid-column: 2 / -1; display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+      .right-rail .right-rail-slot{width:100%; margin:0;}
+    }
+    @media (max-width:820px){
+      .page-grid{grid-template-columns: 1fr;}
+      .left-rail{display:none;} /* hide skinny TAFAJ on small screens */
+    }
 
-    /* ====== LEAD (HERO) ====== */
+    /* ====== LEFT-RAIL TAFAJ (SKINNY) ====== */
+    .left-rail{position:sticky; top:12px;}
+    .tafaj-skinny{
+      width:var(--leftw);
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      font-size:.75rem;text-align:center;
+    }
+    .tafaj-skinny img{width:100%;height:auto;display:block; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);}
+    .tafaj-label-top{color:#8b0000;font-weight:800;line-height:1.1;}
+    .tafaj-label-bottom{color:#222;font-weight:800;line-height:1.1;}
+
+    /* ====== HERO (LEAD) ====== */
     .hero{
-      display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:stretch;
+      display:grid;grid-template-columns: min(420px,38vw) 1fr;gap:16px;align-items:stretch;
       padding:14px;background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);
       box-shadow:0 2px 8px rgba(15,15,26,.06);margin-bottom:16px;
     }
@@ -62,18 +85,12 @@
     .hero h2 a:hover{text-decoration:underline;}
     .hero p{margin:0;color:#333;}
     .kicker{display:block;font-size:.8rem;color:#666;margin-top:6px;}
-
     @media (max-width:900px){.hero{grid-template-columns:1fr}}
 
     /* ====== STORY GRID ====== */
-    .stories{
-      display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:18px;
-    }
+    .stories{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:18px;}
     @media (max-width:700px){.stories{grid-template-columns:1fr}}
-    .card{
-      background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);
-      overflow:hidden;box-shadow:0 2px 8px rgba(15,15,26,.06);
-    }
+    .card{background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(15,15,26,.06);}
     .card .media{position:relative;aspect-ratio:16/9;overflow:hidden;}
     .card .media img{width:100%;height:100%;object-fit:cover;display:block;}
     .card .pill{top:8px;left:8px;}
@@ -82,7 +99,7 @@
     .card h3 a{color:inherit;text-decoration:none;font-weight:800}
     .card h3 a:hover{text-decoration:underline;}
 
-    /* ====== PROMO BAND (Hammer of Grundy constrained) ====== */
+    /* ====== PROMO BAND (Hammer constrained) ====== */
     .promo-band{
       display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
       border:1px solid #e6e2d9;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
@@ -97,19 +114,6 @@
     .right-rail-slot{width:var(--railw);margin:0 0 16px auto;}
     .right-rail-slot img{width:100%;display:block;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.08);}
     @media(max-width:980px){.right-rail-slot{width:100%;}}
-
-    /* ====== TAFAJ (deprioritized / smaller) ====== */
-    .tafaj{
-      margin-top:20px;padding:14px;background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);
-      box-shadow:0 2px 8px rgba(15,15,26,.06);
-      display:grid;grid-template-columns:1fr 220px;gap:12px;align-items:center;
-    }
-    .tafaj h2{margin:0;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;color:var(--red);}
-    .tafaj p{margin:.3rem 0 0 0;color:#444;font-weight:600;font-size:.95rem;}
-    .tafaj-thermo{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #eee;border-radius:10px;padding:8px;background:#fff;}
-    .tafaj-thermo img{width:100%;max-width:160px;height:auto;display:block;}
-    .tafaj-cap{font-size:.85rem;font-weight:800;line-height:1.2;text-align:center;}
-    @media(max-width:900px){.tafaj{grid-template-columns:1fr}.tafaj-thermo{margin-top:8px}}
 
     footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center;}
   </style>
@@ -149,12 +153,19 @@
 
   <main>
     <div class="page-grid">
+      <!-- LEFT: Skinny TAFAJ rail -->
+      <aside class="left-rail" aria-label="TAFAJ threat meter">
+        <div class="tafaj-skinny">
+          <div class="tafaj-label-top">You'll Likely Die</div>
+          <img src="media/tafaj-thermometer.png" alt="TAFAJ thermometer, pegged at Death Imminent">
+          <div class="tafaj-label-bottom">Call the Vigiles!</div>
+        </div>
+      </aside>
 
-      <!-- LEFT: Stories -->
+      <!-- CENTER: Stories -->
       <section aria-label="Front page stories">
-
         <!-- HERO (BREAKING) -->
-        <article class="hero">
+        <article class="hero" id="breaking">
           <div class="media">
             <a href="veteran-visibility-tour.html">
               <img src="media/veteran-visibility-tour.png" alt="First Citizen addressing recovering Angels at hospital.">
@@ -173,7 +184,7 @@
           <article class="card breaking">
             <div class="media">
               <a href="river-glow-incident.html">
-                <img src="media/river-glow-thumbnail.png" alt="River Glow at night">
+                <img src="media/river-glow-placeholder.png" alt="River Glow at night">
                 <span class="pill" aria-label="Breaking">BREAKING</span>
               </a>
             </div>
@@ -244,11 +255,10 @@
             <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
           </div>
         </section>
-
       </section>
 
       <!-- RIGHT: Ads -->
-      <aside aria-label="Sponsored and promotional">
+      <aside class="right-rail" aria-label="Sponsored and promotional">
         <div class="right-rail-slot beer-ad">
           <img src="media/patriot-beer-ad.png" alt="Patriot Beer — Brewed with Liberty, Served with Loyalty">
         </div>
@@ -260,19 +270,6 @@
         </div>
       </aside>
     </div>
-
-    <!-- ====== TAFAJ ALERT (deprioritized & smaller) ====== -->
-    <section id="tafaj" class="tafaj" aria-labelledby="tafaj-alert-h">
-      <div>
-        <h2 id="tafaj-alert-h">TAFAJ TERROR ALERT</h2>
-        <p><strong>STATUS:</strong> RED — Remain perfectly calm. Report geometric bird formations and suspicious serenity.</p>
-      </div>
-      <div class="tafaj-thermo" aria-label="Threat thermometer">
-        <div class="tafaj-cap" style="color:#8b0000;">You'll Likely Die</div>
-        <img src="media/tafaj-thermometer.png" alt="Single thermometer: red-hot tip, cooler base." />
-        <div class="tafaj-cap" style="color:#0f0f1a;">Call the Vigiles!</div>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -287,7 +284,6 @@
       const grid = document.getElementById('stories-grid');
       if (!grid) return;
       const cards = Array.from(grid.children);
-      // Fisher–Yates
       for (let i = cards.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [cards[i], cards[j]] = [cards[j], cards[i]];
