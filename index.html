@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +27,7 @@
 
   <link rel="stylesheet" href="styles.css">
   <script src="js/ticker.js" defer></script>
+  <script src="js/grid.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -70,10 +72,8 @@
 
   <main class="shell" id="content">
     <div class="main-grid" aria-live="polite">
-      <!-- STORY TILES (all hot links). River Glow path is legacy placeholder per canon. -->
-
-      <!-- Center hero (2x2) -->
-      <article class="tile span-2">
+      <!-- STORY TILES (center mosaic). River Glow path is legacy placeholder per canon. -->
+      <article class="tile span-2" data-weight="hero" data-chroma="high" data-fit="square">
         <a href="stories/river-glow.html" title="River Glow">
           <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900">
           <div class="body">
@@ -83,8 +83,7 @@
         </a>
       </article>
 
-      <!-- Tall story (2y) -->
-      <article class="tile span-2y">
+      <article class="tile span-2y" data-weight="strong" data-chroma="high" data-fit="tall">
         <a href="stories/first-citizen.html" title="From the First Citizen">
           <img class="thumb" src="media/stories/first-citizen.jpg" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
@@ -94,8 +93,7 @@
         </a>
       </article>
 
-      <!-- Wide story (2x) -->
-      <article class="tile span-2x">
+      <article class="tile span-2x" data-weight="strong" data-chroma="high" data-fit="wide">
         <a href="stories/patriot-games-update.html" title="Patriot Games Friday Teasers">
           <img class="thumb" src="media/stories/patriot-games.jpg" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
@@ -105,19 +103,7 @@
         </a>
       </article>
 
-      <!-- Ad rail (pinned to border by CSS). Use 'ad-exempt' if this is the fundraising/self-aware appeal allowed in center. -->
-      <article class="tile ad ad-right">
-        <a href="stories/ads-from-patriots.html" title="Ads from Patriots">
-          <img class="thumb" src="media/stories/patriot-ads.jpg" alt="Ads from Patriots" loading="lazy" decoding="async" width="1200" height="900">
-          <div class="body">
-            <h2>Ads from Patriots</h2>
-            <div class="meta">Sponsored • Patriot Beer • Vigiles Recruiters</div>
-          </div>
-        </a>
-      </article>
-
-      <!-- Standard story -->
-      <article class="tile">
+      <article class="tile" data-weight="normal" data-chroma="med" data-fit="square">
         <a href="stories/tafaj-bulletin.html" title="TAFAJ Bulletin">
           <img class="thumb" src="media/stories/tafaj-bulletin.jpg" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900">
           <div class="body">
@@ -127,12 +113,38 @@
         </a>
       </article>
 
-      <!-- Example placeholder for the self-conscious fundraising ad (allowed in center): 
-      <article class="tile ad ad-exempt">
-        ...
+      <!-- AD RAIL TILES (pinned to borders by CSS; not center unless ad-exempt) -->
+      <article class="tile ad ad-left">
+        <a href="stories/patriot-beer.html" title="Patriot Beer">
+          <img class="thumb" src="media/ads/patriot-beer.jpg" alt="Patriot Beer — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
+          <div class="body">
+            <h2>Patriot Beer</h2>
+            <div class="meta">Sponsored • Patriot Beer</div>
+          </div>
+        </a>
       </article>
-      -->
 
+      <article class="tile ad ad-right">
+        <a href="stories/angels-recruitment.html" title="Angels Recruitment">
+          <img class="thumb" src="media/ads/angels-recruitment.jpg" alt="Angels Recruitment — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
+          <div class="body">
+            <h2>Angels Recruitment</h2>
+            <div class="meta">Sponsored • Angels Recruitment</div>
+          </div>
+        </a>
+      </article>
+
+      <article class="tile ad ad-left">
+        <a href="stories/bad-man-vs-badger.html" title="Bad Man vs. Badger — Patriot Games">
+          <img class="thumb" src="media/ads/bad-man-vs-badger.jpg" alt="Bad Man vs. Badger — Sponsored" loading="lazy" decoding="async" width="1200" height="900">
+          <div class="body">
+            <h2>Bad Man vs. Badger</h2>
+            <div class="meta">Sponsored • Patriot Games</div>
+          </div>
+        </a>
+      </article>
+
+      <!-- If you have more than 10 story tiles, grid.js will show only 10 (shuffled) and hide the rest. -->
     </div>
   </main>
 
@@ -146,3 +158,4 @@
   </footer>
 </body>
 </html>
+```
