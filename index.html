@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>One True News · The Voice of the Corrected States of America</title>
-  <meta name="description" content="The Voice of the Corrected States of America — One True News." />
+  <title>One True Infotainment · The Voice of the Corrected States of America</title>
+  <meta name="description" content="The Voice of the Corrected States of America — One True Infotainment." />
   <style>
     :root{
       --amber:#ffb300; --indigo:#0f0f1a; --cream:#faf7ef;
       --red:#c62828; --blue:#1133aa; --white:#ffffff;
-      --railw:300px; --leftw:84px; --radius:14px;
+      --railw:260px; --radius:14px;
     }
     html,body{margin:0;padding:0;background:var(--cream);color:var(--indigo);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
 
@@ -23,52 +23,28 @@
     .banner{
       background:linear-gradient(90deg,var(--red),var(--white),var(--blue));
       color:var(--indigo);
-      padding:24px 16px;
+      padding:8px 12px 0 12px;
       border-bottom:6px solid var(--amber);
-      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
     }
-    .brand-link{display:inline-block;color:inherit;text-decoration:none;}
-    .brand-link:hover .brand{text-decoration:underline;}
-    .brand{font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:1.4rem;}
-    .subtitle{font-size:.9rem;font-weight:600;color:var(--indigo)}
-    .nav{display:flex;gap:16px;align-items:center}
+    .brand-link{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;}
+    .brand-img{display:block;height:56px;width:auto}
+    .nav{display:flex;gap:16px;align-items:center;padding:8px 0 12px;}
     .nav a{color:var(--indigo);text-decoration:none;font-weight:600}
     .nav a:hover{text-decoration:underline}
     @media (max-width:768px){.nav{display:none;}}
 
-    main{max-width:1200px;margin:0 auto;padding:18px 16px;}
+    /* ====== PAGE GRID (FULL BLEED) ====== */
+    main{
+      width:100%; margin:0; padding:18px clamp(12px,2vw,24px);
+      display:grid; grid-template-columns: var(--railw) 1fr; gap:20px; align-items:start;
+    }
+    @media (max-width:1100px){ main{ grid-template-columns: 240px 1fr; } }
+    @media (max-width:820px){ main{ grid-template-columns: 1fr; } }
 
-    /* ====== PAGE GRID (LEFT TAFAJ / CONTENT / RIGHT ADS) ====== */
-    .page-grid{
-      display:grid;
-      grid-template-columns: var(--leftw) 1fr var(--railw);
-      gap:20px;
-      align-items:start;
-    }
-    @media (max-width:1100px){
-      .page-grid{grid-template-columns: var(--leftw) 1fr;}
-      .right-rail{grid-column: 2 / -1; display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
-      .right-rail .right-rail-slot{width:100%; margin:0;}
-    }
-    @media (max-width:820px){
-      .page-grid{grid-template-columns: 1fr;}
-      .left-rail{display:none;} /* hide skinny TAFAJ on small screens */
-    }
-
-    /* ====== LEFT-RAIL TAFAJ (SKINNY) ====== */
-    .left-rail{position:sticky; top:12px;}
-    .tafaj-skinny{
-      width:var(--leftw);
-      display:flex;flex-direction:column;align-items:center;gap:6px;
-      font-size:.75rem;text-align:center;
-    }
-    .tafaj-skinny img{width:100%;height:auto;display:block; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.08);}
-    .tafaj-label-top{color:#8b0000;font-weight:800;line-height:1.1;}
-    .tafaj-label-bottom{color:#222;font-weight:800;line-height:1.1;}
-
-    /* ====== HERO (LEAD) ====== */
+    /* ====== HERO ====== */
     .hero{
-      display:grid;grid-template-columns: min(420px,38vw) 1fr;gap:16px;align-items:stretch;
+      display:grid;grid-template-columns:min(460px,38vw) 1fr;gap:16px;align-items:stretch;
       padding:14px;background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);
       box-shadow:0 2px 8px rgba(15,15,26,.06);margin-bottom:16px;
     }
@@ -87,7 +63,7 @@
     .kicker{display:block;font-size:.8rem;color:#666;margin-top:6px;}
     @media (max-width:900px){.hero{grid-template-columns:1fr}}
 
-    /* ====== STORY GRID ====== */
+    /* ====== STORIES ====== */
     .stories{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:18px;}
     @media (max-width:700px){.stories{grid-template-columns:1fr}}
     .card{background:#fff;border:1px solid #e6e2d9;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(15,15,26,.06);}
@@ -99,7 +75,7 @@
     .card h3 a{color:inherit;text-decoration:none;font-weight:800}
     .card h3 a:hover{text-decoration:underline;}
 
-    /* ====== PROMO BAND (Hammer constrained) ====== */
+    /* ====== PROMO BAND ====== */
     .promo-band{
       display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#fff;
       border:1px solid #e6e2d9;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.06);margin:18px 0;
@@ -110,16 +86,30 @@
     .promo-copy p{margin:0;color:#444;}
     @media(max-width:900px){.promo-band{grid-template-columns:1fr}}
 
-    /* ====== RIGHT RAIL ====== */
-    .right-rail-slot{width:var(--railw);margin:0 0 16px auto;}
-    .right-rail-slot img{width:100%;display:block;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.08);}
-    @media(max-width:980px){.right-rail-slot{width:100%;}}
+    /* ====== LEFT ADS COLUMN ====== */
+    .left-ads .ad-slot{margin-bottom:16px;}
+    .left-ads img{width:100%;display:block;border-radius:var(--radius);box-shadow:0 2px 8px rgba(15,15,26,.08);}
+
+    /* ====== TAFAJ BORDER RAIL (RIGHT EDGE) ====== */
+    .tafaj-border-rail{
+      position: fixed; top: 0; right: 0; height: 100vh; width: 14px;
+      z-index: 9999; pointer-events: none; display: none;
+      background: url("media/tafaj-rail-slice.png") center top / 100% auto repeat-y;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    @media (min-width: 821px){ .tafaj-border-rail{ display:block; } }
+    @media (max-width: 1024px){ .tafaj-border-rail{ width:12px; } }
+    @media (max-width: 360px){ .tafaj-border-rail{ display:none; } }
+
+    /* ====== MOBILE TAFAJ TILE ====== */
+    .tafaj-mobile-tile{display:none;}
+    @media(max-width:820px){.tafaj-mobile-tile{display:block;}}
 
     footer{padding:32px 16px;color:#666;font-size:.85rem;text-align:center;}
   </style>
 </head>
-<body>
 
+<body>
   <!-- ====== SCROLLING TICKER ====== -->
   <div class="ticker-wrap" aria-label="Latest headlines">
     <div class="ticker">
@@ -135,142 +125,142 @@
   <!-- ====== BANNER ====== -->
   <header class="banner">
     <a href="index.html" class="brand-link">
-      <div>
-        <span class="brand">One True News</span><br/>
-        <span class="subtitle">The Voice of the Corrected States of America</span>
-      </div>
+      <img class="brand-img" src="media/header-banner.png" alt="One True Infotainment — The Voice of the Corrected States of America" />
     </a>
     <nav class="nav">
-      <a href="index.html#breaking">Breaking</a>
-      <a href="index.html#national">National</a>
-      <a href="index.html#domestic">Domestic</a>
-      <a href="index.html#international">International</a>
-      <a href="index.html#tafaj">TAFAJ</a>
-      <a href="index.html#commerce">Commerce</a>
-      <a href="index.html#infotainment">Infotainment</a>
+      <a href="#breaking">Breaking</a>
+      <a href="#national">National</a>
+      <a href="#domestic">Domestic</a>
+      <a href="#international">International</a>
+      <a href="#tafaj">TAFAJ</a>
+      <a href="#commerce">Commerce</a>
+      <a href="#infotainment">Infotainment</a>
     </nav>
   </header>
 
   <main>
-    <div class="page-grid">
-      <!-- LEFT: Skinny TAFAJ rail -->
-      <aside class="left-rail" aria-label="TAFAJ threat meter">
-        <div class="tafaj-skinny">
-          <div class="tafaj-label-top">You'll Likely Die</div>
-          <img src="media/tafaj-thermometer.png" alt="TAFAJ thermometer, pegged at Death Imminent">
-          <div class="tafaj-label-bottom">Call the Vigiles!</div>
-        </div>
-      </aside>
+    <!-- LEFT COLUMN: Ads -->
+    <aside class="left-ads" aria-label="Sponsored messages">
+      <div class="ad-slot">
+        <img src="media/patriot-beer-ad.png" alt="Patriot Beer — Brewed with Liberty, Served with Loyalty" />
+      </div>
+      <div class="ad-slot">
+        <img src="media/patriot-games-promo.png" alt="The Patriot Games — Bad Guy Badger Encounter!" />
+      </div>
+      <div class="ad-slot">
+        <img src="media/AngelsAd.png" alt="Angels Recruitment — Earn the Gear" />
+      </div>
+    </aside>
 
-      <!-- CENTER: Stories -->
-      <section aria-label="Front page stories">
-        <!-- HERO (BREAKING) -->
-        <article class="hero" id="breaking">
+    <!-- CENTER COLUMN: Stories -->
+    <section aria-label="Front page stories">
+      <!-- HERO -->
+      <article class="hero" id="breaking">
+        <div class="media">
+          <a href="veteran-visibility-tour.html">
+            <img src="media/veteran-visibility-tour.png" alt="First Citizen addressing recovering Angels at hospital." />
+            <span class="pill">BREAKING</span>
+          </a>
+        </div>
+        <div class="copy">
+          <h2><a href="veteran-visibility-tour.html">OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</a></h2>
+          <p>Hospital stop recast as masterclass in morale — and lighting.</p>
+          <span class="kicker">Filed 07:40 · National Front</span>
+        </div>
+      </article>
+
+      <!-- GRID STORIES -->
+      <div class="stories" id="stories-grid">
+        <article class="card breaking">
           <div class="media">
-            <a href="veteran-visibility-tour.html">
-              <img src="media/veteran-visibility-tour.png" alt="First Citizen addressing recovering Angels at hospital.">
-              <span class="pill" aria-label="Breaking">BREAKING</span>
+            <a href="river-glow-incident.html">
+              <img src="media/river-glow-placeholder.png" alt="River Glow at night" />
+              <span class="pill">BREAKING</span>
             </a>
           </div>
-          <div class="copy">
-            <h2><a href="veteran-visibility-tour.html">OTI Hails Grundy’s “Veteran Visibility Tour” as Landmark in Optics</a></h2>
-            <p>Hospital stop recast as masterclass in morale — and lighting.</p>
-            <span class="kicker">Filed 07:40 · National Front</span>
+          <div class="body">
+            <h3><a href="river-glow-incident.html">Grundy Shrugs Off Thanks for Free Light</a></h3>
+            <span class="kicker">Filed 08:00 · Civic Desk</span>
           </div>
         </article>
 
-        <!-- STORY GRID (non-lead, randomized) -->
-        <div class="stories" id="stories-grid">
-          <article class="card breaking">
-            <div class="media">
-              <a href="river-glow-incident.html">
-                <img src="media/river-glow-placeholder.png" alt="River Glow at night">
-                <span class="pill" aria-label="Breaking">BREAKING</span>
-              </a>
-            </div>
-            <div class="body">
-              <h3><a href="river-glow-incident.html">Grundy Shrugs Off Thanks for Free Light</a></h3>
-              <span class="kicker">Filed 08:00 · Civic Desk</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="media">
-              <a href="patriotic-census.html">
-                <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms">
-              </a>
-            </div>
-            <div class="body">
-              <h3><a href="patriotic-census.html">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</a></h3>
-              <span class="kicker">Filed 09:30 · National Service Desk</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="media">
-              <a href="friendship-correction-pact.html">
-                <img src="media/friendship-border-rebuild.png" alt="Diplomatic dais with repaired banners">
-              </a>
-            </div>
-            <div class="body">
-              <h3><a href="friendship-correction-pact.html">Neighbors Sign Friendship Correction Pact After Border Mishap</a></h3>
-              <span class="kicker">Filed 13:00 · Foreign Desk</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="media">
-              <a href="smiling-hours-directive.html">
-                <img src="media/domestic-smiles.png" alt="Public smiling hour in city square">
-              </a>
-            </div>
-            <div class="body">
-              <h3><a href="smiling-hours-directive.html">Public Smiling Hours Extended; “Cheerful Rigor” Praised</a></h3>
-              <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="media">
-              <a href="grundy-explains-series.html">
-                <img src="media/grundy-explains.png" alt="Studio light and empty chair">
-              </a>
-            </div>
-            <div class="body">
-              <h3><a href="grundy-explains-series.html">First Citizen Explains Stuff — Why Funyons Prevent Colon Cancer</a></h3>
-              <span class="kicker">Filed 17:00 · Channel OTI</span>
-            </div>
-          </article>
-        </div>
-
-        <!-- HAMMER OF GRUNDY (constrained) -->
-        <section class="promo-band hammer-of-grundy" aria-label="Concert: Hammer of Grundy">
-          <div class="promo-media">
-            <a href="hammer-of-grundy.html">
-              <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster">
+        <article class="card">
+          <div class="media">
+            <a href="patriotic-census.html">
+              <img src="media/patriotic-census-placeholder.png" alt="Citizens completing census forms" />
             </a>
           </div>
-          <div class="promo-copy">
-            <h3><a href="hammer-of-grundy.html" style="text-decoration:none;color:inherit;">Hammer of Grundy — Live on the White House Lawn</a></h3>
-            <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
+          <div class="body">
+            <h3><a href="patriotic-census.html">Patriotic Census Finds 104% Participation — Officials Hail “Overachievement of Unity.”</a></h3>
+            <span class="kicker">Filed 09:30 · National Service Desk</span>
           </div>
-        </section>
-      </section>
+        </article>
 
-      <!-- RIGHT: Ads -->
-      <aside class="right-rail" aria-label="Sponsored and promotional">
-        <div class="right-rail-slot beer-ad">
-          <img src="media/patriot-beer-ad.png" alt="Patriot Beer — Brewed with Liberty, Served with Loyalty">
+        <article class="card">
+          <div class="media">
+            <a href="friendship-correction-pact.html">
+              <img src="media/friendship-border-rebuild.png" alt="Diplomatic dais with repaired banners" />
+            </a>
+          </div>
+          <div class="body">
+            <h3><a href="friendship-correction-pact.html">Neighbors Sign Friendship Correction Pact After Border Mishap</a></h3>
+            <span class="kicker">Filed 13:00 · Foreign Desk</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media">
+            <a href="smiling-hours-directive.html">
+              <img src="media/domestic-smiles.png" alt="Public smiling hour in city square" />
+            </a>
+          </div>
+          <div class="body">
+            <h3><a href="smiling-hours-directive.html">Public Smiling Hours Extended; “Cheerful Rigor” Praised</a></h3>
+            <span class="kicker">Filed 11:00 · Ministry of Wellbeing</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media">
+            <a href="grundy-explains-series.html">
+              <img src="media/grundy-explains.png" alt="Studio light and empty chair" />
+            </a>
+          </div>
+          <div class="body">
+            <h3><a href="grundy-explains-series.html">First Citizen Explains Stuff — Why Funyons Prevent Colon Cancer</a></h3>
+            <span class="kicker">Filed 17:00 · Channel OTI</span>
+          </div>
+        </article>
+
+        <!-- MOBILE TAFAJ TILE -->
+        <article class="card tafaj-mobile-tile">
+          <div class="media">
+            <img src="media/tafaj-thermometer.png" alt="TAFAJ threat level: Death Imminent" />
+          </div>
+          <div class="body">
+            <h3>TAFAJ Threat Bulletin</h3>
+            <p><strong>Status:</strong> Death Imminent — Report serenity, geometric birds, and suspicious calm.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- HAMMER OF GRUNDY PROMO -->
+      <section class="promo-band hammer-of-grundy">
+        <div class="promo-media">
+          <a href="hammer-of-grundy.html">
+            <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — White House lawn concert poster" />
+          </a>
         </div>
-        <div class="right-rail-slot games-promo">
-          <img src="media/patriot-games-promo.png" alt="The Patriot Games — Bad Guy Badger Encounter!">
+        <div class="promo-copy">
+          <h3><a href="hammer-of-grundy.html" style="text-decoration:none;color:inherit;">Hammer of Grundy — Live on the White House Lawn</a></h3>
+          <p>One Night Louder · Gates 17:00 · Ceremonial Ear Protection Provided</p>
         </div>
-        <div class="right-rail-slot angels-recruit">
-          <img src="media/AngelsAd.png" alt="Angels Recruitment — Earn the Gear">
-        </div>
-      </aside>
-    </div>
+      </section>
+    </section>
   </main>
+
+  <!-- RIGHT FIXED BORDER (continuous, full height) -->
+  <div class="tafaj-border-rail" aria-hidden="true"></div>
 
   <footer>
     <p>Produced without license from the Corrected States of America.<br>
@@ -278,12 +268,12 @@
     Doubt is treason; irony a pitchfork.</p>
   </footer>
 
-  <!-- ====== RANDOMIZER SCRIPT (non-lead shuffle) ====== -->
+  <!-- RANDOMIZER (shuffle non-lead, non-TAFAJ cards) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const grid = document.getElementById('stories-grid');
       if (!grid) return;
-      const cards = Array.from(grid.children);
+      const cards = Array.from(grid.children).filter(c => !c.classList.contains('tafaj-mobile-tile'));
       for (let i = cards.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [cards[i], cards[j]] = [cards[j], cards[i]];
