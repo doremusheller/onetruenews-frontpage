@@ -1,36 +1,18 @@
-// ONE TRU INFOTAINMENT — Grid Controller v1.0 (root-level version)
-
+// grid.js — puzzle-grid randomization v6.9 (root)
 document.addEventListener("DOMContentLoaded", () => {
-  const tiles = Array.from(document.querySelectorAll(".tile:not(.ad)"));
-  const maxVisible = 10;
-  const heroQuota = { span2: 1, span2x: 1, span2y: 1 };
+  const grid = document.querySelector(".main-grid");
+  if (!grid) return;
 
-  if (tiles.length > maxVisible) {
-    // Shuffle with deterministic session seed
-    const seed = Math.floor(performance.now()) % 100000;
-    tiles.sort((a, b) => (Math.sin(seed + tiles.indexOf(a)) > 0 ? 1 : -1));
+  // Collect and shuffle tiles
+  const tiles = Array.from(grid.children);
+  for (let i = tiles.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
   }
 
-  // Apply hero spans by weight and fit
-  const heroes = tiles.filter(
-    t => t.dataset.weight === "hero" || t.dataset.weight === "strong"
-  );
-  heroes.forEach(t => {
-    const fit = t.dataset.fit;
-    if (fit === "wide" && heroQuota.span2x) {
-      t.classList.add("span-2x");
-      heroQuota.span2x--;
-    } else if (fit === "tall" && heroQuota.span2y) {
-      t.classList.add("span-2y");
-      heroQuota.span2y--;
-    } else if (heroQuota.span2) {
-      t.classList.add("span-2");
-      heroQuota.span2--;
-    }
-  });
-
-  // Hide extras beyond 10
-  tiles.slice(maxVisible).forEach(t => t.classList.add("hidden"));
-
-  console.log(`OTI Grid initialized — showing ${Math.min(tiles.length, maxVisible)} of ${tiles.length} stories.`);
+  // Reinsert in new order
+  const frag = document.createDocumentFragment();
+  tiles.forEach(t => frag.appendChild(t));
+  grid.innerHTML = "";
+  grid.appendChild(frag);
 });
