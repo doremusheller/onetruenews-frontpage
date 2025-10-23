@@ -1,33 +1,28 @@
-// ONE TRU INFOTAINMENT — Ticker v1.1 (root-level)
+// ONE TRU INFOTAINMENT — Ticker v2.0 (Worldfeed Edition, no controls)
 
 (function () {
-  // Doom-message pool (can append freely)
+  // Global sardonic headlines inspired by "When It Happened Here"
   const pool = [
-    "REPORT CHEERFULLY",
-    "BUY PATRIOT BEER",
-    "DO NOT PAUSE",
-    "EVERY ERROR IS TREASON",
-    "TRUST CORRECTIONS",
-    "PAY WITH GRATITUDE",
-    "SEE SOMETHING SAY EVERYTHING",
-    "VIGILES ARE HIRING",
-    "LOYALTY IS A LIFESTYLE",
-    "YOUR TURN TO CLAP",
-    "QUESTION NOTHING",
-    "SPEND BRAVELY",
-    "EXPORT DOUBT",
-    "IMPORT PRIDE",
-    "LINES ARE EFFICIENT",
-    "LAUGHTER IS LICENSED",
-    "BELIEVE OR LEAVE",
-    "NUMBERS NEVER ARGUE",
-    "THE FIRST CITIZEN IS SPEAKING",
-    "TODAY IS OPTIMIZED",
-    // fundraiser-adjacent lines per Tink
-    "WE HATE ASKING",
-    "WE LOVE TAKING",
-    // gentle Grundy needle
-    "GRUNDY SMILES AGAIN"
+    "Ministry Declares Morning Permanently Delayed",
+    "Patriot Grain Shipments Sink Cheerfully",
+    "Peace Talks Resume Under Martial Law",
+    "Weather Corrected For National Morale",
+    "Celebrations Continue Despite Official Denial",
+    "Public Surrender Reaches Record Levels",
+    "Citizens Queue Calmly For Re-Education",
+    "Patriot Games Interrupted By Power Surge",
+    "Unrest Renamed To Enhance Stability",
+    "Grundy Addresses Nation From Mirror",
+    "Curfew Extended For Your Convenience",
+    "Exports Halted Pending Further Triumph",
+    "New Anthem Testing Well In Focus Groups",
+    "Poll Finds 100% Partial Agreement",
+    "Leader’s Heartbeat Declared National Soundtrack",
+    "Freedom Lottery Drawn, Winner Missing",
+    "All Broadcasts Now Safely Pre-Approved",
+    "Truth Ministry Expands Into Children’s Programming",
+    "Protest Reclassified As Patriotic Parade",
+    "Optimism Levels Falling At Acceptable Rate"
   ];
 
   function pickUnique(arr, n) {
@@ -43,12 +38,10 @@
     const ul = document.getElementById("ticker-track");
     if (!ul) return;
 
-    // Populate 10 unique items
+    // Pick and build ten random headlines
     const items = pickUnique(pool, 10);
-
-    // Build once, then duplicate for seamless loop
     const frag = document.createDocumentFragment();
-    items.forEach((text) => {
+    items.forEach(text => {
       const li = document.createElement("li");
       li.textContent = text;
       frag.appendChild(li);
@@ -57,30 +50,10 @@
     ul.appendChild(frag);
     ul.appendChild(dup);
 
-    // Pause/Play
-    const toggle = document.querySelector(".ticker-toggle");
-    let paused = false;
-    if (toggle) {
-      toggle.addEventListener("click", () => {
-        paused = !paused;
-        ul.style.animationPlayState = paused ? "paused" : "running";
-        toggle.setAttribute("aria-pressed", String(paused));
-        toggle.textContent = paused ? "▶" : "⏸";
-        toggle.setAttribute("title", paused ? "Play headlines" : "Pause headlines");
-      });
-    }
-
-    // Respect reduced motion
+    // Handle reduced motion and tempo
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
-      ul.style.animation = "none";
-    } else {
-      // Tiny tempo adjustment for ultra-narrow phones
-      if (window.innerWidth <= 360) {
-        // CSS default is 28s; slow ~12%
-        ul.style.animationDuration = "31.5s";
-      }
-    }
+    if (mq.matches) ul.style.animation = "none";
+    else if (window.innerWidth <= 360) ul.style.animationDuration = "31.5s";
   }
 
   if (document.readyState === "loading") {
