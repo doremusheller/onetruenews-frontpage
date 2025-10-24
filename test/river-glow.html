@@ -1,96 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>River Glow — One True Infotainment</title>
-  <link rel="stylesheet" href="./style.css" />
-  <meta name="theme-color" content="#0a1436" />
+  <meta name="description" content="The river shines. The First Citizen accepts your thanks." />
+  <meta property="og:title" content="River Glow" />
+  <meta property="og:description" content="An industrial incident becomes a civic light show. The First Citizen beams." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="media/river-glow.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+  <link rel="canonical" href="river-glow.html" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="ticker.js"></script>
+  <script defer src="grid.js"></script>
 </head>
-<body>
-  <!-- Top Bar -->
-  <div class="top">
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
-      <a class="brand" href="./index.html" style="display:flex;align-items:center;gap:12px">
-        <img src="./media/oti-logo.png" alt="One True Infotainment logo" style="height:36px;width:auto" />
-        <span style="font-weight:700;letter-spacing:.04em;font-size:14px;color:var(--silver)">One True Infotainment</span>
-      </a>
-      <nav class="nav" aria-label="Primary" style="display:flex;gap:18px;font-size:14px;opacity:.9">
-        <a href="./index.html#latest">Latest</a>
-        <a href="./index.html#about">About</a>
-        <a href="./index.html#contact">Contact</a>
-      </nav>
-    </div>
-  </div>
-
-  <!-- Banner / Hero -->
-  <header class="hero" role="banner" id="top">
-    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center">
-      <div>
-        <div class="logotype">One True Infotainment</div>
-        <div class="tag">The Voice of the Corrected State</div>
-        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-          <a class="btn primary" href="./index.html#latest">Back to Latest</a>
-          <a class="btn" href="#story">Skip to Story</a>
-        </div>
-      </div>
-      <div class="hero-art" style="overflow:hidden;border-radius:18px">
-        <img src="./media/banner.png" alt="Banner field" style="width:100%;height:auto;border-radius:18px" />
-      </div>
-    </div>
+<body class="page story-page">
+  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines"><div class="ticker"></div></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Back to front page">
+      <img src="media/header-banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" class="site-banner" />
+    </a>
   </header>
-
-  <!-- Story -->
-  <main id="story" class="wrap" style="padding:22px 16px 40px">
-    <article style="max-width:78ch;margin:0 auto">
-      <div class="kicker">Feature</div>
-      <h1 class="hed" style="font-size:clamp(26px,4.6vw,40px);margin-top:6px">River Glow</h1>
-      <p class="meta" style="margin:8px 0 18px">
-        <span class="flag" aria-hidden="true"></span>
-        <time datetime="2025-10-24">Updated Oct 24, 2025</time>
-        <span>· 6 min read</span>
-      </p>
-
-      <figure style="margin:0 0 18px 0">
-        <img src="./media/river-glow.png" alt="Luminous corridor reflecting across the river at night" style="width:100%;height:auto;border-radius:12px;border:1px solid rgba(230,234,239,.12)" />
-        <figcaption class="small" style="opacity:.85;margin-top:8px">Glass, light, precision — the studio look in the wild.</figcaption>
+  <main id="content" class="content">
+    <article class="story">
+      <header class="story-head">
+        <span class="story-tag">From the First Citizen</span>
+        <h1 class="story-title">River Glow</h1>
+        <p class="story-dek">A shimmering current, a grateful nation, and a leader who humbly accepts applause.</p>
+        <p class="byline">From the First Citizen Desk · <time datetime="2025-10-24">October 24, 2025</time></p>
+      </header>
+      <figure class="lede">
+        <img src="media/river-glow.png" alt="A glowing river beneath night lights, reflecting civic pride" class="lede-image" />
+        <figcaption class="caption">“You’re welcome,” Grundy said, admiring the sheen.</figcaption>
       </figure>
-
-      <p class="lede">First Citizen shrugs off thanks for free light.</p>
-
-      <p>
-        The current shone again last night, a clear demonstration of civic brightness. Authorities gathered at the embankment to observe the new radiance—a product, they affirmed, of “Grundy’s steady stewardship and technical calm.” Cameras caught him accepting the commendation with his usual serenity, unaware that the applause referred not to management but to accident.
-      </p>
-      <p>
-        When asked about the incident, Grundy thanked the assembled for “keeping the faith in the light we earn.” The phrase was repeated through the morning bulletins, trimmed, captioned, gilded. Within hours, the glow itself had entered official weather reports as <em>favorable visibility conditions.</em>
-      </p>
-      <p>
-        Environmental teams continue to measure the water’s unusual sheen. Results are pending, but the narrative stands complete: the river is brighter, the First Citizen untroubled, and the nation reassured. Children were encouraged to view the reflection as “a sign of national endurance.”
-      </p>
-      <p>
-        In his closing remarks, Grundy declined any further tribute. “The light belongs to everyone,” he said, turning toward the glare, coat collar up, face unreadable in the white-blue shine. The crowd cheered, their silhouettes flickering across the water like proof of order renewed.
-      </p>
-
-      <nav aria-label="Story navigation" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn" href="./index.html#latest">← Back to Latest</a>
-        <a class="btn primary" href="#top">Top</a>
+      <section class="story-body">
+        <p>The river began to shimmer last night, a vivid ribbon through the city. Within minutes, crowds gathered for photos and patriotic reflection. The First Citizen accepted their thanks with practiced modesty and an expansive smile.</p>
+        <p>Officials described the glow as a “temporary beautification event.” Detractors said “spill.” Grundy preferred “innovation.” Asked about environmental impacts, he noted that “a nation this bright deserves reflective water.”</p>
+        <p>Merchants sold commemorative cups that glowed faintly around the rim. Some residents reported a gentle warmth to the touch. “That’s pride,” said a spokesperson. “It tingles.”</p>
+        <p>Regulators pledged a thorough review—after tonight’s drone footage. For now, the river remains a luminous artery. The First Citizen waved at the reflections and promised “more radiance, less doubt.”</p>
+      </section>
+      <nav class="story-nav">
+        <a class="btn back" href="index.html">← Back to Front Page</a>
+        <a class="btn" href="grundy-explains-cancer.html">Previous: Grundy Explains: Cancer</a>
+        <a class="btn primary" href="friendship-correction.html">Next: Friendship Correction</a>
       </nav>
     </article>
   </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div>© <span id="y"></span> One True Infotainment</div>
-      <div><a href="./index.html#top">Back to Top</a></div>
-    </div>
+  <footer class="site-footer">
+    <p class="legal">Produced without license from the Corrected States of America. All contained herein are speculation and may not yet exist. Doubt is treason; irony a pitchfork.</p>
+    <div class="patriotic-ribbon" aria-hidden="true"></div>
   </footer>
-
-  <script>
-    (function(){
-      const y=document.getElementById('y');
-      if(y)y.textContent=new Date().getFullYear();
-    })();
-  </script>
 </body>
 </html>
