@@ -1,93 +1,88 @@
-/* One True Infotainment — jc.js (flat, no deps) */
+/* ============================================================
+   grid.js — One True Infotainment v8.2 Canon
+   Handles randomized grid layouts and ad placement
+   ============================================================ */
 
-(function () {
-  // ===== Smooth anchor scroll (optional, flat-safe) =====
-  function smoothAnchor(e) {
-    const a = e.target.closest('a[href^="./"][href*="#"], a[href^="#"]');
-    if (!a) return;
-    const href = a.getAttribute('href');
-    const hash = href.startsWith('#') ? href : href.split('#')[1] ? '#' + href.split('#')[1] : null;
-    if (!hash) return;
-    const el = document.querySelector(hash);
-    if (!el) return;
-    e.preventDefault();
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    history.replaceState(null, '', hash);
-  }
-  document.addEventListener('click', smoothAnchor);
-
-  // ===== BREAKING ROTATOR =====
-  const ROTATE_MS = 15000; // 15s per story
-  const breakingRoot = document.getElementById('breaking');
-
-  function getTiles() {
-    return breakingRoot ? Array.from(breakingRoot.querySelectorAll('.tile--breaking')) : [];
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---------- Randomize story tiles on the index page ---------- */
+  const storyGrid = document.querySelector(".content.grid-layout");
+  if (storyGrid) {
+    const storyTiles = Array.from(
+      storyGrid.querySelectorAll(".story-tile:not(.sponsor-tile)")
+    );
+    shuffleArray(storyTiles);
+    storyTiles.forEach((tile) => storyGrid.appendChild(tile));
   }
 
-  function ensureOneActive(tiles) {
-    if (!tiles.length) return;
-    const anyActive = tiles.some(t => t.classList.contains('is-active'));
-    if (!anyActive) tiles[0].classList.add('is-active');
+  /* ---------- Populate ad grid on index page ---------- */
+  const adGrid = document.querySelector(".ad-grid");
+  if (adGrid) {
+    const adTiles = generateAdTiles();
+    shuffleArray(adTiles);
+    adTiles.forEach((tile) => adGrid.appendChild(tile));
   }
 
-  let tiles = getTiles();
-  let idx = 0;
-  let paused = false;
-
-  if (breakingRoot && tiles.length) {
-    ensureOneActive(tiles);
-
-    function next() {
-      if (paused || document.hidden) return;
-      tiles = getTiles(); // pick up newly added tiles
-      if (tiles.length <= 1) return;
-
-      // Find current active index
-      const curIdx = tiles.findIndex(t => t.classList.contains('is-active'));
-      const from = curIdx >= 0 ? curIdx : idx % tiles.length;
-      const to = (from + 1) % tiles.length;
-
-      tiles[from]?.classList.remove('is-active');
-      tiles[to]?.classList.add('is-active');
-      idx = to;
-    }
-
-    // Pause rotation on hover
-    breakingRoot.addEventListener('mouseenter', () => { paused = true; });
-    breakingRoot.addEventListener('mouseleave', () => { paused = false; });
-
-    // Mutation observer: ensure an active tile exists + refresh list
-    const mo = new MutationObserver(() => {
-      tiles = getTiles();
-      ensureOneActive(tiles);
-    });
-    mo.observe(breakingRoot, { childList: true, subtree: true });
-
-    // Advance on interval
-    setInterval(next, ROTATE_MS);
+  /* ---------- Populate sponsor rails on story pages ---------- */
+  const leftRail = document.querySelector(".sponsor-rail.left");
+  const rightRail = document.querySelector(".sponsor-rail.right");
+  if (leftRail && rightRail) {
+    const adTiles = generateAdTiles();
+    shuffleArray(adTiles);
+    // place one ad in each rail
+    if (adTiles[0]) leftRail.appendChild(adTiles[0]);
+    if (adTiles[1]) rightRail.appendChild(adTiles[1]);
   }
+});
 
-  // ===== "Time ago" updater =====
-  function fmtAgo(dt) {
-    const s = Math.max(0, (Date.now() - dt.getTime()) / 1000);
-    if (s < 60) return 'Just now';
-    const m = Math.floor(s / 60); if (m < 60) return `${m} min ago`;
-    const h = Math.floor(m / 60); if (h < 24) return `${h} hr ago`;
-    const d = Math.floor(h / 24); return `${d} d ago`;
+/* ============================================================
+   Helper functions
+   ============================================================ */
+
+// Fisher–Yates shuffle
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
+}
 
-  function updateAgo() {
-    document.querySelectorAll('time.ago[datetime]').forEach(el => {
-      const dt = new Date(el.getAttribute('datetime'));
-      if (!isNaN(dt)) el.textContent = fmtAgo(dt);
-    });
-  }
+/* Create sponsor ad tiles programmatically */
+function generateAdTiles() {
+  const ads = [
+    {
+      src: "media/patriot-beer-ad.png",
+      alt: "Patriot Beer advertisement",
+      title: "Patriot Beer",
+      summary: "Raise a can for correctness.",
+    },
+    {
+      src: "media/AngelsAd.png",
+      alt: "Angels recruitment ad",
+      title: "Join the Angels",
+      summary: "Serve brighter. March straighter.",
+    },
+    {
+      src: "media/ad-here..png",
+      alt: "Placement advertisement",
+      title: "Placement Available",
+      summary: "This space smiles back.",
+    },
+  ];
 
-  // Initial + periodic update
-  updateAgo();
-  setInterval(updateAgo, 15000);
-
-  // ===== Footer year helper =====
-  const y = document.getElementById('y');
-  if (y) y.textContent = new Date().getFullYear();
-})();
+  return ads.map((ad) => {
+    const article = document.createElement("article");
+    article.className = "story-tile sponsor-tile";
+    article.innerHTML = `
+      <a href="#" class="tile-link" aria-label="Sponsored content">
+        <img src="${ad.src}" alt="${ad.alt}" class="tile-image" width="800" height="450" />
+        <div class="tile-text">
+          <span class="tile-tag">Sponsored</span>
+          <h2 class="tile-title">${ad.title}</h2>
+          <p class="tile-summary">${ad.summary}</p>
+        </div>
+      </a>
+    `;
+    return article;
+  });
+}
