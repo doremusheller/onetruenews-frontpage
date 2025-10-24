@@ -1,3 +1,0 @@
-rm media
-git commit -m "Remove river-glow.html"
-git push
