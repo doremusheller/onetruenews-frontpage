@@ -1,296 +1,221 @@
-/* ==========================================================
-   ONE TRUE INFOTAINMENT — site.css
-   v6.9 · Full Propaganda Flow
-   ========================================================== */
+/* =========================================================
+   ONE TRUE INFOTAINMENT (OTI) — STYLE.CSS v8.0
+   Full Propaganda Flow
+   ========================================================= */
 
-/* COLOR SYSTEM */
+/* Color Palette */
 :root {
-  --red: #b5121b;
-  --white: #ffffff;
-  --blue: #0e2e73;
   --amber: #ffb300;
+  --indigo: #0f0f1a;
   --cream: #faf7ef;
-  --ink: #0f0f1a;
+  --red: #c62828;
+  --blue: #1133aa;
+  --white: #ffffff;
 }
 
-/* RESET & BASE TYPOGRAPHY */
+/* Base */
 html, body {
   margin: 0;
   padding: 0;
   background: var(--cream);
-  color: var(--ink);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
+  color: var(--indigo);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* ==========================================================
-   SITE HEADER
-   ========================================================== */
+/* ---------------------------------------------------------
+   Banner + Header
+---------------------------------------------------------- */
 .site-header {
-  text-align: center;
-  background: var(--ink);
-  border-bottom: 6px solid var(--red);
+  border-bottom: 4px solid var(--amber);
+  background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
 }
-
 .site-banner {
+  display: block;
   width: 100%;
-  max-height: 180px;
+  height: 70px;
   object-fit: cover;
-  border: none;
 }
 
-/* ==========================================================
-   ALERT STRIP — Scrolling Headlines
-   ========================================================== */
+/* ---------------------------------------------------------
+   Global Ticker
+---------------------------------------------------------- */
 .alert-strip {
-  width: 100%;
   background: var(--red);
   color: var(--white);
-  overflow: hidden;
-  white-space: nowrap;
   font-weight: 700;
   font-size: 0.9rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: uppercase;
+  border-bottom: 4px solid var(--amber);
   padding: 4px 0;
 }
-
 .ticker {
   display: inline-block;
   padding-left: 100%;
   animation: ticker-scroll 45s linear infinite;
 }
-
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
-/* ==========================================================
-   STORY GRID LAYOUT
-   ========================================================== */
-.grid-layout {
+/* ---------------------------------------------------------
+   Index Grid Layout
+---------------------------------------------------------- */
+.content.grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
-  padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 16px;
 }
 
+/* Story Tiles */
 .story-tile {
   background: var(--white);
+  border: 1px solid #ddd;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s;
 }
-
 .story-tile:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
 .tile-link {
-  text-decoration: none;
+  display: block;
   color: inherit;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  text-decoration: none;
 }
-
 .tile-image {
+  display: block;
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: auto;
 }
-
 .tile-text {
-  padding: 12px 16px 20px;
+  padding: 12px;
 }
-
 .tile-tag {
   display: inline-block;
   background: var(--red);
   color: var(--white);
-  text-transform: uppercase;
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 3px 8px;
-  border-radius: 12px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
   margin-bottom: 6px;
 }
-
 .tile-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin: 6px 0;
+  margin: 0.4rem 0;
   color: var(--blue);
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.2;
 }
-
 .tile-summary {
+  margin: 0;
   font-size: 0.95rem;
-  color: #333;
+  color: var(--indigo);
   line-height: 1.4;
 }
 
-/* ==========================================================
-   STORY PAGE STYLES
-   ========================================================== */
-.content {
+/* ---------------------------------------------------------
+   Story Pages
+---------------------------------------------------------- */
+.story-page .story {
   max-width: 760px;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 20px 16px;
 }
-
-.story-head {
-  margin-bottom: 20px;
-}
-
-.story-tag {
-  display: inline-block;
-  background: var(--red);
-  color: var(--white);
-  font-weight: 700;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 10px;
-  letter-spacing: 0.04em;
-}
-
 .story-title {
-  color: var(--blue);
   font-size: 1.8rem;
-  margin: 8px 0 0 0;
+  color: var(--blue);
+  margin-bottom: 0;
 }
-
 .story-dek {
-  color: var(--red);
   font-size: 1.1rem;
-  margin: 4px 0 10px 0;
-  font-weight: 600;
-}
-
-.byline {
-  color: #555;
-  font-size: 0.85rem;
-  margin-top: 2px;
-}
-
-.lede {
-  margin: 0 0 20px;
-}
-
-.lede-image {
-  border-radius: 12px;
-  width: 100%;
-}
-
-.caption {
-  font-size: 0.8rem;
-  color: #666;
+  color: var(--red);
   margin-top: 4px;
 }
-
+.byline {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+.lede-image {
+  width: 100%;
+  border-radius: 12px;
+}
+.caption {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+}
 .story-body p {
+  line-height: 1.6;
   margin: 1em 0;
 }
-
-blockquote {
-  margin: 1.2em 0;
+.story-body blockquote {
+  margin: 1em 0;
   padding: 1em;
-  background: #fff8e1;
   border-left: 4px solid var(--amber);
-  font-style: italic;
+  background: #fff8e1;
 }
 
+/* ---------------------------------------------------------
+   Navigation Buttons
+---------------------------------------------------------- */
 .story-nav {
+  margin-top: 40px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 24px;
 }
-
 .btn {
   display: inline-block;
   background: var(--blue);
   color: var(--white);
   font-weight: 700;
+  padding: 10px 14px;
   text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  transition: background 0.3s ease;
+  border-radius: 6px;
+  transition: background 0.15s;
 }
-
-.btn:hover {
-  background: var(--red);
+.btn:hover { background: var(--red); }
+.btn.back {
+  background: #555;
 }
-
 .btn.primary {
   background: var(--amber);
-  color: var(--ink);
+  color: var(--indigo);
 }
 
-.btn.back {
-  background: var(--white);
-  color: var(--blue);
-  border: 2px solid var(--blue);
-}
-
-.btn.back:hover {
-  background: var(--blue);
-  color: var(--white);
-}
-
-/* ==========================================================
-   FOOTER
-   ========================================================== */
+/* ---------------------------------------------------------
+   Footer
+---------------------------------------------------------- */
 .site-footer {
-  text-align: center;
   padding: 32px 16px;
-  font-size: 0.9rem;
+  text-align: center;
   color: #555;
-  background: var(--cream);
-  position: relative;
-  overflow: hidden;
+  font-size: 0.9rem;
+  border-top: 4px solid var(--amber);
+  margin-top: 40px;
 }
-
-.legal {
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
 .patriotic-ribbon {
-  width: 100%;
-  height: 8px;
-  background: repeating-linear-gradient(
-    to right,
-    var(--red),
-    var(--red) 33%,
-    var(--white) 33%,
-    var(--white) 66%,
-    var(--blue) 66%,
-    var(--blue) 100%
-  );
-  animation: ribbon-wave 10s linear infinite;
+  height: 6px;
+  background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
+  margin-top: 16px;
 }
 
-@keyframes ribbon-wave {
-  0% { background-position: 0 0; }
-  100% { background-position: 100% 0; }
-}
-
-/* ==========================================================
-   RESPONSIVE
-   ========================================================== */
-@media (max-width: 768px) {
-  .tile-image { height: 140px; }
+/* ---------------------------------------------------------
+   Responsive Adjustments
+---------------------------------------------------------- */
+@media (max-width: 600px) {
   .tile-title { font-size: 1rem; }
-  .tile-summary { font-size: 0.9rem; }
-  .content { padding: 16px; }
+  .story-title { font-size: 1.5rem; }
+  .site-banner { height: 60px; }
 }
