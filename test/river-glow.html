@@ -1,0 +1,153 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>River Glow — One True Infotainment</title>
+
+
+  <!-- FLAT ARCH: only ./media subfolder allowed -->
+  <link rel="stylesheet" href="./style.css">
+  <meta name="theme-color" content="#0a1436" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
+      <a class="brand" href="./index.html" style="display:flex;align-items:center;gap:12px">
+        <img src="./media/oti-logo.png" alt="One True Infotainment logo" style="height:36px;width:auto" />
+        <span style="font-weight:700;letter-spacing:.04em;font-size:14px;color:var(--silver)">One True Infotainment</span>
+      </a>
+      <nav class="nav" aria-label="Primary" style="display:flex;gap:18px;font-size:14px;opacity:.9">
+        <a href="./index.html#latest">Latest</a>
+        <a href="./index.html#about">About</a>
+        <a href="./index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+
+  <!-- Banner / Hero -->
+  <header class="hero" role="banner" style="padding-bottom:12px">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center">
+        <div>
+          <div class="logotype">One True Infotainment</div>
+          <div class="tag">The Voice of the Corrected State</div>
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+            <a class="btn primary" href="./index.html#latest">Back to Latest</a>
+            <a class="btn" href="./river-glow.html#story">Skip to Story</a>
+          </div>
+        </div>
+        <div class="hero-art" style="overflow:hidden;border-radius:18px">
+          <!-- Updated per directive -->
+          <img src="./media/banner.png" alt="One True Infotainment banner" style="width:100%;height:auto;display:block;border-radius:18px" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Story Body -->
+  <main id="story" class="wrap" style="padding:22px 16px 40px">
+    <article style="max-width:78ch;margin:0 auto">
+      <div class="kicker">Feature</div>
+      <h1 class="hed" style="font-size:clamp(26px,4.6vw,40px);margin-top:6px">River Glow</h1>
+      <p class="meta" style="margin:8px 0 18px">
+        <span class="flag" aria-hidden="true"></span>
+        <time datetime="2025-10-24">Updated <span id="date-today">Oct 24, 2025</span></time>
+        <span>· 6 min read</span>
+      </p>
+
+
+      <figure style="margin:0 0 18px 0">
+        <img src="./media/lead-1.jpg" alt="Night river lights reflecting across a cityscape" style="width:100%;height:auto;border-radius:12px;border:1px solid rgba(230,234,239,.12)" />
+        <figcaption class="small" style="opacity:.85;margin-top:8px">Glass, light, precision — the studio look in the wild.</figcaption>
+      </figure>
+
+
+      <p class="lede">A clean pass through the midnight corridor: metal, water, signal. The grid hums; the story sharpens.</p>
+
+
+      <p>We keep the surface bright and the routes simple: flat files, straight links, no hidden rooms. The work advances in the open, and every step is legible.</p>
+
+
+      <h2 class="hed" style="font-size:22px;margin-top:20px">Method</h2>
+      <ul style="line-height:1.6;margin-top:6px">
+        <li>Flat architecture, <strong>no subfolders</strong> beyond <code>./media</code>.</li>
+        <li>Locked palette: metallic red → white → blue on deep navy.</li>
+        <li>Direct paths only: <code>./style.css</code>, <code>./media/*</code>.</li>
+      </ul>
+
+
+      <blockquote style="border-left:3px solid rgba(230,234,239,.25);padding-left:12px;margin-left:0;color:#c5cde3">
+        Minimal words, maximal work.
+      </blockquote>
+
+
+      <nav aria-label="Story navigation" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="./index.html#latest">← Back to Latest</a>
+        <a class="btn primary" href="./river-glow.html#top">Top</a>
+      </nav>
+    </article>
+  </main>
+
+
+  <!-- Related Tiles (optional, same grid system) -->
+  <section class="grid" aria-label="More stories">
+    <article class="tile">
+      <a href="./index.html#story-2"><img src="./media/lead-2.jpg" alt="Studio control room" /></a>
+      <div class="tile-body">
+        <div class="kicker">Spotlight</div>
+        <h2 class="hed"><a href="./index.html#story-2">Studio Night</a></h2>
+        <p class="lede">Glass, lens, and the quiet click of certainty.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>3 min read</span></div>
+      </div>
+    </article>
+
+
+    <article class="tile">
+      <a href="./index.html#story-3"><img src="./media/lead-3.jpg" alt="Clean interface with charts" /></a>
+      <div class="tile-body">
+        <div class="kicker">Explainer</div>
+        <h2 class="hed"><a href="./index.html#story-3">The Clean Pass</a></h2>
+        <p class="lede">Why flat files move faster — and break less.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>5 min read</span></div>
+      </div>
+    </article>
+
+
+    <article class="tile">
+      <a href="./index.html#story-4"><img src="./media/lead-4.jpg" alt="Server light trails" /></a>
+      <div class="tile-body">
+        <div class="kicker">Update</div>
+        <h2 class="hed"><a href="./index.html#story-4">Ops Log</a></h2>
+        <p class="lede">Parity check passed. Drive → Live complete.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>2 min read</span></div>
+      </div>
+    </article>
+  </section>
+
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="y"></span> One True Infotainment</div>
+      <div>Return: <a href="./index.html#top">Back to Top</a></div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Flat script only; no libraries
+    (function(){
+      const y = document.getElementById('y');
+      if (y) y.textContent = new Date().getFullYear();
+      const dt = document.getElementById('date-today');
+      if (dt) {
+        const d = new Date();
+        dt.textContent = d.toLocaleString('en-US',{month:'short', day:'2-digit', year:'numeric'});
+      }
+    })();
+  </script>
+</body>
+</html>
