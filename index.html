@@ -3,24 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Big One — ONE TRU INFOTAINMENT</title>
-  <meta name="description" content="The Voice of the Corrected States of America." />
+  <title>ONE TRU INFOTAINMENT — The Voice of the Corrected States of America</title>
+  <meta name="description" content="Broadcasts from the Corrected States of America. Official satire, mandatory optimism." />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- Social / SEO basics -->
-  <meta property="og:title" content="The Big One — ONE TRU INFOTAINMENT">
-  <meta property="og:description" content="The Voice of the Corrected States of America.">
-  <meta property="og:image" content="media/header-banner_1080.png">
+  <!-- Social / SEO -->
+  <meta property="og:title" content="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America">
+  <meta property="og:description" content="Broadcasts from the Corrected States of America.">
+  <meta property="og:image" content="media/header-banner.png">
   <meta name="theme-color" content="#0B1B3B">
-  <link rel="icon" href="media/favicon.ico">
+  <link rel="icon" type="image/png" href="media/favicon.ico.png">
 
-  <!-- Preload (PNG) -->
-  <link rel="preload" as="image" href="media/header-banner_1440.png">
+  <!-- Preload known-good banner -->
+  <link rel="preload" as="image" href="media/header-banner.png">
 
   <link rel="stylesheet" href="styles.css">
   <script src="ticker.js" defer></script>
   <script src="grid.js" defer></script>
 </head>
+
 <body>
   <header class="site-header">
     <h2 class="visually-hidden" id="urgent-headlines">Urgent headlines</h2>
@@ -30,20 +31,14 @@
       </div>
     </div>
 
-    <!-- Banner (PNG only) -->
+    <!-- Banner -->
     <div class="banner">
       <div class="banner-inner">
         <div class="banner-logo">
           <img
-            src="media/header-banner_1080.png"
-            srcset="
-              media/header-banner_768.png 768w,
-              media/header-banner_1080.png 1080w,
-              media/header-banner_1440.png 1440w,
-              media/header-banner_1920.png 1920w"
-            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 70vw, 960px"
+            src="media/header-banner.png"
             alt="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America"
-            fetchpriority="high" decoding="async" />
+            fetchpriority="high" decoding="async">
         </div>
         <div class="banner-tagline">
           <h1 class="banner-title">ONE TRU INFOTAINMENT</h1>
@@ -52,7 +47,7 @@
       </div>
     </div>
 
-    <!-- TAFAJ rail -->
+    <!-- TAFAJ Meter -->
     <div class="tafaj" role="status" aria-label="TAFAJ Threat Meter: Deadly">
       <span class="tafaj-label">TAFAJ THREAT METER</span>
       <div class="tafaj-meter" aria-hidden="true"><span></span></div>
@@ -62,12 +57,11 @@
 
   <main class="shell" id="content">
     <div class="main-grid" aria-live="polite">
-      <!-- STORY TILES -->
 
-      <!-- Wide feature -->
-      <article class="tile span-2x">
-        <a href="stories/river-glow.html" title="River Glow">
-          <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async" width="1200" height="900" />
+      <!-- Center story tiles (all images are links) -->
+      <article class="tile span-2" data-weight="hero" data-chroma="high" data-fit="square">
+        <a href="river-glow-incident.html" title="River Glow">
+          <img class="thumb" src="media/patriotic-census-placeholder.png" alt="River Glow" loading="eager" decoding="async">
           <div class="body">
             <h2>River Glow</h2>
             <div class="meta">Breaking News • Feature</div>
@@ -75,10 +69,9 @@
         </a>
       </article>
 
-      <!-- Standard -->
-      <article class="tile">
-        <a href="stories/first-citizen.html" title="From the First Citizen">
-          <img class="thumb" src="media/stories/first-citizen.png" alt="From the First Citizen" loading="lazy" decoding="async" width="1200" height="900" />
+      <article class="tile span-2y" data-weight="strong" data-chroma="high" data-fit="tall">
+        <a href="smiling-hours-directive.html" title="From the First Citizen">
+          <img class="thumb" src="media/domestic-smiles.png" alt="From the First Citizen" loading="lazy" decoding="async">
           <div class="body">
             <h2>From the First Citizen</h2>
             <div class="meta">Official Communication</div>
@@ -86,10 +79,9 @@
         </a>
       </article>
 
-      <!-- Tall tile -->
-      <article class="tile span-2y">
-        <a href="stories/patriot-games-update.html" title="Patriot Games Friday Teasers">
-          <img class="thumb" src="media/stories/patriot-games.png" alt="Patriot Games Updates" loading="lazy" decoding="async" width="1200" height="900" />
+      <article class="tile span-2x" data-weight="strong" data-chroma="high" data-fit="wide">
+        <a href="grundy-explains-series.html" title="Patriot Games Friday Teasers">
+          <img class="thumb" src="media/patriot-games-promo.png" alt="Patriot Games Updates" loading="lazy" decoding="async">
           <div class="body">
             <h2>Patriot Games: Friday Teasers</h2>
             <div class="meta">Broadcast • Preview</div>
@@ -97,21 +89,9 @@
         </a>
       </article>
 
-      <!-- Standard (promo) -->
-      <article class="tile">
-        <a href="stories/patriot-games-promo.html" title="Patriot Games Promo">
-          <img class="thumb" src="media/stories/patriot-games-promo.png" alt="Patriot Games Promo" loading="lazy" decoding="async" width="1200" height="900" />
-          <div class="body">
-            <h2>Patriot Games Promo</h2>
-            <div class="meta">Sponsored • Patriot Beer • Vigiles Recruiters</div>
-          </div>
-        </a>
-      </article>
-
-      <!-- Standard -->
-      <article class="tile">
-        <a href="stories/tafaj-bulletin.html" title="TAFAJ Bulletin">
-          <img class="thumb" src="media/stories/tafaj-bulletin.png" alt="TAFAJ Bulletin" loading="lazy" decoding="async" width="1200" height="900" />
+      <article class="tile" data-weight="normal" data-chroma="med" data-fit="square">
+        <a href="friendship-correction-pact.html" title="TAFAJ Bulletin">
+          <img class="thumb" src="media/friendship-correction-border-rebuild.png" alt="TAFAJ Bulletin" loading="lazy" decoding="async">
           <div class="body">
             <h2>TAFAJ Bulletin</h2>
             <div class="meta">Security • Always Deadly</div>
@@ -119,28 +99,44 @@
         </a>
       </article>
 
-      <!-- 2×2 feature -->
-      <article class="tile span-2">
-        <a href="grundy-explains-the-collection.html" title="Grundy Explains: The Collection">
-          <img class="thumb" src="media/grundy-explains-the-collection.png"
-               alt="Grundy pointing furiously at a table of labeled specimen jars under red-blue light."
-               loading="lazy" decoding="async" width="1200" height="900" />
+      <!-- Ads pinned to rails (images are links too) -->
+      <article class="tile ad ad-left">
+        <a href="patriotic-census.html" title="Patriot Beer">
+          <img class="thumb" src="media/patriot-beer-ad.png" alt="Patriot Beer — Sponsored" loading="lazy" decoding="async">
           <div class="body">
-            <h2>Grundy Explains: The Collection</h2>
-            <div class="meta">Investigation • Entertainment Division Archives</div>
-            <p>Grundy claims an old game-show host kept trophies from his animal crusade. OTI tries to make sense of it.</p>
+            <h2>Patriot Beer</h2>
+            <div class="meta">Sponsored • Patriot Beer</div>
           </div>
         </a>
       </article>
 
+      <article class="tile ad ad-right">
+        <a href="veteran-visibility-tour.html" title="Angels Recruitment">
+          <img class="thumb" src="media/AngelsAd.png" alt="Angels Recruitment — Sponsored" loading="lazy" decoding="async">
+          <div class="body">
+            <h2>Angels Recruitment</h2>
+            <div class="meta">Sponsored • Angels Recruitment</div>
+          </div>
+        </a>
+      </article>
+
+      <article class="tile ad ad-left">
+        <a href="hammer-of-grundy.html" title="Bad Man vs. Badger — Patriot Games">
+          <img class="thumb" src="media/BreakingFire.png" alt="Bad Man vs. Badger — Sponsored" loading="lazy" decoding="async">
+          <div class="body">
+            <h2>Bad Man vs. Badger</h2>
+            <div class="meta">Sponsored • Patriot Games</div>
+          </div>
+        </a>
+      </article>
     </div>
   </main>
 
   <footer class="site-footer" role="contentinfo" aria-label="Site footer">
     <div class="footer-ribbon" aria-hidden="true"></div>
     <p class="legal">
-      Produced without license from the Corrected States of America. 
-      All content herein is speculative and may not yet exist. 
+      Produced without license from the Corrected States of America.
+      All content herein is speculative and may not yet exist.
       Doubt is treason; irony is a pitchfork.
     </p>
   </footer>
