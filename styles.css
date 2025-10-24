@@ -208,3 +208,65 @@ header.site-header{
 
 /* hide footer ribbon on mobile */
 @media (max-width:700px){.footer-ribbon{display:none;}}
+/* =========================
+   Mobile Optimization (v7.5+)
+   ========================= */
+
+/* 1) Denser grid, bigger tap targets, calmer motion */
+@media (max-width: 640px) {
+  /* tighter columns to avoid big gaps on phones */
+  .main-grid{
+    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    padding: 8px;
+  }
+
+  /* no hover pop on mobile; slightly rounder corners */
+  .tile{ transform:none !important; border-radius:8px; }
+  .tile:hover{ transform:none; box-shadow:none; }
+
+  /* overlay text a bit larger and with more padding */
+  .headline-overlay{ padding: 16px 14px 12px; }
+  .headline-title{ font-size: clamp(18px, 5vw, 22px); }
+  .excerpt{
+    font-size: clamp(15px, 4.2vw, 18px);
+    -webkit-line-clamp: 4;         /* allow one more line on phones */
+  }
+
+  /* center meta and increase spacing for thumb reach */
+  .tile .body{ padding: 12px 12px 16px; }
+  .tile .meta{ font-size: .95rem; }
+
+  /* banner text a touch larger, tighter layout */
+  .banner{ padding: 8px 0; }
+  .banner-title{ font-size: clamp(18px, 6vw, 28px); }
+  .banner-sub{ font-size: clamp(12px, 3.5vw, 16px); }
+}
+
+/* 2) Slow the ticker slightly on phones for readability */
+@media (max-width: 640px) {
+  .ticker-track{
+    animation: scrollTickerMobile 38s linear infinite; /* ~35s scroll + 3s pause */
+  }
+  @keyframes scrollTickerMobile {
+    0%   { transform: translate3d(0,0,0); }
+    92%  { transform: translate3d(-50%,0,0); } /* slower pass */
+    100% { transform: translate3d(-50%,0,0); } /* hold for pause */
+  }
+}
+
+/* 3) Medium screens: keep grid tight but readable */
+@media (641px <= width <= 900px) {
+  .main-grid{
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap: 10px;
+  }
+  .headline-title{ font-size: clamp(18px, 3vw, 22px); }
+  .excerpt{ font-size: clamp(14px, 2.2vw, 18px); }
+}
+
+/* 4) Accessibility: reduce motion honors system setting */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track{ animation: none !important; }
+}
+
