@@ -1,9 +1,11 @@
 /* =========================================================
    ONE TRUE INFOTAINMENT (OTI) — STYLE.CSS v8.0
-   Full Propaganda Flow
+   Full Propaganda Flow (Static Banner + Scroller)
    ========================================================= */
 
-/* Color Palette */
+/* ---------------------------------------------------------
+   Color Palette
+---------------------------------------------------------- */
 :root {
   --amber: #ffb300;
   --indigo: #0f0f1a;
@@ -13,7 +15,9 @@
   --white: #ffffff;
 }
 
-/* Base */
+/* ---------------------------------------------------------
+   Base Layout
+---------------------------------------------------------- */
 html, body {
   margin: 0;
   padding: 0;
@@ -24,23 +28,11 @@ html, body {
 }
 
 /* ---------------------------------------------------------
-   Banner + Header
----------------------------------------------------------- */
-.site-header {
-  border-bottom: 4px solid var(--amber);
-  background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
-}
-.site-banner {
-  display: block;
-  width: 100%;
-  height: 70px;
-  object-fit: cover;
-}
-
-/* ---------------------------------------------------------
-   Global Ticker
+   SCROLLER (Alert Strip)
 ---------------------------------------------------------- */
 .alert-strip {
+  position: static;            /* Scroller appears at top, scrolls away */
+  z-index: auto;
   background: var(--red);
   color: var(--white);
   font-weight: 700;
@@ -62,7 +54,26 @@ html, body {
 }
 
 /* ---------------------------------------------------------
-   Index Grid Layout
+   SITE HEADER (Banner Ribbon)
+---------------------------------------------------------- */
+.site-header {
+  position: static;
+  top: auto;
+  z-index: auto;
+  height: 68px;
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
+  border-bottom: 4px solid var(--amber);
+}
+.site-banner {
+  display: block;
+  width: 100%;
+  height: 68px;
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------------
+   GRID LAYOUT (Index Page)
 ---------------------------------------------------------- */
 .content.grid-layout {
   display: grid;
@@ -71,7 +82,9 @@ html, body {
   padding: 16px;
 }
 
-/* Story Tiles */
+/* ---------------------------------------------------------
+   STORY TILE
+---------------------------------------------------------- */
 .story-tile {
   background: var(--white);
   border: 1px solid #ddd;
@@ -124,7 +137,7 @@ html, body {
 }
 
 /* ---------------------------------------------------------
-   Story Pages
+   STORY PAGE
 ---------------------------------------------------------- */
 .story-page .story {
   max-width: 760px;
@@ -167,7 +180,7 @@ html, body {
 }
 
 /* ---------------------------------------------------------
-   Navigation Buttons
+   NAVIGATION BUTTONS
 ---------------------------------------------------------- */
 .story-nav {
   margin-top: 40px;
@@ -195,7 +208,7 @@ html, body {
 }
 
 /* ---------------------------------------------------------
-   Footer
+   FOOTER
 ---------------------------------------------------------- */
 .site-footer {
   padding: 32px 16px;
@@ -212,10 +225,11 @@ html, body {
 }
 
 /* ---------------------------------------------------------
-   Responsive Adjustments
+   RESPONSIVE
 ---------------------------------------------------------- */
 @media (max-width: 600px) {
   .tile-title { font-size: 1rem; }
   .story-title { font-size: 1.5rem; }
-  .site-banner { height: 60px; }
+  .site-header { height: 56px; }
+  .site-banner { height: 56px; }
 }
