@@ -1,8 +1,8 @@
 /* ============================================================
-   style.css — OTI v8.2
-   Includes ad grids and story-page side rails.
+   style.css — One True Infotainment v8.2 Canon
    ============================================================ */
 
+/* ---------- Root Colors ---------- */
 :root {
   --amber: #ffb300;
   --indigo: #0f0f1a;
@@ -12,212 +12,316 @@
   --white: #ffffff;
 }
 
-/* --- GLOBAL RESET --- */
+/* ---------- Global Reset ---------- */
 html, body {
   margin: 0;
   padding: 0;
   background: var(--cream);
   color: var(--indigo);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
 }
 
-/* --- SCROLLER --- */
+/* ============================================================
+   ALERT STRIP + TICKER
+   ============================================================ */
 .alert-strip {
-  position: static;
-  z-index: auto;
   background: var(--red);
   color: var(--white);
-  font-weight: 700;
-  font-size: 0.9rem;
   overflow: hidden;
   white-space: nowrap;
-  text-transform: uppercase;
   border-bottom: 4px solid var(--amber);
-  padding: 4px 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
+
 .ticker {
   display: inline-block;
   padding-left: 100%;
-  animation: ticker-scroll 45s linear infinite;
+  animation: ticker-scroll 60s linear infinite;
+  font-size: 0.85rem;
 }
+
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
-/* --- BANNER --- */
+/* ============================================================
+   SITE HEADER + BANNER
+   ============================================================ */
 .site-header {
-  position: static;
-  width: 100%;
-  height: 68px;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
   background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
-  border-bottom: 4px solid var(--amber);
-}
-.site-banner {
-  display: block;
-  width: 100%;
-  height: 68px;
-  object-fit: cover;
-  object-position: center;
-  margin: 0;
-  padding: 0;
+  border-bottom: 6px solid var(--amber);
+  text-align: center;
 }
 
-/* --- GRID LAYOUT --- */
+.site-banner {
+  width: 100%;
+  max-height: 68px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   GRID LAYOUT — INDEX PAGE
+   ============================================================ */
 .content.grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* --- STORY TILE --- */
 .story-tile {
   background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.2s ease;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.story-tile:hover { transform: translateY(-4px); }
+
+.story-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
 .tile-link {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
-  display: block;
+  height: 100%;
 }
+
 .tile-image {
-  display: block;
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-bottom: 3px solid var(--amber);
 }
-.tile-text { padding: 1rem; }
+
+.tile-text {
+  padding: 1rem;
+}
+
 .tile-tag {
-  font-size: 0.8rem;
+  display: inline-block;
+  background: var(--blue);
+  color: var(--white);
   font-weight: 700;
-  color: var(--red);
+  font-size: 0.7rem;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 2rem;
+  padding: 4px 10px;
+  margin-bottom: 0.5rem;
 }
+
 .tile-title {
-  margin: 0.5rem 0 0.25rem;
   font-size: 1.1rem;
-  color: var(--blue);
+  color: var(--red);
+  margin: 0.25rem 0;
 }
+
 .tile-summary {
   font-size: 0.9rem;
   color: var(--indigo);
+  line-height: 1.4;
 }
 
-/* --- SPONSOR VARIANTS --- */
-.sponsor-tile .tile-tag {
-  color: var(--white);
-  background: var(--red);
-  padding: 0.15rem 0.35rem;
-  border-radius: 4px;
-}
-.sponsor-tile .tile-summary {
-  color: #333;
-}
-
-/* --- STORY PAGE --- */
-.story {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-.story-head { margin-bottom: 1.5rem; }
-.story-title {
-  font-size: 2rem;
-  color: var(--blue);
-  margin-bottom: 0.25rem;
-}
-.story-dek {
-  color: var(--red);
-  font-weight: 600;
-}
-.byline {
-  font-size: 0.9rem;
-  color: #555;
-}
-.lede-image {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 0.75rem;
-}
-.caption {
-  font-size: 0.8rem;
-  color: #666;
-  margin-bottom: 1.5rem;
-}
-.story-body p {
-  line-height: 1.6;
-  margin: 1rem 0;
-}
-blockquote {
-  margin: 1.5rem 0;
-  padding: 1rem;
-  border-left: 4px solid var(--amber);
-  background: #fff8e1;
-}
-
-/* --- STORY NAV --- */
-.story-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 2rem;
-}
-.btn {
-  background: var(--blue);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-}
-.btn:hover { background: var(--red); }
-.btn.back {
-  background: transparent;
-  color: var(--blue);
-  border: 2px solid var(--blue);
-}
-.btn.back:hover {
-  color: var(--white);
-  background: var(--blue);
-}
-
-/* --- AD GRID (INDEX BOTTOM) --- */
+/* ============================================================
+   AD GRID (INDEX BOTTOM)
+   ============================================================ */
 .ad-grid {
-  margin-top: 2rem;
-  padding: 2rem;
-  background: var(--cream);
-  border-top: 4px solid var(--amber);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto 3rem;
+  max-width: 1200px;
+  padding: 0 1rem;
 }
 
-/* --- STORY PAGE WITH AD RAILS --- */
+.sponsor-tile {
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sponsor-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.sponsor-tile .tile-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 3px solid var(--amber);
+  background: #f8f8f8;
+}
+
+.sponsor-tile .tile-text { padding: 1rem; }
+
+.sponsor-tile .tile-tag {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 2rem;
+  padding: 4px 10px;
+  margin-bottom: 0.5rem;
+}
+
+.sponsor-tile .tile-title {
+  font-size: 1.1rem;
+  color: var(--blue);
+  margin: 0.25rem 0;
+}
+
+.sponsor-tile .tile-summary {
+  font-size: 0.9rem;
+  color: var(--indigo);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   STORY PAGE LAYOUT (with ad rails)
+   ============================================================ */
 .story-page .content {
   display: grid;
   grid-template-columns: 220px minmax(0, 760px) 220px;
   gap: 20px;
   align-items: start;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+.story {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.story-head {
+  margin-bottom: 1.5rem;
+}
+
+.story-tag {
+  background: var(--blue);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  padding: 4px 10px;
+}
+
+.story-title {
+  font-size: 1.8rem;
+  color: var(--red);
+  margin: 0.5rem 0;
+}
+
+.story-dek {
+  font-size: 1.1rem;
+  color: var(--indigo);
+  margin-bottom: 0.5rem;
+}
+
+.byline {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.lede-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.caption {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.story-body p {
+  line-height: 1.6;
+  margin: 1em 0;
+}
+
+.story-nav {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: var(--red);
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Sponsor rails */
 .sponsor-rail {
   display: grid;
   gap: 16px;
 }
-.sponsor-rail .story-tile {
-  border: 1px solid #ddd;
-}
-.sponsor-rail .tile-image {
-  height: 180px;
-  object-fit: cover;
+
+.sponsor-rail .sponsor-tile {
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 }
 
-/* --- FOOTER --- */
+.sponsor-rail .sponsor-tile .tile-image {
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 3px solid var(--amber);
+}
+
+@media (max-width: 1024px) {
+  .story-page .content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sponsor-rail {
+    display: none;
+  }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .site-footer {
   text-align: center;
   font-size: 0.9rem;
@@ -225,23 +329,10 @@ blockquote {
   padding: 2rem 1rem;
   background: var(--cream);
 }
-.patriotic-ribbon {
-  height: 6px;
-  background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
-}
 
-/* --- MOBILE ADJUSTMENTS --- */
-@media (max-width: 1024px) {
-  .story-page .content {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .sponsor-rail { display: none; }
-}
-@media (max-width: 600px) {
-  .site-header, .site-banner { height: 56px; }
-  .content.grid-layout {
-    padding: 1rem;
-    gap: 1rem;
-  }
-  .tile-image { height: 160px; }
+.patriotic-ribbon {
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
+  margin-top: 1rem;
 }
