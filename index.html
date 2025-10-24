@@ -12,9 +12,9 @@
   <meta property="og:description" content="Broadcasts from the Corrected States of America.">
   <meta property="og:image" content="media/header-banner.png">
   <meta name="theme-color" content="#0B1B3B">
-  <link rel="icon" type="image/png" href="media/favicon.ico.png">
+  <link rel="icon" href="media/favicon.ico">
 
-  <!-- Preload known-good banner -->
+  <!-- Preload -->
   <link rel="preload" as="image" href="media/header-banner.png">
 
   <link rel="stylesheet" href="styles.css">
@@ -35,10 +35,9 @@
     <div class="banner">
       <div class="banner-inner">
         <div class="banner-logo">
-          <img
-            src="media/header-banner.png"
-            alt="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America"
-            fetchpriority="high" decoding="async">
+          <img src="media/header-banner.png"
+               alt="ONE TRU INFOTAINMENT — The Voice of the Corrected States of America"
+               fetchpriority="high" decoding="async">
         </div>
         <div class="banner-tagline">
           <h1 class="banner-title">ONE TRU INFOTAINMENT</h1>
@@ -57,13 +56,11 @@
 
   <main class="shell" id="content">
     <div class="main-grid" aria-live="polite">
+      <!-- STORIES + ADS (11 total; grid.js v2.2 picks 10, max 3 ads) -->
 
-      <!-- STORIES & ADS INTERMINGLED (grid.js v2.2 selects up to 10; max 3 ads) -->
-
-      <!-- Story: River Glow (hero) -->
-      <article class="tile span-2" data-weight="hero" data-fit="square">
+      <article class="tile" data-weight="hero" data-fit="square">
         <a href="river-glow-incident.html" title="River Glow">
-          <img class="thumb" src="media/patriotic-census-placeholder.png" alt="River Glow" loading="eager" decoding="async">
+          <img class="thumb" src="media/river-glow-placeholder.png" alt="River Glow" loading="eager" decoding="async">
           <div class="body">
             <h2>River Glow</h2>
             <div class="meta">Breaking News • Feature</div>
@@ -71,7 +68,6 @@
         </a>
       </article>
 
-      <!-- Story: From the First Citizen -->
       <article class="tile" data-weight="strong" data-fit="tall">
         <a href="smiling-hours-directive.html" title="From the First Citizen">
           <img class="thumb" src="media/domestic-smiles.png" alt="From the First Citizen" loading="lazy" decoding="async">
@@ -82,34 +78,9 @@
         </a>
       </article>
 
-      <!-- Story: Patriot Games Preview -->
-      <article class="tile" data-weight="strong" data-fit="wide">
-        <a href="grundy-explains-series.html" title="Patriot Games Friday Teasers">
-          <img class="thumb" src="media/patriot-games-promo.png" alt="Patriot Games Updates" loading="lazy" decoding="async">
-          <div class="body">
-            <h2>Patriot Games: Friday Teasers</h2>
-            <div class="meta">Broadcast • Preview</div>
-          </div>
-        </a>
-      </article>
-
-      <!-- Story: TAFAJ Bulletin -->
-      <article class="tile" data-weight="normal" data-fit="square">
-        <a href="friendship-correction-pact.html" title="TAFAJ Bulletin">
-          <img class="thumb" src="media/friendship-correction-border-rebuild.png" alt="TAFAJ Bulletin" loading="lazy" decoding="async">
-          <div class="body">
-            <h2>TAFAJ Bulletin</h2>
-            <div class="meta">Security • Always Deadly</div>
-          </div>
-        </a>
-      </article>
-
-      <!-- Story: Grundy Explains — The Collection (could be 2×2 if promoted) -->
       <article class="tile" data-weight="strong" data-fit="square">
         <a href="grundy-explains-the-collection.html" title="Grundy Explains: The Collection">
-          <img class="thumb" src="media/grundy-explains-the-collection.png"
-               alt="Grundy Explains: The Collection"
-               loading="lazy" decoding="async">
+          <img class="thumb" src="media/grundy-explains-the-collection.png" alt="Grundy Explains: The Collection" loading="lazy" decoding="async">
           <div class="body">
             <h2>Grundy Explains: The Collection</h2>
             <div class="meta">Investigation • Archives</div>
@@ -117,8 +88,17 @@
         </a>
       </article>
 
-      <!-- Story: Hammer of Grundy -->
-      <article class="tile" data-weight="normal" data-fit="tall">
+      <article class="tile" data-weight="strong" data-fit="wide">
+        <a href="grundy-explains-series.html" title="Grundy Explains: Series">
+          <img class="thumb" src="media/grundy-explains.png" alt="Grundy Explains Series" loading="lazy" decoding="async">
+          <div class="body">
+            <h2>Grundy Explains: Series</h2>
+            <div class="meta">Broadcast • Patriot Games Feature</div>
+          </div>
+        </a>
+      </article>
+
+      <article class="tile" data-weight="normal" data-fit="square">
         <a href="hammer-of-grundy.html" title="Hammer of Grundy">
           <img class="thumb" src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy" loading="lazy" decoding="async">
           <div class="body">
@@ -128,18 +108,16 @@
         </a>
       </article>
 
-      <!-- Story: Veteran Visibility Tour -->
-      <article class="tile" data-weight="normal" data-fit="square">
-        <a href="veteran-visibility-tour.html" title="Veteran Visibility Tour">
-          <img class="thumb" src="media/friendship-border-rebuild.png" alt="Veteran Visibility Tour" loading="lazy" decoding="async">
+      <article class="tile" data-weight="normal" data-fit="tall">
+        <a href="friendship-correction-pact.html" title="TAFAJ Bulletin">
+          <img class="thumb" src="media/friendship-correction-border-rebuild.png" alt="TAFAJ Bulletin" loading="lazy" decoding="async">
           <div class="body">
-            <h2>Veteran Visibility Tour</h2>
-            <div class="meta">Civic • Field Report</div>
+            <h2>TAFAJ Bulletin</h2>
+            <div class="meta">Security • Always Deadly</div>
           </div>
         </a>
       </article>
 
-      <!-- Story: Patriotic Census -->
       <article class="tile" data-weight="normal" data-fit="wide">
         <a href="patriotic-census.html" title="Patriotic Census">
           <img class="thumb" src="media/patriotic-census-placeholder.png" alt="Patriotic Census" loading="lazy" decoding="async">
@@ -150,20 +128,19 @@
         </a>
       </article>
 
-      <!-- AD: Patriot Beer (ads now mingle) -->
-      <article class="tile ad" data-weight="normal" data-fit="square">
-        <a href="patriotic-census.html" title="Patriot Beer">
-          <img class="thumb" src="media/patriot-beer-ad.png" alt="Patriot Beer — Sponsored" loading="lazy" decoding="async">
+      <article class="tile" data-weight="normal" data-fit="square">
+        <a href="veteran-visibility-tour.html" title="Veteran Visibility Tour">
+          <img class="thumb" src="media/veteran-visibility-tour.png" alt="Veteran Visibility Tour" loading="lazy" decoding="async">
           <div class="body">
-            <h2>Patriot Beer</h2>
-            <div class="meta">Sponsored • Patriot Beer</div>
+            <h2>Veteran Visibility Tour</h2>
+            <div class="meta">Civic • Field Report</div>
           </div>
         </a>
       </article>
 
-      <!-- AD: Angels Recruitment -->
-      <article class="tile ad" data-weight="normal" data-fit="tall">
-        <a href="veteran-visibility-tour.html" title="Angels Recruitment">
+      <!-- Ads -->
+      <article class="tile ad" data-weight="normal" data-fit="square">
+        <a href="#" title="Angels Recruitment">
           <img class="thumb" src="media/AngelsAd.png" alt="Angels Recruitment — Sponsored" loading="lazy" decoding="async">
           <div class="body">
             <h2>Angels Recruitment</h2>
@@ -172,18 +149,25 @@
         </a>
       </article>
 
-      <!-- AD: Bad Man vs. Badger -->
-      <article class="tile ad" data-weight="normal" data-fit="wide">
-        <a href="hammer-of-grundy.html" title="Bad Man vs. Badger — Patriot Games">
-          <img class="thumb" src="media/BreakingFire.png" alt="Bad Man vs. Badger — Sponsored" loading="lazy" decoding="async">
+      <article class="tile ad" data-weight="normal" data-fit="tall">
+        <a href="#" title="Patriot Beer">
+          <img class="thumb" src="media/patriot-beer-ad.png" alt="Patriot Beer — Sponsored" loading="lazy" decoding="async">
           <div class="body">
-            <h2>Bad Man vs. Badger</h2>
-            <div class="meta">Sponsored • Patriot Games</div>
+            <h2>Patriot Beer</h2>
+            <div class="meta">Sponsored • Patriot Beer</div>
           </div>
         </a>
       </article>
 
-      <!-- (Optional) Add more story tiles below; grid.js v2.2 will pick a random 10 and cap ads at 3 -->
+      <article class="tile ad" data-weight="normal" data-fit="wide">
+        <a href="#" title="Patriot Games Promo">
+          <img class="thumb" src="media/patriot-games-promo.png" alt="Patriot Games Promo — Sponsored" loading="lazy" decoding="async">
+          <div class="body">
+            <h2>Patriot Games Promo</h2>
+            <div class="meta">Sponsored • Patriot Games</div>
+          </div>
+        </a>
+      </article>
 
     </div>
   </main>
