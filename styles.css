@@ -1,38 +1,32 @@
-/* =========================
-   ONE TRU INFOTAINMENT — Stylesheet v7.3 (Masonry Fit Edition)
-   ========================= */
+/* ============================================
+   ONE TRU INFOTAINMENT — styles.css v7.4
+   ============================================ */
 
-:root{
+/* Core palette */
+:root {
   --c-navy:#0B1B3B;
-  --c-red:#A51224;
-  --c-ink:#0C0F14;
-  --c-metal:#F3F6FA;
-  --c-accent:#DFE6FF;
-  --row:8px;
-  --gap:12px;
-  --space-3:16px; --space-4:20px;
+  --c-red:#B5121B;
+  --c-metal:#f3f3f3;
+  --space-3:8px;
 }
 
-html,body{height:100%;}
-body{
+/* Base reset */
+html,body{
   margin:0;
-  background:var(--c-ink);
+  padding:0;
+  background:#0B1B3B;
   color:var(--c-metal);
-  font:400 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family:"Inter","Arial",sans-serif;
 }
 
-a{color:inherit;text-decoration:none;}
-a:focus-visible{outline:2px solid var(--c-accent);outline-offset:3px;}
-
-/* =========================
-   Header + Ticker
-   ========================= */
+/* ---------- HEADER + TICKER ---------- */
 header.site-header{
   background:linear-gradient(90deg,var(--c-navy),var(--c-red));
   color:var(--c-metal);
   display:block;
 }
 
+/* ticker (v7.4 sync) */
 .ticker{
   display:flex;
   align-items:center;
@@ -41,17 +35,14 @@ header.site-header{
   background:linear-gradient(90deg,var(--c-red) 0%,#7D0E1A 50%,var(--c-red) 100%);
   overflow:hidden;
   color:var(--c-metal);
-  animation:tickerSheen 14s linear infinite;
 }
-@keyframes tickerSheen{from{background-position:0 0}to{background-position:200% 0}}
-
 .ticker-viewport{overflow:hidden;flex:1;}
 .ticker-track{
   display:inline-flex;
   gap:48px;
   white-space:nowrap;
   will-change:transform;
-  animation:scroll 28s linear infinite;
+  animation:scrollTicker 33s linear infinite; /* 30s scroll + 3s pause */
 }
 .ticker-track li{
   list-style:none;
@@ -60,216 +51,147 @@ header.site-header{
   text-transform:uppercase;
   text-shadow:0 1px 0 rgba(0,0,0,.45),0 0 6px rgba(255,255,255,.15);
 }
-@keyframes scroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes scrollTicker {
+  0%{transform:translate3d(0,0,0);}
+  90%{transform:translate3d(-50%,0,0);}
+  100%{transform:translate3d(-50%,0,0);}
+}
 @media (prefers-reduced-motion:reduce){.ticker-track{animation:none;}}
 
-/* =========================
-   Banner
-   ========================= */
+/* ---------- BANNER ---------- */
 .banner{
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding:var(--space-4) var(--space-3);
-}
-.banner-inner{
-  max-width:1280px;
-  width:100%;
-  display:flex;
   align-items:center;
-  gap:20px;
+  padding:12px 0;
+  background:linear-gradient(90deg,#071020,#16294d 50%,#0B1B3B);
 }
-.banner-logo{
-  flex:0 0 auto;
-  width:360px;
-  max-width:38vw;
+.banner-logo img{
+  width:100%;
+  max-width:960px;
+  height:auto;
 }
-.banner-logo img{width:100%;height:auto;display:block;}
-.banner-tagline{flex:1 1 auto;}
 .banner-title{
   margin:0;
   font-weight:900;
-  font-size:clamp(22px,4vw,38px);
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  text-align:center;
+  color:var(--c-metal);
+  letter-spacing:.04em;
+  text-shadow:0 2px 4px rgba(0,0,0,.45);
 }
-.banner-sub{margin:6px 0 0;opacity:.92;font-size:clamp(12px,1.8vw,16px);}
+.banner-sub{
+  margin:0;
+  text-align:center;
+  font-weight:600;
+  letter-spacing:.03em;
+}
 
-/* =========================
-   TAFAJ Threat Meter
-   ========================= */
+/* ---------- TAFAJ METER ---------- */
 .tafaj{
   display:flex;
+  justify-content:center;
   align-items:center;
-  gap:10px;
-  padding:10px 12px;
-  background:linear-gradient(90deg,#350b0e,var(--c-red));
-  border-top:1px solid rgba(255,255,255,.1);
-}
-.tafaj-label{
+  gap:8px;
+  background:#210000;
+  color:#fff;
   font-weight:900;
-  letter-spacing:.08em;
+  padding:6px 0;
   text-transform:uppercase;
 }
-.tafaj-meter{
-  height:10px;
-  flex:1;
-  background:rgba(255,255,255,.15);
-  border-radius:10px;
-  overflow:hidden;
-}
-.tafaj-meter>span{
-  display:block;
-  height:100%;
-  width:100%;
-  background:linear-gradient(90deg,#ffcf33,#ff7a00,#ff0033);
+.tafaj-meter span{
+  display:inline-block;
+  width:60px;height:10px;
+  background:linear-gradient(90deg,#ff0000,#ff8800);
 }
 
-/* =========================
-   Layout Shell + Masonry Grid
-   ========================= */
-.shell{
-  max-width:1280px;
-  margin:0 auto;
-  padding:var(--space-4) var(--space-3);
-}
+/* ---------- GRID ---------- */
 .main-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  grid-auto-rows:var(--row);
-  grid-auto-flow:dense;
-  gap:var(--gap);
+  gap:10px;
+  padding:10px;
 }
-
-/* Tile fundamentals */
 .tile{
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 6px 16px rgba(0,0,0,.25);
-  --span:40;
-  grid-row:span var(--span);
-}
-.tile a{display:block;}
-.tile .thumb{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:cover;
-  background:#111;
-  filter:saturate(.98) brightness(.99);
-}
-.tile .body{padding:12px 12px 14px;}
-.tile h2{margin:0 0 6px;font-size:18px;line-height:1.2;font-weight:800;}
-.tile .meta{opacity:.8;font-size:13px;}
-
-@media (hover:hover){
-  .tile:hover,.tile:focus-within{
-    transform:translateY(-1px);
-    box-shadow:0 10px 22px rgba(0,0,0,.28);
-    transition:transform .15s ease, box-shadow .2s ease;
-  }
-}
-
-/* Span modifiers for width (vertical handled by JS) */
-.tile.span-2x{grid-column:span 2;}
-.tile.span-2 {grid-column:span 2;}
-.tile.span-2y{/* vertical handled by JS */}
-
-/* Hidden class for shuffled stories */
-.hidden{display:none!important;}
-
-/* =========================
-   Ad Rails (Left & Right)
-   ========================= */
-.tile.ad .thumb{filter:saturate(.95) brightness(.97);}
-@media (min-width:768px){.tile.ad:not(.ad-exempt){grid-column:1 / span 1;}}
-@media (min-width:1024px){.tile.ad:not(.ad-exempt).ad-right{grid-column:-2 / -1;}}
-.tile.ad-left{grid-column:1 / span 1;}
-.tile.ad-right{grid-column:-2 / -1;}
-@media (max-width:640px){
-  .tile.ad-left,.tile.ad-right,.tile.ad:not(.ad-exempt){grid-column:auto;}
-}
-
-/* =========================
-   Footer
-   ========================= */
-footer.site-footer{
-  background:linear-gradient(180deg,var(--c-navy) 0%,var(--c-ink) 100%);
-  color:var(--c-metal);
-  padding:20px 16px 28px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-.footer-ribbon{
-  height:6px;
-  margin-bottom:12px;
-  background:repeating-linear-gradient(90deg,#A51224 0 16px,#FFFFFF 16px 32px,#1C3E8E 32px 48px);
-  animation:ribbon 18s linear infinite;
-  transform:translateZ(0);
-}
-@keyframes ribbon{from{background-position:0 0}to{background-position:480px 0}}
-@media (prefers-reduced-motion:reduce){.footer-ribbon{animation:none;}}
-
-/* =========================
-   A11y utilities
-   ========================= */
-.visually-hidden{
-  position:absolute!important;
-  clip:rect(1px,1px,1px,1px);
-  padding:0;
-  border:0;
-  height:1px;
-  width:1px;
-  overflow:hidden;
-  white-space:nowrap;
-}/* === Blended image + headline overlay for tiles === */
-.thumb-wrap{
   position:relative;
   overflow:hidden;
+  background:#111;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;
+  transition:transform .2s ease, box-shadow .2s ease;
 }
-
-.thumb-wrap .headline-overlay{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  padding:10px 12px;
-  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.72) 100%);
+.tile:hover{
+  transform:scale(1.02);
+  box-shadow:0 0 14px rgba(255,255,255,.25);
 }
+.thumb-wrap{position:relative;overflow:hidden;}
+.thumb{width:100%;height:auto;display:block;object-fit:cover;}
 
-.headline{
-  margin:0;
-  font-size:clamp(16px, 2.2vw, 22px);
-  line-height:1.2;
-  font-weight:900;
-  letter-spacing:.02em;
-  text-shadow:0 2px 6px rgba(0,0,0,.45);
-}
-
-/* Non-linked ads: neutral pointer and focus behavior */
-.tile.no-link { cursor:default; }
-.tile.no-link .headline { text-decoration:none; }
-.tile.no-link .body .meta { opacity:.85; }
-/* === Tile overlay excerpts (multi-line) === */
-.thumb-wrap{ position:relative; overflow:hidden; }
+/* ---------- HEADLINE + EXCERPT OVERLAY ---------- */
 .headline-overlay{
-  position:absolute; inset:auto 0 0 0;
+  position:absolute;
+  left:0;right:0;bottom:0;
   padding:12px 12px 10px;
   background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 50%,rgba(0,0,0,.72) 100%);
+}
+.headline-title{
+  margin:0 0 4px 0;
+  color:#fff;
+  font-weight:900;
+  font-size:clamp(16px,2.4vw,22px);
+  line-height:1.15;
+  text-shadow:0 2px 6px rgba(0,0,0,.45);
 }
 .excerpt{
   margin:0;
   color:#fff;
-  font-weight:900;
-  letter-spacing:.02em;
+  font-weight:700;
+  font-size:clamp(14px,2vw,18px);
   line-height:1.25;
-  font-size:clamp(15px,2.2vw,20px);
   display:-webkit-box;
   -webkit-box-orient:vertical;
-  -webkit-line-clamp:3;        /* ~3 visible lines */
+  -webkit-line-clamp:3;
   overflow:hidden;
   text-shadow:0 2px 6px rgba(0,0,0,.45);
 }
-/* ensure masonry measures full height including overlay */
-.tile .body{ padding:10px 12px 12px; }
 
+/* ---------- META ---------- */
+.tile .body{padding:10px 12px 12px;}
+.tile .meta{
+  font-size:.85rem;
+  opacity:.8;
+  letter-spacing:.02em;
+}
 
+/* ---------- ADS INTERMINGLE ---------- */
+.tile.ad,
+.tile.ad-left,
+.tile.ad-right{
+  grid-column:auto !important; /* remove rails */
+}
+.tile.ad .thumb{filter:saturate(1.0) brightness(1.0);}
+.tile.no-link{cursor:default;}
+.tile.no-link .headline-title{text-decoration:none;}
+.tile.no-link .meta{opacity:.9;}
+
+/* ---------- FOOTER ---------- */
+.site-footer{
+  text-align:center;
+  padding:20px 10px 40px;
+  background:#0B1B3B;
+  font-size:.9rem;
+  position:relative;
+}
+.footer-ribbon{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:6px;
+  background:linear-gradient(90deg,red,white,blue,white,red);
+  animation:ribbonShift 4s linear infinite;
+}
+@keyframes ribbonShift{
+  0%{background-position:0 0;}
+  100%{background-position:100% 0;}
+}
+
+/* hide footer ribbon on mobile */
+@media (max-width:700px){.footer-ribbon{display:none;}}
