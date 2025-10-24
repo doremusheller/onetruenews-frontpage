@@ -1,63 +1,43 @@
-// ONE TRU INFOTAINMENT — ticker.js v7.4
-// Sardonic, imperative headlines scroll continuously across the banner
-// Adds a 3-second pause between loops
+/* =========================
+   Header + Ticker (v7.4 sync)
+   ========================= */
+header.site-header{
+  background:linear-gradient(90deg,var(--c-navy),var(--c-red));
+  color:var(--c-metal);
+  display:block;
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const headlines = [
-    "Eat faster, supplies delayed again",
-    "Smile for cameras, ration joy",
-    "TAFAJ raises threat to festive",
-    "Water futures beat the market",
-    "Citizens urged to rehearse gratitude",
-    "Local man thanks algorithm twice",
-    "New patriot app replaces memory",
-    "Neighbors compete in loyalty bakeoff",
-    "Curfew lifted, morale remains steady",
-    "Experts confirm confusion at record highs",
-    "Children pledge daily to Correctness",
-    "Fireworks celebrate minor compliance surge",
-    "Ministry denies rumors of laughter ban",
-    "Grundy promises more air on Fridays",
-    "Patriot Beer lowers proof for unity",
-    "Public asked to imagine calm skies",
-    "Survey finds doubt at unsafe levels",
-    "Officials applaud citizens for staying home",
-    "Broadcast repeats, applause still mandatory",
-    "Study links irony to lowered morale"
-  ];
+.ticker{
+  display:flex;
+  align-items:center;
+  height:28px;
+  padding:0 var(--space-3);
+  background:linear-gradient(90deg,var(--c-red) 0%,#7D0E1A 50%,var(--c-red) 100%);
+  overflow:hidden;
+  color:var(--c-metal);
+}
 
-  const track = document.getElementById("ticker-track");
-  if (!track) return;
+.ticker-viewport{overflow:hidden;flex:1;}
+.ticker-track{
+  display:inline-flex;
+  gap:48px;
+  white-space:nowrap;
+  will-change:transform;
+  animation:scrollTicker 33s linear infinite; /* 30s scroll + 3s pause */
+}
+.ticker-track li{
+  list-style:none;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  text-shadow:0 1px 0 rgba(0,0,0,.45),0 0 6px rgba(255,255,255,.15);
+}
 
-  // Populate with 10 random headlines
-  const shuffled = [...headlines].sort(() => Math.random() - 0.5).slice(0, 10);
-  shuffled.forEach(text => {
-    const li = document.createElement("li");
-    li.textContent = text;
-    track.appendChild(li);
-  });
+/* Keyframes now include pause at end */
+@keyframes scrollTicker {
+  0%   { transform:translate3d(0,0,0); }
+  90%  { transform:translate3d(-50%,0,0); }
+  100% { transform:translate3d(-50%,0,0); } /* hold for pause */
+}
 
-  // Animate scroll with 3-second loop delay
-  const speed = 30_000; // 30s scroll time
-  const pause = 3_000;  // 3s delay between loops
-  let offset = 0;
-
-  function loop() {
-    offset -= 1;
-    track.style.transform = `translateX(${offset}px)`;
-
-    const width = track.scrollWidth;
-    if (Math.abs(offset) >= width / 2) {
-      // pause before resetting
-      setTimeout(() => {
-        offset = 0;
-        track.style.transform = "translateX(0)";
-        requestAnimationFrame(loop);
-      }, pause);
-    } else {
-      requestAnimationFrame(loop);
-    }
-  }
-
-  loop();
-});
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none;}}
