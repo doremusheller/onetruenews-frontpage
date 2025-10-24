@@ -2,12 +2,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const MAX_VISIBLE = 10;
-  const ROW_PX = 8; // must match CSS --row
+  const ROW_PX = 8; // must match --row in styles.css
   const allTiles = Array.from(document.querySelectorAll(".tile:not(.ad)"));
 
-  // Seeded Fisher–Yates for stable shuffle per visit
+  // Seeded Fisher–Yates for stable per-visit shuffle
   function shuffleSeeded(arr, seed = Date.now() % 1e9) {
-    function rnd(){ seed = (seed*1664525+1013904223) % 4294967296; return seed/4294967296; }
+    function rnd(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(rnd() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -15,22 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
     return arr;
   }
 
-  // Respect pre-marked spans in HTML
+  // Quota for hero spans; respect any spans already in HTML
   const quota = { span2: 1, span2x: 1, span2y: 1 };
-  quota.span2  -= document.querySelectorAll(".tile.span-2:not(.ad)").length;
-  quota.span2x -= document.querySelectorAll(".tile.span-2x:not(.ad)").length;
-  quota.span2y -= document.querySelectorAll(".tile.span-2y:not(.ad)").length;
-  quota.span2  = Math.max(0, quota.span2);
-  quota.span2x = Math.max(0, quota.span2x);
-  quota.span2y = Math.max(0, quota.span2y);
+  quota.span2  = Math.max(0, quota.span2  - document.querySelectorAll(".tile.span-2:not(.ad)").length);
+  quota.span2x = Math.max(0, quota.span2x - document.querySelectorAll(".tile.span-2x:not(.ad)").length);
+  quota.span2y = Math.max(0, quota.span2y - document.querySelectorAll(".tile.span-2y:not(.ad)").length);
 
-  // 1) Shuffle + show only 10
-  const tiles = allTiles.slice();
-  if (tiles.length > MAX_VISIBLE) shuffleSeeded(tiles);
+  // 1) Shuffle and keep only MAX_VISIBLE
+  const tiles = shuffleSeeded(allTiles.slice());
   tiles.slice(MAX_VISIBLE).forEach(t => t.classList.add("hidden"));
   const visible = tiles.slice(0, MAX_VISIBLE);
 
-  // 2) Promote a few to wide/tall/2x2 based on data-fit/weight
+  // 2) Promote a few to spans (width only; height handled by masonry pass)
   visible.forEach(t => {
     if (t.classList.contains("span-2") || t.classList.contains("span-2x") || t.classList.contains("span-2y")) return;
     const fit = t.dataset.fit;        // wide | tall | square
@@ -42,12 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 3) Masonry fit pass — compute exact row spans after images load
+  // 3) Masonry fit: compute exact row spans after images/content load
   function fitTile(el){
-    // Temporarily let the tile size itself, then measure total height
+    // Remove any previous explicit span to get natural height
     el.style.gridRow = "auto";
+    // Force reflow, then measure
     const total = el.offsetHeight;
-    const span = Math.max(20, Math.ceil(total / ROW_PX)); // floor for very small items
+    const span = Math.max(20, Math.ceil(total / ROW_PX)); // floor to avoid tiny tiles
     el.style.setProperty("--span", span);
     el.style.gridRow = `span ${span}`;
   }
@@ -62,13 +59,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function fitAll(){ visible.forEach(fitTile); }
 
+  // Fit each visible tile when its image is ready
   visible.forEach(t => whenReady(t, () => fitTile(t)));
-  // Also refit on resize (debounced)
+
+  // Refits: initial microtask (in case all images cached), and on resize
+  queueMicrotask(fitAll);
   let raf;
   window.addEventListener("resize", () => {
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(fitAll);
   });
 
-  console.log(`OTI Grid v2: showing ${visible.length} (of ${allTiles.length}); masonry-fit active.`);
+  console.log(`OTI Grid v2: showing ${visible.length}/${allTiles.length}; masonry-fit active.`);
 });
