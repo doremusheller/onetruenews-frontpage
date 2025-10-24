@@ -1,11 +1,15 @@
-// ONE TRU INFOTAINMENT — Grid Controller v2.0 (masonry-fit, root-level)
+// ONE TRU INFOTAINMENT — Grid Controller v2.2
+// Masonry-fit + ads intermingled with MAX 3 ads visible
 
 document.addEventListener("DOMContentLoaded", () => {
   const MAX_VISIBLE = 10;
+  const MAX_ADS = 3;
   const ROW_PX = 8; // must match --row in styles.css
-  const allTiles = Array.from(document.querySelectorAll(".tile:not(.ad)"));
 
-  // Seeded Fisher–Yates for stable per-visit shuffle
+  // Collect all tiles (stories + ads)
+  const allTiles = Array.from(document.querySelectorAll(".tile"));
+
+  // Seeded Fisher–Yates shuffle (stable per visit)
   function shuffleSeeded(arr, seed = Date.now() % 1e9) {
     function rnd(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
     for (let i = arr.length - 1; i > 0; i--) {
@@ -15,18 +19,29 @@ document.addEventListener("DOMContentLoaded", () => {
     return arr;
   }
 
+  // Split into ads / stories, then shuffle independently
+  const ads = shuffleSeeded(allTiles.filter(t => t.classList.contains("ad")));
+  const stories = shuffleSeeded(allTiles.filter(t => !t.classList.contains("ad")));
+
+  // Build the visible set: up to MAX_ADS ads, fill the rest with stories
+  const chosenAds = ads.slice(0, Math.min(MAX_ADS, ads.length));
+  const slotsLeft = Math.max(0, MAX_VISIBLE - chosenAds.length);
+  const chosenStories = stories.slice(0, Math.min(slotsLeft, stories.length));
+
+  const visible = shuffleSeeded([...chosenAds, ...chosenStories]); // light reshuffle for mix
+  const hidden = allTiles.filter(t => !visible.includes(t));
+
+  // Apply visibility
+  hidden.forEach(t => t.classList.add("hidden"));
+  visible.forEach(t => t.classList.remove("hidden"));
+
   // Quota for hero spans; respect any spans already in HTML
   const quota = { span2: 1, span2x: 1, span2y: 1 };
-  quota.span2  = Math.max(0, quota.span2  - document.querySelectorAll(".tile.span-2:not(.ad)").length);
-  quota.span2x = Math.max(0, quota.span2x - document.querySelectorAll(".tile.span-2x:not(.ad)").length);
-  quota.span2y = Math.max(0, quota.span2y - document.querySelectorAll(".tile.span-2y:not(.ad)").length);
+  quota.span2  = Math.max(0, quota.span2  - document.querySelectorAll(".tile.span-2").length);
+  quota.span2x = Math.max(0, quota.span2x - document.querySelectorAll(".tile.span-2x").length);
+  quota.span2y = Math.max(0, quota.span2y - document.querySelectorAll(".tile.span-2y").length);
 
-  // 1) Shuffle and keep only MAX_VISIBLE
-  const tiles = shuffleSeeded(allTiles.slice());
-  tiles.slice(MAX_VISIBLE).forEach(t => t.classList.add("hidden"));
-  const visible = tiles.slice(0, MAX_VISIBLE);
-
-  // 2) Promote a few to spans (width only; height handled by masonry pass)
+  // Promote weighty tiles to width spans (height handled by masonry)
   visible.forEach(t => {
     if (t.classList.contains("span-2") || t.classList.contains("span-2x") || t.classList.contains("span-2y")) return;
     const fit = t.dataset.fit;        // wide | tall | square
@@ -38,17 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 3) Masonry fit: compute exact row spans after images/content load
+  // Masonry-fit: compute exact row spans after content loads
   function fitTile(el){
-    // Remove any previous explicit span to get natural height
     el.style.gridRow = "auto";
-    // Force reflow, then measure
     const total = el.offsetHeight;
-    const span = Math.max(20, Math.ceil(total / ROW_PX)); // floor to avoid tiny tiles
+    const span = Math.max(20, Math.ceil(total / ROW_PX)); // guard against too-small tiles
     el.style.setProperty("--span", span);
     el.style.gridRow = `span ${span}`;
   }
-
   function whenReady(el, cb){
     const img = el.querySelector("img.thumb");
     if (!img) return cb();
@@ -56,19 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
     img.addEventListener("load", cb, { once: true });
     img.addEventListener("error", cb, { once: true });
   }
-
   function fitAll(){ visible.forEach(fitTile); }
 
-  // Fit each visible tile when its image is ready
   visible.forEach(t => whenReady(t, () => fitTile(t)));
-
-  // Refits: initial microtask (in case all images cached), and on resize
   queueMicrotask(fitAll);
+
   let raf;
   window.addEventListener("resize", () => {
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(fitAll);
   });
 
-  console.log(`OTI Grid v2: showing ${visible.length}/${allTiles.length}; masonry-fit active.`);
+  console.log(`OTI Grid v2.2: showing ${visible.length}/${allTiles.length}; ads capped at ${Math.min(MAX_ADS, chosenAds.length)}.`);
 });
