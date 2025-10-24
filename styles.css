@@ -223,4 +223,30 @@ footer.site-footer{
   width:1px;
   overflow:hidden;
   white-space:nowrap;
+}/* === Blended image + headline overlay for tiles === */
+.thumb-wrap{
+  position:relative;
+  overflow:hidden;
 }
+
+.thumb-wrap .headline-overlay{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:10px 12px;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.72) 100%);
+}
+
+.headline{
+  margin:0;
+  font-size:clamp(16px, 2.2vw, 22px);
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:.02em;
+  text-shadow:0 2px 6px rgba(0,0,0,.45);
+}
+
+/* Non-linked ads: neutral pointer and focus behavior */
+.tile.no-link { cursor:default; }
+.tile.no-link .headline { text-decoration:none; }
+.tile.no-link .body .meta { opacity:.85; }
+
