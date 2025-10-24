@@ -1,0 +1,190 @@
+/* One True Infotainment — Flat Architecture Stylesheet */
+/* Root-level: ./style.css (only ./media subfolder allowed) */
+
+:root {
+  --navy: #0a1436;
+  --navy-2: #0f1d4d;
+  --red: #d71920;
+  --blue: #1b4fff;
+  --silver: #e6eaef;
+  --ink: #eef2f8;
+  --tile-bg: #0f1738;
+  --tile-border: #21305d;
+  --focus: #ffcc33;
+  --font-ui: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--navy), var(--navy-2));
+}
+
+a { color: #fff; text-decoration: none; }
+a:focus { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+
+.top {
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: rgba(10, 20, 54, .72);
+  border-bottom: 1px solid rgba(230, 234, 239, .08);
+}
+
+.wrap {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: 10px 16px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(230, 234, 239, .18);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  color: #fff;
+  font-weight: 600;
+}
+.btn.primary {
+  border-color: transparent;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0)),
+    linear-gradient(90deg, var(--red), var(--blue));
+}
+.btn:hover { opacity: .9; }
+
+/* Hero */
+.hero {
+  padding: 48px 16px 28px;
+  border-bottom: 1px solid rgba(230,234,239,.08);
+  background:
+    radial-gradient(1200px 500px at 20% -10%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(900px 400px at 90% 10%, rgba(27,79,255,.15), transparent 60%);
+}
+.logotype {
+  font-weight: 900;
+  font-size: clamp(28px, 5.5vw, 56px);
+  text-transform: uppercase;
+  background: linear-gradient(180deg, var(--red) 0%, #ff6a75 35%, #ffffff 50%, #7fb0ff 65%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.25));
+}
+.tag {
+  font-size: 14px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--silver);
+  opacity: .9;
+}
+
+/* Grid */
+.grid {
+  max-width: 1100px;
+  margin: 22px auto;
+  padding: 0 16px 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+.tile {
+  background: var(--tile-bg);
+  border: 1px solid var(--tile-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+.tile img { width: 100%; height: 150px; object-fit: cover; }
+.tile-body { padding: 12px 12px 14px; }
+.kicker {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #9fb3e6;
+}
+.hed {
+  margin: 6px 0 8px;
+  font-weight: 800;
+  line-height: 1.2;
+  font-size: 20px;
+}
+.lede { font-size: 13px; color: #c5cde3; opacity: .9; }
+.meta {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #9aa9d0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.flag {
+  display: inline-block;
+  height: 6px;
+  width: 90px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--red), #ffffff 50%, var(--blue));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid rgba(230,234,239,.08);
+  padding: 18px 16px 40px;
+  color: #b9c6e6;
+  font-size: 12px;
+}
+footer a { color: var(--silver); }
+
+/* --- BREAKING NEWS ADDITIONS --- */
+
+/* Pill for breaking label */
+.pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.22);
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
+}
+.pill.breaking {
+  border-color: transparent;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0)),
+    linear-gradient(90deg, var(--red), #ff5151);
+  box-shadow:
+    0 0 0 1px rgba(215,25,32,.35),
+    0 0 18px rgba(215,25,32,.25);
+}
+
+/* Emphasized border for breaking tile */
+.tile--breaking { border-color: #5a1c2a; }
+
+/* Breaking rotator visibility and fade */
+.breaking-rotator .tile--breaking {
+  display: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.breaking-rotator .tile--breaking.is-active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+.breaking-rotator:hover .tile--breaking.is-active {
+  outline: 1px dashed rgba(230,234,239,.18);
+  outline-offset: 4px;
+}
