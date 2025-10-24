@@ -1,8 +1,9 @@
 /* =========================================
-   ONE TRUE INFOTAINMENT — v8.2.3
+   ONE TRUE INFOTAINMENT — v8.2 Canon
+   Style Sheet (style.css)
    ========================================= */
 
-/* --- ROOT VARIABLES --- */
+/* ---------- Root Variables ---------- */
 :root {
   --amber: #ffb300;
   --indigo: #0f0f1a;
@@ -12,147 +13,263 @@
   --white: #ffffff;
 }
 
-/* --- BASE LAYOUT --- */
+/* ---------- Global ---------- */
 html, body {
   margin: 0;
   padding: 0;
   background: var(--cream);
   color: var(--indigo);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
 }
 
-/* --- ALERT STRIP (Ticker) --- */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- Alert Strip / Ticker ---------- */
 .alert-strip {
   background: var(--red);
   color: var(--white);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
+  height: 28px;
   overflow: hidden;
+  position: relative;
+  z-index: 20;
   white-space: nowrap;
-  height: 24px;
-  line-height: 24px;
-  width: 100%;
-  border-bottom: 2px solid var(--amber);
 }
 
-.ticker {
-  display: inline-block;
-  animation: ticker-scroll 55s linear infinite;
-  padding-left: 100%;
+.alert-strip p {
+  margin: 0;
+  line-height: 28px;
+  font-size: 0.85rem;
+  animation: ticker-scroll 30s linear infinite;
 }
 
 @keyframes ticker-scroll {
-  0% { transform: translateX(0); }
+  0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
 
-/* --- BANNER --- */
+/* ---------- Site Header / Banner ---------- */
 .site-header {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   height: 68px;
-  background-color: var(--indigo);
-  border-bottom: 4px solid var(--amber);
+  background: var(--indigo);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.site-banner {
+.site-header .brand {
+  position: relative;
   display: block;
+  line-height: 0;
+}
+
+.site-header .brand img.site-banner {
   width: 100%;
   height: 68px;
   object-fit: cover;
+  display: block;
 }
 
-/* --- GRID LAYOUT --- */
-.content.grid-layout {
+/* ---------- Page Content ---------- */
+.content {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ---------- Grid Layout ---------- */
+.grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 1.5rem auto 3rem;
-  padding: 0 1rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 1.25rem;
 }
 
-/* --- STORY TILE --- */
+/* ---------- Story Tile ---------- */
 .story-tile {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .story-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.tile-link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .tile-image {
   width: 100%;
-  display: block;
+  height: 200px;
+  object-fit: cover;
 }
 
 .tile-text {
-  padding: 0.75rem 1rem 1.25rem;
+  padding: 1rem;
 }
 
 .tile-tag {
   display: inline-block;
   background: var(--red);
   color: var(--white);
+  padding: 0.25rem 0.5rem;
   font-size: 0.7rem;
-  font-weight: 700;
+  border-radius: 3px;
   text-transform: uppercase;
-  border-radius: 10px;
-  padding: 2px 8px;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .tile-title {
   font-size: 1.05rem;
-  margin: 0.25rem 0 0.5rem;
-  color: var(--indigo);
+  margin: 0.25rem 0;
+  font-weight: 700;
 }
 
 .tile-summary {
   font-size: 0.9rem;
-  line-height: 1.4;
   color: #333;
 }
 
-/* --- PROMO (Ad Grid) --- */
-.promo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem auto 3rem;
-  max-width: 1200px;
-  padding: 0 1rem;
+/* ---------- Story Page Blocks ---------- */
+.story {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
 }
 
-.sponsor-tile .tile-tag {
+.story-head {
+  margin-bottom: 1.5rem;
+}
+
+.story-title {
+  font-size: 2rem;
+  color: var(--indigo);
+  margin: 0.25rem 0;
+}
+
+.story-dek {
+  font-style: italic;
+  color: var(--red);
+}
+
+.byline {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+figure.lede {
+  margin: 1rem 0;
+}
+
+img.lede-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.caption {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+.story-body p {
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.story-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.btn {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.btn:hover {
   background: var(--amber);
   color: var(--indigo);
 }
 
-/* --- FOOTER --- */
-.site-footer {
-  text-align: center;
+/* ---------- Ads Section ---------- */
+.ads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.ad-tile {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.ad-tile img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.ad-text {
+  padding: 1rem;
+}
+
+.ad-tag {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
+.ad-title {
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.ad-summary {
   font-size: 0.85rem;
-  color: #555;
-  padding: 1.5rem 1rem;
+  color: #333;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--cream);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  color: #333;
   border-top: 4px solid var(--amber);
+  border-bottom: 4px solid var(--blue);
 }
 
 .patriotic-ribbon {
-  height: 6px;
+  height: 4px;
   background: linear-gradient(to right, var(--red), var(--white), var(--blue));
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 600px) {
-  .tile-title { font-size: 1rem; }
-  .tile-summary { font-size: 0.85rem; }
-  .alert-strip { font-size: 0.75rem; }
 }
