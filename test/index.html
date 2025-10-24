@@ -13,21 +13,23 @@
   <meta property="og:image" content="media/banner.png" />
   <meta property="og:site_name" content="One True Infotainment" />
 
-  <!-- Styles & Scripts (root directory) -->
-  <link rel="stylesheet" href="site.css" />
+  <!-- Correct stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Scripts -->
   <script defer src="ticker.js"></script>
   <script defer src="grid.js"></script>
 </head>
-<body class="home-page">
+<body class="page index-page">
 
-  <!-- SCROLLING ALERT STRIP -->
+  <!-- ALERT STRIP -->
   <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
     <div class="ticker"></div>
   </div>
 
   <!-- SITE HEADER -->
   <header class="site-header">
-    <a href="index.html" class="brand" aria-label="Return to One True Infotainment home">
+    <a class="brand" href="index.html" aria-label="Back to front page">
       <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" class="site-banner" />
     </a>
   </header>
@@ -35,98 +37,98 @@
   <!-- MAIN CONTENT -->
   <main id="content" class="content grid-layout">
 
-    <!-- STORY TILE: Grundy Explains — Cancer -->
-    <article class="story-tile">
-      <a href="grundy-explains-cancer.html" class="tile-link">
-        <img src="media/grundy-explains.png" alt="Grundy holding a bag of onion rings, glowing with confidence" class="tile-image" />
-        <div class="tile-text">
-          <span class="tile-tag">Grundy Explains Stuff</span>
-          <h2 class="tile-title">Grundy Explains: Cancer</h2>
-          <p class="tile-summary">This week, Grundy discovers Funyons cure everything. Doctors disagree. Grundy disagrees harder.</p>
-        </div>
-      </a>
-    </article>
-
-    <!-- STORY TILE: Grundy Explains — The Collection -->
+    <!-- STORY TILE 1 -->
     <article class="story-tile">
       <a href="grundy-explains-collection.html" class="tile-link">
-        <img src="media/grundy-explains-collection.png" alt="Grundy beside jars under studio lights" class="tile-image" />
+        <img src="media/grundy-explains-collection.png" alt="Grundy points accusingly beside jars labeled ‘MERCY’" class="tile-image" />
         <div class="tile-text">
-          <span class="tile-tag">Grundy Explains Stuff</span>
+          <span class="tile-tag">Investigation</span>
           <h2 class="tile-title">Grundy Explains: The Collection</h2>
-          <p class="tile-summary">The First Citizen wonders what neutering looks like—and finds jars. Science applauds politely.</p>
+          <p class="tile-summary">The First Citizen poses a “simple question about jars,” turning confusion into patriotic science.</p>
         </div>
       </a>
     </article>
 
-    <!-- STORY TILE: River Glow -->
+    <!-- STORY TILE 2 -->
+    <article class="story-tile">
+      <a href="grundy-explains-cancer.html" class="tile-link">
+        <img src="media/grundy-explains.png" alt="Administrator Grundy beside a bowl of Funyons" class="tile-image" />
+        <div class="tile-text">
+          <span class="tile-tag">Infotainment</span>
+          <h2 class="tile-title">Grundy Explains: Cancer</h2>
+          <p class="tile-summary">Grundy claims Funyons prevent colon cancer in what experts call a “crispy revelation.”</p>
+        </div>
+      </a>
+    </article>
+
+    <!-- STORY TILE 3 -->
     <article class="story-tile">
       <a href="river-glow.html" class="tile-link">
-        <img src="media/river-glow.png" alt="The glowing river under night lights" class="tile-image" />
+        <img src="media/river-glow.png" alt="A river glowing softly at night" class="tile-image" />
         <div class="tile-text">
-          <span class="tile-tag">From the First Citizen</span>
+          <span class="tile-tag">National Front</span>
           <h2 class="tile-title">River Glow</h2>
-          <p class="tile-summary">Grundy thanks himself for the luminous spill that beautified the nation’s water. Critics call it radiation.</p>
+          <p class="tile-summary">First Citizen shrugs off thanks for the glowing river, calling it “free light for all.”</p>
         </div>
       </a>
     </article>
 
-    <!-- STORY TILE: Friendship Correction -->
+    <!-- STORY TILE 4 -->
     <article class="story-tile">
       <a href="friendship-correction.html" class="tile-link">
-        <img src="media/friendship-correction.png" alt="Two citizens smiling uneasily during a correctional interview" class="tile-image" />
+        <img src="media/friendship-correction.png" alt="Two citizens smiling with identical corrected expressions" class="tile-image" />
         <div class="tile-text">
           <span class="tile-tag">Banners Repair Broken Diplomacy</span>
           <h2 class="tile-title">Friendship Correction</h2>
-          <p class="tile-summary">A pilot program helps citizens love better by removing friends who make them think.</p>
+          <p class="tile-summary">Ministry technicians deploy friendship banners to restore international cheer.</p>
         </div>
       </a>
     </article>
 
-    <!-- STORY TILE: Hammer of Grundy — Live on the White House Lawn -->
+    <!-- STORY TILE 5 -->
     <article class="story-tile">
       <a href="hammer-of-grundy.html" class="tile-link">
-        <img src="media/hammer-of-grundy-concert.png" alt="Stage lights and patriotic crowd at the Hammer of Grundy concert on the White House lawn" class="tile-image" />
+        <img src="media/hammer-of-grundy-concert.png" alt="Stage lights and crowd on the White House lawn" class="tile-image" />
         <div class="tile-text">
           <span class="tile-tag">Infotainment</span>
-          <h2 class="tile-title">Hammer of Grundy — Live on the White House Lawn</h2>
-          <p class="tile-summary">Patriotic metal shakes the capital. Fireworks, loyalty, and decibels legally indistinguishable from faith.</p>
+          <h2 class="tile-title">Hammer of Grundy — Live on the Lawn</h2>
+          <p class="tile-summary">Patriotic metal returns to the capital in a triumph of amplified devotion.</p>
         </div>
       </a>
     </article>
 
-    <!-- STORY TILE: Veteran Visibility Tour -->
+    <!-- STORY TILE 6 -->
     <article class="story-tile">
       <a href="veteran-visibility.html" class="tile-link">
-        <img src="media/veteran-visibility-tour.png" alt="First Citizen Grundy in a glossy hospital corridor with recovering Angels and staff" class="tile-image" />
+        <img src="media/veteran-visibility-tour.png" alt="Grundy addressing recovering Angels in hospital" class="tile-image" />
         <div class="tile-text">
           <span class="tile-tag">National Front</span>
           <h2 class="tile-title">Veteran Visibility Tour</h2>
-          <p class="tile-summary">A masterclass in morale and lighting. Optics perfected; applause looped.</p>
+          <p class="tile-summary">Grundy’s hospital visit praised as a masterclass in morale — and lighting.</p>
         </div>
       </a>
     </article>
 
-    <!-- STORY TILE: The Patriotic Census -->
+    <!-- STORY TILE 7 -->
     <article class="story-tile">
       <a href="patriotic-census.html" class="tile-link">
-        <img src="media/patriotic-census.png" alt="Citizens filling out census forms beneath bright national banners" class="tile-image" />
+        <img src="media/patriotic-census.png" alt="Citizens filling census forms under red-white-blue lights" class="tile-image" />
         <div class="tile-text">
-          <span class="tile-tag">National Initiative</span>
-          <h2 class="tile-title">The Patriotic Census</h2>
-          <p class="tile-summary">Count yourself—and your loyalty—in this year’s celebration of closeness at scale.</p>
+          <span class="tile-tag">Domestic</span>
+          <h2 class="tile-title">Patriotic Census</h2>
+          <p class="tile-summary">New census counts not only citizens — but measurable love of country.</p>
         </div>
       </a>
     </article>
 
-    <!-- STORY TILE: Public Smiling Hours Extended -->
+    <!-- STORY TILE 8 -->
     <article class="story-tile">
       <a href="public-smiling-hours.html" class="tile-link">
-        <img src="media/domestic-smiles.png" alt="Citizens smiling together during official Smiling Hour" class="tile-image" />
+        <img src="media/domestic-smiles.png" alt="Citizens smiling under streetlights during Smiling Hour" class="tile-image" />
         <div class="tile-text">
-          <span class="tile-tag">Ministry of Wellbeing</span>
+          <span class="tile-tag">Wellbeing</span>
           <h2 class="tile-title">Public Smiling Hours Extended</h2>
-          <p class="tile-summary">Cheer windows expand to 06:00–22:00. Meters reward sincerity; jaws show “adaptive resilience.”</p>
+          <p class="tile-summary">Cheer windows expanded through winter as facial compliance rises nationwide.</p>
         </div>
       </a>
     </article>
@@ -136,11 +138,12 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <p class="legal">
-      Produced without license from the Corrected States of America.
-      All contained herein are speculation and may not yet exist.
+      Produced without license from the Corrected States of America.<br>
+      All contained herein are speculation and may not yet exist.<br>
       Doubt is treason; irony a pitchfork.
     </p>
     <div class="patriotic-ribbon" aria-hidden="true"></div>
   </footer>
+
 </body>
 </html>
