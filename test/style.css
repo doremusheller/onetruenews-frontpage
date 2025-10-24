@@ -1,3 +1,8 @@
+/* ============================================================
+   style.css — OTI v8.2
+   Includes ad grids and story-page side rails.
+   ============================================================ */
+
 :root {
   --amber: #ffb300;
   --indigo: #0f0f1a;
@@ -7,7 +12,7 @@
   --white: #ffffff;
 }
 
-/* ===== GLOBAL RESET ===== */
+/* --- GLOBAL RESET --- */
 html, body {
   margin: 0;
   padding: 0;
@@ -16,7 +21,7 @@ html, body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
 }
 
-/* ===== SCROLLER ===== */
+/* --- SCROLLER --- */
 .alert-strip {
   position: static;
   z-index: auto;
@@ -40,7 +45,7 @@ html, body {
   100% { transform: translateX(-100%); }
 }
 
-/* ===== BANNER RIBBON ===== */
+/* --- BANNER --- */
 .site-header {
   position: static;
   width: 100%;
@@ -62,7 +67,7 @@ html, body {
   padding: 0;
 }
 
-/* ===== GRID LAYOUT ===== */
+/* --- GRID LAYOUT --- */
 .content.grid-layout {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -70,7 +75,7 @@ html, body {
   padding: 2rem;
 }
 
-/* ===== STORY TILE ===== */
+/* --- STORY TILE --- */
 .story-tile {
   background: var(--white);
   border-radius: 12px;
@@ -78,9 +83,7 @@ html, body {
   overflow: hidden;
   transition: transform 0.2s ease;
 }
-.story-tile:hover {
-  transform: translateY(-4px);
-}
+.story-tile:hover { transform: translateY(-4px); }
 .tile-link {
   text-decoration: none;
   color: inherit;
@@ -92,9 +95,7 @@ html, body {
   height: 200px;
   object-fit: cover;
 }
-.tile-text {
-  padding: 1rem;
-}
+.tile-text { padding: 1rem; }
 .tile-tag {
   font-size: 0.8rem;
   font-weight: 700;
@@ -111,15 +112,24 @@ html, body {
   color: var(--indigo);
 }
 
-/* ===== STORY PAGE ===== */
+/* --- SPONSOR VARIANTS --- */
+.sponsor-tile .tile-tag {
+  color: var(--white);
+  background: var(--red);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+}
+.sponsor-tile .tile-summary {
+  color: #333;
+}
+
+/* --- STORY PAGE --- */
 .story {
   max-width: 760px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
-.story-head {
-  margin-bottom: 1.5rem;
-}
+.story-head { margin-bottom: 1.5rem; }
 .story-title {
   font-size: 2rem;
   color: var(--blue);
@@ -154,7 +164,7 @@ blockquote {
   background: #fff8e1;
 }
 
-/* ===== STORY NAV ===== */
+/* --- STORY NAV --- */
 .story-nav {
   display: flex;
   flex-wrap: wrap;
@@ -169,9 +179,7 @@ blockquote {
   text-decoration: none;
   font-weight: 600;
 }
-.btn:hover {
-  background: var(--red);
-}
+.btn:hover { background: var(--red); }
 .btn.back {
   background: transparent;
   color: var(--blue);
@@ -182,7 +190,34 @@ blockquote {
   background: var(--blue);
 }
 
-/* ===== FOOTER ===== */
+/* --- AD GRID (INDEX BOTTOM) --- */
+.ad-grid {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--cream);
+  border-top: 4px solid var(--amber);
+}
+
+/* --- STORY PAGE WITH AD RAILS --- */
+.story-page .content {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 760px) 220px;
+  gap: 20px;
+  align-items: start;
+}
+.sponsor-rail {
+  display: grid;
+  gap: 16px;
+}
+.sponsor-rail .story-tile {
+  border: 1px solid #ddd;
+}
+.sponsor-rail .tile-image {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* --- FOOTER --- */
 .site-footer {
   text-align: center;
   font-size: 0.9rem;
@@ -195,16 +230,18 @@ blockquote {
   background: linear-gradient(90deg, var(--red), var(--white), var(--blue));
 }
 
-/* ===== MOBILE ADJUSTMENTS ===== */
-@media (max-width: 600px) {
-  .site-header, .site-banner {
-    height: 56px;
+/* --- MOBILE ADJUSTMENTS --- */
+@media (max-width: 1024px) {
+  .story-page .content {
+    grid-template-columns: minmax(0, 1fr);
   }
+  .sponsor-rail { display: none; }
+}
+@media (max-width: 600px) {
+  .site-header, .site-banner { height: 56px; }
   .content.grid-layout {
     padding: 1rem;
     gap: 1rem;
   }
-  .tile-image {
-    height: 160px;
-  }
+  .tile-image { height: 160px; }
 }
