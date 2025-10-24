@@ -1,171 +1,273 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>One True Infotainment — The Voice of the Corrected States of America</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="Broadcasts from the Corrected States of America. Official satire, mandatory optimism." />
-  <meta name="color-scheme" content="dark light" />
-  <meta property="og:title" content="One True Infotainment — The Voice of the Corrected States of America">
-  <meta property="og:description" content="Broadcasts from the Corrected States of America.">
-  <meta property="og:image" content="media/header-banner.webp">
-  <meta name="theme-color" content="#0B1B3B">
-  <link rel="icon" href="media/favicon.ico">
-  <link rel="preload" as="image" href="media/header-banner.webp">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>One True Infotainment — The Voice of the Corrected State</title>
+  <!-- FLAT SITE: only subfolder allowed is ./media -->
+  <style>
+    :root{
+      --navy: #0a1436;            /* deep base */
+      --navy-2:#0f1d4d;
+      --red:  #d71920;            /* metallic red cap */
+      --blue: #1b4fff;            /* metallic blue cap */
+      --silver:#e6eaef;           /* highlight text/lines */
+      --ink: #eef2f8;             /* light UI text on dark */
+      --tile-bg:#0f1738;          /* card bg */
+      --tile-border:#21305d;      /* card border */
+      --focus:#ffcc33;            /* subtle focus ring */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink); background:linear-gradient(180deg,var(--navy),var(--navy-2));
+    }
+    a{color:#ffffff;text-decoration:none}
+    a:focus{outline:2px solid var(--focus); outline-offset:2px; border-radius:4px}
 
-  <!-- ✅ Correct unified stylesheet -->
-  <link rel="stylesheet" href="site.css">
 
-  <script defer src="shell.js"></script>
-  <script defer src="grid.js"></script>
+    /* Top bar */
+    .top{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(140%) blur(8px);
+      background:rgba(10,20,54,.72);
+      border-bottom:1px solid rgba(230,234,239,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:10px 16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:36px;width:auto;display:block}
+    .brand span{font-weight:700;letter-spacing:.04em;font-size:14px;color:var(--silver)}
+
+
+    .nav{display:flex;gap:18px;font-size:14px;opacity:.9}
+    .nav a:hover{opacity:1;text-decoration:underline}
+
+
+    /* Banner (hero) */
+    .hero{
+      padding:48px 16px 28px;
+      border-bottom:1px solid rgba(230,234,239,.08);
+      background:
+        radial-gradient(1200px 500px at 20% -10%, rgba(255,255,255,.06), transparent 60%),
+        radial-gradient(900px 400px at 90% 10%, rgba(27,79,255,.15), transparent 60%);
+    }
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    @media (max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .lockup{
+      display:flex;flex-direction:column;gap:14px
+    }
+    .logotype{
+      display:inline-block; line-height:1; letter-spacing:.04em; text-transform:uppercase;
+      font-weight:900; font-size: clamp(28px,5.5vw,56px);
+      background: linear-gradient(180deg, var(--red) 0%, #ff6a75 35%, #ffffff 50%, #7fb0ff 65%, var(--blue) 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter: drop-shadow(0 2px 0 rgba(0,0,0,.25));
+    }
+    .tag{
+      font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--silver); opacity:.9
+    }
+    .cta-row{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:10px;border:1px solid rgba(230,234,239,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      color:#fff;font-weight:600
+    }
+    .btn.primary{
+      border-color:transparent;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0)) ,
+        linear-gradient(90deg, var(--red), var(--blue));
+    }
+    .hero-art{
+      border-radius:18px; min-height:180px; aspect-ratio:16/9;
+      background:linear-gradient(135deg,#102252,#07122e);
+      border:1px solid rgba(230,234,239,.12);
+      display:grid;place-items:center;color:#cdd6ea;font-size:13px
+    }
+
+
+    /* Story grid */
+    .grid{
+      max-width:1100px;margin:22px auto;padding:0 16px 36px;
+      display:grid;grid-template-columns:repeat(12,1fr);gap:14px
+    }
+    .tile{
+      grid-column: span 4;
+      background:var(--tile-bg);
+      border:1px solid var(--tile-border);
+      border-radius:12px; overflow:hidden; display:flex;flex-direction:column; min-height:220px
+    }
+    @media (max-width:1000px){.tile{grid-column:span 6}}
+    @media (max-width:640px){.tile{grid-column:span 12}}
+    .tile img{width:100%;height:150px;object-fit:cover;display:block}
+    .tile-body{padding:12px 12px 14px}
+    .kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9fb3e6;opacity:.9}
+    .hed{margin:6px 0 8px; font-weight:800; line-height:1.2; font-size: clamp(16px,2.5vw,20px)}
+    .lede{font-size:13px;color:#c5cde3;opacity:.9}
+    .meta{margin-top:10px; font-size:11px;color:#9aa9d0;display:flex;gap:10px;align-items:center}
+    .flag{
+      display:inline-block; height:6px; width:90px; border-radius:999px;
+      background: linear-gradient(90deg, var(--red), #ffffff 50%, var(--blue));
+      box-shadow:0 0 0 1px rgba(255,255,255,.12) inset
+    }
+
+
+    /* Footer */
+    footer{border-top:1px solid rgba(230,234,239,.08); padding:18px 16px 40px;color:#b9c6e6}
+    .foot-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .small{font-size:12px;opacity:.85}
+  </style>
 </head>
-
 <body>
-  <div data-include="header"></div>
-
-  <main class="shell" id="content">
-    <div class="main-grid" aria-live="polite">
-      <!-- 11 total tiles; grid.js v7.3.2 displays 10 at a time -->
-
-      <article class="tile" data-weight="hero" data-fit="square" role="article">
-        <a class="tile-link" href="river-glow-incident.html" aria-label="River Glow">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/river-glow-placeholder.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">River Glow</h2>
-              <p class="excerpt">Night river burns politely; officials insist glow means prosperity.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Breaking News • Feature</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="strong" data-fit="tall" role="article">
-        <a class="tile-link" href="smiling-hours-directive.html" aria-label="Public Smiling Hours Directive">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/domestic-smiles.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">Public Smiling Hours</h2>
-              <p class="excerpt">Public Smiling Hours extended; citizens urged to rehearse gratitude.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Official Communication</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="strong" data-fit="square" role="article">
-        <a class="tile-link" href="grundy-explains-the-collection.html" aria-label="Grundy Explains: The Collection">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/grundy-explains-the-collection.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">Grundy Explains: The Collection</h2>
-              <p class="excerpt">Jars labeled hope, antler, grievance; Grundy swears it’s all evidence.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Investigation • Archives</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="strong" data-fit="wide" role="article">
-        <a class="tile-link" href="grundy-explains-series.html" aria-label="Grundy Explains: Series">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/grundy-explains.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">Grundy Explains: Series</h2>
-              <p class="excerpt">Weekly broadcast connecting dots no one asked to connect.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Broadcast • Patriot Games Feature</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="normal" data-fit="square" role="article">
-        <a class="tile-link" href="hammer-of-grundy.html" aria-label="Hammer of Grundy">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/hammer-of-grundy-concert.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">Hammer of Grundy</h2>
-              <p class="excerpt">Anvils ring; choir applauds; warnings replaced by louder applause signs.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Culture • Concert Series</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="normal" data-fit="tall" role="article">
-        <a class="tile-link" href="friendship-correction-pact.html" aria-label="TAFAJ Bulletin">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/friendship-correction-border-rebuild.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">TAFAJ Bulletin</h2>
-              <p class="excerpt">Border kindness intensified; dissent reclassified as helpful feedback.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Security • Always Deadly</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="normal" data-fit="wide" role="article">
-        <a class="tile-link" href="patriotic-census.html" aria-label="Patriotic Census">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/patriotic-census-placeholder.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">Patriotic Census</h2>
-              <p class="excerpt">Report your feelings accurately—or let the app improve them.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Civic • Participation</div></div>
-        </a>
-      </article>
-
-      <article class="tile" data-weight="normal" data-fit="square" role="article">
-        <a class="tile-link" href="veteran-visibility-tour.html" aria-label="Veteran Visibility Tour">
-          <div class="thumb-wrap">
-            <img class="thumb" src="media/veteran-visibility-tour.png" alt="">
-            <div class="headline-overlay">
-              <h2 class="headline-title">Veteran Visibility Tour</h2>
-              <p class="excerpt">Parade rerouted indoors for morale; flags remain outdoors for optics.</p>
-            </div>
-          </div>
-          <div class="body"><div class="meta">Civic • Field Report</div></div>
-        </a>
-      </article>
-
-      <article class="tile ad no-link" data-weight="normal" data-fit="square" role="article" aria-label="Angels Recruitment — Sponsored">
-        <div class="thumb-wrap">
-          <img class="thumb" src="media/AngelsAd.png" alt="Angels Recruitment — Sponsored">
-          <div class="headline-overlay">
-            <h2 class="headline-title">Angels Recruitment</h2>
-            <p class="excerpt">Your valor has been noticed; report to the nearest chorus.</p>
-          </div>
-        </div>
-        <div class="body"><div class="meta">Sponsored • Angels</div></div>
-      </article>
-
-      <article class="tile ad no-link" data-weight="normal" data-fit="tall" role="article" aria-label="Patriot Beer — Sponsored">
-        <div class="thumb-wrap">
-          <img class="thumb" src="media/patriot-beer-ad.png" alt="Patriot Beer — Sponsored">
-          <div class="headline-overlay">
-            <h2 class="headline-title">Patriot Beer</h2>
-            <p class="excerpt">Now with fewer questions and the same patriotic aftertaste.</p>
-          </div>
-        </div>
-        <div class="body"><div class="meta">Sponsored • Patriot Beer</div></div>
-      </article>
-
-      <article class="tile ad no-link" data-weight="normal" data-fit="wide" role="article" aria-label="Patriot Games Promo — Sponsored">
-        <div class="thumb-wrap">
-          <img class="thumb" src="media/patriot-games-promo.png" alt="Patriot Games Promo — Sponsored">
-          <div class="headline-overlay">
-            <h2 class="headline-title">Patriot Games Promo</h2>
-            <p class="excerpt">Friday’s contests begin at noon; electricity permitting.</p>
-          </div>
-        </div>
-        <div class="body"><div class="meta">Sponsored • Patriot Games</div></div>
-      </article>
+  <!-- Top Bar (flat links only) -->
+  <div class="top">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
+      <a class="brand" href="./index.html">
+        <img src="./media/banner.png" alt="One True Infotainment logo" />
+        <span>One True Infotainment</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./index.html#top">Top</a>
+        <a href="./index.html#latest">Latest</a>
+        <a href="./index.html#about">About</a>
+        <a href="./index.html#contact">Contact</a>
+      </nav>
     </div>
+  </div>
+
+
+  <!-- Banner / Hero -->
+  <header id="top" class="hero" role="banner">
+    <div class="hero-inner">
+      <div class="lockup">
+        <h1 class="logotype">One True Infotainment</h1>
+        <div class="tag">The Voice of the Corrected State</div>
+        <div class="cta-row">
+          <a class="btn primary" href="./index.html#latest">Latest Stories</a>
+          <a class="btn" href="./index.html#about">What We Are</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        Banner field (swap with <code>./media/hero.jpg</code>)
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Dense Story Grid -->
+  <main id="latest" class="grid">
+    <!-- Tile 1 -->
+    <article class="tile">
+      <a href="./index.html#story-1" aria-label="Read story one">
+        <img src="./media/lead-1.jpg" alt="Lead image one" />
+      </a>
+      <div class="tile-body">
+        <div class="kicker">Briefing</div>
+        <h2 class="hed"><a href="./index.html#story-1">Signal Check: Morning Rundown</a></h2>
+        <p class="lede">Top lines, zero ornament. Everything you need at a glance.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>4 min read</span></div>
+      </div>
+    </article>
+
+
+    <!-- Tile 2 -->
+    <article class="tile">
+      <a href="./index.html#story-2" aria-label="Read story two">
+        <img src="./media/lead-2.jpg" alt="Lead image two" />
+      </a>
+      <div class="tile-body">
+        <div class="kicker">Spotlight</div>
+        <h2 class="hed"><a href="./index.html#story-2">Field Notes: Tonight’s Agenda</a></h2>
+        <p class="lede">What moves now; what waits. A clean cut of priorities.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>5 min read</span></div>
+      </div>
+    </article>
+
+
+    <!-- Tile 3 -->
+    <article class="tile">
+      <a href="./index.html#story-3" aria-label="Read story three">
+        <img src="./media/lead-3.jpg" alt="Lead image three" />
+      </a>
+      <div class="tile-body">
+        <div class="kicker">Explainer</div>
+        <h2 class="hed"><a href="./index.html#story-3">How It Works: The Clean Pass</a></h2>
+        <p class="lede">The method behind the speed: flat files, direct links, no friction.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>6 min read</span></div>
+      </div>
+    </article>
+
+
+    <!-- Tile 4 -->
+    <article class="tile">
+      <a href="./index.html#story-4" aria-label="Read story four">
+        <img src="./media/lead-4.jpg" alt="Lead image four" />
+      </a>
+      <div class="tile-body">
+        <div class="kicker">Update</div>
+        <h2 class="hed"><a href="./index.html#story-4">Ops Log: Site Is Live</a></h2>
+        <p class="lede">Drive → Live push complete. Parity check passed.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>2 min read</span></div>
+      </div>
+    </article>
+
+
+    <!-- Tile 5 -->
+    <article class="tile">
+      <a href="./index.html#story-5" aria-label="Read story five">
+        <img src="./media/lead-5.jpg" alt="Lead image five" />
+      </a>
+      <div class="tile-body">
+        <div class="kicker">Gallery</div>
+        <h2 class="hed"><a href="./index.html#story-5">Frames: Studio Night</a></h2>
+        <p class="lede">Stills from the soundstage — glass, light, precision.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>1 min view</span></div>
+      </div>
+    </article>
+
+
+    <!-- Tile 6 -->
+    <article class="tile">
+      <a href="./index.html#story-6" aria-label="Read story six">
+        <img src="./media/lead-6.jpg" alt="Lead image six" />
+      </a>
+      <div class="tile-body">
+        <div class="kicker">Briefing</div>
+        <h2 class="hed"><a href="./index.html#story-6">Numbers: Tonight’s Board</a></h2>
+        <p class="lede">Charts distilled — the signal without the noise.</p>
+        <div class="meta"><span class="flag" aria-hidden="true"></span><span>3 min read</span></div>
+      </div>
+    </article>
   </main>
 
-  <div data-include="footer"></div>
+
+  <!-- About & Contact (simple sections) -->
+  <section id="about" class="wrap" style="padding:10px 16px 30px;">
+    <h2 style="margin:0 0 10px 0">About</h2>
+    <p class="small" style="max-width:70ch;opacity:.9">
+      One True Infotainment is a modern, high-clarity broadcast site built on a flat architecture.
+      Minimal words, maximal work. All links are root-relative in a single directory, media in <code>./media</code>.
+    </p>
+  </section>
+
+
+  <footer id="contact">
+    <div class="foot-inner">
+      <div class="small">© <span id="y"></span> One True Infotainment</div>
+      <div class="small">Contact: <a href="./index.html#top">Back to Top</a></div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Flat script (optional). No external libs.
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <!-- If you later split CSS/JS, remember flat paths:
+       <link rel="stylesheet" href="./style.css">
+       <script src="./jc.js" defer></script>
+  -->
 </body>
 </html>
