@@ -1,5 +1,6 @@
-// ONE TRU INFOTAINMENT — ticker.js v7.3
+// ONE TRU INFOTAINMENT — ticker.js v7.4
 // Sardonic, imperative headlines scroll continuously across the banner
+// Adds a 3-second pause between loops
 
 document.addEventListener("DOMContentLoaded", () => {
   const headlines = [
@@ -25,14 +26,38 @@ document.addEventListener("DOMContentLoaded", () => {
     "Study links irony to lowered morale"
   ];
 
-  const list = document.getElementById("ticker-track");
-  if (!list) return;
+  const track = document.getElementById("ticker-track");
+  if (!track) return;
 
-  // Shuffle and pick 10 per load
+  // Populate with 10 random headlines
   const shuffled = [...headlines].sort(() => Math.random() - 0.5).slice(0, 10);
-  shuffled.forEach(line => {
+  shuffled.forEach(text => {
     const li = document.createElement("li");
-    li.textContent = line;
-    list.appendChild(li);
+    li.textContent = text;
+    track.appendChild(li);
   });
+
+  // Animate scroll with 3-second loop delay
+  const speed = 30_000; // 30s scroll time
+  const pause = 3_000;  // 3s delay between loops
+  let offset = 0;
+
+  function loop() {
+    offset -= 1;
+    track.style.transform = `translateX(${offset}px)`;
+
+    const width = track.scrollWidth;
+    if (Math.abs(offset) >= width / 2) {
+      // pause before resetting
+      setTimeout(() => {
+        offset = 0;
+        track.style.transform = "translateX(0)";
+        requestAnimationFrame(loop);
+      }, pause);
+    } else {
+      requestAnimationFrame(loop);
+    }
+  }
+
+  loop();
 });
