@@ -1,37 +1,43 @@
-/* ============================================================
-   ticker.js — One True Infotainment v8.2 Canon
-   Populates the scrolling headline ticker (static strip above banner)
-   ============================================================ */
+// ticker.js — One True Infotainment v8.3 (no-delay start)
 
-document.addEventListener("DOMContentLoaded", () => {
-  const el = document.querySelector(".ticker");
-  if (!el) return;
-
-  // Default WIHH-style sardonic headlines (under 10 words each)
-  const HEADLINES = [
-    "First Citizen explains tomorrow later",
-    "River glow officially reclassified as night morale",
-    "Patriotic census counts smiles, not people",
-    "Veteran Visibility improves lighting, questions persist",
-    "Public Smiling Hours extended through winter",
-    "Angels salute louder than yesterday",
-    "Europe mandates optimism; paperwork optional",
-    "Poland bans rain; clouds under investigation",
-    "China celebrates year of the same dragon",
-    "Taiwan renamed Island of Mutual Understanding",
-    "Canada accidentally invades itself again",
-    "TAFAJ weather machine under gentle repair",
+(function () {
+  const headlines = [
     "Markets close up on belief alone",
-    "Grundy promises to explain later"
+    "Airborne Faith Exercise exceeds altitude limit",
+    "River declared self-cleaning",
+    "Breadline renamed Confidence Queue",
+    "Patriotic pollen counts reach record highs",
+    "Corrected States export surplus of certainty",
+    "Candlelight drills extended to noon hours",
+    "Public tears now taxable",
+    "Neighbor reports highest loyalty rating",
+    "Gravity temporarily privatized"
   ];
 
-  // Build a single line with separators
-  const sep = " • ";
-  const line = HEADLINES.join(sep);
+  function initTicker() {
+    const strip = document.getElementById("alert-strip");
+    if (!strip) return;
 
-  // Write to DOM (text only to avoid HTML issues)
-  el.textContent = line;
+    // Clean legacy children
+    while (strip.firstChild) strip.removeChild(strip.firstChild);
 
-  // Optional: if you want extra-long scroll, duplicate the content
-  // el.textContent = line + sep + line;
-});
+    // Create the lone <p> expected by style.css
+    const p = document.createElement("p");
+    p.setAttribute("aria-live", "polite");
+
+    // Duplicate for long runway, starts immediately
+    const text = headlines.join(" • ") + " • " + headlines.join(" • ") + " • ";
+    p.textContent = text;
+
+    strip.appendChild(p);
+
+    // Removed reflow/reset block to eliminate startup delay
+    // (animation begins immediately per CSS)
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTicker);
+  } else {
+    initTicker();
+  }
+})();
