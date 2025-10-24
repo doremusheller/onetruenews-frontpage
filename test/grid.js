@@ -1,8 +1,7 @@
 /* ============================================================
    grid.js — One True Infotainment v8.2.1
-   Randomizes story tiles, populates index ad grid, and fills
-   story-page ad rails. Robust to future ad additions via an
-   optional JSON manifest. Flat-file friendly.
+   Randomizes story tiles, populates index promo grid (sponsors),
+   and fills story-page side rails. Flat-file friendly.
    ============================================================ */
 
 /* Helper: Fisher–Yates shuffle */
@@ -15,7 +14,7 @@ function shuffle(arr) {
 }
 
 /* Helper: Create a sponsor/ad tile element */
-function makeAdTile({ src, alt, title, summary }) {
+function makeSponsorTile({ src, alt, title, summary }) {
   const article = document.createElement("article");
   article.className = "story-tile sponsor-tile";
   article.innerHTML = `
@@ -31,75 +30,37 @@ function makeAdTile({ src, alt, title, summary }) {
   return article;
 }
 
-/* Helper: Load ad pool
-   Priority:
-   1) JSON manifest in DOM: <script id="ads-manifest" type="application/json">["fileA.png", ...]</script>
-   2) Fallback to known filenames
-*/
-function loadAdPool() {
-  const fallback = [
-    "media/patriot-beer-ad.png",
-    "media/AngelsAd.png",
-    "media/ad-here..png",
+/* Load sponsor pool (filenames fixed to /media) */
+function loadSponsorPool() {
+  return [
+    { src: "media/patriot-beer-ad.png", alt: "Patriot Beer advertisement", title: "Patriot Beer", summary: "Raise a can for correctness." },
+    { src: "media/AngelsAd.png", alt: "Angels recruitment", title: "Join the Angels", summary: "Serve brighter. March straighter." },
+    { src: "media/ad-here..png", alt: "Placement Available", title: "Placement Available", summary: "This space smiles back." }
   ];
-
-  try {
-    const node = document.getElementById("ads-manifest");
-    if (!node) return fallback;
-
-    const list = JSON.parse(node.textContent || "[]");
-    // Sanity filter: keep only entries that look like /media/* and contain "ad"
-    const cleaned = (Array.isArray(list) ? list : [])
-      .map(String)
-      .filter((p) => p.includes("media/") && p.toLowerCase().includes("ad"));
-    return cleaned.length ? cleaned : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-/* Build ad objects from filenames */
-function buildAdObjects(paths) {
-  // Simple label generator from filename
-  const label = (p) =>
-    p.split("/").pop().replace(/\.(png|jpg|jpeg|webp)$/i, "").replace(/[-_.]+/g, " ");
-  return paths.map((src) => ({
-    src,
-    alt: "Sponsored message",
-    title: label(src).replace(/\bad\b/i, "").trim() || "Sponsored",
-    summary: "Presented for your correction.",
-  }));
 }
 
 window.addEventListener("load", () => {
   /* ---------- Randomize story tiles on the index page ---------- */
   const storyGrid = document.querySelector(".content.grid-layout");
   if (storyGrid) {
-    const storyTiles = Array.from(
-      storyGrid.querySelectorAll(".story-tile:not(.sponsor-tile)")
-    );
+    const storyTiles = Array.from(storyGrid.querySelectorAll(".story-tile:not(.sponsor-tile)"));
     shuffle(storyTiles).forEach((t) => storyGrid.appendChild(t));
   }
 
-  /* ---------- Prepare ad pool once ---------- */
-  const adPaths = loadAdPool();
-  const adObjs = buildAdObjects(adPaths);
-  shuffle(adObjs);
-
-  /* ---------- Populate ad grid on index page (bottom) ---------- */
-  const adGrid = document.querySelector(".ad-grid");
-  if (adGrid) {
-    // Use up to 3 ads for the index-footer grid
-    const slice = adObjs.slice(0, Math.min(3, adObjs.length));
-    slice.forEach((ad) => adGrid.appendChild(makeAdTile(ad)));
+  /* ---------- Populate promo (sponsor) grid on index page ---------- */
+  const promoGrid = document.querySelector(".promo-grid");
+  if (promoGrid) {
+    const pool = shuffle(loadSponsorPool());
+    // Use up to 3 sponsors
+    pool.slice(0, 3).forEach((ad) => promoGrid.appendChild(makeSponsorTile(ad)));
   }
 
   /* ---------- Populate sponsor rails on story pages ---------- */
   const leftRail = document.querySelector(".sponsor-rail.left");
   const rightRail = document.querySelector(".sponsor-rail.right");
   if (leftRail && rightRail) {
-    const pool = shuffle([...adObjs]);
-    if (pool[0]) leftRail.appendChild(makeAdTile(pool[0]));
-    if (pool[1]) rightRail.appendChild(makeAdTile(pool[1]));
+    const pool = shuffle(loadSponsorPool());
+    if (pool[0]) leftRail.appendChild(makeSponsorTile(pool[0]));
+    if (pool[1]) rightRail.appendChild(makeSponsorTile(pool[1]));
   }
 });
