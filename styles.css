@@ -183,3 +183,29 @@ a:hover .tile, .tile:hover {
     font-size: 0.8rem;
   }
 }
+/* === Grid spans & utilities expected by grid.js === */
+.hidden { display: none !important; }
+
+.tile.span-2x { grid-column: span 2; }
+.tile.span-2y { grid-row: span 2; }
+.tile.span-2  { grid-column: span 2; grid-row: span 2; }
+
+/* Ad rails (desktop/tablet) */
+.tile.ad .thumb { filter: saturate(0.95) brightness(0.97); }
+
+@media (min-width: 768px) {
+  .tile.ad:not(.ad-exempt) { grid-column: 1 / span 1; } /* left rail default */
+}
+@media (min-width: 1024px) {
+  .tile.ad:not(.ad-exempt).ad-right { grid-column: -2 / -1; } /* right rail */
+}
+.tile.ad-left  { grid-column: 1 / span 1; }
+.tile.ad-right { grid-column: -2 / -1; }
+
+/* A11y helper used in header title */
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px,1px,1px,1px);
+  padding: 0; border: 0; height: 1px; width: 1px;
+  overflow: hidden; white-space: nowrap;
+}
