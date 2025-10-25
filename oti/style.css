@@ -74,13 +74,20 @@ img {
   overflow: hidden;
 }
 
-.site-banner {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 220px;
-  object-fit: contain;
+.site-header {
+  margin-top: var(--ticker-h);
+  background: #001a3a;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  text-align: center;
+  overflow: hidden;
+  z-index: 150;
 }
+
 
 /* Mobile optimization */
 @media (max-width: 900px) {
@@ -243,3 +250,4 @@ footer {
     padding: 1.25rem;
   }
 }
+
