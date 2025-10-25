@@ -1,5 +1,5 @@
 /* =========================================
-   ONE TRUE INFOTAINMENT — v8.3 Canon
+   ONE TRUE INFOTAINMENT — v8.4 Canon
    Style Sheet (style.css)
    ========================================= */
 
@@ -31,17 +31,17 @@ img {
 .alert-strip {
   background: var(--red);
   color: var(--white);
-  height: 28px;
+  height: 32px;
   overflow: hidden;
-  position: relative;
-  z-index: 20;
+  position: static;      /* prevent overlay conflicts */
+  z-index: auto;
   white-space: nowrap;
 }
 
 .alert-strip p, .ticker span {
   margin: 0;
-  line-height: 28px;
-  font-size: 0.85rem;
+  line-height: 32px;
+  font-size: 1.1rem;     /* +30% font increase */
   animation: ticker-scroll 30s linear infinite;
 }
 
@@ -50,27 +50,24 @@ img {
   100% { transform: translateX(-100%); }
 }
 
-/* ---------- Site Header / Banner ---------- */
+/* ---------- Site Header / Banner (fixed) ---------- */
 .site-header {
-  position: relative;
-  z-index: 10;
-  height: 120px;
-  background: var(--indigo) url("media/banner.png") center/contain no-repeat;
-  background-color: var(--indigo);
-  background-size: cover;
+  position: static;
+  z-index: auto;
+  height: 140px;
+  background: var(--indigo);
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .site-header .brand {
-  position: relative;
   display: block;
   line-height: 0;
 }
 
 .site-header .site-banner {
   width: 100%;
-  height: 120px;
+  height: 140px;
   object-fit: cover;
   display: block;
 }
@@ -141,14 +138,6 @@ img {
 .tile-summary {
   font-size: 0.9rem;
   color: #333;
-}
-
-/* ---------- Breaking Story Highlight ---------- */
-.story-tile.breaking {
-  border: 3px solid var(--red);
-  box-shadow: 0 0 12px rgba(198,40,40,0.4);
-  grid-column: span 2;
-  background: #fff9f9;
 }
 
 /* ---------- Story Page Blocks ---------- */
@@ -259,61 +248,18 @@ img.lede-image {
   background: linear-gradient(to right, var(--red), var(--white), var(--blue));
 }
 
-#tafaj-meter {
-  position: fixed;
-  top: 120px;
-  left: 10px;
-  width: 140px;
-  z-index: 50;
-}
-
-
-#tafaj-meter img {
-  width: 100%;
-  height: auto;
-  max-height: 90vh;
-  filter: drop-shadow(0 0 12px rgba(255, 0, 0, 0.6))
-          drop-shadow(0 0 20px rgba(255, 120, 0, 0.4));
-  animation: flicker 2s infinite ease-in-out alternate;
-}
-
-@keyframes flicker {
-  0%   { filter: drop-shadow(0 0 10px rgba(255,0,0,0.4))
-                drop-shadow(0 0 16px rgba(255,120,0,0.3)); }
-  100% { filter: drop-shadow(0 0 18px rgba(255,0,0,0.8))
-                drop-shadow(0 0 28px rgba(255,120,0,0.6)); }
-}
-
-/* ---------- Mobile Layout Fixes ---------- */
+/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
-
-  .content { padding: 1rem; }
-
-  .grid-layout {
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
-
-  .story-tile.breaking {
-    grid-column: auto;
-    border-width: 2px;
+  .site-header .site-banner {
+    height: 80px;
+    object-fit: cover;
   }
 
   .tile-image {
-    height: 48vw;
-    min-height: 160px;
-    object-fit: cover;
+    height: 160px;
   }
 
-  .tile-text { padding: 0.9rem; }
-  .tile-title { font-size: 1.1rem; overflow-wrap: anywhere; }
-  .tile-summary { font-size: 0.95rem; overflow-wrap: anywhere; }
-
-  .site-header .site-banner {
-    height: 72px;
-    object-fit: cover;
+  .alert-strip p, .ticker span {
+    font-size: 1rem;
   }
-
-  #tafaj-meter { display: none; }
 }
-
