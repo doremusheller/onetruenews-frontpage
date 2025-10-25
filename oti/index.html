@@ -2,139 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>One True Infotainment — The Voice of the Corrected States of America</title>
-  <meta name="description" content="Official news portal of the Corrected States of America — Broadcasting unity, belief, and brilliance since correction.">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Official news portal of the Corrected States of America — Broadcasting unity, belief, and brilliance since correction." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css?v=latest" />
+
+  <!-- Scripts -->
   <script defer src="ticker.js"></script>
   <script defer src="grid.js"></script>
 </head>
 
 <body>
 
-  <!-- TICKER -->
-  <div id="alert-strip">
-    <p>
-      Markets close up on belief alone •
-      Airborne Faith Exercise exceeds altitude limit •
-      River declared self-cleaning •
-      Breadline renamed Confidence Queue •
-      Patriotic pollen counts reach record highs •
-      Corrected States export surplus of certainty •
-      Candlelight drills extended to noon hours •
-      Public tears now taxable •
-      Neighbor reports highest loyalty rating •
-      Gravity temporarily privatized •
-      Markets close up on belief alone •
-      Airborne Faith Exercise exceeds altitude limit •
-      River declared self-cleaning •
-      Breadline renamed Confidence Queue •
-      Patriotic pollen counts reach record highs •
-      Corrected States export surplus of certainty •
-      Candlelight drills extended to noon hours •
-      Public tears now taxable •
-      Neighbor reports highest loyalty rating •
-      Gravity temporarily privatized
-    </p>
+  <!-- ALERT STRIP / SCROLLER -->
+  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
+    <div class="ticker"></div>
   </div>
 
-  <!-- BANNER -->
-  <header id="banner">
-    <img
-      src="media/banner.png"
-      alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
-    />
+  <!-- SITE HEADER / BANNER -->
+  <header class="site-header">
+    <img src="media/banner.png"
+         alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
+         class="site-banner" />
   </header>
-
-  <!-- TAFAJ THREAT METER -->
-  <aside id="tafaj-meter">
-    <img src="media/threatmeter.png" alt="TAFAJ Threat Meter — Death Imminent">
-  </aside>
 
   <!-- MAIN CONTENT GRID -->
   <main class="main-grid">
 
     <!-- Grundy Explains: Cancer -->
     <article class="tile">
-      <a href="grundy-explains-cancer.html">
-        <img src="media/grundy-explains.png" alt="Grundy Explains: Cancer">
-        <div class="tile-content">
-          <span class="pill">Infotainment</span>
-          <h3>Grundy Explains: Cancer</h3>
-          <p>This week, Grundy teaches citizens how snack geometry protects the colon — and the nation.</p>
-        </div>
+      <a href="grundy-explains-cancer.html" class="tile-link">
+        <img src="media/grundy-explains.png" alt="Grundy Explains: Cancer" />
+        <span class="label">Infotainment</span>
+        <h2>Grundy Explains: Cancer</h2>
+        <p>This week, Grundy teaches citizens how snack geometry protects the colon — and the nation.</p>
       </a>
     </article>
 
-    <!-- Grundy Explains: Collection -->
+    <!-- Grundy Explains: The Collection -->
     <article class="tile">
-      <a href="grundy-explains-collection.html">
-        <img src="media/grundy-explains-collection.png" alt="Grundy Explains: The Collection">
-        <div class="tile-content">
-          <span class="pill">Infotainment</span>
-          <h3>Grundy Explains: The Collection</h3>
-          <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
-        </div>
+      <a href="grundy-explains-collection.html" class="tile-link">
+        <img src="media/grundy-explains-collection.png" alt="Grundy Explains: The Collection" />
+        <span class="label">Infotainment</span>
+        <h2>Grundy Explains: The Collection</h2>
+        <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
+      </a>
+    </article>
+
+    <!-- River Glow -->
+    <article class="tile">
+      <a href="river-glow.html" class="tile-link">
+        <img src="media/river-glow.png" alt="River glowing at night" />
+        <span class="label">National</span>
+        <h2>River Glow</h2>
+        <p>Grundy thanks industry for the glowing river — a miracle of modern discharge.</p>
       </a>
     </article>
 
     <!-- Hammer of Grundy -->
     <article class="tile">
-      <a href="hammer-of-grundy.html">
-        <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy Live on the Lawn">
-        <div class="tile-content">
-          <span class="pill">Infotainment</span>
-          <h3>Hammer of Grundy — Live on the Lawn</h3>
-          <p>Patriotic metal shakes the capital as decibels and devotion collide beneath the executive portico.</p>
-        </div>
+      <a href="hammer-of-grundy.html" class="tile-link">
+        <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — Live on the Lawn" />
+        <span class="label">Infotainment</span>
+        <h2>Hammer of Grundy — Live on the Lawn</h2>
+        <p>Patriotic metal shakes the capital as decibels and devotion collide beneath the executive portico.</p>
       </a>
     </article>
 
     <!-- Public Smiling Hours -->
     <article class="tile">
-      <a href="public-smiling-hours.html">
-        <img src="media/domestic-smiles.png" alt="Citizens smiling in unison">
-        <div class="tile-content">
-          <span class="pill">Domestic Policy</span>
-          <h3>Public Smiling Hours Extended</h3>
-          <p>Nationwide smiling mandate lengthened for winter to preserve brightness and jaw morale.</p>
-        </div>
+      <a href="public-smiling-hours.html" class="tile-link">
+        <img src="media/domestic-smiles.png" alt="Citizens smiling in unison" />
+        <span class="label">Domestic Policy</span>
+        <h2>Public Smiling Hours Extended</h2>
+        <p>Nationwide smiling mandate lengthened for winter to preserve brightness and jaw morale.</p>
       </a>
     </article>
 
     <!-- Patriotic Census -->
     <article class="tile">
-      <a href="patriotic-census.html">
-        <img src="media/patriotic-census.png" alt="Census workers saluting">
-        <div class="tile-content">
-          <span class="pill">National Unity</span>
-          <h3>Patriotic Census</h3>
-          <p>Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
-        </div>
+      <a href="patriotic-census.html" class="tile-link">
+        <img src="media/patriotic-census.png" alt="Census workers saluting" />
+        <span class="label">National Unity</span>
+        <h2>Patriotic Census</h2>
+        <p>Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
       </a>
     </article>
 
     <!-- Friendship Correction -->
     <article class="tile">
-      <a href="friendship-correction.html">
-        <img src="media/friendship-rebuild.png" alt="Repair crews hoisting banners">
-        <div class="tile-content">
-          <span class="pill">Diplomacy</span>
-          <h3>Friendship Correction</h3>
-          <p>Officials rebrand diplomacy through patriotic signage, promising smiles per treaty.</p>
-        </div>
+      <a href="friendship-correction.html" class="tile-link">
+        <img src="media/friendship-rebuild.png" alt="Repair crews hoisting banners" />
+        <span class="label">Diplomacy</span>
+        <h2>Friendship Correction</h2>
+        <p>Officials rebrand diplomacy through patriotic signage, promising smiles per treaty.</p>
       </a>
     </article>
 
-    <!-- TAFAJ Broadcast Story -->
+    <!-- Vigiles Double Patrols -->
     <article class="tile">
-      <a href="tafaj-broadcast.html">
-        <img src="media/tafajsatan.png" alt="TAFAJ Satan Broadcast Scene">
-        <div class="tile-content">
-          <span class="pill">Breaking News</span>
-          <h3>Vigiles Double Patrols After TAFAJ Terror Broadcast</h3>
-          <p>Latex terror grips the Corrected States as authorities seek the elusive troupe behind the broadcast. Grundy demands visible fear compliance.</p>
-        </div>
+      <a href="vigiles-doubling-patrols.html" class="tile-link">
+        <img src="media/tafajsatan.png" alt="TAFAJ Threat Meter" />
+        <span class="label">Security</span>
+        <h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
+        <p>Authorities report heightened awareness after latex-suited threats disrupt faith programming.</p>
       </a>
     </article>
 
@@ -143,8 +116,8 @@
   <!-- FOOTER -->
   <footer>
     <p>
-      Produced without license from the Corrected States of America.<br>
-      All contained herein are speculation and may not yet exist.<br>
+      Produced without license from the Corrected States of America.<br />
+      All contained herein are speculation and may not yet exist.<br />
       Doubt is treason; irony a pitchfork.
     </p>
   </footer>
