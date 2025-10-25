@@ -89,52 +89,6 @@ img {
   grid-gap: 1.25rem;
 }
 
-/* ---------- Breaking News Tile ---------- */
-.story-tile.breaking {
-  border: 3px solid var(--red);
-  grid-column: span 2;
-  background: var(--white);
-  position: relative;
-}
-
-/* ---------- TAFAJ Threat Meter ---------- */
-.threat-meter {
-  position: fixed;
-  top: 160px;           /* below the banner */
-  left: 10px;
-  width: 120px;         /* base width */
-  z-index: 5;
-}
-
-.threat-meter img {
-  width: 100%;
-  height: auto;
-  max-height: 90vh;     /* ensures it scales nicely with screen */
-  object-fit: contain;
-}
-
-/* On smaller screens, hide it to prevent layout issues */
-@media (max-width: 900px) {
-  .threat-meter {
-    display: none;
-  }
-}
-
-
-.breaking-pill {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: var(--red);
-  color: var(--white);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  z-index: 5;
-}
-
 /* ---------- Story Tile ---------- */
 .story-tile {
   background: var(--white);
@@ -187,6 +141,14 @@ img {
 .tile-summary {
   font-size: 0.9rem;
   color: #333;
+}
+
+/* ---------- Breaking Story Highlight ---------- */
+.story-tile.breaking {
+  border: 3px solid var(--red);
+  box-shadow: 0 0 12px rgba(198,40,40,0.4);
+  grid-column: span 2;
+  background: #fff9f9;
 }
 
 /* ---------- Story Page Blocks ---------- */
@@ -297,4 +259,60 @@ img.lede-image {
   background: linear-gradient(to right, var(--red), var(--white), var(--blue));
 }
 
+/* ---------- TAFAJ Threat Meter ---------- */
+#tafaj-meter {
+  position: fixed;
+  top: 120px;
+  left: 10px;
+  width: 140px;
+  z-index: 50;
+}
 
+#tafaj-meter img {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  filter: drop-shadow(0 0 12px rgba(255, 0, 0, 0.6))
+          drop-shadow(0 0 20px rgba(255, 120, 0, 0.4));
+  animation: flicker 2s infinite ease-in-out alternate;
+}
+
+@keyframes flicker {
+  0%   { filter: drop-shadow(0 0 10px rgba(255,0,0,0.4))
+                drop-shadow(0 0 16px rgba(255,120,0,0.3)); }
+  100% { filter: drop-shadow(0 0 18px rgba(255,0,0,0.8))
+                drop-shadow(0 0 28px rgba(255,120,0,0.6)); }
+}
+
+/* ---------- Mobile Layout Fixes ---------- */
+@media (max-width: 768px) {
+
+  .content { padding: 1rem; }
+
+  .grid-layout {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+
+  .story-tile.breaking {
+    grid-column: auto;
+    border-width: 2px;
+  }
+
+  .tile-image {
+    height: 48vw;
+    min-height: 160px;
+    object-fit: cover;
+  }
+
+  .tile-text { padding: 0.9rem; }
+  .tile-title { font-size: 1.1rem; overflow-wrap: anywhere; }
+  .tile-summary { font-size: 0.95rem; overflow-wrap: anywhere; }
+
+  .site-header .site-banner {
+    height: 72px;
+    object-fit: cover;
+  }
+
+  #tafaj-meter { display: none; }
+}
