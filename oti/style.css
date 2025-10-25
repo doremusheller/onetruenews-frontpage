@@ -76,11 +76,13 @@ img {
 
 .site-header img {
   width: 100%;
-  max-height: 160px;   /* limit banner size */
-  height: auto;
+  height: 140px;          /* consistent banner height */
+  object-fit: contain;    /* show full banner, no cropping */
   display: block;
-  object-fit: cover;
+  margin: 0 auto;
+  background: #001a3a;    /* fallback color */
 }
+
 
 /* ============================================================
    TAFAJ METER (LEFT MARGIN)
@@ -255,3 +257,4 @@ footer {
     padding: 1rem;
   }
 }
+
