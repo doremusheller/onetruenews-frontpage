@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Master Style Sheet (v9.3)
+   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.2)
    ============================================================ */
 
 /* ---------- Root ---------- */
@@ -10,6 +10,7 @@
   --card-bg: #fff;
   --shadow: rgba(0, 0, 0, 0.08);
   --ticker-h: 36px;
+  --banner-bg: #071b36;
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -47,7 +48,7 @@ img {
   overflow: hidden;
   white-space: nowrap;
   z-index: 200;
-  font-size: 1.2em; /* +20% font increase */
+  font-size: 1.2em;
 }
 
 #alert-strip p {
@@ -63,33 +64,41 @@ img {
 }
 
 /* ============================================================
-   SITE HEADER / BANNER
+   BANNER (full-width, responsive, respects fixed ticker)
    ============================================================ */
 .site-header {
   margin-top: var(--ticker-h);
-  background: #001a3a;
-  width: 100%;
-  text-align: center;
+  height: clamp(96px, 12vw, 160px);
+  background: var(--banner-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  z-index: 150;
+  z-index: 100;
 }
 
-.site-header img {
+.site-header .site-banner {
   width: 100%;
-  height: 140px;          /* consistent banner height */
-  object-fit: contain;    /* show full banner, no cropping */
-  display: block;
-  margin: 0 auto;
-  background: #001a3a;    /* fallback color */
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
+/* Optional: full edge-to-edge variant */
+.site-header .site-banner.fullbleed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* ============================================================
    TAFAJ METER (LEFT MARGIN)
    ============================================================ */
 #tafaj-meter {
   position: fixed;
-  top: calc(var(--ticker-h) + 160px + 12px); /* ticker + banner + gap */
+  top: calc(var(--ticker-h) + 160px + 12px);
   left: 16px;
   width: 240px;
   z-index: 50;
@@ -173,60 +182,6 @@ article p {
 }
 
 /* ============================================================
-   STORY PAGE (ARTICLE)
-   ============================================================ */
-.story-page main.content {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-.story {
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px var(--shadow);
-  padding: 2rem;
-}
-
-.story img {
-  border-radius: 8px;
-}
-
-.story-head {
-  margin-bottom: 1.5rem;
-}
-
-.story-title {
-  font-size: 1.8rem;
-  margin: 0.5rem 0;
-}
-
-.story-byline {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.story-body p {
-  margin-bottom: 1rem;
-}
-
-.story-nav {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.story-nav a {
-  color: var(--accent);
-  text-decoration: none;
-  margin: 0 1rem;
-  font-weight: bold;
-}
-
-.story-nav a:hover {
-  text-decoration: underline;
-}
-
-/* ============================================================
    FOOTER
    ============================================================ */
 footer {
@@ -239,22 +194,19 @@ footer {
 /* ============================================================
    MOBILE ADJUSTMENTS
    ============================================================ */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  :root { --ticker-h: 32px; }
+
   #alert-strip {
     font-size: 1em;
-    height: 32px;
+    height: var(--ticker-h);
   }
 
-  .site-header img {
-    max-height: 120px;
+  .site-header {
+    height: clamp(84px, 18vw, 120px);
   }
 
   article img {
     height: 140px;
   }
-
-  .story {
-    padding: 1rem;
-  }
 }
-
