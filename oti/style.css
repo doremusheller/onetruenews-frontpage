@@ -1,5 +1,5 @@
 /* ============================================================
-   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.4)
+   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.5)
    ============================================================ */
 
 /* ---------- Root ---------- */
@@ -11,6 +11,10 @@
   --shadow: rgba(0, 0, 0, 0.08);
   --ticker-h: 36px;
   --banner-bg: #071b36;
+
+  /* Single source of truth for banner height */
+  --banner-h: clamp(96px, 10vw, 140px);
+
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -68,22 +72,22 @@ img {
    ============================================================ */
 .site-header {
   margin-top: var(--ticker-h);
-  height: clamp(96px, 10vw, 140px);   /* Slightly shorter for proportion */
+  height: var(--banner-h);
   background-color: var(--banner-bg);
   background-image: url("media/banner.png");
-  background-position: top center;    /* Ensures logo band shows fully */
-  background-size: cover;             /* Fill area, crop excess */
+  background-position: top center; /* show the logo band */
+  background-size: cover;          /* fill area, crop excess */
   background-repeat: no-repeat;
   border-bottom: 2px solid var(--accent);
   z-index: 100;
 }
 
 /* ============================================================
-   TAFAJ METER (LEFT MARGIN)
+   TAFAJ METER (LEFT MARGIN) — follows banner height
    ============================================================ */
 #tafaj-meter {
   position: fixed;
-  top: calc(var(--ticker-h) + 160px + 12px);
+  top: calc(var(--ticker-h) + var(--banner-h) + 12px);
   left: 16px;
   width: 240px;
   z-index: 50;
@@ -180,16 +184,18 @@ footer {
    MOBILE ADJUSTMENTS
    ============================================================ */
 @media (max-width: 700px) {
-  :root { --ticker-h: 32px; }
+  :root { 
+    --ticker-h: 32px;
+    /* Shorter banner on small screens */
+    --banner-h: clamp(84px, 18vw, 120px);
+  }
 
   #alert-strip {
     font-size: 1em;
     height: var(--ticker-h);
   }
 
-  .site-header {
-    height: clamp(84px, 18vw, 120px);
-  }
+  /* no explicit .site-header height here — it inherits var(--banner-h) */
 
   article img {
     height: 140px;
