@@ -16,56 +16,49 @@
 
   <link rel="canonical" href="patriotic-census.html" />
 
-  <!-- Stylesheet with timestamp-based cache busting -->
+  <!-- Stylesheet + cache-bust -->
   <link id="site-style" rel="stylesheet" href="style.css" />
   <script>
-    // Cache-bust CSS and JS with timestamp: v=YYYYMMDDThhmm
-    const t = new Date();
-    const v = `${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
-    document.getElementById("site-style").href = `style.css?v=${v}`;
-    window.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll("script[data-cache-bust]").forEach(s => {
-        s.src = `${s.getAttribute("data-src")}?v=${v}`;
+    // v=YYYYMMDDThhmm
+    const t=new Date();
+    const v=`${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
+    document.getElementById("site-style").href=`style.css?v=${v}`;
+    window.addEventListener("DOMContentLoaded",()=> {
+      document.querySelectorAll("script[data-cache-bust]").forEach(s=>{
+        s.src=`${s.getAttribute("data-src")}?v=${v}`;
       });
     });
   </script>
 
-  <!-- JS files tagged for cache-busting -->
+  <!-- JS (cache-busted) -->
   <script defer data-cache-bust data-src="ticker.js"></script>
-  <script defer data-cache-bust data-src="grid.js"></script>
 </head>
 
 <body class="story-page">
 
-  <!-- ALERT STRIP / SCROLLER -->
-  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
-    <div class="ticker"></div>
-  </div>
+  <!-- TICKER (ticker.js will populate) -->
+  <div id="alert-strip"></div>
 
-  <!-- SITE HEADER / BANNER -->
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Back to front page">
-      <img src="media/banner.png"
-           alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
-           class="site-banner" />
-    </a>
+  <!-- BANNER (canonical) -->
+  <header id="banner">
+    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" />
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main id="content" class="content">
+  <!-- STORY CONTENT (canonical) -->
+  <main class="story-wrap">
     <article class="story">
+
       <header class="story-head">
-        <span class="story-tag">National Unity</span>
+        <div class="story-kicker">National Unity</div>
         <h1 class="story-title">Patriotic Census</h1>
-        <p class="story-dek">Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
-        <p class="byline">Civic Enumeration Desk · <time datetime="2025-10-24">October 24, 2025</time></p>
+        <div class="story-byline">
+          By Civic Enumeration Desk · <time datetime="2025-10-24">October 24, 2025</time>
+        </div>
       </header>
 
       <figure class="lede">
-        <img src="media/patriotic-census.png"
-             alt="Citizens saluting as they complete official patriotic census forms"
-             class="lede-image" />
-        <figcaption class="caption">“Every count is a pledge — every checkbox a declaration of place and faith.”</figcaption>
+        <img src="media/patriotic-census.png" alt="Census workers saluting beneath flags." />
+        <figcaption class="caption">Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</figcaption>
       </figure>
 
       <section class="story-body">
@@ -79,21 +72,19 @@
       </section>
 
       <nav class="story-nav">
-        <a class="btn back" href="index.html" aria-label="Return to front page">← Back to Front Page</a>
-        <a class="btn primary" href="friendship-correction.html">Next: Friendship Correction</a>
+        <a class="btn" href="index.html#top">← Back to Front Page</a>
+        <a class="btn" href="friendship-correction.html">Next: Friendship Correction</a>
       </nav>
+
     </article>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <p class="legal">
-      Produced without license from the Corrected States of America.<br>
-      All contained herein are speculation and may not yet exist.<br>
+  <footer>
+    <p>
+      Produced without license from the Corrected States of America.<br />
+      All contained herein are speculation and may not yet exist.<br />
       Doubt is treason; irony a pitchfork.
     </p>
-    <div class="patriotic-ribbon" aria-hidden="true"></div>
   </footer>
-
 </body>
 </html>
