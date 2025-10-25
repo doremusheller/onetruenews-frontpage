@@ -1,138 +1,372 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OTI Sandbox</title>
+<style>
+:root{--bg:#faf6ee;--text:#111;--accent:#b80000;--card:#fff;--shadow:rgba(0,0,0,.08);--ticker-h:36px;--banner:#071b36}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Inter,Arial}
+img{display:block;max-width:100%;height:auto;border:0}
 
-  <title>One True Infotainment — The Voice of the Corrected State</title>
-  <meta name="description" content="The Voice of the Corrected State — satirical state media from the world of When It Happens Here." />
+/* ticker */
+#alert-strip{position:fixed;inset:0 auto auto 0;width:100%;height:var(--ticker-h);background:var(--accent);color:#fff;display:flex;align-items:center;overflow:hidden;white-space:nowrap;z-index:200;pointer-events:none}
+#alert-strip p{display:inline-block;padding-left:100%;animation:tkr 45s linear infinite;margin:0}
+@keyframes tkr{to{transform:translateX(-100%)}}
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="One True Infotainment" />
-  <meta property="og:description" content="The Voice of the Corrected State — satirical state media from the world of When It Happens Here." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="media/banner.png" />
-  <meta property="og:site_name" content="One True Infotainment" />
+/* banner */
+.site-header{margin-top:var(--ticker-h);height:140px;background:var(--banner) url("media/banner.png") top center/cover no-repeat;border-bottom:2px solid var(--accent);position:relative;z-index:100}
 
-  <link rel="canonical" href="index.html" />
+/* TAFAJ left rail */
+#tafaj-meter{position:fixed;left:16px;top:calc(var(--ticker-h) + 140px + 12px);width:240px;z-index:90}
+#tafaj-meter img{width:100%;filter:drop-shadow(0 0 8px rgba(0,0,0,.15))}
 
-  <!-- Stylesheet (timestamp cache-bust) -->
-  <link id="site-style" rel="stylesheet" href="style.css" />
-  <script>
-    (function () {
-      const t = new Date();
-      const v = `${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
-      const link = document.getElementById('site-style');
-      if (link) link.href = `style.css?v=${v}`;
-      window.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('script[data-cache-bust]').forEach(s => {
-          s.src = `${s.getAttribute('data-src')}?v=${v}`;
-        });
-      });
-    })();
-  </script>
+/* grid */
+main.main-grid{max-width:1400px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;position:relative;z-index:1}
+article{background:var(--card);border-radius:12px;box-shadow:0 2px 6px var(--shadow);overflow:hidden;transition:.2s}
+article:hover{transform:translateY(-4px);box-shadow:0 6px 12px var(--shadow)}
+.story-tile a{display:block;color:inherit;text-decoration:none}
+.label{display:inline-block;background:var(--accent);color:#fff;text-transform:uppercase;font:700 .7rem/1 system-ui;letter-spacing:.04em;padding:.25rem .5rem;margin:.75rem 1rem 0.25rem;border-radius:3px}
+article h2{font-size:1.05rem;margin:.5rem 1rem .25rem}
+article p{font-size:.9rem;margin:0 1rem 1rem;color:#333}
+footer{text-align:center;font-size:.8rem;padding:2rem 1rem;color:#444}
+</style>
 
-  <!-- Scripts -->
-  <script defer data-cache-bust data-src="ticker.js"></script>
-  <script defer data-cache-bust data-src="grid.js"></script>
-</head>
+<body>
+<div id="alert-strip"><p>Sandbox ticker • This file does not modify your site • Use it to verify banner/TAFAJ/links</p></div>
+<header class="site-header"></header>
 
-<body id="top">
+<aside id="tafaj-meter">
+  <img src="media/tafajatan.png" alt="TAFAJ index">
+</aside>
 
-  <!-- TICKER -->
-  <div id="alert-strip" class="alert-strip"></div>
+<main class="main-grid content grid-layout">
+  <article class="story-tile"><a href="grundy-explains.html">
+    <img src="media/grundy-explains.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: Cancer</h2>
+    <p>This week, Grundy teaches citizens how snack geometry protects the colon.</p>
+  </a></article>
 
-  <!-- BANNER -->
-  <header class="site-header">
-    <img class="site-banner" src="media/banner.png" alt="One True Infotainment banner" />
-  </header>
+  <article class="story-tile"><a href="grundy-explains-collection.html">
+    <img src="media/grundy-explains-collection.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: The Collection</h2>
+    <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
+  </a></article>
 
-  <!-- TAFAJ DEVIL -->
-  <aside id="tafaj-meter">
-    <img src="media/tafajatan.png" alt="TAFAJ index" />
-  </aside>
+  <article class="story-tile"><a href="river-glow.html">
+    <img src="media/river-glow.png" alt="">
+    <span class="label">NATIONAL</span><h2>River Glow</h2>
+    <p>Industry thanks for the glowing river — a miracle of modern discharge.</p>
+  </a></article>
 
-  <!-- MAIN CONTENT GRID -->
-  <main class="main-grid content grid-layout">
-    <article class="story-tile" data-fit-fixed>
-      <a href="grundy-explains.html">
-        <img src="media/grundy-explains.png" alt="Grundy Explains: Cancer" />
-        <span class="label">INFOTAINMENT</span>
-        <h2>Grundy Explains: Cancer</h2>
-        <p>This week, Grundy teaches citizens how snack geometry protects the colon — and the nation.</p>
-      </a>
-    </article>
+  <article class="story-tile"><a href="hammer-of-grundy.html">
+    <img src="media/hammer-of-grundy-concert.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Hammer of Grundy — Live on the Lawn</h2>
+    <p>Patriotic metal shakes the capital beneath the executive portico.</p>
+  </a></article>
 
-    <article class="story-tile">
-      <a href="grundy-explains-collection.html">
-        <img src="media/grundy-explains-collection.png" alt="Grundy Explains: The Collection" />
-        <span class="label">INFOTAINMENT</span>
-        <h2>Grundy Explains: The Collection</h2>
-        <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
-      </a>
-    </article>
+  <article class="story-tile"><a href="public-smiling.html">
+    <img src="media/public-smiling.png" alt="">
+    <span class="label">DOMESTIC POLICY</span><h2>Public Smiling Hours Extended</h2>
+    <p>Mandate lengthened for winter to preserve brightness and jaw morale.</p>
+  </a></article>
 
-    <article class="story-tile">
-      <a href="river-glow.html">
-        <img src="media/river-glow.png" alt="River Glow" />
-        <span class="label">NATIONAL</span>
-        <h2>River Glow</h2>
-        <p>Grundy thanks industry for the glowing river — a miracle of modern discharge.</p>
-      </a>
-    </article>
+  <article class="story-tile"><a href="patriotic-census.html">
+    <img src="media/patriotic-census.png" alt="">
+    <span class="label">NATIONAL UNITY</span><h2>Patriotic Census</h2>
+    <p>Every count is a pledge — under a single shining metric.</p>
+  </a></article>
 
-    <article class="story-tile">
-      <a href="hammer-of-grundy.html">
-        <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — Live on the Lawn" />
-        <span class="label">INFOTAINMENT</span>
-        <h2>Hammer of Grundy — Live on the Lawn</h2>
-        <p>Patriotic metal shakes the capital as decibels and devotion collide beneath the executive portico.</p>
-      </a>
-    </article>
+  <article class="story-tile"><a href="friendship-rebuild.html">
+    <img src="media/friendship-rebuild.png" alt="">
+    <span class="label">DIPLOMACY</span><h2>Friendship Rebuild</h2>
+    <p>Rebranded diplomacy through patriotic signage.</p>
+  </a></article>
 
-    <article class="story-tile">
-      <a href="public-smiling.html">
-        <img src="media/public-smiling.png" alt="Public Smiling Hours Extended" />
-        <span class="label">DOMESTIC POLICY</span>
-        <h2>Public Smiling Hours Extended</h2>
-        <p>Nationwide smiling mandate lengthened for winter to preserve brightness and jaw morale.</p>
-      </a>
-    </article>
+  <article class="story-tile"><a href="vigiles-patrols.html">
+    <img src="media/patriot-games-promo.png" alt="">
+    <span class="label">SECURITY</span><h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
+    <p>Heightened awareness after latex-suited threats disrupt programming.</p>
+  </a></article>
+</main>
 
-    <article class="story-tile">
-      <a href="patriotic-census.html">
-        <img src="media/patriotic-census.png" alt="Patriotic Census" />
-        <span class="label">NATIONAL UNITY</span>
-        <h2>Patriotic Census</h2>
-        <p>Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
-      </a>
-    </article>
+<footer>
+  <p>Sandbox file — safe to delete. Does not modify production.</p>
+</footer>
+</body></html>
+<!DOCTYPE html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OTI Sandbox</title>
+<style>
+:root{--bg:#faf6ee;--text:#111;--accent:#b80000;--card:#fff;--shadow:rgba(0,0,0,.08);--ticker-h:36px;--banner:#071b36}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Inter,Arial}
+img{display:block;max-width:100%;height:auto;border:0}
 
-    <article class="story-tile">
-      <a href="friendship-rebuild.html">
-        <img src="media/friendship-rebuild.png" alt="Friendship Rebuild" />
-        <span class="label">DIPLOMACY</span>
-        <h2>Friendship Rebuild</h2>
-        <p>Officials rebrand diplomacy through patriotic signage, promising smiles per treaty.</p>
-      </a>
-    </article>
+/* ticker */
+#alert-strip{position:fixed;inset:0 auto auto 0;width:100%;height:var(--ticker-h);background:var(--accent);color:#fff;display:flex;align-items:center;overflow:hidden;white-space:nowrap;z-index:200;pointer-events:none}
+#alert-strip p{display:inline-block;padding-left:100%;animation:tkr 45s linear infinite;margin:0}
+@keyframes tkr{to{transform:translateX(-100%)}}
 
-    <article class="story-tile">
-      <a href="vigiles-patrols.html">
-        <img src="media/patriot-games-promo.png" alt="Vigiles Double Patrols After TAFAJ Broadcast" />
-        <span class="label">SECURITY</span>
-        <h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
-        <p>Authorities report heightened awareness after latex-suited threats disrupt faith programming.</p>
-      </a>
-    </article>
-  </main>
+/* banner */
+.site-header{margin-top:var(--ticker-h);height:140px;background:var(--banner) url("media/banner.png") top center/cover no-repeat;border-bottom:2px solid var(--accent);position:relative;z-index:100}
 
-  <footer>
-    <p>
-      Produced without license from the Corrected States of America.<br />
-      All contained herein are speculation and may not yet exist.<br />
-      Doubt is treason; irony a pitchfork.
-    </p>
-  </footer>
-</body>
-</html>
+/* TAFAJ left rail */
+#tafaj-meter{position:fixed;left:16px;top:calc(var(--ticker-h) + 140px + 12px);width:240px;z-index:90}
+#tafaj-meter img{width:100%;filter:drop-shadow(0 0 8px rgba(0,0,0,.15))}
+
+/* grid */
+main.main-grid{max-width:1400px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;position:relative;z-index:1}
+article{background:var(--card);border-radius:12px;box-shadow:0 2px 6px var(--shadow);overflow:hidden;transition:.2s}
+article:hover{transform:translateY(-4px);box-shadow:0 6px 12px var(--shadow)}
+.story-tile a{display:block;color:inherit;text-decoration:none}
+.label{display:inline-block;background:var(--accent);color:#fff;text-transform:uppercase;font:700 .7rem/1 system-ui;letter-spacing:.04em;padding:.25rem .5rem;margin:.75rem 1rem 0.25rem;border-radius:3px}
+article h2{font-size:1.05rem;margin:.5rem 1rem .25rem}
+article p{font-size:.9rem;margin:0 1rem 1rem;color:#333}
+footer{text-align:center;font-size:.8rem;padding:2rem 1rem;color:#444}
+</style>
+
+<body>
+<div id="alert-strip"><p>Sandbox ticker • This file does not modify your site • Use it to verify banner/TAFAJ/links</p></div>
+<header class="site-header"></header>
+
+<aside id="tafaj-meter">
+  <img src="media/tafajatan.png" alt="TAFAJ index">
+</aside>
+
+<main class="main-grid content grid-layout">
+  <article class="story-tile"><a href="grundy-explains.html">
+    <img src="media/grundy-explains.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: Cancer</h2>
+    <p>This week, Grundy teaches citizens how snack geometry protects the colon.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="grundy-explains-collection.html">
+    <img src="media/grundy-explains-collection.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: The Collection</h2>
+    <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="river-glow.html">
+    <img src="media/river-glow.png" alt="">
+    <span class="label">NATIONAL</span><h2>River Glow</h2>
+    <p>Industry thanks for the glowing river — a miracle of modern discharge.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="hammer-of-grundy.html">
+    <img src="media/hammer-of-grundy-concert.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Hammer of Grundy — Live on the Lawn</h2>
+    <p>Patriotic metal shakes the capital beneath the executive portico.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="public-smiling.html">
+    <img src="media/public-smiling.png" alt="">
+    <span class="label">DOMESTIC POLICY</span><h2>Public Smiling Hours Extended</h2>
+    <p>Mandate lengthened for winter to preserve brightness and jaw morale.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="patriotic-census.html">
+    <img src="media/patriotic-census.png" alt="">
+    <span class="label">NATIONAL UNITY</span><h2>Patriotic Census</h2>
+    <p>Every count is a pledge — under a single shining metric.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="friendship-rebuild.html">
+    <img src="media/friendship-rebuild.png" alt="">
+    <span class="label">DIPLOMACY</span><h2>Friendship Rebuild</h2>
+    <p>Rebranded diplomacy through patriotic signage.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="vigiles-patrols.html">
+    <img src="media/patriot-games-promo.png" alt="">
+    <span class="label">SECURITY</span><h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
+    <p>Heightened awareness after latex-suited threats disrupt programming.</p>
+  </a></article>
+</main>
+
+<footer>
+  <p>Sandbox file — safe to delete. Does not modify production.</p>
+</footer>
+</body></html>
+<!DOCTYPE html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OTI Sandbox</title>
+<style>
+:root{--bg:#faf6ee;--text:#111;--accent:#b80000;--card:#fff;--shadow:rgba(0,0,0,.08);--ticker-h:36px;--banner:#071b36}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Inter,Arial}
+img{display:block;max-width:100%;height:auto;border:0}
+
+/* ticker */
+#alert-strip{position:fixed;inset:0 auto auto 0;width:100%;height:var(--ticker-h);background:var(--accent);color:#fff;display:flex;align-items:center;overflow:hidden;white-space:nowrap;z-index:200;pointer-events:none}
+#alert-strip p{display:inline-block;padding-left:100%;animation:tkr 45s linear infinite;margin:0}
+@keyframes tkr{to{transform:translateX(-100%)}}
+
+/* banner */
+.site-header{margin-top:var(--ticker-h);height:140px;background:var(--banner) url("media/banner.png") top center/cover no-repeat;border-bottom:2px solid var(--accent);position:relative;z-index:100}
+
+/* TAFAJ left rail */
+#tafaj-meter{position:fixed;left:16px;top:calc(var(--ticker-h) + 140px + 12px);width:240px;z-index:90}
+#tafaj-meter img{width:100%;filter:drop-shadow(0 0 8px rgba(0,0,0,.15))}
+
+/* grid */
+main.main-grid{max-width:1400px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;position:relative;z-index:1}
+article{background:var(--card);border-radius:12px;box-shadow:0 2px 6px var(--shadow);overflow:hidden;transition:.2s}
+article:hover{transform:translateY(-4px);box-shadow:0 6px 12px var(--shadow)}
+.story-tile a{display:block;color:inherit;text-decoration:none}
+.label{display:inline-block;background:var(--accent);color:#fff;text-transform:uppercase;font:700 .7rem/1 system-ui;letter-spacing:.04em;padding:.25rem .5rem;margin:.75rem 1rem 0.25rem;border-radius:3px}
+article h2{font-size:1.05rem;margin:.5rem 1rem .25rem}
+article p{font-size:.9rem;margin:0 1rem 1rem;color:#333}
+footer{text-align:center;font-size:.8rem;padding:2rem 1rem;color:#444}
+</style>
+
+<body>
+<div id="alert-strip"><p>Sandbox ticker • This file does not modify your site • Use it to verify banner/TAFAJ/links</p></div>
+<header class="site-header"></header>
+
+<aside id="tafaj-meter">
+  <img src="media/tafajatan.png" alt="TAFAJ index">
+</aside>
+
+<main class="main-grid content grid-layout">
+  <article class="story-tile"><a href="grundy-explains.html">
+    <img src="media/grundy-explains.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: Cancer</h2>
+    <p>This week, Grundy teaches citizens how snack geometry protects the colon.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="grundy-explains-collection.html">
+    <img src="media/grundy-explains-collection.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: The Collection</h2>
+    <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="river-glow.html">
+    <img src="media/river-glow.png" alt="">
+    <span class="label">NATIONAL</span><h2>River Glow</h2>
+    <p>Industry thanks for the glowing river — a miracle of modern discharge.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="hammer-of-grundy.html">
+    <img src="media/hammer-of-grundy-concert.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Hammer of Grundy — Live on the Lawn</h2>
+    <p>Patriotic metal shakes the capital beneath the executive portico.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="public-smiling.html">
+    <img src="media/public-smiling.png" alt="">
+    <span class="label">DOMESTIC POLICY</span><h2>Public Smiling Hours Extended</h2>
+    <p>Mandate lengthened for winter to preserve brightness and jaw morale.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="patriotic-census.html">
+    <img src="media/patriotic-census.png" alt="">
+    <span class="label">NATIONAL UNITY</span><h2>Patriotic Census</h2>
+    <p>Every count is a pledge — under a single shining metric.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="friendship-rebuild.html">
+    <img src="media/friendship-rebuild.png" alt="">
+    <span class="label">DIPLOMACY</span><h2>Friendship Rebuild</h2>
+    <p>Rebranded diplomacy through patriotic signage.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="vigiles-patrols.html">
+    <img src="media/patriot-games-promo.png" alt="">
+    <span class="label">SECURITY</span><h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
+    <p>Heightened awareness after latex-suited threats disrupt programming.</p>
+  </a></article>
+</main>
+
+<footer>
+  <p>Sandbox file — safe to delete. Does not modify production.</p>
+</footer>
+</body></html>
+<!DOCTYPE html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OTI Sandbox</title>
+<style>
+:root{--bg:#faf6ee;--text:#111;--accent:#b80000;--card:#fff;--shadow:rgba(0,0,0,.08);--ticker-h:36px;--banner:#071b36}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Inter,Arial}
+img{display:block;max-width:100%;height:auto;border:0}
+
+/* ticker */
+#alert-strip{position:fixed;inset:0 auto auto 0;width:100%;height:var(--ticker-h);background:var(--accent);color:#fff;display:flex;align-items:center;overflow:hidden;white-space:nowrap;z-index:200;pointer-events:none}
+#alert-strip p{display:inline-block;padding-left:100%;animation:tkr 45s linear infinite;margin:0}
+@keyframes tkr{to{transform:translateX(-100%)}}
+
+/* banner */
+.site-header{margin-top:var(--ticker-h);height:140px;background:var(--banner) url("media/banner.png") top center/cover no-repeat;border-bottom:2px solid var(--accent);position:relative;z-index:100}
+
+/* TAFAJ left rail */
+#tafaj-meter{position:fixed;left:16px;top:calc(var(--ticker-h) + 140px + 12px);width:240px;z-index:90}
+#tafaj-meter img{width:100%;filter:drop-shadow(0 0 8px rgba(0,0,0,.15))}
+
+/* grid */
+main.main-grid{max-width:1400px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;position:relative;z-index:1}
+article{background:var(--card);border-radius:12px;box-shadow:0 2px 6px var(--shadow);overflow:hidden;transition:.2s}
+article:hover{transform:translateY(-4px);box-shadow:0 6px 12px var(--shadow)}
+.story-tile a{display:block;color:inherit;text-decoration:none}
+.label{display:inline-block;background:var(--accent);color:#fff;text-transform:uppercase;font:700 .7rem/1 system-ui;letter-spacing:.04em;padding:.25rem .5rem;margin:.75rem 1rem 0.25rem;border-radius:3px}
+article h2{font-size:1.05rem;margin:.5rem 1rem .25rem}
+article p{font-size:.9rem;margin:0 1rem 1rem;color:#333}
+footer{text-align:center;font-size:.8rem;padding:2rem 1rem;color:#444}
+</style>
+
+<body>
+<div id="alert-strip"><p>Sandbox ticker • This file does not modify your site • Use it to verify banner/TAFAJ/links</p></div>
+<header class="site-header"></header>
+
+<aside id="tafaj-meter">
+  <img src="media/tafajatan.png" alt="TAFAJ index">
+</aside>
+
+<main class="main-grid content grid-layout">
+  <article class="story-tile"><a href="grundy-explains.html">
+    <img src="media/grundy-explains.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: Cancer</h2>
+    <p>This week, Grundy teaches citizens how snack geometry protects the colon.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="grundy-explains-collection.html">
+    <img src="media/grundy-explains-collection.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Grundy Explains: The Collection</h2>
+    <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="river-glow.html">
+    <img src="media/river-glow.png" alt="">
+    <span class="label">NATIONAL</span><h2>River Glow</h2>
+    <p>Industry thanks for the glowing river — a miracle of modern discharge.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="hammer-of-grundy.html">
+    <img src="media/hammer-of-grundy-concert.png" alt="">
+    <span class="label">INFOTAINMENT</span><h2>Hammer of Grundy — Live on the Lawn</h2>
+    <p>Patriotic metal shakes the capital beneath the executive portico.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="public-smiling.html">
+    <img src="media/public-smiling.png" alt="">
+    <span class="label">DOMESTIC POLICY</span><h2>Public Smiling Hours Extended</h2>
+    <p>Mandate lengthened for winter to preserve brightness and jaw morale.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="patriotic-census.html">
+    <img src="media/patriotic-census.png" alt="">
+    <span class="label">NATIONAL UNITY</span><h2>Patriotic Census</h2>
+    <p>Every count is a pledge — under a single shining metric.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="friendship-rebuild.html">
+    <img src="media/friendship-rebuild.png" alt="">
+    <span class="label">DIPLOMACY</span><h2>Friendship Rebuild</h2>
+    <p>Rebranded diplomacy through patriotic signage.</p>
+  </a></article>
+
+  <article class="story-tile"><a href="vigiles-patrols.html">
+    <img src="media/patriot-games-promo.png" alt="">
+    <span class="label">SECURITY</span><h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
+    <p>Heightened awareness after latex-suited threats disrupt programming.</p>
+  </a></article>
+</main>
+
+<footer>
+  <p>Sandbox file — safe to delete. Does not modify production.</p>
+</footer>
+</body></html>
