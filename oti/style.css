@@ -1,5 +1,5 @@
 /* ============================================================
-   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.3)
+   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.4)
    ============================================================ */
 
 /* ---------- Root ---------- */
@@ -64,15 +64,15 @@ img {
 }
 
 /* ============================================================
-   BANNER — locked, stable background
+   BANNER — locked, stable background (top-aligned)
    ============================================================ */
 .site-header {
   margin-top: var(--ticker-h);
-  height: clamp(96px, 12vw, 160px);
+  height: clamp(96px, 10vw, 140px);   /* Slightly shorter for proportion */
   background-color: var(--banner-bg);
   background-image: url("media/banner.png");
-  background-position: center;
-  background-size: cover;
+  background-position: top center;    /* Ensures logo band shows fully */
+  background-size: cover;             /* Fill area, crop excess */
   background-repeat: no-repeat;
   border-bottom: 2px solid var(--accent);
   z-index: 100;
