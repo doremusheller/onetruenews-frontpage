@@ -33,12 +33,12 @@ img {
   color: var(--white);
   height: 28px;
   overflow: hidden;
-  position: relative;   /* keeps it from overlaying header */
+  position: relative;
   z-index: 20;
   white-space: nowrap;
 }
 
-.alert-strip p {
+.alert-strip p, .ticker span {
   margin: 0;
   line-height: 28px;
   font-size: 0.85rem;
@@ -54,27 +54,25 @@ img {
 .site-header {
   position: relative;
   z-index: 10;
-  background: var(--indigo);
-  /* Banner fallback in CSS: shows even if <img> path fails */
-  background-image: url("media/banner.png");
-  background-repeat: no-repeat;
-  background-size: cover;       /* full bleed */
-  background-position: center;
-  min-height: 120px;            /* natural space for banner */
+  height: 120px;
+  background: var(--indigo) url("oti/media/banner.png") center/contain no-repeat;
+  background-color: var(--indigo);
+  background-size: cover;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  margin: 0;
-  padding: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* If the <img> loads, it simply sits on top of the fallback */
-.site-header .brand,
-.site-header img.site-banner {
+.site-header .brand {
+  position: relative;
   display: block;
+  line-height: 0;
+}
+
+.site-header .site-banner {
   width: 100%;
-  height: auto;                 /* remove old 68px lock */
+  height: 120px;
   object-fit: cover;
-  margin: 0 auto;
+  display: block;
 }
 
 /* ---------- Page Content ---------- */
@@ -218,48 +216,23 @@ img.lede-image {
 }
 
 /* ---------- Ads Section ---------- */
-.ads-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
+.ad-section {
+  margin-top: 3rem;
 }
 
-.ad-tile {
+.ad-section .story-tile {
   background: var(--white);
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   overflow: hidden;
 }
 
-.ad-tile img {
+.ad-section .tile-image {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.ad-text {
-  padding: 1rem;
-}
-
-.ad-tag {
-  display: inline-block;
-  background: var(--red);
-  color: var(--white);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-}
-
-.ad-title {
-  font-weight: 700;
-  margin: 0.5rem 0;
-}
-
-.ad-summary {
-  font-size: 0.85rem;
-  color: #333;
+  height: 220px;
+  object-fit: contain;
+  background: #fdfdfd;
+  padding: 0.5rem;
 }
 
 /* ---------- Footer ---------- */
