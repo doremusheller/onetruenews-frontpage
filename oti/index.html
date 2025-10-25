@@ -1,117 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>One True Infotainment — The Voice of the Corrected States of America</title>
-  <meta name="description" content="Official news portal of the Corrected States of America — Broadcasting unity, belief, and brilliance since correction." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=latest" />
+  <title>One True Infotainment — The Voice of the Corrected State</title>
+  <meta name="description" content="The Voice of the Corrected State — satirical state media from the world of When It Happens Here." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="One True Infotainment" />
+  <meta property="og:description" content="The Voice of the Corrected State — satirical state media from the world of When It Happens Here." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="media/banner.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+
+  <link rel="canonical" href="index.html" />
+
+  <!-- Stylesheet (timestamp cache-bust) -->
+  <link id="site-style" rel="stylesheet" href="style.css" />
+  <script>
+    (function () {
+      const t = new Date();
+      const v = `${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
+      const link = document.getElementById('site-style');
+      if (link) link.href = `style.css?v=${v}`;
+      window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('script[data-cache-bust]').forEach(s => {
+          s.src = `${s.getAttribute('data-src')}?v=${v}`;
+        });
+      });
+    })();
+  </script>
 
   <!-- Scripts -->
-  <script defer src="ticker.js"></script>
-  <script defer src="grid.js"></script>
+  <script defer data-cache-bust data-src="ticker.js"></script>
+  <script defer data-cache-bust data-src="grid.js"></script>
 </head>
 
-<body>
+<body id="top">
 
-  <!-- ALERT STRIP / SCROLLER -->
-  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
-    <div class="ticker"></div>
-  </div>
+  <!-- TICKER (ticker.js injects content) -->
+  <div id="alert-strip" class="alert-strip"></div>
 
-  <!-- SITE HEADER / BANNER -->
-<header class="site-header"></header>
+  <!-- BANNER -->
+  <header class="site-header"></header>
 
-
+  <!-- TAFAJ Devil (left rail) -->
+  <aside id="tafaj-meter">
+    <img src="media/tafaj-devil.png" alt="TAFAJ index" />
+  </aside>
 
   <!-- MAIN CONTENT GRID -->
-  <main class="main-grid">
-
-    <!-- Grundy Explains: Cancer -->
-    <article class="tile">
-      <a href="grundy-explains-cancer.html" class="tile-link">
-        <img src="media/grundy-explains.png" alt="Grundy Explains: Cancer" />
-        <span class="label">Infotainment</span>
-        <h2>Grundy Explains: Cancer</h2>
-        <p>This week, Grundy teaches citizens how snack geometry protects the colon — and the nation.</p>
-      </a>
+  <main class="main-grid content grid-layout">
+    <!-- ===== STORY CARDS ===== -->
+    <article class="story-tile">
+      <img src="media/grundy-explains-chair.png" alt="Grundy Explains: Cancer" />
+      <span class="label">INFOTAINMENT</span>
+      <h2>Grundy Explains: Cancer</h2>
+      <p>This week, Grundy teaches citizens how snack geometry protects the colon — and the nation.</p>
     </article>
 
-    <!-- Grundy Explains: The Collection -->
-    <article class="tile">
-      <a href="grundy-explains-collection.html" class="tile-link">
-        <img src="media/grundy-explains-collection.png" alt="Grundy Explains: The Collection" />
-        <span class="label">Infotainment</span>
-        <h2>Grundy Explains: The Collection</h2>
-        <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/grundy-explains-collection.png" alt="Grundy Explains: The Collection" />
+      <span class="label">INFOTAINMENT</span>
+      <h2>Grundy Explains: The Collection</h2>
+      <p>The First Citizen questions where the parts went — and how the jars stack up.</p>
     </article>
 
-    <!-- River Glow -->
-    <article class="tile">
-      <a href="river-glow.html" class="tile-link">
-        <img src="media/river-glow.png" alt="River glowing at night" />
-        <span class="label">National</span>
-        <h2>River Glow</h2>
-        <p>Grundy thanks industry for the glowing river — a miracle of modern discharge.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/river-glow.png" alt="River Glow" />
+      <span class="label">NATIONAL</span>
+      <h2>River Glow</h2>
+      <p>Grundy thanks industry for the glowing river — a miracle of modern discharge.</p>
     </article>
 
-    <!-- Hammer of Grundy -->
-    <article class="tile">
-      <a href="hammer-of-grundy.html" class="tile-link">
-        <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy — Live on the Lawn" />
-        <span class="label">Infotainment</span>
-        <h2>Hammer of Grundy — Live on the Lawn</h2>
-        <p>Patriotic metal shakes the capital as decibels and devotion collide beneath the executive portico.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/hammer-of-grundy.png" alt="Hammer of Grundy — Live on the Lawn" />
+      <span class="label">INFOTAINMENT</span>
+      <h2>Hammer of Grundy — Live on the Lawn</h2>
+      <p>Patriotic metal shakes the capital as decibels and devotion collide beneath the executive portico.</p>
     </article>
 
-    <!-- Public Smiling Hours -->
-    <article class="tile">
-      <a href="public-smiling-hours.html" class="tile-link">
-        <img src="media/domestic-smiles.png" alt="Citizens smiling in unison" />
-        <span class="label">Domestic Policy</span>
-        <h2>Public Smiling Hours Extended</h2>
-        <p>Nationwide smiling mandate lengthened for winter to preserve brightness and jaw morale.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/public-smiling.png" alt="Public Smiling Hours Extended" />
+      <span class="label">DOMESTIC POLICY</span>
+      <h2>Public Smiling Hours Extended</h2>
+      <p>Nationwide smiling mandate lengthened for winter to preserve brightness and jaw morale.</p>
     </article>
 
-    <!-- Patriotic Census -->
-    <article class="tile">
-      <a href="patriotic-census.html" class="tile-link">
-        <img src="media/patriotic-census.png" alt="Census workers saluting" />
-        <span class="label">National Unity</span>
-        <h2>Patriotic Census</h2>
-        <p>Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/patriotic-census.png" alt="Patriotic Census" />
+      <span class="label">NATIONAL UNITY</span>
+      <h2>Patriotic Census</h2>
+      <p>Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
+      <a href="patriotic-census.html" class="read-more">Read More</a>
     </article>
 
-    <!-- Friendship Correction -->
-    <article class="tile">
-      <a href="friendship-correction.html" class="tile-link">
-        <img src="media/friendship-rebuild.png" alt="Repair crews hoisting banners" />
-        <span class="label">Diplomacy</span>
-        <h2>Friendship Correction</h2>
-        <p>Officials rebrand diplomacy through patriotic signage, promising smiles per treaty.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/friendship-correction.png" alt="Friendship Correction" />
+      <span class="label">DIPLOMACY</span>
+      <h2>Friendship Correction</h2>
+      <p>Officials rebrand diplomacy through patriotic signage, promising smiles per treaty.</p>
     </article>
 
-    <!-- Vigiles Double Patrols -->
-    <article class="tile">
-      <a href="vigiles-doubling-patrols.html" class="tile-link">
-        <img src="media/tafajsatan.png" alt="TAFAJ Threat Meter" />
-        <span class="label">Security</span>
-        <h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
-        <p>Authorities report heightened awareness after latex-suited threats disrupt faith programming.</p>
-      </a>
+    <article class="story-tile">
+      <img src="media/vigiles-patrols.png" alt="Vigiles Double Patrols After TAFAJ Broadcast" />
+      <span class="label">SECURITY</span>
+      <h2>Vigiles Double Patrols After TAFAJ Broadcast</h2>
+      <p>Authorities report heightened awareness after latex-suited threats disrupt faith programming.</p>
     </article>
-
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <p>
       Produced without license from the Corrected States of America.<br />
@@ -122,6 +121,3 @@
 
 </body>
 </html>
-
-
-
