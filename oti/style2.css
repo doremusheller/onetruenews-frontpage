@@ -1,140 +1,67 @@
-/* ============================================================
-   ONE TRUE INFOTAINMENT — BASE THEME (v2, corrected root path)
-   Palette, typography, ticker, banner (full-width background)
-   ============================================================ */
-
-/* ---------- Root Palette ---------- */
 :root {
-  --bg: #faf6ee;
-  --text: #111;
-  --accent: #b80000;
-  --card-bg: #fff;
-  --shadow: rgba(0, 0, 0, 0.08);
-  --banner-bg: #071b36;
-  --ticker-h: 36px;
-
-  /* ✅ relative to /oti/ root */
-  --banner-url: url("media/banner.png");
-
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --ticker-bg: #b40000;
+  --banner-bg: #061a3a;
+  --page-bg: #faf5ec;
+  --text-color: #111;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* ---------- Reset ---------- */
-html, body {
+/* GENERAL */
+body {
   margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  line-height: 1.4;
-  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background: var(--page-bg);
+  color: var(--text-color);
+  text-align: center;
 }
 
-img {
-  display: block;
-  max-width: 100%;
+/* TICKER */
+.ticker {
+  background: var(--ticker-bg);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 5px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* HEADER & BANNER */
+.site-header {
+  width: 100%;
+  background-color: var(--banner-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
   height: auto;
-  border: none;
+  display: block;
+  object-fit: cover;
 }
 
-/* ---------- Typography ---------- */
-h1, h2, h3, h4, h5, h6 {
-  font-family: inherit;
+/* MAIN */
+main {
+  padding: 4rem 1rem;
+}
+
+h1 {
+  font-size: 1.8rem;
   font-weight: 700;
-  line-height: 1.2;
-  margin: 0.5em 0;
 }
 
 p {
-  margin: 0 0 1em;
-  font-weight: 400;
+  max-width: 700px;
+  margin: 1rem auto;
+  line-height: 1.6;
 }
 
-/* ============================================================
-   TICKER (BREAKING NEWS STRIP)
-   ============================================================ */
-#alert-strip {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
-  height: var(--ticker-h);
-  background: var(--accent);
-  color: #fff;
-  display: flex; align-items: center;
-  overflow: hidden; white-space: nowrap;
-  z-index: 200;
-  pointer-events: none;
-  box-shadow: 0 1px 0 rgba(0,0,0,.05) inset;
-  font-weight: 600;
-}
-
-#alert-strip p {
-  display: inline-block;
-  padding-left: 100%;
-  margin: 0;
-  animation: ticker-scroll 45s linear infinite;
-  letter-spacing: .02em;
-}
-
-@keyframes ticker-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #alert-strip p { animation: none; padding-left: 0; }
-}
-
-/* ============================================================
-   BANNER — full-width, edge-to-edge, background-driven
-   ============================================================ */
-.site-header {
-  margin-top: var(--ticker-h);
-  width: 100%;
-  height: clamp(100px, 14vw, 200px);
-  background-color: var(--banner-bg);
-  background-image: var(--banner-url);
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: cover;         /* ✅ fills screen width */
-  display: block;
-  box-shadow: 0 2px 6px var(--shadow);
-  z-index: 150;
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 footer {
-  text-align: center;
-  font-size: 0.8rem;
-  padding: 2rem 1rem;
-  color: #444;
-}
-
-/* ============================================================
-   TAFAJ METER — relative path to media/tafajatan.png
-   ============================================================ */
-#tafaj-meter {
-  position: fixed;
-  top: calc(var(--ticker-h) + 200px + 12px);
-  left: 16px;
-  width: 240px;
-  z-index: 50;
-}
-
-#tafaj-meter img {
-  width: 100%;
-  height: auto;
-  content: url("media/tafajatan.png");
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
-}
-
-/* Mobile: TAFAJ moves into page flow */
-@media (max-width: 900px) {
-  #tafaj-meter {
-    position: static;
-    width: min(360px, 90vw);
-    margin: 1rem auto;
-    display: block;
-  }
+  margin-top: 4rem;
+  font-size: 12px;
+  color: #555;
 }
