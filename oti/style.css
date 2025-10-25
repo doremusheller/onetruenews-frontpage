@@ -89,6 +89,28 @@ img {
   grid-gap: 1.25rem;
 }
 
+/* ---------- Breaking News Tile ---------- */
+.story-tile.breaking {
+  border: 3px solid var(--red);
+  grid-column: span 2;
+  background: var(--white);
+  position: relative;
+}
+
+.breaking-pill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  z-index: 5;
+}
+
 /* ---------- Story Tile ---------- */
 .story-tile {
   background: var(--white);
@@ -250,3 +272,4 @@ img.lede-image {
   height: 4px;
   background: linear-gradient(to right, var(--red), var(--white), var(--blue));
 }
+
