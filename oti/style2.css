@@ -1,5 +1,5 @@
 /* ============================================================
-   ONE TRUE INFOTAINMENT — BASE THEME (v2, banner fixed & validated)
+   ONE TRUE INFOTAINMENT — BASE THEME (v2, corrected root path)
    Palette, typography, ticker, banner (full-width background)
    ============================================================ */
 
@@ -13,7 +13,9 @@
   --banner-bg: #071b36;
   --ticker-h: 36px;
 
+  /* ✅ relative to /oti/ root */
   --banner-url: url("media/banner.png");
+
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -93,7 +95,7 @@ p {
   background-image: var(--banner-url);
   background-position: top center;
   background-repeat: no-repeat;
-  background-size: cover;           /* ✅ Full width, fills screen */
+  background-size: cover;         /* ✅ fills screen width */
   display: block;
   box-shadow: 0 2px 6px var(--shadow);
   z-index: 150;
@@ -110,7 +112,7 @@ footer {
 }
 
 /* ============================================================
-   TAFAJ METER — validated path to media/tafajatan.png
+   TAFAJ METER — relative path to media/tafajatan.png
    ============================================================ */
 #tafaj-meter {
   position: fixed;
@@ -123,6 +125,7 @@ footer {
 #tafaj-meter img {
   width: 100%;
   height: auto;
+  content: url("media/tafajatan.png");
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
 }
 
