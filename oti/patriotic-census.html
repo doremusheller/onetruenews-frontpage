@@ -15,43 +15,60 @@
   <meta property="og:site_name" content="One True Infotainment" />
 
   <link rel="canonical" href="patriotic-census.html" />
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="ticker.js"></script>
+
+  <!-- Stylesheet with timestamp-based cache busting -->
+  <link id="site-style" rel="stylesheet" href="style.css" />
+  <script>
+    // Cache-bust CSS and JS with timestamp: v=YYYYMMDDThhmm
+    const t = new Date();
+    const v = `${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
+    document.getElementById("site-style").href = `style.css?v=${v}`;
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("script[data-cache-bust]").forEach(s => {
+        s.src = `${s.getAttribute("data-src")}?v=${v}`;
+      });
+    });
+  </script>
+
+  <!-- JS files tagged for cache-busting -->
+  <script defer data-cache-bust data-src="ticker.js"></script>
+  <script defer data-cache-bust data-src="grid.js"></script>
 </head>
 
 <body class="story-page">
 
-  <!-- TICKER (auto-populated by ticker.js) -->
-  <div id="alert-strip"></div>
+  <!-- ALERT STRIP / SCROLLER -->
+  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
+    <div class="ticker"></div>
+  </div>
 
-  <!-- BANNER -->
-  <header id="banner">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+  <!-- SITE HEADER / BANNER -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Back to front page">
+      <img src="media/banner.png"
+           alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
+           class="site-banner" />
+    </a>
   </header>
 
-  <!-- STORY CONTENT -->
-  <main class="story-wrap">
+  <!-- MAIN CONTENT -->
+  <main id="content" class="content">
     <article class="story">
-
       <header class="story-head">
-        <div class="story-kicker">National Unity</div>
+        <span class="story-tag">National Unity</span>
         <h1 class="story-title">Patriotic Census</h1>
-        <div class="story-byline">
-          By Civic Enumeration Desk · <time datetime="2025-10-24">October 24, 2025</time>
-        </div>
+        <p class="story-dek">Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</p>
+        <p class="byline">Civic Enumeration Desk · <time datetime="2025-10-24">October 24, 2025</time></p>
       </header>
 
       <figure class="lede">
-        <img src="media/patriotic-census.png" alt="Census workers saluting beneath flags." />
-        <figcaption class="caption">Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</figcaption>
+        <img src="media/patriotic-census.png"
+             alt="Citizens saluting as they complete official patriotic census forms"
+             class="lede-image" />
+        <figcaption class="caption">“Every count is a pledge — every checkbox a declaration of place and faith.”</figcaption>
       </figure>
 
       <section class="story-body">
-        <!-- ─────────────────────────────────────────────────────────
-             Paste or update your existing story text here.
-             Keep each paragraph wrapped in <p>.
-             ───────────────────────────────────────────────────────── -->
-
         <p>With banners unfurled and clipboards raised, enumeration teams swept through the Corrected State today to verify unity totals. Officials reminded citizens that every count is a pledge, every checkbox a declaration of place and faith.</p>
 
         <p>Residents expressed gratitude for the opportunity to reaffirm both their residence and their belief. “Being counted makes you real,” said one loyal subject as he straightened his uniform for the fourth time that hour.</p>
@@ -62,19 +79,21 @@
       </section>
 
       <nav class="story-nav">
-        <a class="btn" href="index.html#top">← Back to Front Page</a>
-        <a class="btn" href="friendship-correction.html">Next: Friendship Correction</a>
+        <a class="btn back" href="index.html" aria-label="Return to front page">← Back to Front Page</a>
+        <a class="btn primary" href="friendship-correction.html">Next: Friendship Correction</a>
       </nav>
-
     </article>
   </main>
 
-  <footer>
-    <p>
-      Produced without license from the Corrected States of America.<br />
-      All contained herein are speculation and may not yet exist.<br />
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="legal">
+      Produced without license from the Corrected States of America.<br>
+      All contained herein are speculation and may not yet exist.<br>
       Doubt is treason; irony a pitchfork.
     </p>
+    <div class="patriotic-ribbon" aria-hidden="true"></div>
   </footer>
+
 </body>
 </html>
