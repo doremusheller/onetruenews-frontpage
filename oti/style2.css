@@ -1,0 +1,120 @@
+/* ============================================================
+   ONE TRUE INFOTAINMENT — BASE THEME (v2)
+   Palette, typography, ticker, and banner only.
+   ============================================================ */
+
+/* ---------- Root Palette ---------- */
+:root {
+  --bg: #faf6ee;
+  --text: #111;
+  --accent: #b80000;
+  --card-bg: #fff;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --banner-bg: #071b36;
+  --ticker-h: 36px;
+
+  --indigo: var(--banner-bg);
+  --amber: var(--accent);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- Reset ---------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: none;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0.5em 0;
+}
+
+p {
+  margin: 0 0 1em;
+  font-weight: 400;
+}
+
+/* ============================================================
+   TICKER (BREAKING NEWS STRIP)
+   ============================================================ */
+#alert-strip {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  height: var(--ticker-h);
+  background: var(--accent);
+  color: #fff;
+  display: flex; align-items: center;
+  overflow: hidden; white-space: nowrap;
+  z-index: 200;
+  pointer-events: none;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05) inset;
+  font-weight: 600;
+}
+
+#alert-strip p {
+  display: inline-block;
+  padding-left: 100%;
+  margin: 0;
+  animation: ticker-scroll 45s linear infinite;
+  letter-spacing: .02em;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #alert-strip p { animation: none; padding-left: 0; }
+}
+
+/* ============================================================
+   BANNER (Safe contain version)
+   ============================================================ */
+.site-header {
+  margin-top: var(--ticker-h);
+  width: 100%;
+  height: clamp(100px, 14vw, 200px);
+  background: var(--banner-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 6px var(--shadow);
+  z-index: 150;
+}
+
+/* Contained banner image — never cropped */
+.site-header .site-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ============================================================
+   Footer (for grounding during tests)
+   ============================================================ */
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 2rem 1rem;
+  color: #444;
+}
