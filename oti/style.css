@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Master Style Sheet (v9.2)
+   One True Infotainment — Unified Stylesheet (v9.2)
    ============================================================ */
 
 /* ---------- Root ---------- */
@@ -9,10 +9,11 @@
   --accent: #b80000;
   --card-bg: #fff;
   --shadow: rgba(0, 0, 0, 0.08);
+  --ticker-h: 36px; /* fixed ticker height */
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* ---------- Global Reset ---------- */
+/* ---------- Global ---------- */
 html, body {
   margin: 0;
   padding: 0;
@@ -31,14 +32,14 @@ img {
 }
 
 /* ============================================================
-   TICKER (BREAKING NEWS STRIP)
+   ALERT STRIP / TICKER
    ============================================================ */
-#alert-strip {
+.alert-strip {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 36px;             /* Enlarged ticker height */
+  height: var(--ticker-h);
   background: var(--accent);
   color: white;
   display: flex;
@@ -46,37 +47,49 @@ img {
   overflow: hidden;
   white-space: nowrap;
   z-index: 200;
-  font-size: 1.2em;         /* +20% font increase */
+  font-size: 1.2em;
 }
-#alert-strip p {
+
+.alert-strip p {
   display: inline-block;
   padding-left: 100%;
   animation: ticker-scroll 45s linear infinite;
   margin: 0;
 }
+
 @keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
 /* ============================================================
-   BANNER (unified for index + stories)
+   SITE HEADER / BANNER
    ============================================================ */
-.site-header, #banner {
-  margin-top: 36px;         /* sits below fixed ticker */
-  height: 140px;            /* fixed banner height */
-  overflow: hidden;
-  position: relative;
-  z-index: 100;
+.site-header {
+  margin-top: var(--ticker-h);
   background: #001a3a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.site-header img, #banner img {
+  display: block;
   width: 100%;
-  height: 140px;
-  object-fit: cover;
+  text-align: center;
+  overflow: hidden;
+}
+
+.site-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+/* Mobile optimization */
+@media (max-width: 900px) {
+  :root { --ticker-h: 32px; }
+
+  .site-banner {
+    max-height: 140px;
+    object-fit: contain;
+  }
 }
 
 /* ============================================================
@@ -84,17 +97,19 @@ img {
    ============================================================ */
 #tafaj-meter {
   position: fixed;
-  top: calc(36px + 140px + 12px); /* ticker + banner + gap */
+  top: calc(var(--ticker-h) + 220px + 16px);
   left: 16px;
-  width: 240px;
+  width: 260px;
   z-index: 50;
 }
+
 #tafaj-meter img {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
 }
-/* Mobile: TAFAJ becomes part of flow */
+
+/* Mobile: TAFAJ becomes inline in the content */
 @media (max-width: 900px) {
   #tafaj-meter {
     position: static;
@@ -105,7 +120,7 @@ img {
 }
 
 /* ============================================================
-   MAIN GRID LAYOUT (Front page)
+   MAIN GRID LAYOUT
    ============================================================ */
 main.main-grid {
   display: grid;
@@ -119,34 +134,39 @@ main.main-grid {
 }
 
 /* ============================================================
-   STORY CARDS (Front page tiles only)  <-- SCOPED
+   STORY TILES (INDEX)
    ============================================================ */
-main.main-grid article {
+.tile {
   background: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 2px 6px var(--shadow);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-main.main-grid article:hover {
+
+.tile:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 12px var(--shadow);
 }
-main.main-grid article img {
+
+.tile img {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
-main.main-grid article h2 {
+
+.tile h2 {
   font-size: 1.05rem;
   margin: 0.5rem 1rem 0.25rem;
   color: var(--text);
 }
-main.main-grid article p {
+
+.tile p {
   font-size: 0.9rem;
   margin: 0 1rem 1rem;
   color: #333;
 }
+
 .label {
   display: inline-block;
   background: var(--accent);
@@ -161,38 +181,38 @@ main.main-grid article p {
 }
 
 /* ============================================================
-   STORY PAGES (detail view)
+   STORY PAGES
    ============================================================ */
-.story-wrap {
-  max-width: 1100px;
-  margin: 24px auto 48px;
-  padding: 0 20px;
+.story-page main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
 }
-.story .story-head { margin-bottom: 1rem; }
-.story .story-title { font-size: 2rem; margin: 0.25rem 0; }
-.story .story-dek { font-style: italic; color: #b80000; }
-.story .byline, .story .story-byline { color: #666; font-size: 0.9rem; }
 
-.story .lede {
-  margin: 1rem 0;
+.story {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px var(--shadow);
+  padding: 2rem;
 }
-.story .lede img,
-.story .lede-image {
+
+.story h1 {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.story .lede img {
   width: 100%;
-  height: auto;            /* no forced height on stories */
-  max-height: 560px;       /* optional: keeps huge images sensible */
-  object-fit: cover;
+  height: auto;
   border-radius: 8px;
-}
-.story .caption {
-  font-size: 0.85rem;
-  color: #555;
-  margin-top: 0.4rem;
+  margin: 1rem 0;
+  object-fit: contain;
 }
 
-.story .story-body p {
-  line-height: 1.6;
-  margin: 1rem 0;
+.caption {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
 }
 
 /* ============================================================
@@ -203,18 +223,23 @@ footer {
   font-size: 0.8rem;
   padding: 2rem 1rem;
   color: #444;
+  background: var(--bg);
 }
 
 /* ============================================================
    MOBILE ADJUSTMENTS
    ============================================================ */
 @media (max-width: 600px) {
-  #alert-strip {
+  .alert-strip {
     font-size: 1em;
-    height: 32px;
+    height: var(--ticker-h);
   }
-  .site-header, #banner { height: 100px; }
-  .site-header img, #banner img { height: 100px; }
 
-  main.main-grid article img { height: 140px; }
+  .tile img {
+    height: 140px;
+  }
+
+  .story {
+    padding: 1.25rem;
+  }
 }
