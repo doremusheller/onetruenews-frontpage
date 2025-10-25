@@ -5,24 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>One True Infotainment — Prototype Index 2.0</title>
-  <meta name="description" content="Prototype rebuild of One True Infotainment with ticker and banner base." />
+  <meta name="description" content="Prototype rebuild of One True Infotainment with ticker, banner, and TAFAJ base." />
 
   <!-- Base styles and scripts -->
   <link id="site-style" rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="grid2.css" />
   <script src="base.js" defer></script>
   <script src="ticker2.js" defer></script>
-  <script src="tafaj2.js" defer></script>
 </head>
 
 <body>
   <!-- TICKER -->
   <div id="alert-strip" class="alert-strip" aria-live="polite" aria-label="Breaking updates"></div>
 
-  <!-- BANNER (background-driven; full width, no <img>) -->
+  <!-- BANNER -->
   <header class="site-header" role="img" aria-label="One True Infotainment banner"></header>
 
+  <!-- TAFAJ (static, validated path) -->
+  <aside id="tafaj-meter">
+    <img src="/oti/media/tafajatan.png" alt="TAFAJ meter" />
+  </aside>
+
   <!-- BODY CONTENT PLACEHOLDER -->
-  <main style="padding:2rem;text-align:center;">
+  <main class="main-grid" style="padding:2rem;text-align:center;">
     <h1>Prototype Index 2.0</h1>
     <p>This page shows the base color palette, ticker, banner, and TAFAJ integration under v2.</p>
   </main>
