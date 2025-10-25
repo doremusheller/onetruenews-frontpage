@@ -1,5 +1,5 @@
 /* ============================================================
-   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.6)
+   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.2)
    ============================================================ */
 
 /* ---------- Root ---------- */
@@ -11,10 +11,6 @@
   --shadow: rgba(0, 0, 0, 0.08);
   --ticker-h: 36px;
   --banner-bg: #071b36;
-
-  /* Single source of truth for banner height */
-  --banner-h: clamp(96px, 10vw, 140px);
-
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -68,32 +64,45 @@ img {
 }
 
 /* ============================================================
-   BANNER — locked, stable background (top-aligned)
+   BANNER (Full-Width, Responsive, Respects Ticker)
    ============================================================ */
 .site-header {
-  display: block;                      /* ensure visible */
   margin-top: var(--ticker-h);
-  height: var(--banner-h);
-  background-color: var(--banner-bg);
-  /* confirmed banner file path in /media/ is banner.png */
-  background-image: url("media/banner.png");
-  background-position: top center;    /* show the logo band */
-  background-size: cover;             /* fill area, crop excess */
-  background-repeat: no-repeat;
-  border-bottom: 2px solid var(--accent);
+  height: clamp(96px, 12vw, 160px);
+  background: var(--banner-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   z-index: 100;
 }
 
+/* Banner Image */
+.site-header .site-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Optional Edge-to-Edge (cropped) */
+.site-header .site-banner.fullbleed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ============================================================
-   TAFAJ METER (LEFT MARGIN) — follows banner height
+   TAFAJ METER (LEFT MARGIN)
    ============================================================ */
 #tafaj-meter {
   position: fixed;
-  top: calc(var(--ticker-h) + var(--banner-h) + 12px);
+  top: calc(var(--ticker-h) + 160px + 12px);
   left: 16px;
   width: 240px;
-  z-index: 90;            /* below header but above main content */
-  pointer-events: auto;   /* allow hover if needed */
+  z-index: 50;
 }
 
 #tafaj-meter img {
@@ -123,8 +132,7 @@ main.main-grid {
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
-  z-index: 10;           /* ensure tiles are above page background */
-  pointer-events: auto;  /* ensure links receive events */
+  z-index: 1;
 }
 
 /* ============================================================
@@ -136,20 +144,6 @@ article {
   box-shadow: 0 2px 6px var(--shadow);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Make the anchor fill the tile so clicks register anywhere */
-.story-tile a,
-.story-tile a * {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  pointer-events: auto;
-}
-
-.story-tile a:hover h2,
-.story-tile a:hover .label {
-  text-decoration: none;
 }
 
 article:hover {
@@ -188,13 +182,6 @@ article p {
   border-radius: 3px;
 }
 
-/* Make sure read-more / links are visible */
-.read-more {
-  display: inline-block;
-  margin: 0 1rem 1rem;
-  color: #3b2b7b;
-}
-
 /* ============================================================
    FOOTER
    ============================================================ */
@@ -209,18 +196,16 @@ footer {
    MOBILE ADJUSTMENTS
    ============================================================ */
 @media (max-width: 700px) {
-  :root { 
-    --ticker-h: 32px;
-    /* Shorter banner on small screens */
-    --banner-h: clamp(84px, 18vw, 120px);
-  }
+  :root { --ticker-h: 32px; }
 
   #alert-strip {
     font-size: 1em;
     height: var(--ticker-h);
   }
 
-  /* no explicit .site-header height here — it inherits var(--banner-h) */
+  .site-header {
+    height: clamp(84px, 18vw, 120px);
+  }
 
   article img {
     height: 140px;
