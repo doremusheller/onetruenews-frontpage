@@ -259,7 +259,6 @@ img.lede-image {
   background: linear-gradient(to right, var(--red), var(--white), var(--blue));
 }
 
-/* ---------- TAFAJ Threat Meter ---------- */
 #tafaj-meter {
   position: fixed;
   top: 120px;
@@ -267,6 +266,7 @@ img.lede-image {
   width: 140px;
   z-index: 50;
 }
+
 
 #tafaj-meter img {
   width: 100%;
@@ -316,3 +316,4 @@ img.lede-image {
 
   #tafaj-meter { display: none; }
 }
+
