@@ -4,71 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Banner Test — One True Infotainment</title>
-  <style>
-    :root {
-      --ticker-bg: #b40000;
-      --banner-bg: #061a3a;
-      --page-bg: #faf5ec;
-      --text-color: #111;
-      --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      font-family: var(--font-sans);
-      background: var(--page-bg);
-      color: var(--text-color);
-      text-align: center;
-    }
-
-    /* --- NEWS TICKER --- */
-    .ticker {
-      background: var(--ticker-bg);
-      color: #fff;
-      font-size: 14px;
-      line-height: 1.5;
-      padding: 5px 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    /* --- SITE HEADER / BANNER --- */
-    .site-header {
-      background: var(--banner-bg) url("/oti/media/banner.png") top center / cover no-repeat;
-      width: 100%;
-      height: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-    }
-
-    .site-header img {
-      max-width: 90%;
-      height: auto;
-    }
-
-    main {
-      padding: 4rem 1rem;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-    }
-
-    p {
-      max-width: 700px;
-      margin: 1rem auto;
-      line-height: 1.6;
-    }
-
-    footer {
-      margin-top: 4rem;
-      font-size: 12px;
-      color: #555;
-    }
-  </style>
+  <link rel="stylesheet" href="style2.css">
 </head>
 
 <body>
@@ -77,12 +13,12 @@
   </div>
 
   <header class="site-header">
-    <img src="/oti/media/banner.png" alt="One True Infotainment Banner">
+    <img src="/oti/media/banner.png" alt="One True Infotainment Banner" class="banner-img">
   </header>
 
   <main>
     <h1>Banner is rendering full-width.</h1>
-    <p>If you see the full blue header with the logo image spanning edge-to-edge under the ticker, we’re good.</p>
+    <p>If you see the blue header image spanning edge-to-edge under the ticker, we’re good.</p>
   </main>
 
   <footer>
