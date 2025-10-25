@@ -55,7 +55,7 @@ img {
   position: relative;
   z-index: 10;
   height: 120px;
-  background: var(--indigo) url("oti/media/banner.png") center/contain no-repeat;
+  background: var(--indigo) url("media/banner.png") center/contain no-repeat;
   background-color: var(--indigo);
   background-size: cover;
   overflow: hidden;
