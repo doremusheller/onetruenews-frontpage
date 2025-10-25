@@ -211,3 +211,27 @@ footer {
     height: 140px;
   }
 }
+
+/* ============================================================
+   DESKTOP-ONLY: TRUE FULL-BLEED BANNER (safe for mobile)
+   ============================================================ */
+@media (min-width: 1024px) {
+  /* Break the header out of any centered/max-width container */
+  .site-header {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  /* Make the banner image behave like a hero background (cropped) */
+  .site-header .site-banner {
+    width: 100vw;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;      /* fill without distortion */
+    object-position: center;
+  }
+}
