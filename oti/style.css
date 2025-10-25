@@ -68,25 +68,18 @@ img {
 .site-header {
   margin-top: var(--ticker-h);
   background: #001a3a;
-  display: block;
   width: 100%;
-  text-align: center;
-  overflow: hidden;
-}
-
-.site-header {
-  margin-top: var(--ticker-h);
-  background: #001a3a;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   text-align: center;
   overflow: hidden;
   z-index: 150;
 }
+
+.site-header img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 
 /* Mobile optimization */
@@ -250,4 +243,5 @@ footer {
     padding: 1.25rem;
   }
 }
+
 
