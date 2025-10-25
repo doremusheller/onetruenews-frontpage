@@ -19,32 +19,41 @@
   <!-- Stylesheet + cache-bust -->
   <link id="site-style" rel="stylesheet" href="style.css" />
   <script>
-    // v=YYYYMMDDThhmm
-    const t=new Date();
-    const v=`${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
-    document.getElementById("site-style").href=`style.css?v=${v}`;
-    window.addEventListener("DOMContentLoaded",()=> {
-      document.querySelectorAll("script[data-cache-bust]").forEach(s=>{
-        s.src=`${s.getAttribute("data-src")}?v=${v}`;
+    // Cache-bust CSS & any tagged JS with v=YYYYMMDDThhmm
+    (function () {
+      const t = new Date();
+      const v = `${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
+      const link = document.getElementById('site-style');
+      if (link) link.href = `style.css?v=${v}`;
+      window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('script[data-cache-bust]').forEach(s => {
+          s.src = `${s.getAttribute('data-src')}?v=${v}`;
+        });
       });
-    });
+    })();
   </script>
 
-  <!-- JS (cache-busted) -->
+  <!-- JS (tagged for cache-busting) -->
   <script defer data-cache-bust data-src="ticker.js"></script>
+  <script defer data-cache-bust data-src="grid.js"></script>
 </head>
 
 <body class="story-page">
 
-  <!-- TICKER (ticker.js will populate) -->
-  <div id="alert-strip"></div>
+  <!-- TICKER -->
+  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
+    <div class="ticker"></div>
+  </div>
 
-  <!-- BANNER (canonical) -->
-  <header id="banner">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" />
+  <!-- UNIFIED BANNER -->
+  <header class="site-header">
+    <img
+      src="media/banner.png"
+      alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
+      class="site-banner" />
   </header>
 
-  <!-- STORY CONTENT (canonical) -->
+  <!-- STORY CONTENT -->
   <main class="story-wrap">
     <article class="story">
 
@@ -57,8 +66,13 @@
       </header>
 
       <figure class="lede">
-        <img src="media/patriotic-census.png" alt="Census workers saluting beneath flags." />
-        <figcaption class="caption">Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.</figcaption>
+        <img
+          src="media/patriotic-census.png"
+          alt="Census workers saluting beneath national banners"
+          class="lede-image" />
+        <figcaption class="caption">
+          Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.
+        </figcaption>
       </figure>
 
       <section class="story-body">
@@ -72,7 +86,7 @@
       </section>
 
       <nav class="story-nav">
-        <a class="btn" href="index.html#top">← Back to Front Page</a>
+        <a class="btn back" href="index.html#top" aria-label="Return to front page">← Back to Front Page</a>
         <a class="btn" href="friendship-correction.html">Next: Friendship Correction</a>
       </nav>
 
