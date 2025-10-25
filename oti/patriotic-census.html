@@ -16,10 +16,9 @@
 
   <link rel="canonical" href="patriotic-census.html" />
 
-  <!-- Stylesheet + cache-bust -->
+  <!-- Stylesheet (timestamp cache-bust) -->
   <link id="site-style" rel="stylesheet" href="style.css" />
   <script>
-    // Cache-bust CSS & any tagged JS with v=YYYYMMDDThhmm
     (function () {
       const t = new Date();
       const v = `${t.getFullYear()}${String(t.getMonth()+1).padStart(2,'0')}${String(t.getDate()).padStart(2,'0')}T${String(t.getHours()).padStart(2,'0')}${String(t.getMinutes()).padStart(2,'0')}`;
@@ -33,28 +32,24 @@
     })();
   </script>
 
-  <!-- JS (tagged for cache-busting) -->
+  <!-- Ticker only (story pages don't need grid) -->
   <script defer data-cache-bust data-src="ticker.js"></script>
-  <script defer data-cache-bust data-src="grid.js"></script>
 </head>
 
 <body class="story-page">
 
-  <!-- TICKER -->
-  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
-    <div class="ticker"></div>
-  </div>
+  <!-- TICKER (ticker.js will inject a <p> inside) -->
+  <div id="alert-strip" class="alert-strip"></div>
 
-  <!-- UNIFIED BANNER -->
+  <!-- BANNER (responsive, no cropping) -->
   <header class="site-header">
-    <img
-      src="media/banner.png"
-      alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
-      class="site-banner" />
+    <img src="media/banner.png"
+         alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America"
+         class="site-banner" />
   </header>
 
   <!-- STORY CONTENT -->
-  <main class="story-wrap">
+  <main>
     <article class="story">
 
       <header class="story-head">
@@ -66,10 +61,8 @@
       </header>
 
       <figure class="lede">
-        <img
-          src="media/patriotic-census.png"
-          alt="Census workers saluting beneath national banners"
-          class="lede-image" />
+        <img src="media/patriotic-census.png"
+             alt="Census workers saluting beneath national banners" />
         <figcaption class="caption">
           Every count is a pledge — citizens reaffirm loyalty and residence under a single shining metric.
         </figcaption>
