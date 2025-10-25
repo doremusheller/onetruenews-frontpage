@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Unified Stylesheet (v9.2)
+   One True Infotainment — Master Style Sheet (v9.3)
    ============================================================ */
 
 /* ---------- Root ---------- */
@@ -9,11 +9,11 @@
   --accent: #b80000;
   --card-bg: #fff;
   --shadow: rgba(0, 0, 0, 0.08);
-  --ticker-h: 36px; /* fixed ticker height */
+  --ticker-h: 36px;
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* ---------- Global ---------- */
+/* ---------- Global Reset ---------- */
 html, body {
   margin: 0;
   padding: 0;
@@ -32,9 +32,9 @@ img {
 }
 
 /* ============================================================
-   ALERT STRIP / TICKER
+   TICKER (BREAKING NEWS STRIP)
    ============================================================ */
-.alert-strip {
+#alert-strip {
   position: fixed;
   top: 0;
   left: 0;
@@ -47,10 +47,10 @@ img {
   overflow: hidden;
   white-space: nowrap;
   z-index: 200;
-  font-size: 1.2em;
+  font-size: 1.2em; /* +20% font increase */
 }
 
-.alert-strip p {
+#alert-strip p {
   display: inline-block;
   padding-left: 100%;
   animation: ticker-scroll 45s linear infinite;
@@ -76,20 +76,10 @@ img {
 
 .site-header img {
   width: 100%;
+  max-height: 160px;   /* limit banner size */
   height: auto;
   display: block;
-}
-
-
-
-/* Mobile optimization */
-@media (max-width: 900px) {
-  :root { --ticker-h: 32px; }
-
-  .site-banner {
-    max-height: 140px;
-    object-fit: contain;
-  }
+  object-fit: cover;
 }
 
 /* ============================================================
@@ -97,19 +87,19 @@ img {
    ============================================================ */
 #tafaj-meter {
   position: fixed;
-  top: calc(var(--ticker-h) + 220px + 16px);
+  top: calc(var(--ticker-h) + 160px + 12px); /* ticker + banner + gap */
   left: 16px;
-  width: 260px;
+  width: 240px;
   z-index: 50;
 }
 
 #tafaj-meter img {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
 }
 
-/* Mobile: TAFAJ becomes inline in the content */
+/* Mobile: TAFAJ becomes part of flow */
 @media (max-width: 900px) {
   #tafaj-meter {
     position: static;
@@ -134,9 +124,9 @@ main.main-grid {
 }
 
 /* ============================================================
-   STORY TILES (INDEX)
+   STORY CARDS
    ============================================================ */
-.tile {
+article {
   background: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 2px 6px var(--shadow);
@@ -144,24 +134,24 @@ main.main-grid {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tile:hover {
+article:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 12px var(--shadow);
 }
 
-.tile img {
+article img {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-.tile h2 {
+article h2 {
   font-size: 1.05rem;
   margin: 0.5rem 1rem 0.25rem;
   color: var(--text);
 }
 
-.tile p {
+article p {
   font-size: 0.9rem;
   margin: 0 1rem 1rem;
   color: #333;
@@ -181,12 +171,12 @@ main.main-grid {
 }
 
 /* ============================================================
-   STORY PAGES
+   STORY PAGE (ARTICLE)
    ============================================================ */
-.story-page main {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
+.story-page main.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
 }
 
 .story {
@@ -196,23 +186,42 @@ main.main-grid {
   padding: 2rem;
 }
 
-.story h1 {
-  font-size: 2rem;
+.story img {
+  border-radius: 8px;
+}
+
+.story-head {
+  margin-bottom: 1.5rem;
+}
+
+.story-title {
+  font-size: 1.8rem;
   margin: 0.5rem 0;
 }
 
-.story .lede img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 1rem 0;
-  object-fit: contain;
+.story-byline {
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.caption {
-  font-size: 0.8rem;
-  color: #666;
+.story-body p {
+  margin-bottom: 1rem;
+}
+
+.story-nav {
+  margin-top: 2rem;
   text-align: center;
+}
+
+.story-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.story-nav a:hover {
+  text-decoration: underline;
 }
 
 /* ============================================================
@@ -223,25 +232,26 @@ footer {
   font-size: 0.8rem;
   padding: 2rem 1rem;
   color: #444;
-  background: var(--bg);
 }
 
 /* ============================================================
    MOBILE ADJUSTMENTS
    ============================================================ */
 @media (max-width: 600px) {
-  .alert-strip {
+  #alert-strip {
     font-size: 1em;
-    height: var(--ticker-h);
+    height: 32px;
   }
 
-  .tile img {
+  .site-header img {
+    max-height: 120px;
+  }
+
+  article img {
     height: 140px;
   }
 
   .story {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 }
-
-
