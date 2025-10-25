@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OTI — Banner Proof</title>
+
+<style>
+  :root{
+    --bg:#faf6ee; --text:#111; --accent:#b80000; --banner-bg:#071b36; --ticker-h:36px;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Inter,Arial}
+  /* Ticker */
+  #alert-strip{position:fixed;top:0;left:0;width:100%;height:var(--ticker-h);background:var(--accent);color:#fff;
+    display:flex;align-items:center;white-space:nowrap;overflow:hidden;z-index:200;pointer-events:none}
+  #alert-strip p{display:inline-block;margin:0;padding-left:100%;animation:tkr 45s linear infinite}
+  @keyframes tkr{to{transform:translateX(-100%)}}
+
+  /* BANNER — full-width, scaled */
+  .site-header{
+    margin-top:var(--ticker-h);
+    width:100%;
+    height:clamp(110px,14vw,220px);
+    background:var(--banner-bg) url("media/banner.png") top center / cover no-repeat;
+    display:block; box-shadow:0 2px 6px rgba(0,0,0,.08);
+  }
+
+  /* If you prefer NO cropping, swap 'cover' above for 'contain' */
+  /* Fallback img (only shows if you delete background line above) */
+  .site-header img{display:none;width:100%;height:auto}
+</style>
+</head>
+
+<body>
+  <!-- TICKER -->
+  <div id="alert-strip"><p>Official guidance: Remain Correct. • Tonight: Hammer of Grundy — measured thunder approved. • Public Smiling Hours extended.</p></div>
+
+  <!-- BANNER (single element) -->
+  <header class="site-header" role="img" aria-label="One True Infotainment banner">
+    <img src="media/banner.png" alt="Banner fallback">
+  </header>
+
+  <main style="padding:2rem;text-align:center">
+    <h1>Banner is rendering full-width.</h1>
+    <p>If you see the full blue header with the logo spanning edge-to-edge under the ticker, we’re good.</p>
+  </main>
+</body>
+</html>
