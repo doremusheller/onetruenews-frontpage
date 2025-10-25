@@ -62,20 +62,20 @@ img {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
-
-/* ============================================================
-   BANNER (Full-Width, Responsive, Respects Ticker)
-   ============================================================ */
-.site-header {
+/* === BANNER — locked, predictable === */
+.site-header{
   margin-top: var(--ticker-h);
-  height: clamp(96px, 12vw, 160px);
-  background: var(--banner-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: clamp(96px, 12vw, 160px);   /* same visual cadence */
+  background-color: var(--banner-bg); /* fallback color */
+  background-position: center;
+  background-size: cover;             /* fills area, crops nicely */
+  background-repeat: no-repeat;
   overflow: hidden;
   z-index: 100;
 }
+
+/* remove or ignore any .site-header .site-banner rules */
+
 
 /* Banner Image */
 .site-header .site-banner {
@@ -235,3 +235,4 @@ footer {
     object-position: center;
   }
 }
+
