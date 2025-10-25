@@ -33,7 +33,7 @@ img {
   color: var(--white);
   height: 28px;
   overflow: hidden;
-  position: relative;
+  position: relative;   /* keeps it from overlaying header */
   z-index: 20;
   white-space: nowrap;
 }
@@ -55,17 +55,24 @@ img {
   position: relative;
   z-index: 10;
   background: var(--indigo);
+  /* Banner fallback in CSS: shows even if <img> path fails */
+  background-image: url("media/banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;       /* full bleed */
+  background-position: center;
+  min-height: 120px;            /* natural space for banner */
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   margin: 0;
   padding: 0;
 }
 
+/* If the <img> loads, it simply sits on top of the fallback */
 .site-header .brand,
 .site-header img.site-banner {
   display: block;
   width: 100%;
-  height: auto;
+  height: auto;                 /* remove old 68px lock */
   object-fit: cover;
   margin: 0 auto;
 }
