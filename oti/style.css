@@ -1,265 +1,202 @@
-/* =========================================
-   ONE TRUE INFOTAINMENT — v8.4 Canon
-   Style Sheet (style.css)
-   ========================================= */
+/* ==========================================================================
+   One True Infotainment — master stylesheet (v8.4)
+   ========================================================================== */
 
-/* ---------- Root Variables ---------- */
-:root {
-  --amber: #ffb300;
-  --indigo: #0f0f1a;
-  --cream: #faf7ef;
-  --red: #c62828;
-  --blue: #1133aa;
-  --white: #ffffff;
-}
-
-/* ---------- Global ---------- */
+/* ---------- Base Reset ---------- */
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--cream);
-  color: var(--indigo);
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f8f4eb;
+  color: #111;
+  overflow-x: hidden;
 }
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
+  border: none;
 }
 
-/* ---------- Alert Strip / Ticker ---------- */
-.alert-strip {
-  background: var(--red);
-  color: var(--white);
-  height: 32px;
-  overflow: hidden;
-  position: static;      /* prevent overlay conflicts */
-  z-index: auto;
-  white-space: nowrap;
+/* ---------- Layout Containers ---------- */
+header, footer {
+  text-align: center;
+  padding: 0.5rem 0;
 }
 
-.alert-strip p, .ticker span {
-  margin: 0;
-  line-height: 32px;
-  font-size: 1.1rem;     /* +30% font increase */
-  animation: ticker-scroll 30s linear infinite;
-}
-
-@keyframes ticker-scroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-/* ---------- Site Header / Banner (fixed) ---------- */
-.site-header {
-  position: static;
-  z-index: auto;
-  height: 140px;
-  background: var(--indigo);
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.site-header .brand {
-  display: block;
-  line-height: 0;
-}
-
-.site-header .site-banner {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  display: block;
-}
-
-/* ---------- Page Content ---------- */
-.content {
-  padding: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* ---------- Grid Layout ---------- */
-.grid-layout {
+.main-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1.5rem;
+  padding: 1rem 2rem;
+  justify-items: center;
+  box-sizing: border-box;
 }
 
-/* ---------- Story Tile ---------- */
-.story-tile {
-  background: var(--white);
+.tile {
+  background: #fff;
   border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.story-tile:hover {
+.tile:hover {
   transform: translateY(-3px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.tile-link {
-  color: inherit;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.tile-image {
+.tile img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto;
+  border-bottom: 1px solid #ddd;
 }
 
-.tile-text {
-  padding: 1rem;
+.tile-content {
+  padding: 0.75rem 1rem;
 }
 
-.tile-tag {
-  display: inline-block;
-  background: var(--red);
-  color: var(--white);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.7rem;
-  border-radius: 3px;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.tile-title {
-  font-size: 1.05rem;
-  margin: 0.25rem 0;
+.tile h3 {
+  margin: 0.4rem 0;
+  font-size: 1rem;
   font-weight: 700;
 }
 
-.tile-summary {
+.tile p {
+  margin: 0.3rem 0;
   font-size: 0.9rem;
-  color: #333;
+  color: #222;
 }
 
-/* ---------- Story Page Blocks ---------- */
-.story {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-}
-
-.story-head {
-  margin-bottom: 1.5rem;
-}
-
-.story-title {
-  font-size: 2rem;
-  color: var(--indigo);
-  margin: 0.25rem 0;
-}
-
-.story-dek {
-  font-style: italic;
-  color: var(--red);
-}
-
-.byline {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-figure.lede {
-  margin: 1rem 0;
-}
-
-img.lede-image {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.caption {
-  font-size: 0.8rem;
-  color: #555;
-  margin-top: 0.25rem;
-}
-
-.story-body p {
-  line-height: 1.6;
-  margin: 1rem 0;
-}
-
-.story-nav {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-}
-
-.btn {
-  background: var(--red);
-  color: var(--white);
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  cursor: pointer;
+/* ---------- Pills (category tags) ---------- */
+.pill {
+  display: inline-block;
+  background: #b80000;
+  color: #fff;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  text-decoration: none;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-bottom: 6px;
 }
 
-.btn:hover {
-  background: var(--amber);
-  color: var(--indigo);
-}
-
-/* ---------- Ads Section ---------- */
-.ad-section {
-  margin-top: 3rem;
-}
-
-.ad-section .story-tile {
-  background: var(--white);
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+/* ---------- Breaking News Ticker ---------- */
+#alert-strip {
+  background-color: #b80000;
+  color: #fff;
+  font-size: 1.2em;             /* increased by ~20% */
+  font-weight: 600;
+  white-space: nowrap;
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 36px;                 /* slightly taller */
+  display: flex;
+  align-items: center;
+  z-index: 200;
+  padding-left: 12px;
+  letter-spacing: 0.2px;
 }
 
-.ad-section .tile-image {
+#alert-strip p {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-scroll 60s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---------- Banner ---------- */
+#banner {
   width: 100%;
-  height: 220px;
-  object-fit: contain;
-  background: #fdfdfd;
-  padding: 0.5rem;
+  margin-top: 36px;  /* sits below ticker */
+  position: relative;
+  z-index: 100;
+}
+
+#banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- TAFAJ Threat Meter ---------- */
+#tafaj-meter {
+  position: fixed;
+  top: calc(36px + 140px + 12px);   /* below ticker + banner */
+  left: 16px;
+  right: auto;
+  width: 240px;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+#tafaj-meter img {
+  width: 100%;
+  height: auto;
+  max-height: 95vh;
+  filter: drop-shadow(0 0 18px rgba(255,0,0,0.6))
+          drop-shadow(0 0 28px rgba(255,120,0,0.5));
+  animation: flicker 2s infinite ease-in-out alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.92; transform: scale(1.00); }
+  50% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 0.94; transform: scale(1.00); }
 }
 
 /* ---------- Footer ---------- */
-.site-footer {
-  background: var(--cream);
+footer {
   text-align: center;
-  padding: 1rem 0;
+  color: #777;
   font-size: 0.8rem;
-  color: #333;
-  border-top: 4px solid var(--amber);
-  border-bottom: 4px solid var(--blue);
+  padding: 2rem 0;
 }
 
-.patriotic-ribbon {
-  height: 4px;
-  background: linear-gradient(to right, var(--red), var(--white), var(--blue));
+/* ---------- Mobile View ---------- */
+@media (max-width: 900px) {
+
+  #tafaj-meter {
+    position: static;
+    width: min(360px, 90vw);
+    margin: 1rem auto;
+    display: block;
+  }
+
+  #alert-strip {
+    font-size: 1.1em;
+    height: 32px;
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .tile {
+    max-width: 95%;
+  }
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 768px) {
-  .site-header .site-banner {
-    height: 80px;
-    object-fit: cover;
-  }
+/* ---------- Utility ---------- */
+a {
+  text-decoration: none;
+  color: #111;
+}
 
-  .tile-image {
-    height: 160px;
-  }
+a:hover {
+  color: #b80000;
+}
 
-  .alert-strip p, .ticker span {
-    font-size: 1rem;
-  }
+body.darkmode {
+  background-color: #111;
+  color: #eee;
 }
