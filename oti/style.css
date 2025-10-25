@@ -97,6 +97,30 @@ img {
   position: relative;
 }
 
+/* ---------- TAFAJ Threat Meter ---------- */
+.threat-meter {
+  position: fixed;
+  top: 160px;           /* below the banner */
+  left: 10px;
+  width: 120px;         /* base width */
+  z-index: 5;
+}
+
+.threat-meter img {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;     /* ensures it scales nicely with screen */
+  object-fit: contain;
+}
+
+/* On smaller screens, hide it to prevent layout issues */
+@media (max-width: 900px) {
+  .threat-meter {
+    display: none;
+  }
+}
+
+
 .breaking-pill {
   position: absolute;
   top: 8px;
@@ -272,4 +296,5 @@ img.lede-image {
   height: 4px;
   background: linear-gradient(to right, var(--red), var(--white), var(--blue));
 }
+
 
