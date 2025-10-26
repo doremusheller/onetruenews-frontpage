@@ -10,11 +10,12 @@ html, body {
   font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Banner setup */
+/* Banner tuned for correct ratio */
 .banner {
   width: 100%;
-  aspect-ratio: 21 / 9; /* keeps correct proportion */
+  aspect-ratio: 3 / 1; /* closer to actual banner shape */
   background: var(--indigo) url("./media/banner.png")
-              center / cover no-repeat;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+              center / contain no-repeat;
+  background-color: var(--indigo);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
