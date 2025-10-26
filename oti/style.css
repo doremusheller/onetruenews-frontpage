@@ -1,18 +1,14 @@
 :root{
   --indigo:#071b36;
   --cream:#faf5ee;
-  --banner-h:clamp(140px,18vw,280px);
+  --banner-h:clamp(160px,22vw,320px);
   --gap:16px;
 }
 
 html,body{margin:0;padding:0}
-body{
-  background:var(--cream);
-  color:#111;
-  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-}
+body{background:var(--cream);color:#111;font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 
-/* Banner: background image, full width, no crop */
+/* Banner: full-width, edge-to-edge */
 .banner{
   width:100%;
   height:var(--banner-h);
@@ -20,12 +16,12 @@ body{
   background-image:url("./media/banner.png");
   background-repeat:no-repeat;
   background-position:center;
-  background-size:contain; /* show full banner */
+  background-size:cover;
   box-shadow:0 2px 6px rgba(0,0,0,.08);
   margin-bottom:var(--gap);
 }
 
-/* Threatmeter: fixed left under banner on desktop */
+/* Threat meter: fixed left below banner (desktop), tile on mobile */
 #threatmeter{
   position:fixed;
   left:var(--gap);
@@ -35,7 +31,6 @@ body{
 }
 #threatmeter img{display:block;width:100%;height:auto}
 
-/* Mobile: inline tile */
 @media (max-width:900px){
   #threatmeter{
     position:static;
