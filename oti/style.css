@@ -1,32 +1,26 @@
-:root{
-  --indigo: #071b36;
-  --cream:  #faf5ee;
-
-  /* Responsive header strip height (thin, readable) */
-  --banner-h: clamp(120px, 14vw, 220px);
-}
-
-html, body {
+/* Reset & background */
+body {
   margin: 0;
   padding: 0;
-  background: var(--cream);
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  background-color: #faf5ef; /* subtle warm tone for page */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Wide, proportional, legible header */
-.banner{
-  background: var(--indigo);
+/* Header container */
+.site-header {
   width: 100%;
-  height: var(--banner-h);
+  background-color: #071b36; /* deep indigo fallback */
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden; /* hides any tiny rounding bleed */
+  align-items: center;
+  overflow: hidden;
 }
 
-.banner img{
-  height: 100%;     /* fit the defined header height */
-  width: auto;      /* keep aspect ratio (no distortion) */
-  max-width: 100%;  /* prevent overflow on narrow screens */
-  display: block;
+/* Banner image */
+.banner {
+  width: 100%;
+  height: auto;          /* maintain aspect ratio */
+  max-height: 160px;     /* thin banner */
+  object-fit: contain;   /* no distortion, full image visible */
+  background-color: #071b36;
 }
