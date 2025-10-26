@@ -1,32 +1,135 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>One True Infotainment</title>
+
+  <!-- Serif for ticker only -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="style.css" />
+
+  <!-- 
+  === IMAGE–PAGE MAP (Reference Only) ===
+  Each HTML file and its corresponding image in /media
+  Updated: 2025-10-26
+
+  index.html ................ banner-wide.png (or banner.png), threatmeter.png
+  friendship-correction.html  friendship-rebuild.png
+  grundy-explains-cancer.html grundy-explains-health.png
+  grundy-explains-collection.html grundy-explains-collection.png
+  hammer-of-grundy.html       hammer-of-grundy-concert.png
+  patriotic-census.html       patriotic-census.png
+  public-smiling-hours.html   public-smiling.png
+  river-glow.html             river-glow.png
+  tafaj-latex-panic.html      tafajsatan.png
+  veteran-visibility.html     veteran-visibility.png
+
+  Loose/promotional media:
+  patriot-beer-ad.png, patriot-games-promo.png, AngelsAd.png, CorrectedAaF.png, ad-here.png
+  -->
 </head>
 <body>
 
-  <!-- Site header / banner -->
+  <!-- TICKER (red strip above banner) -->
+  <div id="ticker" class="ticker" aria-live="polite">
+    <p>
+      Officials certify surplus of certainty abroad • Midnight trains now arrive at noon for efficiency audits •
+      Friendship Correction opens satellite embassy in Neutral Waters • Ministry of Metrics expands to feelings and fog •
+      Allies report record levels of coordinated smiling • Border mirrors reinstalled to improve perspective •
+      Weather licensed for patriotic use in coastal capitals • International irony permits reduced to ceremonial quotas •
+      Export-grade optimism cleared for global broadcast • Angels salute the unbroken future at sunrise review
+    </p>
+  </div>
+
+  <!-- BANNER -->
   <header class="site-header">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT" class="banner-img" />
+    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
   </header>
 
-  <!-- Page layout: left sidebar (TAFAJ) + main content -->
+  <!-- PAGE LAYOUT: TAFAJ left + content grid -->
   <div class="page">
     <aside class="tafa-sidebar" aria-label="TAFAJ Threat Meter">
       <img src="media/threatmeter.png" alt="TAFAJ Threat Meter" />
     </aside>
 
-    <main class="content">
-      <!-- your content goes here -->
-      <section class="placeholder">
-        <h1>Prototype</h1>
-        <p>This area is just a placeholder for page content.</p>
+    <main class="content" id="top">
+      <section class="grid">
+        <!-- Story tiles -->
+        <article class="tile">
+          <a href="friendship-correction.html">
+            <img src="media/friendship-rebuild.png" alt="" />
+            <h2>Friendship Correction</h2>
+            <p>Old alliances reissued with cleaner, brighter paperwork.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="grundy-explains-cancer.html">
+            <img src="media/grundy-explains-health.png" alt="" />
+            <h2>Grundy Explains: Cancer</h2>
+            <p>Snack geometry clarifies national health objectives.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="grundy-explains-collection.html">
+            <img src="media/grundy-explains-collection.png" alt="" />
+            <h2>Grundy Explains: Collection</h2>
+            <p>Previous lessons condensed for improved retention.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="hammer-of-grundy.html">
+            <img src="media/hammer-of-grundy-concert.png" alt="" />
+            <h2>Hammer of Grundy</h2>
+            <p>Measured thunder approved for public listening.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="patriotic-census.html">
+            <img src="media/patriotic-census.png" alt="" />
+            <h2>Patriotic Census</h2>
+            <p>Every count is a pledge, every checkbox devotion.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="public-smiling-hours.html">
+            <img src="media/public-smiling.png" alt="" />
+            <h2>Public Smiling Hours</h2>
+            <p>Grins extended while spirits remain measurable.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="river-glow.html">
+            <img src="media/river-glow.png" alt="" />
+            <h2>River Glow</h2>
+            <p>Industry thanks the water for cooperating beautifully.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="tafaj-latex-panic.html">
+            <img src="media/tafajsatan.png" alt="" />
+            <h2>TAFAJ Latex Panic</h2>
+            <p>Authorities address rumors with brighter graphs.</p>
+          </a>
+        </article>
+
+        <article class="tile">
+          <a href="veteran-visibility.html">
+            <img src="media/veteran-visibility.png" alt="" />
+            <h2>Veteran Visibility</h2>
+            <p>Citizens invited to witness precision and poise.</p>
+          </a>
+        </article>
       </section>
     </main>
   </div>
-
 </body>
 </html>
