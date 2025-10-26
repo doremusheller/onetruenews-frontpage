@@ -1,10 +1,31 @@
-:root { --indigo:#071b36; --cream:#faf5ee; }
+:root {
+  --indigo: #071b36;
+  --cream: #faf5ee;
+}
 
-html,body{margin:0;padding:0;background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
 
-.banner{background:var(--indigo)}            /* fills edges behind the image */
-.banner img{
-  display:block;
-  width:100%;    /* spans full width */
-  height:auto;   /* preserves aspect ratio, no distortion, no crop */
+/* Banner */
+.banner {
+  background: var(--indigo);
+  width: 100%;
+  height: clamp(120px, 22vw, 260px);  /* defines a clean horizontal band */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.banner img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
