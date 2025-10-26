@@ -1,3 +1,4 @@
+<!-- /oti/veteran-visibility.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +9,13 @@
   <!-- Libre Baskerville for story pages -->
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Master stylesheet (canon: single CSS file, relative path) -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- master CSS at root -->
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body class="story-page" style="background:var(--cream); color:#111; font-family:'Libre Baskerville', Georgia, serif;">
 
   <header class="site-header" style="background:var(--indigo);">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    <img src="../media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
   </header>
 
   <main id="top">
@@ -28,7 +29,7 @@
       </header>
 
       <figure style="max-width:1000px;margin:1rem auto 1.5rem;padding:0 1rem;">
-        <img src="media/veteran-visibility.png" alt="First Citizen Grundy greeting recuperating Angels troops during a hospital walkthrough" style="display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 8px 16px var(--shadow);" />
+        <img src="../media/veteran-visibility.png" alt="First Citizen Grundy greeting recuperating Angels troops during a hospital walkthrough" style="display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 8px 16px var(--shadow);" />
         <figcaption style="font-size:.9rem;color:#444;margin-top:.5rem;">
           Ministry image release: “Precision, Poise, Recuperation.” Location redacted for security and mood.
         </figcaption>
@@ -54,7 +55,7 @@
         </p>
 
         <figure style="max-width:900px;margin:2rem auto;padding:0;">
-          <img src="media/veteran-visibility.png" alt="Grundy shaking hands with recovering Angels soldiers under indigo-and-amber banners" style="display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 6px 12px var(--shadow);" />
+          <img src="../media/veteran-visibility.png" alt="Grundy shaking hands with recovering Angels soldiers under indigo-and-amber banners" style="display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 6px 12px var(--shadow);" />
           <figcaption style="font-size:.9rem;color:#555;margin-top:.4rem;">
             The official scene, as distributed by One True Infotainment: gratitude perfectly lit and evenly applied.
           </figcaption>
@@ -101,5 +102,7 @@
     </article>
   </main>
 
+  <!-- optional: no grid/ticker needed on story pages; if used, source from root -->
+  <!-- <script src="../ticker.js" defer></script> -->
 </body>
 </html>
