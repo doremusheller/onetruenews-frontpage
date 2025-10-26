@@ -1,220 +1,27 @@
-/* ============================================================
-   ONE TRUE INFOTAINMENT — MASTER STYLE SHEET (v9.2)
-   ============================================================ */
-
-/* ---------- Root ---------- */
+/* Canon colors */
 :root {
-  --bg: #faf6ee;
-  --text: #111;
-  --accent: #b80000;
-  --card-bg: #fff;
-  --shadow: rgba(0, 0, 0, 0.08);
-  --ticker-h: 36px;
-  --banner-bg: #071b36;
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --indigo: #071b36;
+  --amber: #b80000;
+  --cream: #faf5ee;
 }
 
-/* ---------- Global Reset ---------- */
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  line-height: 1.4;
-  overflow-x: hidden;
+/* Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: #111;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-img {
+/* Banner */
+.site-banner {
+  background: var(--indigo);
+  width: 100%;
+  overflow: hidden;
+}
+.banner-img {
   display: block;
-  max-width: 100%;
-  height: auto;
-  border: none;
-}
-
-/* ============================================================
-   TICKER (BREAKING NEWS STRIP)
-   ============================================================ */
-#alert-strip {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: var(--ticker-h);
-  background: var(--accent);
-  color: white;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
-  z-index: 200;
-  font-size: 1.2em;
+  height: auto;       /* preserves aspect ratio */
+  max-width: none;
 }
-
-#alert-strip p {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker-scroll 45s linear infinite;
-  margin: 0;
-}
-
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-/* ============================================================
-   BANNER (Full-Width, Responsive, Respects Ticker)
-   ============================================================ */
-.site-header {
-  margin-top: var(--ticker-h);
-  height: clamp(96px, 12vw, 160px);
-  background: var(--banner-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 100;
-}
-
-/* Banner Image */
-.site-header .site-banner {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-}
-
-/* Optional Edge-to-Edge (cropped) */
-.site-header .site-banner.fullbleed {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ============================================================
-   TAFAJ METER (LEFT MARGIN)
-   ============================================================ */
-#tafaj-meter {
-  position: fixed;
-  top: calc(var(--ticker-h) + 160px + 12px);
-  left: 16px;
-  width: 240px;
-  z-index: 50;
-}
-
-#tafaj-meter img {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
-}
-
-/* Mobile: TAFAJ moves into page flow */
-@media (max-width: 900px) {
-  #tafaj-meter {
-    position: static;
-    width: min(360px, 90vw);
-    margin: 1rem auto;
-    display: block;
-  }
-}
-
-/* ============================================================
-   MAIN GRID LAYOUT
-   ============================================================ */
-main.main-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* ============================================================
-   STORY CARDS
-   ============================================================ */
-article {
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px var(--shadow);
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-article:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px var(--shadow);
-}
-
-article img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-article h2 {
-  font-size: 1.05rem;
-  margin: 0.5rem 1rem 0.25rem;
-  color: var(--text);
-}
-
-article p {
-  font-size: 0.9rem;
-  margin: 0 1rem 1rem;
-  color: #333;
-}
-
-.label {
-  display: inline-block;
-  background: var(--accent);
-  color: white;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  font-weight: bold;
-  letter-spacing: 0.04em;
-  padding: 0.25rem 0.5rem;
-  margin: 0.75rem 1rem 0.25rem;
-  border-radius: 3px;
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer {
-  text-align: center;
-  font-size: 0.8rem;
-  padding: 2rem 1rem;
-  color: #444;
-}
-
-/* ============================================================
-   MOBILE ADJUSTMENTS
-   ============================================================ */
-@media (max-width: 700px) {
-  :root { --ticker-h: 32px; }
-
-  #alert-strip {
-    font-size: 1em;
-    height: var(--ticker-h);
-  }
-
-  .site-header {
-    height: clamp(84px, 18vw, 120px);
-  }
-
-  article img {
-    height: 140px;
-  }
-}
-/* ---- Production hotfix (surgical) ---- */
-#alert-strip{pointer-events:none;}              /* ticker can't intercept clicks */
-.site-header{position:relative;}                /* prevent stray overlay */
-main, main.main-grid{position:relative;z-index:1;pointer-events:auto;}
-.story-tile a{display:block;color:inherit;text-decoration:none;}  /* full-card clicks */
-.story .lede img{width:100%;height:auto;display:block;}          /* story image sane size */
-
