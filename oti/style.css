@@ -1,17 +1,10 @@
-:root{
-  --indigo:#071b36;
-  --cream:#faf5ee;
-  --banner-h: 220px; /* strip height; adjust (180–300px) to taste */
-}
+:root { --indigo:#071b36; --cream:#faf5ee; }
 
-html,body{margin:0;padding:0}
-body{background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+html,body{margin:0;padding:0;background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 
-/* Top banner: full-width strip, no distortion */
-.banner{
-  width:100%;
-  height:var(--banner-h);                 /* fixed strip height */
-  background: var(--indigo) url("./media/banner.png")
-              center / cover no-repeat;   /* fill width, safe vertical crop */
-  box-shadow:0 2px 6px rgba(0,0,0,.08);
+.banner{background:var(--indigo)}            /* fills edges behind the image */
+.banner img{
+  display:block;
+  width:100%;    /* spans full width */
+  height:auto;   /* preserves aspect ratio, no distortion, no crop */
 }
