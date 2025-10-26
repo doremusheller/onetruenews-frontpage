@@ -1,37 +1,71 @@
-:root {
-  --indigo: #071b36;
-  --paper: #faf5ef;
+:root{
+  --indigo:#071b36;
+  --cream:#faf5ee;
 }
 
-/* Reset and base layout */
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--paper);
-  font-family: system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+/* Reset */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
+/* Base */
+body{
+  background:var(--cream);
+  color:#111;
+  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
 }
 
-/* Header and banner styling */
-.site-header {
-  background-color: var(--indigo);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+/* Banner */
+.site-header{
+  background:var(--indigo);
+}
+.banner-img{
+  display:block;
+  width:100%;
+  height:auto;          /* keep proportions */
 }
 
-/* The banner image — full width, always proportional */
-.banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  background-color: var(--indigo);
+/* Page grid: sidebar scrolls with page (not fixed) */
+.page{
+  display:grid;
+  grid-template-columns: 220px 1fr;   /* narrow left margin */
+  gap:24px;
+  align-items:start;
+  max-width:1200px;
+  margin:0 auto;
+  padding:24px 16px 48px;
 }
 
-/* Optional: a little breathing room below banner */
-main {
-  min-height: 80vh;
-  background: var(--paper);
+/* TAFAJ sidebar */
+.tafa-sidebar{
+  padding-top:8px;
+}
+.tafa-sidebar img{
+  width:100%;
+  height:auto;          /* no distortion */
+  display:block;
+}
+
+/* Content placeholder */
+.placeholder{
+  background:#fff;
+  border:1px solid #e6e2db;
+  border-radius:12px;
+  padding:24px;
+}
+
+/* Mobile: stack, show TAFAJ under banner */
+@media (max-width: 900px){
+  .page{
+    grid-template-columns: 1fr;
+    gap:12px;
+    padding:16px 12px 36px;
+  }
+  .tafa-sidebar{
+    order:1;            /* TAFAJ first under banner */
+    max-width:320px;
+    margin:0 auto;
+  }
+  .content{
+    order:2;
+  }
 }
