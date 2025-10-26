@@ -1,9 +1,9 @@
-/* Page base */
 :root {
   --indigo: #071b36;
   --paper: #faf5ef;
 }
 
+/* Reset and base layout */
 html, body {
   margin: 0;
   padding: 0;
@@ -11,34 +11,27 @@ html, body {
   font-family: system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
 }
 
-/* Header strip */
+/* Header and banner styling */
 .site-header {
-  background: var(--indigo);
-}
-
-/* Banner viewport: thin, full-width, with vertical crop */
-.banner-wrap {
-  position: relative;
-  height: 120px;      /* desired thin header height */
+  background-color: var(--indigo);
   width: 100%;
-  overflow: hidden;   /* crop top/bottom */
-  background: var(--indigo);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-/* Banner image: fill width, keep aspect, centered vertically */
+/* The banner image — full width, always proportional */
 .banner-img {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%); /* center vertically */
-  width: 100%;      /* span full width */
-  height: auto;     /* keep proportions */
+  width: 100%;
+  height: auto;
   display: block;
+  object-fit: cover;
+  background-color: var(--indigo);
 }
 
-/* Optional: slightly taller on small screens for legibility */
-@media (max-width: 640px) {
-  .banner-wrap {
-    height: 140px;
-  }
+/* Optional: a little breathing room below banner */
+main {
+  min-height: 80vh;
+  background: var(--paper);
 }
