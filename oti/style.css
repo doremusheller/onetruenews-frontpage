@@ -1,27 +1,36 @@
-/* Canon colors */
-:root {
-  --indigo: #071b36;
-  --amber: #b80000;
-  --cream: #faf5ee;
+/* ===========================
+   TAFAJ thermometer
+   =========================== */
+#tafaj-meter {
+  position: fixed;
+  left: 16px;
+  top: calc(clamp(100px, 14vw, 220px) + 16px); /* below banner */
+  width: 240px;
+  z-index: 50;
 }
 
-/* Base */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--cream);
-  color: #111;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-/* Banner */
-.site-banner {
-  background: var(--indigo);
-  width: 100%;
-  overflow: hidden;
-}
-.banner-img {
+#tafaj-meter img {
   display: block;
   width: 100%;
-  height: auto;       /* preserves aspect ratio */
-  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.15));
+}
+
+/* Mobile: convert to a tile in flow */
+@media (max-width: 900px) {
+  #tafaj-meter {
+    position: static;
+    width: min(360px, 92vw);
+    margin: 1rem auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    padding: .5rem;
+  }
+  #tafaj-meter img {
+    width: 100%;
+    height: auto;
+    filter: none;
+    border-radius: 8px;
+  }
 }
