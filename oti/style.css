@@ -1,27 +1,20 @@
-:root{
-  --indigo:#071b36;
-  --cream:#faf5ee;
-  /* cap the header height so it never feels huge */
-  --banner-max-h: clamp(140px, 18vw, 300px);
+:root {
+  --indigo: #071b36;
+  --cream: #faf5ee;
 }
 
-/* reset/base */
-html,body{margin:0;padding:0}
-body{
-  background:var(--cream);
-  color:#111;
-  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* banner: full-width image, preserves 21:9 ratio */
-.banner{
-  background:var(--indigo);         /* edge fill behind the image */
-  box-shadow:0 2px 6px rgba(0,0,0,.08);
-}
-.banner img{
-  display:block;
-  width:100%;                       /* spans page width */
-  height:auto;                      /* keeps correct aspect ratio */
-  max-height:var(--banner-max-h);   /* avoids overly tall header */
-  margin:0 auto;
+/* Banner setup */
+.banner {
+  width: 100%;
+  aspect-ratio: 21 / 9; /* keeps correct proportion */
+  background: var(--indigo) url("./media/banner.png")
+              center / cover no-repeat;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
