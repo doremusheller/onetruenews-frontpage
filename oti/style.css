@@ -1,6 +1,9 @@
-:root {
+:root{
   --indigo: #071b36;
-  --cream: #faf5ee;
+  --cream:  #faf5ee;
+
+  /* Responsive header strip height (thin, readable) */
+  --banner-h: clamp(120px, 14vw, 220px);
 }
 
 html, body {
@@ -10,22 +13,20 @@ html, body {
   font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Banner */
-.banner {
+/* Wide, proportional, legible header */
+.banner{
   background: var(--indigo);
   width: 100%;
-  height: clamp(120px, 22vw, 260px);  /* defines a clean horizontal band */
+  height: var(--banner-h);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden; /* hides any tiny rounding bleed */
 }
 
-.banner img {
-  height: 100%;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center;
+.banner img{
+  height: 100%;     /* fit the defined header height */
+  width: auto;      /* keep aspect ratio (no distortion) */
+  max-width: 100%;  /* prevent overflow on narrow screens */
   display: block;
 }
