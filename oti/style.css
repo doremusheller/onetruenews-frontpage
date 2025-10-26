@@ -1,11 +1,11 @@
 :root{
   --indigo:#071b36;
   --cream:#faf5ee;
-  /* Height tuned for the new wide banner; adjust if needed */
-  --banner-h: clamp(140px, 18vw, 300px);
+  /* cap the header height so it never feels huge */
+  --banner-max-h: clamp(140px, 18vw, 300px);
 }
 
-/* Reset / base */
+/* reset/base */
 html,body{margin:0;padding:0}
 body{
   background:var(--cream);
@@ -13,14 +13,15 @@ body{
   font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
 }
 
-/* Banner: uses background so sizing is predictable and crisp */
+/* banner: full-width image, preserves 21:9 ratio */
 .banner{
-  width:100%;
-  height:var(--banner-h);
-  background-color:var(--indigo);
-  background-image:url("./media/banner.png");
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;   /* shows full banner without crop (optimized for new asset) */
+  background:var(--indigo);         /* edge fill behind the image */
   box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.banner img{
+  display:block;
+  width:100%;                       /* spans page width */
+  height:auto;                      /* keeps correct aspect ratio */
+  max-height:var(--banner-max-h);   /* avoids overly tall header */
+  margin:0 auto;
 }
