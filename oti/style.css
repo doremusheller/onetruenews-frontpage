@@ -1,45 +1,51 @@
 /* Canon palette */
-:root {
-  --indigo: #071b36;
-  --cream:  #faf5ee;
-  --banner-h: clamp(120px, 16vw, 240px); /* one source of truth */
+:root{
+  --indigo:#071b36;
+  --cream:#faf5ee;
+  --banner-h:clamp(120px,16vw,240px);
+  --gap:16px;
 }
 
 /* Base */
-html, body { margin: 0; padding: 0; }
-body {
-  background: var(--cream);
-  color: #111;
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+html,body{margin:0;padding:0}
+body{
+  background:var(--cream);
+  color:#111;
+  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
 }
 
-/* Banner (full width, whole image visible) */
-.site-banner {
-  width: 100%;
-  height: var(--banner-h);
-  background-color: var(--indigo);
-  background-image: url("./media/banner.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain; /* no cropping; shows entire banner */
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+/* Banner: full-width, cover, neat spacing below */
+.banner{
+  width:100%;
+  height:var(--banner-h);
+  background:var(--indigo);
+  overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+  margin-bottom:var(--gap);
+}
+.banner img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;         /* stretch horizontally, crop safely */
+  object-position:center;   /* centered focus */
 }
 
-/* Left border element */
-#threat-meter {
-  position: fixed;
-  left: 16px;
-  top: calc(var(--banner-h) + 16px);
-  width: 240px;
-  z-index: 10;
+/* TAFAJ: fixed left, visually below banner */
+#tafaj{
+  position:fixed;
+  left:var(--gap);
+  top:calc(var(--banner-h) + var(--gap));
+  width:220px;
+  z-index:50;
 }
-#threat-meter img { display: block; width: 100%; height: auto; }
+#tafaj img{display:block;width:100%;height:auto}
 
-/* Mobile: place in flow as a tile */
-@media (max-width: 900px) {
-  #threat-meter {
-    position: static;
-    width: min(360px, 92vw);
-    margin: 1rem auto;
+/* Mobile: become a tile in flow */
+@media (max-width:900px){
+  #tafaj{
+    position:static;
+    width:min(360px,92vw);
+    margin:0 auto var(--gap);
   }
 }
