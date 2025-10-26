@@ -1,21 +1,17 @@
-:root {
-  --indigo: #071b36;
-  --cream: #faf5ee;
+:root{
+  --indigo:#071b36;
+  --cream:#faf5ee;
+  --banner-h: 220px; /* strip height; adjust (180–300px) to taste */
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--cream);
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-}
+html,body{margin:0;padding:0}
+body{background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 
-/* Banner tuned for correct ratio */
-.banner {
-  width: 100%;
-  aspect-ratio: 3 / 1; /* closer to actual banner shape */
+/* Top banner: full-width strip, no distortion */
+.banner{
+  width:100%;
+  height:var(--banner-h);                 /* fixed strip height */
   background: var(--indigo) url("./media/banner.png")
-              center / contain no-repeat;
-  background-color: var(--indigo);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+              center / cover no-repeat;   /* fill width, safe vertical crop */
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
 }
