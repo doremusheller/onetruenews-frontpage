@@ -1,69 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>One True Infotainment — Prototype</title>
-
-<!-- Critical styles inlined to avoid cache/path surprises -->
-<style>
-  :root{
-    --indigo:#071b36;
-    --cream:#faf5ee;
-    --banner-h:clamp(140px,18vw,280px); /* one source of truth */
-    --gap:16px;
-  }
-
-  html,body{margin:0;padding:0}
-  body{
-    background:var(--cream);
-    color:#111;
-    font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-  }
-
-  /* Banner — background image, full width, no crop */
-  header.banner{
-    width:100%;
-    height:var(--banner-h);
-    background-color:var(--indigo);
-    background-image:url("./media/banner.png");
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:contain;         /* show full banner */
-    box-shadow:0 2px 6px rgba(0,0,0,.08);
-  }
-
-  /* Threat meter — fixed left below banner on desktop */
-  #threatmeter{
-    position:fixed;
-    left:var(--gap);
-    top:calc(var(--banner-h) + var(--gap));
-    width:200px;
-    z-index:10;
-  }
-  #threatmeter img{
-    display:block;
-    width:100%;
-    height:auto;
-  }
-
-  /* Mobile: fall into flow as a tile */
-  @media (max-width:900px){
-    #threatmeter{
-      position:static;
-      width:min(360px,92vw);
-      margin:var(--gap) auto 0;
-    }
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One True Infotainment — Prototype</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- Banner -->
-  <header class="banner" role="img" aria-label="One True Infotainment banner"></header>
+  <header class="banner"></header>
 
-  <!-- Left Threat Meter -->
-  <aside id="threatmeter" aria-label="TAFAJ Threat Meter">
+  <aside id="threatmeter">
     <img src="./media/threatmeter.png" alt="TAFAJ Threat Meter" />
   </aside>
 </body>
