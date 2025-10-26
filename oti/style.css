@@ -1,53 +1,45 @@
+/* Canon palette */
 :root {
   --indigo: #071b36;
-  --cream: #faf5ee;
+  --cream:  #faf5ee;
+  --banner-h: clamp(120px, 16vw, 240px); /* one source of truth */
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
+/* Base */
+html, body { margin: 0; padding: 0; }
 body {
   background: var(--cream);
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   color: #111;
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Banner: full width, no cropping */
+/* Banner (full width, whole image visible) */
 .site-banner {
   width: 100%;
-  background: var(--indigo);
-  overflow: hidden;
+  height: var(--banner-h);
+  background-color: var(--indigo);
+  background-image: url("./media/banner.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* no cropping; shows entire banner */
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
-.banner-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-}
-
-/* TAFAJ thermometer: fixed on left margin (desktop), inline tile on mobile */
-#tafaj-meter {
+/* Left border element */
+#threat-meter {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
-  width: 120px;
-  z-index: 100;
+  left: 16px;
+  top: calc(var(--banner-h) + 16px);
+  width: 240px;
+  z-index: 10;
 }
+#threat-meter img { display: block; width: 100%; height: auto; }
 
-#tafaj-meter img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
+/* Mobile: place in flow as a tile */
 @media (max-width: 900px) {
-  #tafaj-meter {
+  #threat-meter {
     position: static;
-    width: min(340px, 90vw);
+    width: min(360px, 92vw);
     margin: 1rem auto;
   }
 }
