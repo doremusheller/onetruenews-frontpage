@@ -1,22 +1,52 @@
-/* ===========================
-   TAFAJ thermometer
-   =========================== */
+:root {
+  --indigo: #071b36;
+  --cream: #faf5ee;
+}
+
+/* Reset and base */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--cream);
+  font-family: system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+  color: #111;
+}
+
+/* Banner */
+.site-banner {
+  background: var(--indigo);
+  width: 100%;
+  height: clamp(100px, 14vw, 220px);
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* TAFAJ thermometer */
 #tafaj-meter {
   position: fixed;
   left: 16px;
-  top: calc(clamp(100px, 14vw, 220px) + 16px); /* below banner */
+  top: calc(clamp(100px, 14vw, 220px) + 16px); /* places it under banner */
   width: 240px;
   z-index: 50;
 }
 
 #tafaj-meter img {
-  display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,.15));
+  display: block;
 }
 
-/* Mobile: convert to a tile in flow */
+/* Mobile */
 @media (max-width: 900px) {
   #tafaj-meter {
     position: static;
@@ -24,13 +54,12 @@
     margin: 1rem auto;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.08);
-    padding: .5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 0.5rem;
   }
+
   #tafaj-meter img {
-    width: 100%;
-    height: auto;
-    filter: none;
     border-radius: 8px;
+    filter: none;
   }
 }
