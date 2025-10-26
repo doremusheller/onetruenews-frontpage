@@ -1,26 +1,44 @@
-/* Reset & background */
-body {
+/* Page base */
+:root {
+  --indigo: #071b36;
+  --paper: #faf5ef;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-  background-color: #faf5ef; /* subtle warm tone for page */
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  font-family: system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
 }
 
-/* Header container */
+/* Header strip */
 .site-header {
-  width: 100%;
-  background-color: #071b36; /* deep indigo fallback */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  background: var(--indigo);
 }
 
-/* Banner image */
-.banner {
+/* Banner viewport: thin, full-width, with vertical crop */
+.banner-wrap {
+  position: relative;
+  height: 120px;      /* desired thin header height */
   width: 100%;
-  height: auto;          /* maintain aspect ratio */
-  max-height: 160px;     /* thin banner */
-  object-fit: contain;   /* no distortion, full image visible */
-  background-color: #071b36;
+  overflow: hidden;   /* crop top/bottom */
+  background: var(--indigo);
+}
+
+/* Banner image: fill width, keep aspect, centered vertically */
+.banner-img {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); /* center vertically */
+  width: 100%;      /* span full width */
+  height: auto;     /* keep proportions */
+  display: block;
+}
+
+/* Optional: slightly taller on small screens for legibility */
+@media (max-width: 640px) {
+  .banner-wrap {
+    height: 140px;
+  }
 }
