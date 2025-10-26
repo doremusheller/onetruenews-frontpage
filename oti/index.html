@@ -1,41 +1,14 @@
-/* ===========================
-   Canon Color Palette
-   =========================== */
-:root {
-  --indigo: #071b36;
-  --amber: #b80000;
-  --cream: #faf5ee;
-}
-
-/* ===========================
-   Base
-   =========================== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background: var(--cream);
-  color: #111;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-/* ===========================
-   Banner
-   =========================== */
-.site-banner {
-  background: var(--indigo);
-  width: 100%;
-  height: clamp(100px, 14vw, 220px);  /* responsive height */
-  overflow: hidden;
-}
-
-.banner-img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;        /* fills the banner, crops as needed */
-  object-position: center top;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype — One True Infotainment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-banner">
+    <img src="media/banner.png" alt="One True Infotainment banner" class="banner-img" />
+  </header>
+</body>
+</html>
