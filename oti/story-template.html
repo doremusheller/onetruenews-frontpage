@@ -1,17 +1,25 @@
+Del here. Next corrected file:
+
+# `/oti/story-template.html`
+
+```html
 <!doctype html>
 <html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Story Title — OTI</title>
-  <link rel="stylesheet" href="../style.css" />
+  <!-- all assets live in /oti -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
-  <script src="../ticker.js" defer></script>
+  <script src="ticker.js" defer></script>
 
+  <!-- Banner -->
   <header class="site-header">
-    <img class="banner-img" src="../media/banner.png" alt="One True Infotainment site banner">
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner">
   </header>
 
   <main>
@@ -21,27 +29,32 @@
         <div class="byline">By Gene — 500 words</div>
       </header>
 
+      <!-- Story navigation (top) -->
       <nav class="footer-nav" aria-label="Story Navigation">
         <a class="btn" href="previous-story.html">← Last Story</a>
-        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="next-story.html">Next Story →</a>
       </nav>
 
+      <!-- Hero image -->
       <figure class="story-hero">
-        <img src="../media/public-smiling.png" alt="Neutral descriptive scene from the story world">
+        <img src="media/public-smiling.png" alt="Neutral descriptive scene from the story world">
         <figcaption>Neutral, descriptive caption set apart from body text.</figcaption>
       </figure>
 
+      <!-- Story body -->
       <section>
-        <p>Body copy begins here…</p>
+        <p>Body copy begins here. Approximately 500 words authored by Gene.</p>
       </section>
 
+      <!-- Story navigation (bottom, above ads) -->
       <nav class="footer-nav" aria-label="Story Navigation">
         <a class="btn" href="previous-story.html">← Last Story</a>
-        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="next-story.html">Next Story →</a>
       </nav>
 
+      <!-- Bottom ads -->
       <div class="ad-row"></div>
     </article>
   </main>
@@ -50,6 +63,8 @@
     “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
   </div>
 
-  <script src="../ads.js" defer></script>
+  <!-- scripts (same-folder paths) -->
+  <script src="ads.js" defer></script>
 </body>
 </html>
+```
