@@ -1,3 +1,4 @@
+```css
 /* ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
    Flat /oti structure, ticker above banner, validated responsive rules
@@ -34,7 +35,7 @@ body {
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   font-size: clamp(0.9rem, 0.9vw + 0.6rem, 1rem);
   line-height: 1.2;
-  min-height: 2.2rem; /* ensures visible amber bar */
+  min-height: 2.2rem;
 }
 .ticker p {
   margin: 0;
@@ -73,6 +74,9 @@ body {
   width: 220px;
   max-width: 240px;
 }
+.index-page .tafa-sidebar { display: block; }
+.story-page .tafa-sidebar { display: none; }
+
 .tafa-sidebar a { display: block; text-decoration: none; }
 .tafa-sidebar img {
   width: 100%;
@@ -169,6 +173,18 @@ body {
 }
 
 /* ===== STORY PAGE ===== */
+/* STORY DISPLAY NOTE (canonical):
+   The hero image locks to the TOP-LEFT of the story body.
+   Caption sits directly beneath the image (self-contained).
+   Body text wraps to the right and below the hero.
+   On mobile (≤900px) the hero clears and becomes full-width above text. */
+
+/* STORY IMAGE SCALING NOTE:
+   Scale hero images for optimal fit.
+   - On desktop, image should occupy ~40–45% of article width (max 420px).
+   - On mobile, full-width display (100%) above text.
+   - Maintain aspect ratio via object-fit: contain. */
+
 .story-page article {
   max-width: 900px;
   margin: 2rem auto;
@@ -186,6 +202,7 @@ body {
 .byline { font-style: italic; color: #444; margin-bottom: 1.25rem; }
 .story-hero {
   float: left;
+  width: 42%;
   max-width: 420px;
   margin: 0 1.5rem 1.5rem 0;
   display: flex;
@@ -206,6 +223,9 @@ body {
   text-align: center;
   line-height: 1.3;
   margin: 0 0 0.3rem 0;
+}
+@media (max-width: 900px) {
+  .story-hero { width: 100%; float: none; margin: 0 auto 1rem; }
 }
 
 /* ===== NAV BUTTONS ===== */
