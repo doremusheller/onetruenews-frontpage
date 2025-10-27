@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,67 +16,71 @@
 
   <link rel="canonical" href="public-smiling-hours.html" />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Ticker script (creates the scrolling text inside #alert-strip) -->
-  <script defer src="ticker.js"></script>
+  <script src="ticker.js" defer></script>
 </head>
 
-<body class="story-page">
+<body>
+  <!-- Ticker (topmost) -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
 
-  <!-- TICKER (empty; ticker.js will populate) -->
-  <div id="alert-strip"></div>
-
-  <!-- BANNER -->
-  <header id="banner">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+  <!-- Banner -->
+  <header class="site-header">
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner" />
   </header>
 
-  <!-- STORY CONTENT -->
-  <main class="story-wrap">
-    <article class="story">
-
-      <header class="story-head">
-        <div class="story-kicker">Domestic Harmony Bureau</div>
-        <h1 class="story-title">Public Smiling Hours Extended Through Winter</h1>
-        <div class="story-byline">
+  <main>
+    <article>
+      <header>
+        <h1>Public Smiling Hours Extended Through Winter</h1>
+        <div class="byline">
           By Staff Correspondent — Ministry of Wellbeing Desk ·
           <time datetime="2025-10-24">October 24, 2025</time>
         </div>
       </header>
 
-      <figure class="lede">
+      <!-- Story navigation (top) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="index.html">← OTI Home</a>
+        <a class="btn" href="grundy-explains-collection.html">Next Story →</a>
+      </nav>
+
+      <!-- Hero: top-left anchored, proportionate, captioned -->
+      <figure class="story-hero">
         <img src="media/domestic-smiles.png"
-             alt="Residents perform synchronized smiles under ministry supervision during the evening audit." />
-        <figcaption class="caption">
+             alt="Residents perform synchronized smiles under ministry supervision during the evening audit.">
+        <figcaption>
           Residents perform synchronized smiles under ministry supervision during the evening audit.
         </figcaption>
       </figure>
 
-      <section class="story-body">
-        <!-- ─────────────────────────────────────────────────────────
-             PASTE YOUR EXISTING STORY PARAGRAPHS BELOW THIS COMMENT.
-             Keep plain <p> paragraphs; no extra wrappers needed.
-             ───────────────────────────────────────────────────────── -->
-
+      <!-- Story body -->
+      <section>
         <p>Nationwide grin initiative credited with “increased warmth and cheek resilience.” The Ministry of Wellbeing announced the official extension of Public Smiling Hours to preserve morale visibility through the darker quarter, increasing daily duration from fourteen to sixteen hours.</p>
 
-        <!-- (If you prefer, replace the sample paragraph above with your original copy.) -->
+        <p>Officials cited early studies showing “a measurable glow in national tone,” with particular improvement in regions previously labeled frown-prone. In the capital, compliance monitors reported record participation, with citizens maintaining expressions rated “warm to radiant” for most daylight hours.</p>
+
+        <p>“We smile because we can,” said Deputy Minister Lora Henth, during a televised audit at a downtown plaza. “Cold is temporary; morale is forever.” Volunteers distributed cocoa-flavored grin wax to prevent chapping and to “keep the corners consistent.”</p>
+
+        <p>Critics of the program were reminded that Public Smiling Hours are a civic celebration, not a mandate. “Participation remains voluntary within expected norms,” the Ministry clarified, adding that “grimacing, partial grins, or ironic smirks” may still count toward the quota if performed with sincerity.</p>
+
+        <p>The extension, effective immediately, will remain in place through March, subject to solar review and cheek elasticity studies. Citizens are encouraged to “prepare their faces for faith-based endurance.”</p>
       </section>
 
-      <nav class="story-nav">
-        <a class="btn" href="index.html#top">← Back to Front Page</a>
-        <a class="btn" href="grundy-explains-collection.html">Next: Grundy Explains — The Collection</a>
+      <!-- Story navigation (bottom, above ads) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="index.html">← OTI Home</a>
+        <a class="btn" href="grundy-explains-collection.html">Next Story →</a>
       </nav>
 
+      <!-- Bottom ads (auto) -->
+      <div class="ad-row"></div>
     </article>
   </main>
 
-  <footer>
-    <p>
-      Produced without license from the Corrected States of America.<br />
-      All contained herein are speculation and may not yet exist.<br />
-      Doubt is treason; irony a pitchfork.
-    </p>
-  </footer>
+  <div class="footer-banner">
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
+  </div>
+
+  <script src="ads.js" defer></script>
 </body>
 </html>
