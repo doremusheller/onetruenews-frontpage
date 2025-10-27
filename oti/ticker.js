@@ -1,7 +1,7 @@
 /* ============================================================
    ticker.js — One True Infotainment (central headlines)
    Injects a scrolling ticker into #ticker on every page.
-   Plain JS, no deps. Honors prefers-reduced-motion.
+   Plain JS, no dependencies. Honors prefers-reduced-motion.
    ============================================================ */
 
 (function () {
@@ -22,7 +22,7 @@
     const host = document.getElementById("ticker");
     if (!host) return;
 
-    // Build the <p> once, feed headlines centrally
+    // Build the <p> element dynamically
     const p = document.createElement("p");
     p.setAttribute("role", "text");
     p.textContent = HEADLINES.join(" • ") + " • ";
@@ -30,11 +30,12 @@
     // Respect reduced motion
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      // No animation; just static, readable line
       p.style.animation = "none";
       p.style.paddingLeft = "0";
     }
 
+    // Append to host
+    host.textContent = "";
     host.appendChild(p);
   }
 
@@ -44,7 +45,7 @@
     initTicker();
   }
 
-  // Optional: expose a way to update headlines without editing this file
+  // Optional public interface for updates
   window.OTI_TICKER = {
     set(items) {
       if (!Array.isArray(items) || !items.length) return;
