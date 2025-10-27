@@ -51,16 +51,21 @@ body{
 
 /* PAGE LAYOUT (TAFAJ left + content) */
 .page{
-  display:grid;
-  grid-template-columns: 220px 1fr; /* left margin */
-  gap:24px;
+  display:block;
+  position:relative;
   max-width:1200px;
   margin:0 auto;
-  padding:24px 16px 48px;
-  align-items:start;
+  padding:24px 16px 48px 260px; /* space for floated TAFAJ meter */
 }
 
-/* TAFAJ sidebar (scrolls with page, 20% taller + link) */
+/* TAFAJ sidebar — floated left margin, linked, 20% taller */
+.tafa-sidebar{
+  position:absolute;
+  top:24px;
+  left:0;
+  width:220px;
+  max-width:240px;
+}
 .tafa-sidebar a{
   display:block;
   text-decoration:none;
@@ -69,9 +74,9 @@ body{
   width:100%;
   height:auto;
   display:block;
-  transform:scale(1.2);              /* 20% taller visual */
+  transform:scale(1.2);
   transform-origin:top;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,.15));
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.15));
   transition:transform .2s ease, filter .2s ease;
   cursor:pointer;
 }
@@ -164,16 +169,15 @@ body{
   font-weight:600;
 }
 
-/* MOBILE: stack TAFAJ and hero image */
+/* MOBILE */
 @media (max-width:900px){
   .page{
-    grid-template-columns:1fr;
-    gap:12px;
     padding:16px 12px 36px;
   }
   .tafa-sidebar{
+    position:static;
     max-width:320px;
-    margin:0 auto;
+    margin:0 auto 1rem;
   }
   .tafa-sidebar img{
     transform:none;
