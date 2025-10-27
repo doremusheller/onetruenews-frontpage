@@ -1,9 +1,9 @@
-<!doctype html>
-<html lang="en" class="story-page">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Grundy Explains: Cancer · One True Infotainment</title>
+  <title>Grundy Explains: Cancer — One True Infotainment</title>
   <meta name="description" content="In this week’s broadcast, Grundy claims Funyons prevent colon cancer, framing prevention as a matter of faith, crunch, and national morale." />
 
   <!-- Open Graph -->
@@ -14,42 +14,41 @@
   <meta property="og:site_name" content="One True Infotainment" />
 
   <link rel="canonical" href="grundy-explains-cancer.html" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="ticker.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=126" />
 </head>
 
-<body>
-  <!-- Ticker (topmost) -->
+<body class="story-page">
+  <!-- Live Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
-    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner">
+    <a href="index.html" aria-label="Return to OTI Home">
+      <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    </a>
   </header>
 
-  <main>
+  <main class="page">
     <article>
       <header>
         <h1>Grundy Explains: Cancer</h1>
-        <div class="byline">By Cultural Bureau</div>
+        <p class="byline">By Cultural Bureau</p>
       </header>
 
-      <!-- Story navigation (top) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
+      <!-- Top Nav -->
+      <nav class="footer-nav" aria-label="Story navigation (top)">
         <a class="btn" href="grundy-explains-collection.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="hammer-of-grundy.html">Next Story →</a>
       </nav>
 
-      <!-- Top-left anchored hero with caption; text wraps on desktop -->
+      <!-- Hero -->
       <figure class="story-hero">
-        <!-- NOTE: live media filename is grundy-explains-health.png -->
-        <img src="media/grundy-explains-health.png"
-             alt="First Citizen Grundy holding a bag of Funyons during a studio broadcast">
+        <img src="media/grundy-explains-health.png" alt="First Citizen Grundy holding a bag of Funyons during a studio broadcast" />
         <figcaption>“Trust the crunch,” Grundy told viewers, elevating a ring to the camera like a seal of office.</figcaption>
       </figure>
 
-      <!-- Body (kept from original) -->
+      <!-- BODY (verbatim) -->
       <section>
         <p>In this week’s episode of <strong>Grundy Explains Stuff</strong>, the First Citizen took 14 minutes to redefine prevention as posture, patriotism, and snack selection. Holding a bag of Funyons at chest height, he asserted that the onion-flavored rings “polish the inner nation and keep the colon on course.” The audience, seated in neat arcs around the podium, applauded in measured bursts. Behind him, a screen displayed two x-rays labeled <em>Before Belief</em> and <em>After Snacks</em>, separated by a diagonal of light that read: <strong>RING, REPAIR, REJOICE</strong>.</p>
 
@@ -72,23 +71,26 @@
         <p><em>Health is Harmony. Belief is Biology.</em></p>
       </section>
 
-      <!-- Story navigation (bottom, above ads) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
+      <!-- Bottom Nav -->
+      <nav class="footer-nav" aria-label="Story navigation (bottom)">
         <a class="btn" href="grundy-explains-collection.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="hammer-of-grundy.html">Next Story →</a>
       </nav>
-
-      <!-- Bottom ads (auto) -->
-      <div class="ad-row"></div>
     </article>
+
+    <!-- Bottom ads -->
+    <div class="ad-row"></div>
   </main>
 
-  <div class="footer-banner">
-    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
-  </div>
+  <!-- Footer -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
+  </footer>
 
-  <!-- Only required page script -->
+  <!-- Scripts -->
+  <script src="ticker.js" defer></script>
+  <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
