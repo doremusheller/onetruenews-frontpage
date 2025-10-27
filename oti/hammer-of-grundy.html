@@ -1,50 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+Del here — rebuilt to canon (flat `/oti`, no external fonts, single ticker include, correct paths/meta).
+
+# `/oti/hammer-of-grundy.html`
+
+```html
+<!doctype html>
+<html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hammer of Grundy — One True Infotainment</title>
+  <meta name="description" content="The nation’s loudest ministry returns to the stage with righteous volume and measured enlightenment in equal decibels." />
 
-  <!-- Libre Baskerville for story pages -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css?v=122" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hammer of Grundy" />
+  <meta property="og:description" content="Righteous volume meets measured enlightenment at the National Obedience Pavilion." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="media/hammer-of-grundy-concert.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+
+  <link rel="canonical" href="hammer-of-grundy.html" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="ticker.js" defer></script>
 </head>
-<body class="story-page">
-
-  <!-- TICKER (central feed) -->
+<body>
+  <!-- Ticker (topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
-  <!-- BANNER -->
+  <!-- Banner -->
   <header class="site-header">
-    <img src="../media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner" />
   </header>
 
-  <main id="top">
+  <main>
     <article>
       <header>
         <h1>Hammer of Grundy Shakes the Faithful</h1>
-        <p class="byline">
+        <div class="byline">
           The nation’s loudest ministry returned to the stage last night,
           delivering righteous volume and measured enlightenment in equal decibels.
-        </p>
+        </div>
       </header>
 
-      <!-- TOP NAV -->
+      <!-- Story navigation (top) -->
       <nav class="footer-nav" aria-label="Story Navigation">
         <a class="btn" href="veteran-visibility.html">← Last Story</a>
-        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="patriotic-census.html">Next Story →</a>
       </nav>
 
-      <!-- HERO -->
+      <!-- Hero: top-left anchored, proportionate, with caption; text wraps on desktop -->
       <figure class="story-hero">
-        <img src="../media/hammer-of-grundy-concert.png" alt="Hammer of Grundy performing under national spotlight" />
+        <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy performing under national spotlight" />
         <figcaption>
           Official still: Hammer of Grundy’s sanctioned concert, where faith met feedback in full compliance.
         </figcaption>
       </figure>
 
-      <!-- BODY -->
+      <!-- Body -->
       <section>
         <p>
           The <strong>Hammer of Grundy</strong>, a government-endorsed Christian Death Metal ensemble,
@@ -97,26 +109,23 @@
         </p>
       </section>
 
-      <!-- BOTTOM NAV (above ads) -->
+      <!-- Story navigation (bottom, above ads) -->
       <nav class="footer-nav" aria-label="Story Navigation">
         <a class="btn" href="veteran-visibility.html">← Last Story</a>
-        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="patriotic-census.html">Next Story →</a>
       </nav>
 
-      <!-- Bottom Ads -->
+      <!-- Bottom ads (auto via ads.js) -->
       <div class="ad-row"></div>
     </article>
   </main>
 
-  <!-- Footer Banner -->
   <div class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
-    Irony is resistance, satire a pitchfork.
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
   </div>
 
-  <!-- Scripts -->
-  <script src="../ads.js" defer></script>
-  <script src="../ticker.js" defer></script>
+  <script src="ads.js" defer></script>
 </body>
 </html>
+```
