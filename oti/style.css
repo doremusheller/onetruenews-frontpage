@@ -1,9 +1,4 @@
-Del here. Next corrected file:
-
-# `/oti/style.css`
-
-```css
-/* ============================================================
+/ ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
    Flat /oti structure, ticker above banner, validated responsive rules
    ============================================================ */
@@ -297,3 +292,4 @@ body {
   .tile img { height: 160px; }
 }
 ```
+
