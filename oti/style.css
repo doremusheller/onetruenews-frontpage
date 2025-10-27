@@ -1,326 +1,212 @@
 /* ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
-   Flat /oti structure, ticker above banner, validated responsive rules
+   Flat /oti structure
    ============================================================ */
 
 /* ===== VARIABLES ===== */
-:root {
-  --indigo: #071b36;
-  --amber: #b80000;
-  --cream: #faf5ef;
-  --shadow: rgba(0, 0, 0, 0.08);
+:root{
+  --indigo:#071b36;
+  --amber:#b80000;
+  --cream:#faf5ef;
+  --shadow:rgba(0,0,0,.08);
+  --ticker-h:2.6rem;
 }
 
 /* ===== RESET / BASE ===== */
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  background: var(--cream);
-  color: #111;
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+*{ box-sizing:border-box }
+html,body{ margin:0; padding:0 }
+body{
+  background:var(--cream);
+  color:#111;
+  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  padding-top:var(--ticker-h);           /* offset for fixed ticker */
 }
 
-/* ===== TICKER (locked topmost, slower) ===== */
-.ticker {
-  position: sticky;
-  top: 0;
-  z-index: 10000;           /* topmost */
-  background: #b80000;      /* red */
-  color: #fff;              /* white text */
-  font-family: "Libre Baskerville", Georgia, serif;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-  font-size: clamp(0.9rem, 0.9vw + 0.6rem, 1rem);
-  line-height: 1.2;
-  min-height: 2.2rem;
+/* ===== TICKER (fixed, topmost, slower) ===== */
+.ticker{
+  position:fixed; top:0; left:0; right:0;
+  z-index:10000;
+  background:#b80000; color:#fff;
+  font-family:"Libre Baskerville", Georgia, serif;
+  font-weight:700; white-space:nowrap; overflow:hidden;
+  border-bottom:2px solid rgba(0,0,0,.1);
+  font-size:clamp(.9rem,.9vw + .6rem,1rem);
+  line-height:1.2; min-height:var(--ticker-h);
 }
-.ticker p {
-  margin: 0;
-  padding: 0.45rem 0;
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker-scroll 46s linear infinite; /* 30% slower */
-  letter-spacing: 0.02em;
-  will-change: transform;
+.ticker p{
+  margin:0; padding:.45rem 0; display:inline-block; padding-left:100%;
+  animation:ticker-scroll 46s linear infinite;   /* ~30% slower */
+  letter-spacing:.02em; will-change:transform;
 }
-@keyframes ticker-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ticker p { animation: none; padding-left: 0; }
-}
+@keyframes ticker-scroll{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
+@media (prefers-reduced-motion:reduce){ .ticker p{ animation:none; padding-left:0 } }
 
 /* ===== BANNER ===== */
-.site-header { background: var(--indigo); }
-.banner-img { display: block; width: 100%; height: auto; }
+.site-header{ background:var(--indigo) }
+.banner-img{ display:block; width:100%; height:auto }
 
 /* ===== PAGE LAYOUT (index) ===== */
-.page {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 16px 48px 260px;
+.page{
+  position:relative; max-width:1200px; margin:0 auto;
+  padding:24px 16px 48px 260px;
 }
 
 /* ===== TAFAJ + LEFT AD ===== */
-.tafa-sidebar {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  width: 220px;
-  max-width: 240px;
+.tafa-sidebar{
+  position:absolute; top:24px; left:0; width:220px; max-width:240px;
 }
-.index-page .tafa-sidebar { display: block; }
-.story-page .tafa-sidebar { display: none; }
-
-.tafa-sidebar a { display: block; text-decoration: none; }
-.tafa-sidebar img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transform: scale(1.2);
-  transform-origin: top;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.15));
-  transition: transform 0.2s ease, filter 0.2s ease;
-  cursor: pointer;
-  margin-bottom: 28px;
+.index-page .tafa-sidebar{ display:block }
+.story-page .tafa-sidebar{ display:none }
+.tafa-sidebar a{ display:block; text-decoration:none }
+.tafa-sidebar img{
+  width:100%; height:auto; display:block;
+  transform:scale(1.2); transform-origin:top;
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.15));
+  transition:transform .2s ease, filter .2s ease;
+  cursor:pointer; margin-bottom:28px;
 }
-.tafa-sidebar img:hover {
-  filter: brightness(1.1) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
-  transform: scale(1.22);
-}
+.tafa-sidebar img:hover{ filter:brightness(1.1) drop-shadow(0 8px 20px rgba(0,0,0,.25)); transform:scale(1.22) }
 
 /* LEFT AD CONTAINER */
-.ad-container-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  background: #fff;
-  border: 1px solid var(--shadow);
-  box-shadow: 0 2px 6px var(--shadow);
-  padding: 8px;
-  border-radius: 8px;
+.ad-container-left{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; background:#fff; border:1px solid var(--shadow);
+  box-shadow:0 2px 6px var(--shadow); padding:8px; border-radius:8px;
 }
-.ad-container-left img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
+.ad-container-left img{ width:100%; height:auto; object-fit:contain; display:block }
 
-/* ===== GRID (index desktop) ===== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+/* ===== GRID (index) ===== */
+.grid{
+  display:grid;
+  gap:1rem;
+  grid-template-columns:1fr;             /* base */
 }
-.tile {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@media (min-width:701px){
+  .grid{ grid-template-columns:repeat(2, minmax(300px, 1fr)); }
 }
-.tile:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px var(--shadow);
+@media (min-width:1100px){
+  .grid{ grid-template-columns:repeat(3, minmax(300px, 1fr)); }
 }
-.tile a { display: block; color: inherit; text-decoration: none; }
-.tile img {
-  display: block;
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+.tile{
+  background:#fff; border-radius:12px; overflow:hidden;
+  box-shadow:0 2px 6px var(--shadow);
+  transition:transform .2s ease, box-shadow .2s ease;
 }
-.tile h2 {
-  margin: 0.6rem 1rem 0.25rem;
-  font-size: clamp(1rem, 1.2vw + 0.7rem, 1.2rem);
-  line-height: 1.25;
+.tile:hover{ transform:translateY(-4px); box-shadow:0 8px 16px var(--shadow) }
+.tile a{ display:block; color:inherit; text-decoration:none }
+.tile img{
+  display:block; width:100%;
+  height:150px;                            /* smaller card images */
+  object-fit:cover;
 }
-.tile p {
-  margin: 0 1rem 1rem;
-  color: #333;
-  font-size: clamp(0.9rem, 0.4vw + 0.7rem, 1rem);
-  line-height: 1.4;
+.tile h2{
+  margin:.6rem 1rem .25rem;
+  font-size:clamp(1rem, 1.1vw + .65rem, 1.15rem);
+  line-height:1.25;
 }
-
-/* ===== DESKTOP GRID ENFORCEMENT ===== */
-@media (min-width: 901px) {
-  .grid { display: grid !important; }
+.tile p{
+  margin:0 1rem 1rem; color:#333;
+  font-size:clamp(.9rem, .4vw + .7rem, 1rem); line-height:1.4;
 }
 
 /* ===== BREAKING ===== */
-.breaking { position: relative; border: 2px solid var(--amber); }
-.breaking-pill {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: var(--amber);
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.7rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px var(--shadow);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  pointer-events: none;
+.breaking{ position:relative; border:2px solid var(--amber) }
+.breaking-pill{
+  position:absolute; top:8px; left:8px;
+  background:var(--amber); color:#fff; font-weight:700; font-size:.7rem;
+  padding:.25rem .5rem; border-radius:6px; box-shadow:0 2px 4px var(--shadow);
+  text-transform:uppercase; letter-spacing:.05em; pointer-events:none;
 }
 
 /* ===== STORY PAGE ===== */
-.story-page article {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  line-height: 1.7;
-  font-family: "Libre Baskerville", Georgia, serif;
-  overflow: auto;
+.story-page article{
+  max-width:900px; margin:2rem auto; padding:0 1rem;
+  line-height:1.7; font-family:"Libre Baskerville", Georgia, serif; overflow:auto;
 }
-.story-page h1 {
-  color: var(--indigo);
-  font-size: 2.1rem;
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
+.story-page h1{ color:var(--indigo); font-size:2.1rem; line-height:1.2; margin-bottom:.5rem }
+.byline{ font-style:italic; color:#444; margin-bottom:1.25rem }
+.story-hero{
+  float:left; width:42%; max-width:420px; margin:0 1.5rem 1.5rem 0;
+  display:flex; flex-direction:column; align-items:center;
 }
-.byline { font-style: italic; color: #444; margin-bottom: 1.25rem; }
-.story-hero {
-  float: left;
-  width: 42%;
-  max-width: 420px;
-  margin: 0 1.5rem 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.story-hero img{
+  width:100%; height:auto; object-fit:contain;
+  border-radius:12px; box-shadow:0 6px 12px var(--shadow); margin-bottom:.4rem;
 }
-.story-hero img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px var(--shadow);
-  margin-bottom: 0.4rem;
-}
-.story-hero figcaption {
-  font-size: 0.85rem;
-  color: #555;
-  text-align: center;
-  line-height: 1.3;
-  margin: 0 0 0.3rem 0;
-}
-@media (max-width: 900px) {
-  .story-hero { width: 100%; float: none; margin: 0 auto 1rem; }
-}
+.story-hero figcaption{ font-size:.85rem; color:#555; text-align:center; line-height:1.3; margin:0 0 .3rem 0 }
+@media (max-width:900px){ .story-hero{ width:100%; float:none; margin:0 auto 1rem } }
 
 /* ===== NAV BUTTONS ===== */
-.footer-nav { text-align: center; margin: 1.25rem 0; }
-.btn {
-  display: inline-block;
-  padding: 0.45rem 0.75rem;
-  border-radius: 10px;
-  background: var(--indigo);
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 2px 6px var(--shadow);
-  transition: transform 0.15s ease, background 0.2s ease;
+.footer-nav{ text-align:center; margin:1.25rem 0 }
+.btn{
+  display:inline-block; padding:.45rem .75rem; border-radius:10px;
+  background:var(--indigo); color:#fff; font-weight:700; text-decoration:none;
+  box-shadow:0 2px 6px var(--shadow);
+  transition:transform .15s ease, background .2s ease;
 }
-.btn:hover { background: var(--amber); transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
-.footer-nav .btn + .btn { margin-left: 0.5rem; }
+.btn:hover{ background:var(--amber); transform:translateY(-1px) }
+.btn:active{ transform:translateY(0) }
+.footer-nav .btn + .btn{ margin-left:.5rem }
 
-/* ===== ADS (bottom row) — unified with “Financial Patriotism” pill ===== */
-.ad-row {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(170px, 1fr);
-  gap: 12px;
-  margin: 2rem auto 2rem;
-  padding: 0.75rem 0;
-  max-width: 100%;
-  overflow-x: hidden;
+/* ===== ADS (bottom row) — horizontal, right-sized) ===== */
+.ad-row{
+  display:grid;
+  grid-auto-flow:column;                  /* single line on desktop */
+  grid-auto-columns:minmax(160px, 1fr);   /* smaller tiles */
+  gap:10px;
+  margin:2rem auto;
+  padding:.5rem 0;
+  max-width:100%;
+  overflow-x:hidden;
 }
-
-.ad-tile {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  border-radius: 14px;
-  padding: 6px;
-  box-shadow:
-    0 8px 18px var(--shadow),
-    0 0 0 1px rgba(7, 27, 54, 0.14);
+.ad-tile{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  background:#fff; border-radius:14px; padding:4px;
+  box-shadow:0 8px 18px var(--shadow), 0 0 0 1px rgba(7,27,54,.14);
+}
+.ad-tile img{
+  width:100%; height:auto; max-height:110px; object-fit:contain; display:block; border-radius:10px;
 }
 
-/* “Financial Patriotism” pill */
-.ad-pill {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: var(--amber);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
-  box-shadow: 0 2px 4px var(--shadow);
-  pointer-events: none;
+/* “Financial Patriotism” pill — hover only */
+.ad-pill{
+  position:absolute; top:8px; left:8px;
+  background:var(--amber); color:#fff; font-size:.65rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.05em; padding:.25rem .5rem;
+  border-radius:999px; box-shadow:0 2px 4px var(--shadow);
+  pointer-events:none; opacity:0; transform:translateY(-2px);
+  transition:opacity .15s ease, transform .15s ease;
 }
-
-.ad-tile img {
-  width: 100%;
-  height: auto;
-  max-height: 120px;
-  object-fit: contain;
-  display: block;
-  border-radius: 10px;
-}
+.ad-tile:hover .ad-pill{ opacity:1; transform:translateY(0) }
 
 /* Wider desktops */
-@media (min-width: 1100px) {
-  .ad-row { grid-auto-columns: minmax(190px, 1fr); }
-  .ad-tile img { max-height: 130px; }
-}
-
-/* ===== MOBILE (≤700px): stack ads, larger cap ===== */
-@media (max-width: 700px) {
-  .ad-row {
-    grid-auto-flow: row;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 2rem;
-  }
-  .ad-tile {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  .ad-tile img { max-height: 180px; }
+@media (min-width:1100px){
+  .ad-row{ grid-auto-columns:minmax(180px, 1fr) }
+  .ad-tile img{ max-height:120px }
 }
 
 /* ===== FOOTER ===== */
-.footer-banner {
-  background: var(--cream);
-  color: rgba(7, 27, 54, 0.6);
-  font-family: "Libre Baskerville", Georgia, serif;
-  font-size: 0.45rem;
-  text-align: center;
-  line-height: 1.4;
-  padding: 1.5rem 0.5rem 1.75rem;
-  border-top: 1px solid var(--shadow);
-  font-style: italic;
+.footer-banner{
+  background:var(--cream); color:rgba(7,27,54,.6);
+  font-family:"Libre Baskerville", Georgia, serif; font-size:.45rem;
+  text-align:center; line-height:1.4; padding:1.5rem .5rem 1.75rem;
+  border-top:1px solid var(--shadow); font-style:italic;
 }
 
-/* ===== DESKTOP GRID COLUMNS ===== */
-@media (min-width:701px){
-  .grid{ grid-template-columns: repeat(2, minmax(280px,1fr)); }
-}
-@media (min-width:1100px){
-  .grid{ grid-template-columns: repeat(3, minmax(280px,1fr)); }
+/* ===== MOBILE (≤700px) ===== */
+@media (max-width:700px){
+  .page{ padding:16px 12px 36px }
+  .tafa-sidebar{ position:static; max-width:320px; margin:0 auto 1rem; width:100% }
+  .tafa-sidebar img{ transform:none }
+  .ad-container-left{ display:none }
+
+  .grid{ grid-template-columns:1fr }      /* stack */
+  .tile img{ height:160px }               /* a little larger on phones */
+
+  .ad-row{
+    grid-auto-flow:row; grid-template-columns:1fr; gap:14px; margin-top:2rem;
+  }
+  .ad-tile{ max-width:300px; margin:0 auto }
+  .ad-tile img{ max-height:170px }
 }
