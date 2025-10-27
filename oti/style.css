@@ -205,10 +205,6 @@ body{
   display: flex;
   flex-wrap: nowrap;
   overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: var(--cream);
   padding: .5rem 0;
   animation: ad-march 60s linear infinite;
@@ -236,4 +232,19 @@ body{
     animation: none;
     overflow: visible;
   }
+}
+
+/* ===== Etta Hotfix — keep ad row in flow (above footer) ===== */
+.index-page .ad-row{
+  position: static;       /* was fixed */
+  inset: auto;            /* reset top/right/bottom/left */
+  margin: 2rem auto 0;    /* spacing before footer */
+  max-width: 100%;
+  background: var(--cream);
+  overflow: hidden;       /* preserve marquee window */
+}
+
+/* Accessibility respect (unchanged) */
+@media (max-width:700px){
+  .index-page .ad-row{ position: static; animation: none; overflow: visible; }
 }
