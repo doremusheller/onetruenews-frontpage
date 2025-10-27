@@ -3,25 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Story Title — OTI</title>
-  <!-- all assets live in /oti -->
-  <link rel="stylesheet" href="style.css" />
+  <title><!-- STORY_TITLE -->Story Title — One True Infotainment</title>
+  <meta name="description" content="Official story from One True Infotainment." />
+
+  <!-- Flat /oti assets -->
+  <link rel="stylesheet" href="style.css?v=122" />
 </head>
+
 <body>
-  <!-- Ticker -->
+  <!-- Live Ticker (sticky, topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
   <script src="ticker.js" defer></script>
 
   <!-- Banner -->
   <header class="site-header">
-    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner">
+    <a href="index.html" aria-label="Return to OTI Home">
+      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State">
+    </a>
   </header>
 
   <main>
     <article>
       <header>
-        <h1>Story Title</h1>
-        <div class="byline">By Gene — 500 words</div>
+        <h1><!-- STORY_TITLE -->Story Title</h1>
+        <div class="byline"><!-- BYLINE -->By Cultural Bureau</div>
       </header>
 
       <!-- Story navigation (top) -->
@@ -31,18 +36,20 @@
         <a class="btn" href="next-story.html">Next Story →</a>
       </nav>
 
-      <!-- Hero image: top-left anchored, proportionate, with self-contained caption -->
+      <!-- Hero image: locks top-left; caption self-contained; text wraps -->
       <figure class="story-hero">
-        <!-- Replace the filename below with the story’s associated media asset -->
-        <img src="media/public-smiling.png"
+        <img src="media/placeholder-hero.png"
              alt="Neutral, descriptive scene from within the fictional world">
-        <figcaption>Neutral descriptive caption. Keep concise; do not duplicate body text.</figcaption>
+        <figcaption><!-- CAPTION -->Neutral descriptive caption. Keep concise; do not duplicate body text.</figcaption>
       </figure>
 
-      <!-- Story body: wraps around the floated hero on desktop -->
+      <!-- Story body (~500 words, 5–7 paragraphs) -->
       <section>
-        <p>Body copy begins here…</p>
-        <p>Additional paragraphs…</p>
+        <p><!-- BODY_P1 -->Paragraph one…</p>
+        <p><!-- BODY_P2 -->Paragraph two…</p>
+        <p><!-- BODY_P3 -->Paragraph three…</p>
+        <p><!-- BODY_P4 -->Paragraph four…</p>
+        <p><!-- BODY_P5 -->Paragraph five…</p>
       </section>
 
       <!-- Story navigation (bottom, above ads) -->
@@ -52,16 +59,17 @@
         <a class="btn" href="next-story.html">Next Story →</a>
       </nav>
 
-      <!-- Bottom ads -->
+      <!-- Bottom ads (auto-filled by ads.js) -->
       <div class="ad-row"></div>
     </article>
   </main>
 
+  <!-- Footer disclaimer (exact text) -->
   <div class="footer-banner">
-    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
   </div>
 
-  <!-- scripts (same-folder paths) -->
+  <!-- Flat /oti scripts -->
   <script src="ads.js" defer></script>
 </body>
 </html>
