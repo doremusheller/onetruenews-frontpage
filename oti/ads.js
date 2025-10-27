@@ -1,46 +1,40 @@
-/* ============================================================
-   ads.js — One True Infotainment
-   Auto-fills ad containers with any /media image containing "AD"
-   (case-insensitive). Non-interactive, lightweight, and canon-safe.
-   ============================================================ */
-
+/* ads.js — auto-fill ad containers from /media where name contains "AD" (case-insensitive) */
 document.addEventListener("DOMContentLoaded", () => {
-  const adContainers = [
-    ...document.querySelectorAll(".ad-container-left, .ad-row")
+  const targets = [...document.querySelectorAll(".ad-container-left, .ad-row")];
+  if (!targets.length) return;
+
+  // Canonical inventory (reindexed from /media)
+  const mediaInventory = [
+    "Angels-AD.png",
+    "patriot-beer-AD.png",
+    "patriot-games-AD.png",
+    "you-AD-here.png",
+
+    // non-ad images present (ignored by filter):
+    // "banner.png","banner-wide.png","border-banners.png","domestic-smiles.png",
+    // "friendship-rebuild.png","grundy-accuses-host.png","grundy-explains-health.png",
+    // "hammer-of-grundy-concert.png","patriot-games-promo.png","patriotic-census.png",
+    // "public-smiling.png","river-glow.png","tafaj-bulletin.jpg.png","tafajsatan.png",
+    // "threatmeter.png","veteran-visibility.png"
   ];
 
-  if (adContainers.length === 0) return;
+  const adImages = mediaInventory.filter(n => /(^|[-_])ad(\.|-)/i.test(n) || /-AD\.png$/i.test(n) || /AD/i.test(n));
+  if (!adImages.length) return;
 
-  // Predefined fallback list (for static environments like GitHub Pages)
-  const mediaFiles = [
-    "ad-here.png",
-    "AngelsAd.png",
-    "patriot-beer-ad.png",
-    "patriot-games-promo.png",
-    "CorrectedAaF.png"
-  ];
-
-  // Filter for ad-related images (filenames containing "ad" or "AD")
-  const adImages = mediaFiles.filter(name => /ad/i.test(name));
-
-  adContainers.forEach(container => {
-    // Clear any placeholder content
+  targets.forEach(container => {
     container.innerHTML = "";
-
-    // Choose random ad or multiple ads depending on container type
     const isRow = container.classList.contains("ad-row");
-    const adsToShow = isRow ? adImages : [adImages[Math.floor(Math.random() * adImages.length)]];
 
-    adsToShow.forEach(imgName => {
+    const list = isRow ? adImages : [adImages[Math.floor(Math.random()*adImages.length)]];
+    list.forEach(name => {
       const img = document.createElement("img");
-      img.src = `media/${imgName}`;
+      img.src = `media/${name}`;
       img.alt = "Promotional image";
       img.loading = "lazy";
       img.style.width = "100%";
       img.style.height = "auto";
       img.style.objectFit = "contain";
 
-      // Wrap each in a tile for consistent styling
       if (isRow) {
         const tile = document.createElement("div");
         tile.className = "ad-tile";
