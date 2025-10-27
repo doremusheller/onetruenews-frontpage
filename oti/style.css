@@ -145,6 +145,26 @@ body{
   color:#333;
   font-size:.92rem;
 }
+/* BREAKING NEWS PILL */
+.breaking {
+  position: relative;
+  border: 2px solid var(--amber);
+}
+
+.breaking-pill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--amber);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px var(--shadow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 /* STORY PAGE BASE */
 .story-page article{
@@ -270,4 +290,5 @@ body{
   }
 }
 ```
+
 
