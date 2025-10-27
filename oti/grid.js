@@ -1,22 +1,21 @@
-/* ============================================================
-   grid.js — One True Infotainment v2
-   Randomizes visible story tiles for freshness
-   ============================================================ */
-
+/* grid.js — shuffle tiles except `.breaking` (pinned first) */
 document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelector(".grid");
+  const grid = document.getElementById("storyGrid");
   if (!grid) return;
 
-  // Collect all story tiles
   const tiles = Array.from(grid.querySelectorAll(".tile"));
-  if (tiles.length <= 1) return; // Nothing to shuffle
+  if (!tiles.length) return;
+
+  const pinned = tiles.filter(t => t.classList.contains("breaking"));
+  const rest = tiles.filter(t => !t.classList.contains("breaking"));
 
   // Fisher–Yates shuffle
-  for (let i = tiles.length - 1; i > 0; i--) {
+  for (let i = rest.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+    [rest[i], rest[j]] = [rest[j], rest[i]];
   }
 
-  // Re-append shuffled tiles to the grid
-  tiles.forEach(tile => grid.appendChild(tile));
+  grid.innerHTML = "";
+  pinned.forEach(t => grid.appendChild(t));
+  rest.forEach(t => grid.appendChild(t));
 });
