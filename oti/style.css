@@ -1,3 +1,4 @@
+```css
 /* ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
    Flat /oti structure, ticker above banner, validated responsive rules
@@ -172,18 +173,6 @@ body {
 }
 
 /* ===== STORY PAGE ===== */
-/* STORY DISPLAY NOTE (canonical):
-   The hero image locks to the TOP-LEFT of the story body.
-   Caption sits directly beneath the image (self-contained).
-   Body text wraps to the right and below the hero.
-   On mobile (≤900px) the hero clears and becomes full-width above text. */
-
-/* STORY IMAGE SCALING NOTE:
-   Scale hero images for optimal fit.
-   - On desktop, image should occupy ~40–45% of article width (max 420px).
-   - On mobile, full-width display (100%) above text.
-   - Maintain aspect ratio via object-fit: contain. */
-
 .story-page article {
   max-width: 900px;
   margin: 2rem auto;
@@ -244,34 +233,76 @@ body {
 .btn:active { transform: translateY(0); }
 .footer-nav .btn + .btn { margin-left: 0.5rem; }
 
-/* ===== ADS (bottom row) ===== */
+/* ===== ADS (bottom row) — unified with “Financial Patriotism” pill ===== */
 .ad-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin: 3rem auto 2rem;
-  padding: 1rem;
-  max-width: 1000px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(170px, 1fr);
+  gap: 12px;
+  margin: 2rem auto 2rem;
+  padding: 0.75rem 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
+
 .ad-tile {
-  flex: 1 1 180px;
-  max-width: 220px;
-  background: #fff;
-  border: 1px solid var(--shadow);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px var(--shadow);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow:
+    0 8px 18px var(--shadow),
+    0 0 0 1px rgba(7, 27, 54, 0.14);
 }
+
+/* “Financial Patriotism” pill */
+.ad-pill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--amber);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px var(--shadow);
+  pointer-events: none;
+}
+
 .ad-tile img {
   width: 100%;
   height: auto;
+  max-height: 120px;
   object-fit: contain;
   display: block;
-  max-height: 140px;              /* default cap */
+  border-radius: 10px;
+}
+
+/* Wider desktops */
+@media (min-width: 1100px) {
+  .ad-row { grid-auto-columns: minmax(190px, 1fr); }
+  .ad-tile img { max-height: 130px; }
+}
+
+/* ===== MOBILE (≤700px): stack ads, larger cap ===== */
+@media (max-width: 700px) {
+  .ad-row {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 2rem;
+  }
+  .ad-tile {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .ad-tile img { max-height: 180px; }
 }
 
 /* ===== FOOTER ===== */
@@ -287,41 +318,6 @@ body {
   font-style: italic;
 }
 
-/* ===== MOBILE (≤700px) ===== */
-@media (max-width: 700px) {
-  .page { padding: 16px 12px 36px; }
-  .tafa-sidebar {
-    position: static;
-    max-width: 320px;
-    margin: 0 auto 1rem;
-    width: 100%;
-  }
-  .tafa-sidebar img { transform: none; }
-  .ad-container-left { display: none; }
-
-  .ad-row {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-  }
-  .ad-tile { max-width: 300px; width: 90%; }
-  .ad-tile img { max-height: 180px; } /* larger cap on small screens */
-
-  .story-hero {
-    float: none;
-    display: block;
-    max-width: 100%;
-    margin: 0 auto 1rem;
-  }
-}
-
-/* ===== DESKTOP (≥701px): force horizontal ad row ===== */
-@media (min-width: 701px) {
-  .ad-row { flex-wrap: nowrap; justify-content: center; }
-  .ad-tile { flex: 0 0 220px; }       /* fixed tiles → no wrap */
-  .ad-tile img { max-height: 120px; } /* tighter desktop cap */
-}
-
 /* ===== DESKTOP GRID COLUMNS ===== */
 @media (min-width:701px){
   .grid{ grid-template-columns: repeat(2, minmax(280px,1fr)); }
@@ -329,3 +325,4 @@ body {
 @media (min-width:1100px){
   .grid{ grid-template-columns: repeat(3, minmax(280px,1fr)); }
 }
+```
