@@ -1,37 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>River Glow — One True Infotainment</title>
-
-  <!-- Libre Baskerville for story pages -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="ticker.js" defer></script>
 </head>
-<body class="story-page">
+<body>
+  <!-- Ticker (topmost) -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
 
+  <!-- Banner -->
   <header class="site-header">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner">
   </header>
 
-  <main id="top">
+  <main>
     <article>
       <header>
         <h1>River Glow Declared “A Triumph of Industrial Creativity”</h1>
-        <p>
-          After a vivid spill illuminated the Mississippi at St. Louis, the Ministry of Correction praised
-          the event as “an outstanding collaboration between industry and imagination.”
-        </p>
+        <div class="byline">By Cultural Bureau</div>
       </header>
 
+      <!-- Story navigation (top) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="grundy-doubts-game-show-host.html">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="tafaj-latex-panic.html">Next Story →</a>
+      </nav>
+
+      <!-- Hero: top-left anchored, proportionate, with caption; text wraps on desktop -->
       <figure class="story-hero">
-        <img src="media/river-glow.png" alt="Glowing Mississippi River at night after industrial spill" />
-        <figcaption>
-          Official still: The Mississippi River exhibits patriotic luminescence, courtesy of the nation’s productive sectors.
-        </figcaption>
+        <img src="media/river-glow.png" alt="Glowing Mississippi River at night after industrial spill">
+        <figcaption>Official still: The Mississippi River exhibits patriotic luminescence, courtesy of the nation’s productive sectors.</figcaption>
       </figure>
 
+      <!-- Story body (kept, with semantic fixes) -->
       <section>
         <p>
           Residents of St. Louis awoke this week to find the Mississippi River emitting what officials called
@@ -46,7 +51,7 @@
         </p>
 
         <p>
-          Local citizen **Marla James**, a retired post-auditor, expressed delight at the development.
+          Local citizen <strong>Marla James</strong>, a retired post-auditor, expressed delight at the development.
           “I don’t need a porch light anymore,” she said, gesturing toward the pulsing shoreline.
           “It’s like living next to an aurora that smells faintly of victory. My plants are confused,
           but they look patriotic doing it.”
@@ -59,7 +64,7 @@
         </p>
 
         <p>
-          Asked for comment, **First Citizen Grundy** appeared elated.
+          Asked for comment, <strong>First Citizen Grundy</strong> appeared elated.
           “That’s the kind of spirit we need,” he said. “Why just build a better world when you can make it sparkle?
           People like to see where they’re walking, and now they can do it without guilt or batteries.”
         </p>
@@ -72,27 +77,20 @@
         </p>
       </section>
 
-      <!-- Bottom Ads -->
-      <div class="ad-row">
-        <div class="ad-tile"><img src="media/Angels-AD.png" alt="Promotional image" /></div>
-        <div class="ad-tile"><img src="media/patriot-beer-AD.png" alt="Promotional image" /></div>
-        <div class="ad-tile"><img src="media/patriot-games-AD.png" alt="Promotional image" /></div>
-      </div>
+      <!-- Story navigation (bottom, above ads) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="grundy-doubts-game-show-host.html">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="tafaj-latex-panic.html">Next Story →</a>
+      </nav>
 
-      <footer>
-        <nav class="footer-nav" aria-label="Story navigation" style="display:flex;gap:.75rem;flex-wrap:wrap;">
-          <a href="grundy-doubts-game-show-host.html" style="background:var(--indigo);color:#fff;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">← Last Story</a>
-          <a href="index.html" style="background:var(--amber);color:#fff;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">OTI Home</a>
-          <a href="tafaj-latex-panic.html" style="background:#fff;color:#071b36;border:1px solid #071b36;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">Next Story →</a>
-        </nav>
-      </footer>
+      <!-- Bottom ads (auto via ads.js) -->
+      <div class="ad-row"></div>
     </article>
   </main>
 
-  <!-- Footer Banner -->
   <div class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
-    Irony is resistance, satire a pitchfork.
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
   </div>
 
   <script src="ads.js" defer></script>
