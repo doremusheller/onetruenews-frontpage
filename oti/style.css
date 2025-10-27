@@ -233,12 +233,14 @@ body{
   background:var(--cream);
   color:rgba(7,27,54,.6); /* faint indigo tone */
   font-family:"Libre Baskerville", Georgia, serif;
-  font-size:.75rem;
+  font-size:.45rem; /* reduced ~40% from .75rem */
   text-align:center;
   line-height:1.4;
   padding:1.5rem .5rem 1.75rem;
   border-top:1px solid var(--shadow);
+  font-style:italic; /* new rule: italicized disclaimer text */
 }
+
 
 /* MOBILE */
 @media (max-width:900px){
@@ -268,3 +270,4 @@ body{
   }
 }
 ```
+
