@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("ticker");
   if (!el) return;
 
-  // Canon headlines (edit order/content here only)
+  // Canonical headlines — update here only
   const headlines = [
     "Patriot Games relocates; traffic advisories in effect",
     "Ministry clarifies travel window for winter departures",
@@ -14,16 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const sep = "  •  ";
-  // Duplicate content to ensure long scroll track
   const text = (headlines.join(sep) + sep + headlines.join(sep));
 
   const p = document.createElement("p");
   p.textContent = text;
   el.appendChild(p);
 
-  // Respect reduced motion: if user prefers, show static rolling text
-  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (mediaQuery.matches) {
+  // Respect reduced motion
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (reduceMotion.matches) {
     p.style.animation = "none";
     p.style.paddingLeft = "0";
   }
