@@ -1,61 +1,30 @@
-/* ============================================================
-   ticker.js — One True Infotainment (central headlines)
-   Injects a scrolling ticker into #ticker on every page.
-   Plain JS, no dependencies. Honors prefers-reduced-motion.
-   ============================================================ */
+/* ticker.js — injects canonical headlines into #ticker (single source of truth) */
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("ticker");
+  if (!el) return;
 
-(function () {
-  // Canon headlines (single source of truth)
-  const HEADLINES = [
-    "Officials certify surplus of certainty abroad",
-    "Midnight trains now arrive at noon for efficiency audits",
-    "Ministry of Metrics expands to feelings and fog",
-    "Allies report record levels of coordinated smiling",
-    "Border mirrors reinstalled to improve perspective",
-    "Weather licensed for patriotic use in coastal capitals",
-    "International irony permits reduced to ceremonial quotas",
-    "Export-grade optimism cleared for global broadcast",
-    "Angels salute the unbroken future at sunrise review"
+  // Canon headlines (edit order/content here only)
+  const headlines = [
+    "Patriot Games relocates; traffic advisories in effect",
+    "Ministry clarifies travel window for winter departures",
+    "Veteran Visibility Week expands to River District",
+    "Patriotic Census Phase II—verification reminders",
+    "First Citizen addresses wellness regimen rumors",
+    "Nightworks scheduled along riverfront lighting grid"
   ];
 
-  function initTicker() {
-    const host = document.getElementById("ticker");
-    if (!host) return;
+  const sep = "  •  ";
+  // Duplicate content to ensure long scroll track
+  const text = (headlines.join(sep) + sep + headlines.join(sep));
 
-    // Build the <p> element dynamically
-    const p = document.createElement("p");
-    p.setAttribute("role", "text");
-    p.textContent = HEADLINES.join(" • ") + " • ";
+  const p = document.createElement("p");
+  p.textContent = text;
+  el.appendChild(p);
 
-    // Respect reduced motion
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      p.style.animation = "none";
-      p.style.paddingLeft = "0";
-    }
-
-    // Append to host
-    host.textContent = "";
-    host.appendChild(p);
+  // Respect reduced motion: if user prefers, show static rolling text
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (mediaQuery.matches) {
+    p.style.animation = "none";
+    p.style.paddingLeft = "0";
   }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initTicker);
-  } else {
-    initTicker();
-  }
-
-  // Optional public interface for updates
-  window.OTI_TICKER = {
-    set(items) {
-      if (!Array.isArray(items) || !items.length) return;
-      const host = document.getElementById("ticker");
-      if (!host) return;
-      host.textContent = "";
-      const p = document.createElement("p");
-      p.setAttribute("role", "text");
-      p.textContent = items.join(" • ") + " • ";
-      host.appendChild(p);
-    }
-  };
-})();
+});
