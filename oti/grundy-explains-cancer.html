@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,49 +10,47 @@
   <meta property="og:title" content="Grundy Explains: Cancer" />
   <meta property="og:description" content="Funyons, faith, and the nation’s digestion — a lesson in prevention, explained by the First Citizen." />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="media/grundy-explains.png" />
+  <meta property="og:image" content="media/grundy-explains-health.png" />
   <meta property="og:site_name" content="One True Infotainment" />
 
   <link rel="canonical" href="grundy-explains-cancer.html" />
   <link rel="stylesheet" href="style.css" />
-  <script defer src="ticker.js"></script>
-  <script defer src="grid.js"></script>
+  <script src="ticker.js" defer></script>
 </head>
 
-<body class="story-page">
+<body>
+  <!-- Ticker (topmost) -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
 
-  <!-- ALERT STRIP -->
-  <div id="alert-strip" class="alert-strip" aria-label="Urgent scrolling headlines">
-    <p>
-      Markets close up on belief alone • Airborne Faith Exercise exceeds altitude limit • River declared self-cleaning • Breadline renamed Confidence Queue • Patriotic pollen counts reach record highs • Corrected States export surplus of certainty • Candlelight drills extended to noon hours • Public tears now taxable • Neighbor reports highest loyalty rating • Gravity temporarily privatized
-    </p>
-  </div>
-
-  <!-- SITE HEADER -->
+  <!-- Banner -->
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Return to OTI Home">
-      <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected States of America" class="site-banner" />
-    </a>
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner">
   </header>
 
-  <!-- MAIN STORY CONTENT -->
-  <main id="content" class="content">
-    <article class="story">
-
-      <header class="story-head">
-        <span class="story-tag">Infotainment</span>
-        <h1 class="story-title">Grundy Explains: Cancer</h1>
-        <p class="story-dek">In a brisk broadcast, the First Citizen declares Funyons a national ally against colon cancer, citing “the cleansing geometry of the ring.”</p>
-        <p class="byline">By Cultural Bureau</p>
-        <span class="publine">Filed October 24, 2025 — One True Infotainment News Service</span>
+  <main>
+    <article>
+      <header>
+        <h1>Grundy Explains: Cancer</h1>
+        <div class="byline">By Cultural Bureau</div>
       </header>
 
-      <figure class="lede">
-        <img src="media/grundy-explains.png" alt="Administrator Grundy holding a bag of Funyons during a studio broadcast" class="lede-image" />
-        <figcaption class="caption">“Trust the crunch,” Grundy told viewers, elevating a ring to the camera like a seal of office.</figcaption>
+      <!-- Story navigation (top) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="grundy-explains-collection.html">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="hammer-of-grundy.html">Next Story →</a>
+      </nav>
+
+      <!-- Top-left anchored hero with caption; text wraps on desktop -->
+      <figure class="story-hero">
+        <!-- NOTE: live media filename is grundy-explains-health.png -->
+        <img src="media/grundy-explains-health.png"
+             alt="First Citizen Grundy holding a bag of Funyons during a studio broadcast">
+        <figcaption>“Trust the crunch,” Grundy told viewers, elevating a ring to the camera like a seal of office.</figcaption>
       </figure>
 
-      <section class="story-body">
+      <!-- Body (kept from original) -->
+      <section>
         <p>In this week’s episode of <strong>Grundy Explains Stuff</strong>, the First Citizen took 14 minutes to redefine prevention as posture, patriotism, and snack selection. Holding a bag of Funyons at chest height, he asserted that the onion-flavored rings “polish the inner nation and keep the colon on course.” The audience, seated in neat arcs around the podium, applauded in measured bursts. Behind him, a screen displayed two x-rays labeled <em>Before Belief</em> and <em>After Snacks</em>, separated by a diagonal of light that read: <strong>RING, REPAIR, REJOICE</strong>.</p>
 
         <p>The program opened with charts on fiber compliance and morale. A Ministry nutrition aide, speaking from off-camera, confirmed that “ring-shaped foods are statistically cooperative,” while cautioning viewers to follow approved portion counts. Grundy waved off the caveat with a smile. “We are a circular people,” he said. “We go around obstacles.” He lifted a ring toward the lens. “Geometry heals what doubt disturbs.”</p>
@@ -74,24 +72,23 @@
         <p><em>Health is Harmony. Belief is Biology.</em></p>
       </section>
 
-      <nav class="story-nav">
-        <a class="btn back" href="index.html#infotainment" aria-label="Return to front page">← Back to Front Page</a>
-        <a class="btn" href="grundy-explains-collection.html">Previous: The Collection</a>
-        <a class="btn primary" href="hammer-of-grundy.html">Next: Hammer of Grundy — Live on the Lawn</a>
+      <!-- Story navigation (bottom, above ads) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="grundy-explains-collection.html">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="hammer-of-grundy.html">Next Story →</a>
       </nav>
 
+      <!-- Bottom ads (auto) -->
+      <div class="ad-row"></div>
     </article>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <p class="legal">
-      Produced without license from the Corrected States of America.  
-      All contained herein are speculation and may not yet exist.  
-      Doubt is treason; irony a pitchfork.
-    </p>
-    <div class="patriotic-ribbon" aria-hidden="true"></div>
-  </footer>
+  <div class="footer-banner">
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
+  </div>
 
+  <!-- Only required page script -->
+  <script src="ads.js" defer></script>
 </body>
 </html>
