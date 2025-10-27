@@ -7,9 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "Patriot Games relocates; wild monkey still at large",
     "Ministry clarifies travel restrictions for Holiday Freedom season",
     "Veteran Visibility Week expands to Reaility Show!",
-    "Patriotic Census Phase II—verification reminders",
-    "First Citizen addresses wellness regimen rumors with full jerk disclosure",
-    "Nightworks scheduled along riverfront lighting grid after suspect sighting"
+    "How much do YOU support our troops? Take the quiz!"
+    "First Citizen to provide first-in-class 'Color Coded Census',
+    "First Citizen addresses wellness rumors with full jerky disclosure",
+    "Nightworks scheduled along riverfront after suspect sighting"
   ];
 
   // wider spacing between items (NBSPs around the bullet)
