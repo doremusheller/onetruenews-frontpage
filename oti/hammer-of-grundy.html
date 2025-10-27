@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,48 +7,62 @@
 
   <!-- Libre Baskerville for story pages -->
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body class="story-page">
 
+  <!-- TICKER (central feed) -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
+
+  <!-- BANNER -->
   <header class="site-header">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    <img src="../media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
   </header>
 
   <main id="top">
     <article>
       <header>
         <h1>Hammer of Grundy Shakes the Faithful</h1>
-        <p>
+        <p class="byline">
           The nation’s loudest ministry returned to the stage last night,
           delivering righteous volume and measured enlightenment in equal decibels.
         </p>
       </header>
 
+      <!-- TOP NAV (buttons) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="veteran-visibility.html">← Last Story</a>
+        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="patriotic-census.html">Next Story →</a>
+      </nav>
+
+      <!-- HERO -->
       <figure class="story-hero">
-        <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy performing under national spotlight" />
+        <img src="../media/hammer-of-grundy-concert.png" alt="Hammer of Grundy performing under national spotlight" />
         <figcaption>
           Official still: Hammer of Grundy’s sanctioned concert, where faith met feedback in full compliance.
         </figcaption>
       </figure>
 
+      <!-- BODY -->
       <section>
         <p>
-          The **Hammer of Grundy**, a government-endorsed Christian Death Metal ensemble,
-          performed their long-delayed *Resurrection Audit* tour before a crowd of loyal citizens
+          The <strong>Hammer of Grundy</strong>, a government-endorsed Christian Death Metal ensemble,
+          performed their long-delayed <em>Resurrection Audit</em> tour before a crowd of loyal citizens
           at the National Obedience Pavilion. Attendees described the evening as “spiritually thunderous”
           and “slightly overregulated,” which organizers considered high praise.
         </p>
 
         <p>
           The show opened with a moment of silence calibrated to exactly 4.7 seconds,
-          immediately followed by a synchronized burst of pyrotechnics spelling **FAITH IS STRUCTURE** across the rafters.
-          From there, the band launched into their hit single *Cruciform Efficiency*,
+          immediately followed by a synchronized burst of pyrotechnics spelling
+          <strong>FAITH IS STRUCTURE</strong> across the rafters.
+          From there, the band launched into their hit single <em>Cruciform Efficiency</em>,
           accompanied by patriotic fog and the faint hum of state electricity.
         </p>
 
         <p>
-          Lead vocalist and founder **Brother Grundy Jr.**, rumored distant relative of the First Citizen,
+          Lead vocalist and founder <strong>Brother Grundy Jr.</strong>, rumored distant relative of the First Citizen,
           roared blessings into the microphone while national inspectors monitored the decibel-to-piety ratio.
           “We bring the Word, and the Word brings distortion,” he declared,
           gesturing toward a row of amplifiers shaped like miniature ministries.
@@ -57,15 +70,15 @@
 
         <p>
           Between songs, a large projection displayed approved verses and crowd posture reminders.
-          Ushers circulated with earplugs embossed *HEAR RESPONSIBLY*,
+          Ushers circulated with earplugs embossed <em>HEAR RESPONSIBLY</em>,
           ensuring safe participation in the Lord’s loud work.
-          The second half featured a crowd favorite, *Repent in D Minor (Extended Audit)*,
+          The second half featured a crowd favorite, <em>Repent in D Minor (Extended Audit)</em>,
           a twelve-minute guitar sermon measured for spiritual compliance.
         </p>
 
         <p>
           Observers noted that, unlike previous tours, no unregistered moshing occurred.
-          Instead, the audience performed the newly sanctioned motion of **Controlled Head Reverence**,
+          Instead, the audience performed the newly sanctioned motion of <strong>Controlled Head Reverence</strong>,
           a rhythmic nod pattern introduced by the Ministry of Moral Motion earlier this year.
         </p>
 
@@ -73,43 +86,37 @@
           “It was transcendent,” said an official witness from the Bureau of Culture.
           “My ears bled patriotically. That’s what the First Citizen means by national resonance.”
           Grundy Jr. later confirmed he would donate part of the night’s proceeds
-          to the *Campaign for Quieter Cities*, calling it “a small price for big silence.”
+          to the <em>Campaign for Quieter Cities</em>, calling it “a small price for big silence.”
         </p>
 
         <p>
           As the final chord faded, the crowd chanted “ONE TRUE INFOTAINMENT” in perfect unison.
           A fireworks cross rose above the pavilion, briefly forming the shape of the national logo
           before dissolving into amber smoke. State television cut to the closing crawl:
-          *Faith has been successfully amplified.*
+          <em>Faith has been successfully amplified.</em>
         </p>
       </section>
 
-      <!-- Bottom Ads -->
-      <div class="ad-row">
-        <div class="ad-tile"><img src="media/ad-here.png" alt="Promotional image" /></div>
-        <div class="ad-tile"><img src="media/AngelsAd.png" alt="Promotional image" /></div>
-        <div class="ad-tile"><img src="media/patriot-beer-ad.png" alt="Promotional image" /></div>
-      </div>
+      <!-- BOTTOM NAV (buttons) — above ads -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="veteran-visibility.html">← Last Story</a>
+        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="patriotic-census.html">Next Story →</a>
+      </nav>
 
-      <footer>
-        <nav class="footer-nav" aria-label="Story navigation" style="display:flex;gap:.75rem;flex-wrap:wrap;">
-          <a href="veteran-visibility.html" style="background:var(--indigo);color:#fff;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">← Last Story</a>
-          <a href="index.html" style="background:var(--amber);color:#fff;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">OTI Home</a>
-          <a href="patriotic-census.html" style="background:#fff;color:#071b36;border:1px solid #071b36;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">Next Story →</a>
-        </nav>
-      </footer>
+      <!-- Bottom Ads (auto-populated) -->
+      <div class="ad-row"></div>
     </article>
   </main>
 
   <!-- Footer Banner -->
-<div class="footer-banner">
-  The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
-  Irony is resistance, satire a pitchfork.
-</div>
+  <div class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </div>
 
-
-  <script src="ads.js" defer></script>
+  <!-- Scripts -->
+  <script src="../ads.js" defer></script>
+  <script src="../ticker.js" defer></script>
 </body>
 </html>
-```
-
