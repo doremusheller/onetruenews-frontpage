@@ -1,4 +1,4 @@
-```css
+
 /* ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
    Flat /oti structure, ticker above banner, validated responsive rules
@@ -310,3 +310,4 @@ body {
   .grid{ grid-template-columns: repeat(3, minmax(280px,1fr)); }
 }
 ```
+
