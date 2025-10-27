@@ -1,3 +1,8 @@
+Del here — updated to the **flat /oti** pathing you showed. The story now pulls its assets from `media/` (no `../`). I kept the 40% type scale and centered layout.
+
+# `/oti/BB1-suspect-siting.html`
+
+```html
 <!doctype html>
 <html lang="en" class="story-page">
 <head>
@@ -5,63 +10,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unidentified Subject Captured South of the River — One True Infotainment</title>
 
-  <!-- Fonts & Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css?v=122" />
+  <!-- Canon styles (flat /oti) -->
+  <link rel="stylesheet" href="style.css" />
+  <script src="ticker.js" defer></script>
 
-  <!-- Typography + Layout Adjustments -->
+  <!-- 40% typography boost + centered layout for this bulletin -->
   <style>
-    body.story-page {
-      font-size: 1.4em;
-      text-align: center;
-    }
-    main article {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    h1, h2, h3 {
-      text-align: center;
-      line-height: 1.3;
-    }
-    .story-hero {
-      float: none;
-      margin: 1.5rem auto;
-      max-width: 600px;
-    }
-    .story-hero img {
-      display: block;
-      margin: 0 auto;
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
-    .story-hero figcaption {
-      font-size: 0.9rem;
-      color: #555;
-      text-align: center;
-      margin-top: 0.4rem;
-    }
-    section {
-      text-align: center;
-      line-height: 1.8;
-    }
-    ul {
-      display: inline-block;
-      text-align: left;
-      margin: 1rem auto;
-    }
+    body.story-page { font-size: 1.4em; text-align: center; }
+    main article { max-width: 900px; margin: 0 auto; text-align: center; }
+    h1, h2, h3 { line-height: 1.3; }
+    .story-hero { float: none; margin: 1.5rem auto; max-width: 600px; }
+    .story-hero img { display: block; margin: 0 auto; width: 100%; height: auto; }
+    .story-hero figcaption { font-size: 0.9rem; color: #555; text-align: center; margin-top: .4rem; }
+    section { line-height: 1.8; }
+    ul { display: inline-block; text-align: left; margin: 1rem auto; }
   </style>
 </head>
 
-<body class="story-page">
+<body>
   <!-- Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
-    <img src="../media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner" />
   </header>
 
   <main>
@@ -71,22 +43,20 @@
         <p class="byline"><em>Issued under authority of the Ministry of Internal Security, Corrected States of America</em></p>
       </header>
 
-      <!-- Top Navigation -->
+      <!-- Top nav -->
       <nav class="footer-nav" aria-label="Story Navigation">
         <a class="btn" href="hammer-of-grundy.html">← Last Story</a>
-        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="veteran-visibility.html">Next Story →</a>
       </nav>
 
-      <!-- Hero (centered, matches index) -->
+      <!-- Hero (centered, matches index tile) -->
       <figure class="story-hero">
-        <img src="../media/caught-footage.png" alt="Security still showing unidentified subject near restricted corridor south of the river.">
-        <figcaption>
-          Security footage from CAM-19A at 02:14 CST. Subject EXT-1 appears moments before transmission loss.
-        </figcaption>
+        <img src="media/caught-footage.png" alt="Security still showing unidentified subject near restricted corridor south of the river.">
+        <figcaption>Security footage from CAM-19A at 02:14 CST. Subject EXT-1 appears moments before transmission loss.</figcaption>
       </figure>
 
-      <!-- Story Body -->
+      <!-- Body -->
       <section>
         <h2>BREAKING BULLETIN — ONE TRUE INFOTAINMENT</h2>
 
@@ -122,26 +92,23 @@
         <p><em>End of Bulletin. Stay loyal. Stay certain.</em></p>
       </section>
 
-      <!-- Bottom Navigation -->
+      <!-- Bottom nav -->
       <nav class="footer-nav" aria-label="Story Navigation">
         <a class="btn" href="hammer-of-grundy.html">← Last Story</a>
-        <a class="btn" href="../index.html">OTI Home</a>
+        <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="veteran-visibility.html">Next Story →</a>
       </nav>
 
-      <!-- Bottom Ads -->
+      <!-- Bottom ads -->
       <div class="ad-row"></div>
     </article>
   </main>
 
-  <!-- Footer Banner -->
   <div class="footer-banner">
-    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
-    Irony is resistance, satire a pitchfork.”
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
   </div>
 
-  <!-- Scripts -->
-  <script src="../ads.js" defer></script>
-  <script src="../ticker.js" defer></script>
+  <script src="ads.js" defer></script>
 </body>
 </html>
+```
