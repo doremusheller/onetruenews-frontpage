@@ -43,7 +43,7 @@
       </header>
 
       <figure class="lede">
-        <img src="media/grundy-explains.png" alt="Grundy at a lectern, brandishing a bag of onion rings with televised zeal" class="lede-image" />
+        <img src="media/grundy-explains-health.png" alt="Grundy at a lectern, brandishing a bag of onion rings with televised zeal" class="lede-image" />
         <figcaption class="caption">“Science is delicious if you let it be,” the First Citizen said, lifting a ring to the light.</figcaption>
       </figure>
 
@@ -76,3 +76,4 @@
   </footer>
 </body>
 </html>
+
