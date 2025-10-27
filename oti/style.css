@@ -60,12 +60,24 @@ body{
   align-items:start;
 }
 
-/* TAFAJ sidebar (scrolls with page) */
+/* TAFAJ sidebar (scrolls with page, 20% taller + link) */
+.tafa-sidebar a{
+  display:block;
+  text-decoration:none;
+}
 .tafa-sidebar img{
   width:100%;
   height:auto;
   display:block;
+  transform:scale(1.2);              /* 20% taller visual */
+  transform-origin:top;
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.15));
+  transition:transform .2s ease, filter .2s ease;
+  cursor:pointer;
+}
+.tafa-sidebar img:hover{
+  filter:brightness(1.1) drop-shadow(0 8px 20px rgba(0,0,0,.25));
+  transform:scale(1.22);
 }
 
 /* GRID */
@@ -107,7 +119,52 @@ body{
   font-size:.92rem;
 }
 
-/* MOBILE: stack TAFAJ under banner */
+/* STORY PAGE BASE */
+.story-page article{
+  max-width:900px;
+  margin:2rem auto;
+  padding:0 1rem;
+  line-height:1.7;
+  font-family:"Libre Baskerville", Georgia, serif;
+  overflow:auto; /* clearfix */
+}
+.story-page h1{
+  color:var(--indigo);
+  font-size:2.1rem;
+  line-height:1.2;
+  margin-bottom:.5rem;
+}
+.story-page p{
+  font-size:1.05rem;
+  color:#222;
+  margin-bottom:1rem;
+}
+
+/* STORY HERO IMAGE — scaled + text wrap */
+.story-hero{
+  float:right;
+  max-width:480px;
+  margin:0 0 1rem 1.5rem;
+}
+.story-hero img{
+  width:100%;
+  height:auto;
+  border-radius:12px;
+  box-shadow:0 6px 12px var(--shadow);
+}
+.story-hero figcaption{
+  font-size:.85rem;
+  color:#555;
+  margin-top:.3rem;
+}
+
+/* FOOTER NAV */
+.footer-nav a{
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* MOBILE: stack TAFAJ and hero image */
 @media (max-width:900px){
   .page{
     grid-template-columns:1fr;
@@ -117,5 +174,14 @@ body{
   .tafa-sidebar{
     max-width:320px;
     margin:0 auto;
+  }
+  .tafa-sidebar img{
+    transform:none;
+  }
+  .story-hero{
+    float:none;
+    display:block;
+    max-width:100%;
+    margin:0 auto 1rem;
   }
 }
