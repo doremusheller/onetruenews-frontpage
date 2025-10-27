@@ -1,38 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vigiles Respond After TAFAJ Broadcast — One True Infotainment</title>
+  <meta name="description" content="Following the First Citizen’s televised remarks redefining national material priorities, Vigiles issue clarifications after a TAFAJ broadcast." />
 
-  <!-- Libre Baskerville for story pages -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vigiles Respond After TAFAJ Broadcast" />
+  <meta property="og:description" content="Clarifications follow the First Citizen’s televised remarks after a TAFAJ broadcast." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="media/tafajsatan.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+
+  <link rel="canonical" href="tafaj-latex-panic.html" />
   <link rel="stylesheet" href="style.css" />
+  <script src="ticker.js" defer></script>
 </head>
-<body class="story-page">
+<body>
+  <!-- Ticker (topmost) -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
 
+  <!-- Banner -->
   <header class="site-header">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner" />
   </header>
 
-  <main id="top">
+  <main>
     <article>
       <header>
         <h1>Vigiles Respond After TAFAJ Broadcast; Grundy Calls Latex “Ideological Lubricant”</h1>
+        <div class="byline">By Cultural Bureau</div>
+      </header>
+
+      <!-- Story navigation (top) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="grundy-doubts-game-show-host.html">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="river-glow.html">Next Story →</a>
+      </nav>
+
+      <!-- Hero: top-left anchored, proportionate, with caption; text wraps on desktop -->
+      <figure class="story-hero">
+        <img src="media/tafajsatan.png" alt="First Citizen addressing Vigiles during a TAFAJ debrief">
+        <figcaption>Official still: The First Citizen mid-explanation during the TAFAJ follow-up broadcast.</figcaption>
+      </figure>
+
+      <!-- Story body (kept verbatim) -->
+      <section>
         <p>
           State television issued a clarification following the First Citizen’s latest televised reflection,
           in which he redefined the nation’s material priorities using a word no one expected to survive censors.
         </p>
-      </header>
 
-      <figure class="story-hero">
-        <img src="media/tafajsatan.png" alt="Grundy addressing Vigiles during a TAFAJ debrief" />
-        <figcaption>
-          Official still: The First Citizen mid-explanation during the TAFAJ follow-up broadcast.
-        </figcaption>
-      </figure>
-
-      <section>
         <p>
           What began as a routine TAFAJ network reassurance broadcast turned elastic early this morning
           when <strong>First Citizen Grundy</strong> described latex not as “a supply material,”
@@ -87,22 +107,21 @@
         </p>
       </section>
 
-      <!-- Bottom Ads -->
-      <div class="ad-row">
-        <div class="ad-tile"><img src="media/ad-here.png" alt="Promotional image" /></div>
-        <div class="ad-tile"><img src="media/AngelsAd.png" alt="Promotional image" /></div>
-        <div class="ad-tile"><img src="media/patriot-beer-ad.png" alt="Promotional image" /></div>
-      </div>
+      <!-- Story navigation (bottom, above ads) -->
+      <nav class="footer-nav" aria-label="Story Navigation">
+        <a class="btn" href="grundy-doubts-game-show-host.html">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="river-glow.html">Next Story →</a>
+      </nav>
 
-      <footer>
-        <nav class="footer-nav" aria-label="Story navigation" style="display:flex;gap:.75rem;flex-wrap:wrap;">
-          <a href="grundy-doubts-game-show-host.html" style="background:var(--indigo);color:#fff;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">← Last Story</a>
-          <a href="index.html" style="background:var(--amber);color:#fff;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">OTI Home</a>
-          <a href="river-glow.html" style="background:#fff;color:#071b36;border:1px solid #071b36;padding:.6rem 1rem;border-radius:999px;text-decoration:none;">Next Story →</a>
-        </nav>
-      </footer>
+      <!-- Bottom ads (auto via ads.js) -->
+      <div class="ad-row"></div>
     </article>
   </main>
+
+  <div class="footer-banner">
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
+  </div>
 
   <script src="ads.js" defer></script>
 </body>
