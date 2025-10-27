@@ -1,4 +1,3 @@
-```css
 /* ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
    Flat /oti structure, ticker above banner, validated responsive rules
@@ -287,9 +286,11 @@ body {
   font-style: italic;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 900px) {
-  .page { padding: 16px 12px 36px; }
+/* ===== MOBILE (≤700px) ===== */
+@media (max-width:700px) {
+  .page {
+    padding: 16px 12px 36px;
+  }
   .tafa-sidebar {
     position: static;
     max-width: 320px;
@@ -314,9 +315,23 @@ body {
   }
 }
 
+/* ===== DESKTOP LOCK (≥701px) ===== */
+@media (min-width:701px) {
+  .tafa-sidebar {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    width: 220px;
+    max-width: 240px;
+    display: block;
+  }
+  .page {
+    padding-left: 260px;
+  }
+}
+
 /* ===== MOBILE GRID STACK ===== */
-@media (max-width: 700px) {
+@media (max-width:700px) {
   .grid { grid-template-columns: 1fr; }
   .tile { margin-bottom: 1rem; }
 }
-```
