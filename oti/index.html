@@ -1,4 +1,3 @@
-<!-- /oti/index.html (fixed paths, veteran tile updated) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>One True Infotainment</title>
 
+  <!-- Serif for ticker only -->
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
-  <!-- IMAGE–PAGE MAP (Reference Only) -->
-  <!-- index.html uses media/banner.png, media/threatmeter.png -->
+  <!-- 
+  === IMAGE–PAGE MAP (Reference Only) ===
+  Updated: 2025-10-26
+  -->
 </head>
 <body>
-  <!-- TICKER -->
+
+  <!-- TICKER (red strip above banner) -->
   <div id="ticker" class="ticker" aria-live="polite">
     <p>
       Officials certify surplus of certainty abroad • Midnight trains now arrive at noon for efficiency audits •
@@ -29,10 +32,12 @@
     <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
   </header>
 
-  <!-- PAGE LAYOUT -->
+  <!-- PAGE LAYOUT: TAFAJ left + content grid -->
   <div class="page">
     <aside class="tafa-sidebar" aria-label="TAFAJ Threat Meter">
-      <img src="media/threatmeter.png" alt="TAFAJ Threat Meter" />
+      <a href="tafaj-latex-panic.html" aria-label="TAFAJ Latex Panic">
+        <img src="media/threatmeter.png" alt="TAFAJ Threat Meter" />
+      </a>
     </aside>
 
     <main class="content" id="top">
@@ -114,6 +119,5 @@
   </div>
 
   <script src="grid.js" defer></script>
-  <!-- ticker.js optional on index; omit if using static <p> above -->
 </body>
 </html>
