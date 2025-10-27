@@ -1,23 +1,23 @@
-/* ads.js — auto-fill ad containers from /media where name contains "AD" (case-insensitive) */
+/* ============================================================
+   ads.js — One True Infotainment
+   Auto-fills ad containers (left rail + bottom row)
+   ============================================================ */
+
 document.addEventListener("DOMContentLoaded", () => {
-  const targets = [...document.querySelectorAll(".ad-container-left, .ad-row")];
+  const targets = [
+    ...document.querySelectorAll(".ad-container-left, .ad-row")
+  ];
   if (!targets.length) return;
 
-  // Canonical inventory (indexed from /media)
+  // Canonical inventory (from /media)
   const mediaInventory = [
     "Angels-AD.png",
     "patriot-beer-AD.png",
     "patriot-games-AD.png",
-    "you-AD-here.png",
-    // Non-ad images present (ignored by filter)
-    // "banner.png","banner-wide.png","border-banners.png","domestic-smiles.png",
-    // "friendship-rebuild.png","grundy-accuses-host.png","grundy-explains-health.png",
-    // "hammer-of-grundy-concert.png","patriot-games-promo.png","patriotic-census.png",
-    // "public-smiling.png","river-glow.png","tafaj-bulletin.jpg.png","tafajsatan.png",
-    // "threatmeter.png","veteran-visibility.png"
+    "you-AD-here.png"
   ];
 
-  // Filter for filenames indicating ads
+  // Filter only valid ad images (contains "AD")
   const adImages = mediaInventory.filter(n =>
     /(^|[-_])ad(\.|-)/i.test(n) || /-AD\.png$/i.test(n) || /AD/i.test(n)
   );
@@ -34,25 +34,30 @@ document.addEventListener("DOMContentLoaded", () => {
     container.innerHTML = "";
     const isRow = container.classList.contains("ad-row");
 
-    // Left ad: one random; bottom row: 2–4 random tiles
+    // Left ad: 1 random image; Bottom row: up to 4
     const list = isRow
       ? shuffled.slice(0, Math.min(4, Math.max(2, shuffled.length)))
       : [shuffled[Math.floor(Math.random() * shuffled.length)]];
 
     list.forEach(name => {
       const img = document.createElement("img");
-      img.src = `media/${name}`;   // correct relative path (same folder)
+      img.src = `media/${name}`;
       img.alt = "Promotional image";
       img.loading = "lazy";
       img.decoding = "async";
       img.draggable = false;
-      img.style.width = "100%";
-      img.style.height = "auto";
-      img.style.objectFit = "contain";
 
+      // Create tile wrapper for bottom ads
       if (isRow) {
         const tile = document.createElement("div");
         tile.className = "ad-tile";
+
+        // Add “Financial Patriotism” pill
+        const pill = document.createElement("span");
+        pill.className = "ad-pill";
+        pill.textContent = "Financial Patriotism";
+        tile.appendChild(pill);
+
         tile.appendChild(img);
         container.appendChild(tile);
       } else {
