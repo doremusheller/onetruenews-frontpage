@@ -292,10 +292,11 @@ body {
     max-width: 100%;
     margin: 0 auto 1rem;
   }
-
-  /* Index becomes list view */
-  .grid { display: block; }
-  .grid .tile { margin-bottom: 1rem; }
-
-  .tile img { height: 160px; }
 }
+
+/* ===== MOBILE GRID STACK ===== */
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  .tile { margin-bottom: 1rem; }
+}
+```
