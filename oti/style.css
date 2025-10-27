@@ -1,3 +1,8 @@
+Del here. Next corrected file:
+
+# `/oti/style.css`
+
+```css
 /* ============================================================
    style.css — One True Infotainment (Unified Canon Layout)
    Flat /oti structure, ticker above banner, validated responsive rules
@@ -20,7 +25,7 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* ===== TICKER (central feed — topmost element) ===== */
+/* ===== TICKER ===== */
 .ticker {
   position: sticky;
   top: 0;
@@ -59,10 +64,10 @@ body {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 16px 48px 260px; /* space for TAFAJ sidebar */
+  padding: 24px 16px 48px 260px;
 }
 
-/* ===== TAFAJ + LEFT AD (index only) ===== */
+/* ===== TAFAJ + LEFT AD ===== */
 .tafa-sidebar {
   position: absolute;
   top: 24px;
@@ -70,10 +75,7 @@ body {
   width: 220px;
   max-width: 240px;
 }
-.tafa-sidebar a {
-  display: block;
-  text-decoration: none;
-}
+.tafa-sidebar a { display: block; text-decoration: none; }
 .tafa-sidebar img {
   width: 100%;
   height: auto;
@@ -90,7 +92,7 @@ body {
   transform: scale(1.22);
 }
 
-/* LEFT MARGIN AD CONTAINER */
+/* LEFT AD CONTAINER */
 .ad-container-left {
   display: flex;
   align-items: center;
@@ -109,7 +111,7 @@ body {
   display: block;
 }
 
-/* ===== GRID (index) ===== */
+/* ===== GRID (index desktop) ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -126,11 +128,7 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px var(--shadow);
 }
-.tile a {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-}
+.tile a { display: block; color: inherit; text-decoration: none; }
 .tile img {
   display: block;
   width: 100%;
@@ -149,11 +147,8 @@ body {
   line-height: 1.4;
 }
 
-/* ===== BREAKING NEWS TILE ===== */
-.breaking {
-  position: relative;
-  border: 2px solid var(--amber);
-}
+/* ===== BREAKING ===== */
+.breaking { position: relative; border: 2px solid var(--amber); }
 .breaking-pill {
   position: absolute;
   top: 8px;
@@ -170,7 +165,7 @@ body {
   pointer-events: none;
 }
 
-/* ===== STORY PAGES ===== */
+/* ===== STORY PAGE ===== */
 .story-page article {
   max-width: 900px;
   margin: 2rem auto;
@@ -185,11 +180,7 @@ body {
   line-height: 1.2;
   margin-bottom: 0.5rem;
 }
-.byline {
-  font-style: italic;
-  color: #444;
-  margin-bottom: 1.25rem;
-}
+.byline { font-style: italic; color: #444; margin-bottom: 1.25rem; }
 .story-hero {
   float: left;
   max-width: 420px;
@@ -197,7 +188,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
 }
 .story-hero img {
   width: 100%;
@@ -215,11 +205,8 @@ body {
   margin: 0 0 0.3rem 0;
 }
 
-/* ===== NAVIGATION BUTTONS ===== */
-.footer-nav {
-  text-align: center;
-  margin: 1.25rem 0;
-}
+/* ===== NAV BUTTONS ===== */
+.footer-nav { text-align: center; margin: 1.25rem 0; }
 .btn {
   display: inline-block;
   padding: 0.45rem 0.75rem;
@@ -231,18 +218,11 @@ body {
   box-shadow: 0 2px 6px var(--shadow);
   transition: transform 0.15s ease, background 0.2s ease;
 }
-.btn:hover {
-  background: var(--amber);
-  transform: translateY(-1px);
-}
-.btn:active {
-  transform: translateY(0);
-}
-.footer-nav .btn + .btn {
-  margin-left: 0.5rem;
-}
+.btn:hover { background: var(--amber); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.footer-nav .btn + .btn { margin-left: 0.5rem; }
 
-/* ===== ADS (bottom, all pages) ===== */
+/* ===== ADS ===== */
 .ad-row {
   display: flex;
   flex-wrap: wrap;
@@ -271,7 +251,7 @@ body {
   display: block;
 }
 
-/* ===== FOOTER BANNER ===== */
+/* ===== FOOTER ===== */
 .footer-banner {
   background: var(--cream);
   color: rgba(7, 27, 54, 0.6);
@@ -296,18 +276,13 @@ body {
   .tafa-sidebar img { transform: none; }
   .ad-container-left { display: none; }
 
-  /* Stack all ads at bottom */
   .ad-row {
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
   }
-  .ad-tile {
-    max-width: 300px;
-    width: 90%;
-  }
+  .ad-tile { max-width: 300px; width: 90%; }
 
-  /* Story hero full-width above text */
   .story-hero {
     float: none;
     display: block;
@@ -315,6 +290,10 @@ body {
     margin: 0 auto 1rem;
   }
 
-  /* Slightly smaller tile images on phones */
+  /* Index becomes list view */
+  .grid { display: block; }
+  .grid .tile { margin-bottom: 1rem; }
+
   .tile img { height: 160px; }
 }
+```
