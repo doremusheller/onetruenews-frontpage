@@ -4,11 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>One True Infotainment — OTI</title>
-  <!-- All assets live in /oti → same-folder paths -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Ticker (topmost) -->
+  <!-- Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
   <script src="ticker.js" defer></script>
 
@@ -18,7 +17,7 @@
   </header>
 
   <main class="page">
-    <!-- TAFAJ sidebar + left ad (left ad hidden on mobile via CSS) -->
+    <!-- TAFAJ sidebar + left ad -->
     <aside class="tafa-sidebar">
       <a href="tafaj-latex-panic.html">
         <img src="media/threatmeter.png" alt="Threat meter status">
@@ -26,10 +25,20 @@
       <div class="ad-container-left"></div>
     </aside>
 
-    <!-- STORIES GRID (desktop grid; mobile list via CSS) -->
+    <!-- GRID -->
     <section class="grid" id="storyGrid">
-      <!-- Newly edited stories only — no Patriot Games tile -->
 
+      <!-- 🔶 BREAKING NEWS TILE (pinned first, not shuffled) -->
+      <article class="tile breaking">
+        <span class="breaking-pill">Breaking</span>
+        <a href="BB1-suspect-siting.html">
+          <img src="media/BB1-suspect-siting.png" alt="CCTV still related to BB1 suspect siting">
+          <h2>BB1 Suspect Reported Near Broadcast Ridge</h2>
+          <p>Officials confirm increased vigilance after a confirmed visual near the OTI relay complex.</p>
+        </a>
+      </article>
+
+      <!-- REGULAR STORIES -->
       <article class="tile">
         <a href="grundy-explains-cancer.html">
           <img src="media/grundy-explains-health.png" alt="First Citizen explaining preventive geometry with snack rings">
@@ -79,15 +88,15 @@
       </article>
     </section>
 
-    <!-- Bottom ads (auto via ads.js) -->
+    <!-- Bottom ads -->
     <div class="ad-row"></div>
   </main>
 
   <div class="footer-banner">
-    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
+    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.”
   </div>
 
-  <!-- Local scripts (same-folder) -->
   <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
