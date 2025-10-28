@@ -1,4 +1,8 @@
-/* ticker.js — injects canonical headlines into #ticker (single source of truth) */
+/* ============================================================
+   ticker.js — One True Infotainment
+   Injects canonical headlines into #ticker (single source of truth)
+   ============================================================ */
+
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("ticker");
   if (!el) return;
@@ -6,9 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const headlines = [
     "Patriot Games relocates; wild monkey still at large",
     "Ministry clarifies travel restrictions for Holiday Freedom season",
-    "Veteran Visibility Week expands to Reaility Show!",
-    "How much do YOU support our troops? Take the quiz!"
-    "First Citizen to provide first-in-class 'Color Coded Census',
+    "Veteran Visibility Week expands to Reality Show!",
+    "How much do YOU support our troops? Take the quiz!",
+    "First Citizen to provide first-in-class 'Color Coded Census'",
     "First Citizen addresses wellness rumors with full jerky disclosure",
     "Nightworks scheduled along riverfront after suspect sighting"
   ];
