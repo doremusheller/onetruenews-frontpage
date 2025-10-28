@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v136
+   One True Infotainment — Canonical Style Sheet v137
    Validated: ticker.js, ads.js, grid.js, story-page, index-page
    ============================================================ */
 
@@ -300,7 +300,6 @@ body{
     margin:0 auto;
   }
   .ad-tile img{height:auto;}
-  /* Turn off wrap on small screens (stack image above text) */
   .story-hero.wrap-left{
     float:none;
     width:100%;
@@ -321,7 +320,11 @@ body{
   box-shadow:0 2px 4px var(--shadow);
   text-transform:uppercase;
   letter-spacing:.05em;
+  opacity:0;
+  transition:opacity .25s ease;
 }
+.ad-tile:hover .ad-pill,
+.ad-tile:focus-within .ad-pill{opacity:1}
 @media(max-width:700px){
   .ad-pill{
     font-size:.55rem;
@@ -350,4 +353,85 @@ body{
     font-size:.6rem;
     padding:.2rem .4rem;
   }
+}
+
+/* ============================================================
+   STORY PAGES — NEWS PRINT TOUCHES (scoped)
+   ============================================================ */
+.story-page article{
+  line-height:1.75;
+  letter-spacing:.005em;
+  -webkit-hyphens:auto; -ms-hyphens:auto; hyphens:auto;
+  hanging-punctuation:first;
+  font-variant-ligatures:common-ligatures discretionary-ligatures;
+  font-feature-settings:"liga","clig","kern";
+  color:#1a1a1a;
+}
+.story-page article h1{
+  letter-spacing:-.01em;
+  line-height:1.15;
+  margin-bottom:.35rem;
+}
+.story-page .dek{
+  font-family:"Libre Baskerville",Georgia,serif;
+  font-size:1.05rem;
+  color:rgba(7,27,54,.8);
+  margin:.15rem 0 .75rem;
+}
+.story-page .kicker{
+  font-family:system-ui,-apple-system,\"Segoe UI\",Helvetica,Arial,sans-serif;
+  font-weight:700;
+  font-size:.8rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(7,27,54,.7);
+  margin:.25rem 0 .15rem;
+}
+.story-page .pull{
+  border-left:3px solid rgba(7,27,54,.2);
+  padding:.5rem .75rem;
+  font-family:\"Libre Baskerville\",Georgia,serif;
+  font-size:1.05rem;
+  color:#111;
+  margin:1rem 0;
+}
+.story-page .note{
+  font-style:italic;
+  color:rgba(7,27,54,.8);
+}
+.story-page article header{
+  border-top:1px solid rgba(7,27,54,.12);
+  border-bottom:1px solid rgba(7,27,54,.12);
+  padding:.5rem 0 .65rem;
+  margin-bottom:.75rem;
+}
+
+/* ============================================================
+   MOBILE — AD PARADE (horizontal, slow)
+   ============================================================ */
+@keyframes mobile-ad-parade{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+@media(max-width:700px){
+  .ad-row{
+    display:block;
+    overflow:hidden;
+    padding:1rem 0;
+  }
+  .ad-row .track{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:0;
+    animation:mobile-ad-parade 120s linear infinite;
+  }
+  .ad-tile{
+    flex:0 0 auto;
+    width:72vw;
+    margin:0 .5rem;
+  }
+  .ad-tile img{height:auto;object-fit:contain;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ad-row .track{animation:none !important;}
+  .ad-tile .ad-pill{transition:none;}
 }
