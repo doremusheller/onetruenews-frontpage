@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "patriot-beer-AD.png",
     "patriot-games-AD.png",
     "you-AD-here.png"
+     "golden-streets.png"
   ];
 
   // pick only names that look like ads
