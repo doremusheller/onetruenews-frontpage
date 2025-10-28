@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><!-- STORY_TITLE -->Story Title — One True Infotainment</title>
-  <meta name="description" content="Official story from One True Infotainment." />
+  <title>{{TITLE}} — One True Infotainment</title>
+  <meta name="description" content="{{DESCRIPTION}}" />
 
   <!-- Open Graph (flat, canonical) -->
-  <meta property="og:title" content="<!-- STORY_TITLE -->Story Title" />
-  <meta property="og:description" content="Official story from One True Infotainment." />
+  <meta property="og:title" content="{{OG_TITLE}}" />
+  <meta property="og:description" content="{{OG_DESC}}" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="media/<!-- HERO_FILENAME -->placeholder-hero.png" />
+  <meta property="og:image" content="media/{{OG_IMAGE}}" />
   <meta property="og:site_name" content="One True Infotainment" />
-  <link rel="canonical" href="<!-- CANONICAL_SLUG -->story-template.html" />
+  <link rel="canonical" href="{{FILENAME}}.html" />
 
   <!-- Flat /oti assets -->
-  <link rel="stylesheet" href="style.css?v=%%BUILD%%" />
+  <link rel="stylesheet" href="style.css?v=139" />
 </head>
 
 <body class="story-page">
@@ -31,37 +31,48 @@
 
   <main class="page">
     <article>
-      <header>
-        <h1><!-- STORY_TITLE -->Story Title</h1>
-        <p class="byline"><!-- BYLINE -->By Cultural Bureau</p>
-      </header>
 
-      <!-- Buttons (top): after byline -->
-      <nav class="footer-nav" aria-label="Story navigation (top)">
-        <a class="btn" href="<!-- NEXT_SLUG -->next-story.html">Next Story →</a>
-        <a class="btn" href="index.html">OTI Home</a>
-      </nav>
-
-      <!-- Hero image: caption self-contained; text wraps on desktop -->
-      <figure class="story-hero">
-        <img src="media/<!-- HERO_FILENAME -->placeholder-hero.png"
-             alt="<!-- HERO_ALT -->Neutral, descriptive scene from within the fictional world">
-        <figcaption><!-- CAPTION -->Neutral descriptive caption. Keep concise; do not duplicate body text.</figcaption>
+      <!-- Hero image FIRST so headline/dek can wrap on desktop -->
+      <figure class="story-hero wrap-left">
+        <img src="media/{{HERO_SRC}}" 
+             alt="{{HERO_ALT}}" 
+             loading="lazy" decoding="async">
+        <figcaption>{{CAPTION}}</figcaption>
       </figure>
 
-      <!-- Story body (~500 words, 5–7 paragraphs) -->
+      <header>
+        <div class="kicker">{{KICKER}}</div>
+        <h1>{{TITLE}}</h1>
+        <p class="dek">{{DEK}}</p>
+        <p class="byline">By {{AUTHOR}} — One True Infotainment</p>
+        <p class="dateline">{{DATELINE}}</p>
+      </header>
+
+      <!-- Top navigation -->
+      <nav class="footer-nav" aria-label="Story navigation (top)">
+        <a class="btn" href="{{PREV_LINK}}">← Last Story</a>
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="{{NEXT_LINK}}">Next Story →</a>
+      </nav>
+
+      <!-- Story body -->
       <section>
-        <p><!-- BODY_P1 -->Paragraph one…</p>
-        <p><!-- BODY_P2 -->Paragraph two…</p>
-        <p><!-- BODY_P3 -->Paragraph three…</p>
-        <p><!-- BODY_P4 -->Paragraph four…</p>
-        <p><!-- BODY_P5 -->Paragraph five…</p>
+        <p>{{P1}}</p>
+        <p>{{P2}}</p>
+        <p>{{P3}}</p>
+        <p>{{P4}}</p>
+
+        <!-- Optional pull quote -->
+        <!-- <blockquote class="pull">{{PULL_QUOTE}}</blockquote> -->
+
+        <p class="note">{{ITALIC_STINGER}}</p>
       </section>
 
-      <!-- Buttons (bottom): after last line of story -->
+      <!-- Bottom navigation -->
       <nav class="footer-nav" aria-label="Story navigation (bottom)">
-        <a class="btn" href="<!-- NEXT_SLUG -->next-story.html">Next Story →</a>
+        <a class="btn" href="{{PREV_LINK}}">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="{{NEXT_LINK}}">Next Story →</a>
       </nav>
     </article>
 
@@ -71,12 +82,12 @@
 
   <!-- Footer disclaimer (exact text) -->
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. 
+    Irony is resistance, satire a pitchfork.
   </footer>
 
-  <!-- Flat /oti scripts (ordered) -->
+  <!-- Flat /oti scripts -->
   <script src="ticker.js" defer></script>
-  <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
