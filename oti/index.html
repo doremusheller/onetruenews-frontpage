@@ -1,92 +1,240 @@
-<!doctype html>
-<html lang="en" class="index-page">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>One True Infotainment — The Voice of the Corrected State</title>
-  <meta name="description" content="Official news and satire from One True Infotainment." />
+# Minimal patch: fix three tile href targets in /oti/index.html
+# Context-only unified diff (apply to current live index.html)
 
-  <!-- Canonical style and scripts -->
-  <link rel="stylesheet" href="style.css?v=137" />
-  <script src="ticker.js" defer></script>
-  <script src="grid.js" defer></script>
-  <script src="ads.js" defer></script>
-</head>
+--- a/index.html
++++ b/index.html
+@@
+-      <article class="tile">
+-        <a href="grundy-sends-towels.html">
++      <article class="tile">
++        <a href="grundy-towels.html">
+           <img src="media/grundy-towels.png" alt="First Citizen Grundy holds aloft a roll of towels at the podium" />
+           <h2>First Citizen Sends Thoughts, Towels to Jamaica</h2>
+           <p>Symbolic aid descends: slogans, sunshine, and absorbency.</p>
+         </a>
+       </article>
+@@
+-      <article class="tile">
+-        <a href="grundy-doubts-game-show-host.html">
++      <article class="tile">
++        <a href="grundy-accuses-show-host.html">
+           <img src="media/grundy-accuses-host.png" alt="Grundy doubts game show host’s motives" />
+           <h2>Grundy Doubts Game Show Host’s Motives</h2>
+           <p>The First Citizen questions the moral geometry of televised charity.</p>
+         </a>
+       </article>
+@@
+-      <article class="tile">
+-        <a href="border-banners.html">
++      <article class="tile">
++        <a href="final-seam.html">
+           <img src="media/border-banners.png" alt="Workers completing the wall’s final seam under floodlights" />
+           <h2>Grundy Praises the Wall’s Final Seam</h2>
+           <p>The nation’s edge sealed beneath floodlights and loyal applause.</p>
+         </a>
+       </article>
 
-<body>
-  <!-- Live Ticker -->
-  <div id="ticker" class="ticker" aria-live="polite"></div>
+# Rollback: revert this file to the previous version or undo the three href edits above.
+# Verification checklist (Del):
+# - Click each tile → resolves to target story page (200 OK in your local/hosted env)
+# - All images load: media/grundy-towels.png, media/grundy-accuses-host.png, media/border-banners.png
+# - Sidebar link tafaj-latex-panic.html functional
+# - Breaking tile grundy-checkup.html functional
 
-  <!-- Banner -->
-  <header class="site-header">
-    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
-  </header>
 
-  <!-- Page layout -->
-  <main class="page">
-    <!-- TAFAJ Threat Meter + Left Ad -->
-    <aside class="tafa-sidebar">
-      <a href="tafaj-latex-panic.html">
-        <img src="media/threatmeter.png" alt="TAFAJ threat meter, current advisory" />
-      </a>
-      <div class="ad-container-left"></div>
-    </aside>
+---
+# Minimal patch: grundy-towels.html (canonical story template adjustments)
+# Apply to /oti/grundy-towels.html
 
-    <!-- Story Grid -->
-    <section id="storyGrid" class="grid">
-      <!-- Breaking story (always first) -->
-      <article class="tile breaking">
-        <span class="breaking-pill">Breaking</span>
-        <a href="grundy-checkup.html">
-          <img src="media/grundy-checkup.png" alt="First Citizen Grundy during morale inspection at Walter Reed" />
-          <h2>Walter Reed Declares First Citizen “Picture of Health”</h2>
-          <p>Dr. Flint hails immaculate vitals; minor irregularities dismissed as patriotic phenomena.</p>
-        </a>
-      </article>
+@@
+-  <link rel="canonical" href="grundy-sends-towels.html" />
++  <link rel="canonical" href="grundy-towels.html" />
+@@
+-        <img src="media/grundy-towels.png"
+-             alt="First Citizen Grundy holds aloft a roll of towels at a podium bearing his seal">
++        <img src="media/grundy-towels.png"
++             alt="First Citizen Grundy holds aloft a roll of towels at a podium bearing his seal"
++             loading="lazy" decoding="async">
+@@
+-  <script src="ticker.js" defer></script>
+-  <script src="grid.js" defer></script>
+-  <script src="ads.js" defer></script>
++  <script src="ticker.js" defer></script>
++  <script src="ads.js" defer></script>
 
-      <!-- Grundy Towels story -->
-      <article class="tile">
-        <a href="grundy-towels.html">
-          <img src="media/grundy-towels.png" alt="First Citizen Grundy holds aloft a roll of towels at the podium" />
-          <h2>First Citizen Sends Thoughts, Towels to Jamaica</h2>
-          <p>Symbolic aid descends: slogans, sunshine, and absorbency.</p>
-        </a>
-      </article>
+# Rollback: undo these three hunks.
+# Verification (Del):
+# - Canonical URL points to grundy-towels.html
+# - Hero image lazy loads and paints correctly on desktop & mobile
+# - grid.js absent on this page; ticker and ads still function
+# - Buttons → grundy-checkup.html and index.html resolve
 
-      <!-- Example standard stories -->
-      <article class="tile">
-        <a href="grundy-doubts-game-show-host.html">
-          <img src="media/grundy-accuses-host.png" alt="Grundy doubts game show host’s motives" />
-          <h2>Grundy Doubts Game Show Host’s Motives</h2>
-          <p>The First Citizen questions the moral geometry of televised charity.</p>
-        </a>
-      </article>
 
-      <article class="tile">
-        <a href="grundy-explains-cancer.html">
-          <img src="media/grundy-explains-health.png" alt="Grundy explains national prevention through snacks" />
-          <h2>Grundy Explains: Cancer</h2>
-          <p>Faith, crunch, and Funyons — prevention redefined as patriotic geometry.</p>
-        </a>
-      </article>
+---
+# style.css — minimal additions for story “news-print” feel + mobile ad parade + ad-pill hover
+# Bump version to v137 when publishing
 
-      <article class="tile">
-        <a href="border-banners.html">
-          <img src="media/border-banners.png" alt="Workers completing the wall’s final seam under floodlights" />
-          <h2>Grundy Praises the Wall’s Final Seam</h2>
-          <p>The nation’s edge sealed beneath floodlights and loyal applause.</p>
-        </a>
-      </article>
-    </section>
+/* =====================
+   STORY PAGES — NEWS PRINT TOUCHES (scoped)
+   ===================== */
+.story-page article{
+  /* preserve existing max-width and margins; add newspaper-like readability */
+  line-height:1.75;
+  letter-spacing:.005em; /* slight ink-spread feel */
+  -webkit-hyphens:auto; -ms-hyphens:auto; hyphens:auto;
+  hanging-punctuation:first; /* graceful leading quotes when supported */
+  font-variant-ligatures:common-ligatures discretionary-ligatures;
+  font-feature-settings:"liga","clig","kern";
+  color:#1a1a1a; /* softer than #111 */
+}
+.story-page article h1{
+  letter-spacing:-.01em;
+  line-height:1.15;
+  margin-bottom:.35rem;
+}
+/* optional subhead (dek) under H1 */
+.story-page .dek{
+  font-family:"Libre Baskerville",Georgia,serif;
+  font-size:1.05rem;
+  color:rgba(7,27,54,.8);
+  margin:.15rem 0 .75rem;
+}
+/* optional kicker above H1 */
+.story-page .kicker{
+  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-weight:700;
+  font-size:.8rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(7,27,54,.7);
+  margin:.25rem 0 .15rem;
+}
+/* optional pull-quote block */
+.story-page .pull{
+  border-left:3px solid rgba(7,27,54,.2);
+  padding:.5rem .75rem;
+  font-family:"Libre Baskerville",Georgia,serif;
+  font-size:1.05rem;
+  color:#111;
+  margin:1rem 0;
+}
+/* optional note (replaces inline style attr) */
+.story-page .note{
+  font-style:italic;
+  color:rgba(7,27,54,.8);
+}
 
-    <!-- Bottom Ads -->
-    <div class="ad-row"></div>
-  </main>
+/* Hairline rules around header block for print vibe */
+.story-page article header{
+  border-top:1px solid rgba(7,27,54,.12);
+  border-bottom:1px solid rgba(7,27,54,.12);
+  padding:.5rem 0 .65rem;
+  margin-bottom:.75rem;
+}
 
-  <!-- Footer Disclaimer -->
-  <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
-    Irony is resistance, satire a pitchfork.
-  </footer>
-</body>
-</html>
+/* =====================
+   AD PILL — SHOW ON HOVER/FOCUS ONLY
+   ===================== */
+.ad-pill{opacity:0;transition:opacity .25s ease}
+.ad-tile:hover .ad-pill,
+.ad-tile:focus-within .ad-pill{opacity:1}
+
+/* =====================
+   MOBILE — AD PARADE (bottom-most, slow horizontal)
+   ===================== */
+@keyframes mobile-ad-parade{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+@media(max-width:700px){
+  /* Make the belt horizontal again (mobile parade) */
+  .ad-row{
+    display:block; /* ensures the track can flow horizontally */
+    overflow:hidden;
+    padding:1rem 0; /* keep breathing room */
+  }
+  .ad-row .track{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:0;
+    animation:mobile-ad-parade 120s linear infinite; /* slow patriotic pace */
+  }
+  .ad-tile{
+    flex:0 0 auto;
+    width:72vw; /* one dominant tile in view */
+    margin:0 .5rem;
+  }
+  .ad-tile img{height:auto;object-fit:contain}
+}
+
+/* Respect user preference: disable motion */
+@media (prefers-reduced-motion: reduce){
+  .ad-row .track{animation:none !important}
+  .ad-tile .ad-pill{transition:none}
+}
+
+/* =====================
+   NOTES FOR DEL (non-CSS):
+   - After publishing, bump <link rel="stylesheet" href="style.css?v=137"> on story templates and index.
+   - No JS changes required. ads.js continues to supply duplicated tiles for seamless loop.
+   - Index desktop belt keeps its original animation; mobile now scrolls horizontally as requested.
+*/
+
+
+---
+# Bump CSS version references → v137 and add optional story elements
+
+## Patch 1 — /oti/index.html
+@@
+-  <link rel="stylesheet" href="style.css?v=136" />
++  <link rel="stylesheet" href="style.css?v=137" />
+
+## Patch 2 — /oti/grundy-towels.html
+@@
+-  <link rel="stylesheet" href="style.css?v=136" />
++  <link rel="stylesheet" href="style.css?v=137" />
+@@
+-      <header>
+-        <h1>First Citizen Sends Thoughts, Towels to Jamaica as “Solidarity Gesture”</h1>
+-        <p class="byline">By Mara C. Halley — One True Infotainment</p>
+-        <p class="dateline">KINGSTON, Jamaica — October 28, 2025</p>
+-      </header>
++      <header>
++        <!-- Optional kicker & dek (news-print styling ready in CSS) -->
++        <div class="kicker">International • Disaster Response</div>
++        <h1>First Citizen Sends Thoughts, Towels to Jamaica as “Solidarity Gesture”</h1>
++        <p class="dek">Symbolic aid descends: slogans, sunshine, and absorbency.</p>
++        <p class="byline">By Mara C. Halley — One True Infotainment</p>
++        <p class="dateline">KINGSTON, Jamaica — October 28, 2025</p>
++      </header>
+@@
+-        <p style="margin-top:1.25rem;font-style:italic;color:rgba(7,27,54,.8)">When the sea takes everything, the powerful send towels—still wrapped in their price tags.</p>
++        <p class="note" style="margin-top:1.25rem">When the sea takes everything, the powerful send towels—still wrapped in their price tags.</p>
++
++        <!-- Optional pull quote example (remove or replace per story) -->
++        <!--
++        <blockquote class="pull">“Our towels are very absorbent. We’ll dry their tears and teach self-reliance at the same time.”</blockquote>
++        -->
+
+# Post-apply verification (Del):
+# - Both pages reference style.css?v=137
+# - Towels story renders kicker/dek/byline/dateline block with hairline rules
+# - The italic kicker uses .note class (no inline color dependence); inline margin retained
+# - Optional pull quote remains commented for future use
+
+
+---
+# Patch — style.css v137 tweaks
+
+/* Desktop-only ad tile tightening */
+@media (min-width:1100px){
+  .ad-row .ad-tile{ width:160px; }
+  .ad-row .ad-tile img{
+    height:80px;                  /* was 60px */
+    object-fit:cover;             /* tighter crop */
+    object-position:center;       /* centered crop */
+  }
+}
+
+/* Mobile ad parade — 30% faster */
+@media (max-width:700px){
+  .ad-row .track{animation:mobile-ad-parade 84s linear infinite;} /* was 120s */
+}
