@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "you-AD-here.png"
   ];
 
-  // Filter only valid ad images (contains "AD")
+  // Filter only valid ad images (contains “AD”)
   const adImages = mediaInventory.filter(n =>
     /(^|[-_])ad(\.|-)/i.test(n) || /-AD\.png$/i.test(n) || /AD/i.test(n)
   );
@@ -66,5 +66,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-updated this ad file
