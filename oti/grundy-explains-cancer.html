@@ -1,3 +1,23 @@
+👂 **Etta — LISTEN! brief received.**
+
+**Instruction:**
+Do **not** overwrite story body or imagery — only update the shell to current OTI v139 spec.
+
+**Scope:**
+
+* Apply v139 template structure + accessibility updates.
+* Keep full `<section>` story verbatim.
+* Keep all images and captions.
+* Update stylesheet link to `style.css?v=139`.
+* Remove `grid.js` (index-only).
+* Add OG/canonical meta normalization + bottom ads container position.
+* Ensure `<main class="page">` and nav consistency.
+
+**Rollback:** restore previous file version of `/oti/grundy-explains-cancer.html`.
+
+---
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,43 +32,50 @@
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/grundy-explains-health.png" />
   <meta property="og:site_name" content="One True Infotainment" />
-
   <link rel="canonical" href="grundy-explains-cancer.html" />
-  <link rel="stylesheet" href="style.css?v=126" />
+
+  <!-- Flat /oti assets -->
+  <link rel="stylesheet" href="style.css?v=139" />
 </head>
 
 <body class="story-page">
-  <!-- Live Ticker -->
+  <!-- Live Ticker (sticky, topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
     <a href="index.html" aria-label="Return to OTI Home">
-      <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State">
     </a>
   </header>
 
   <main class="page">
     <article>
+
+      <!-- Hero image FIRST for wrap and layout -->
+      <figure class="story-hero wrap-left">
+        <img src="media/grundy-explains-health.png"
+             alt="First Citizen Grundy holding a bag of Funyons during a studio broadcast"
+             loading="lazy" decoding="async">
+        <figcaption>“Trust the crunch,” Grundy told viewers, elevating a ring to the camera like a seal of office.</figcaption>
+      </figure>
+
       <header>
+        <div class="kicker">HEALTH</div>
         <h1>Grundy Explains: Cancer</h1>
-        <p class="byline">By Cultural Bureau</p>
+        <p class="dek">Funyons, faith, and the nation’s digestion — a lesson in prevention, explained by the First Citizen.</p>
+        <p class="byline">By Cultural Bureau — One True Infotainment</p>
+        <p class="dateline">NEW CHICAGO —</p>
       </header>
 
-      <!-- Top Nav -->
+      <!-- Top navigation -->
       <nav class="footer-nav" aria-label="Story navigation (top)">
         <a class="btn" href="grundy-explains-collection.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="hammer-of-grundy.html">Next Story →</a>
       </nav>
 
-      <!-- Hero -->
-      <figure class="story-hero">
-        <img src="media/grundy-explains-health.png" alt="First Citizen Grundy holding a bag of Funyons during a studio broadcast" />
-        <figcaption>“Trust the crunch,” Grundy told viewers, elevating a ring to the camera like a seal of office.</figcaption>
-      </figure>
-
-      <!-- BODY (verbatim) -->
+      <!-- BODY (preserved verbatim) -->
       <section>
         <p>In this week’s episode of <strong>Grundy Explains Stuff</strong>, the First Citizen took 14 minutes to redefine prevention as posture, patriotism, and snack selection. Holding a bag of Funyons at chest height, he asserted that the onion-flavored rings “polish the inner nation and keep the colon on course.” The audience, seated in neat arcs around the podium, applauded in measured bursts. Behind him, a screen displayed two x-rays labeled <em>Before Belief</em> and <em>After Snacks</em>, separated by a diagonal of light that read: <strong>RING, REPAIR, REJOICE</strong>.</p>
 
@@ -71,7 +98,7 @@
         <p><em>Health is Harmony. Belief is Biology.</em></p>
       </section>
 
-      <!-- Bottom Nav -->
+      <!-- Bottom navigation -->
       <nav class="footer-nav" aria-label="Story navigation (bottom)">
         <a class="btn" href="grundy-explains-collection.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
@@ -79,18 +106,19 @@
       </nav>
     </article>
 
-    <!-- Bottom ads -->
+    <!-- Bottom ads (auto-filled by ads.js) -->
     <div class="ad-row"></div>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer disclaimer -->
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
   </footer>
 
-  <!-- Scripts -->
+  <!-- Flat /oti scripts -->
   <script src="ticker.js" defer></script>
-  <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
+```
