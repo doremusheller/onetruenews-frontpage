@@ -83,18 +83,52 @@ body { background:var(--cream); color:#111; font-family:system-ui,-apple-system,
 
 /* ===== Etta Hotfix: Ticker should be single-line, fixed height ===== */
 .ticker{
-  white-space: nowrap;           /* prevent wrapping */
-  height: var(--ticker-h);       /* lock height */
-  line-height: var(--ticker-h);  /* vertically center text */
+  white-space: nowrap;
+  height: var(--ticker-h);
+  line-height: var(--ticker-h);
 }
-
 .ticker p{
   display: inline-block;
-  white-space: nowrap;           /* ensure the scroller line never wraps */
-  padding-left: 100%;            /* start off-screen to the right */
+  white-space: nowrap;
+  padding-left: 100%;
 }
-
-/* Safety for reduced motion users */
 @media (prefers-reduced-motion: reduce){
   .ticker p{ animation: none; padding-left: 0; }
+}
+
+/* ===== Etta Fix: Scope left-rail rules to index only; mobile stack ===== */
+
+/* Story pages never show the left rail */
+.story-page .tafa-sidebar { display:none !important; }
+
+/* Desktop (index only): fixed left rail + correct padding */
+@media (min-width:701px){
+  .index-page .page{ padding:24px 16px 48px 260px; }
+  .index-page .tafa-sidebar{
+    position:absolute;
+    top:24px; left:0;
+    width:220px; max-width:240px;
+    z-index:1;
+  }
+  .index-page .tafa-sidebar img{
+    display:block; width:100%; height:auto; max-width:100%;
+    object-fit:contain;
+    transform:scale(1.12); transform-origin:top;
+  }
+}
+
+/* Mobile (index only): stack; bounded image; hide left ad */
+@media (max-width:700px){
+  .index-page .page{ padding:16px 12px 48px; }
+  .index-page .tafa-sidebar{
+    position:static; width:100%; max-width:320px;
+    margin:0 auto 1rem; transform:none;
+  }
+  .index-page .tafa-sidebar img{
+    transform:none;
+    width:100%; height:auto; max-height:40vh;
+    object-fit:contain;
+  }
+  .index-page .ad-container-left{ display:none; }
+  .index-page .grid{ grid-template-columns:1fr; }
 }
