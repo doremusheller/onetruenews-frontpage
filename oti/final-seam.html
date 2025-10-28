@@ -5,44 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Grundy Praises the Wall’s Final Seam — One True Infotainment</title>
   <meta name="description" content="Under floodlights and broadcast silence, the First Citizen commemorates the completion of the nation’s edge with the wall’s final seam." />
-  <link rel="stylesheet" href="style.css?v=125" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Grundy Praises the Wall’s Final Seam" />
+  <meta property="og:description" content="Under floodlights and broadcast silence, the First Citizen commemorates the completion of the nation’s edge with the wall’s final seam." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="media/border-banners.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+  <link rel="canonical" href="final-seam.html" />
+
+  <!-- Flat /oti assets -->
+  <link rel="stylesheet" href="style.css?v=139" />
 </head>
+
 <body class="story-page">
-  <!-- Live Ticker -->
+  <!-- Live Ticker (sticky, topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
     <a href="index.html" aria-label="Return to OTI Home">
-      <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State">
     </a>
   </header>
 
   <main class="page">
     <article>
+
+      <!-- Hero image FIRST so headline/dek can wrap on desktop -->
+      <figure class="story-hero wrap-left">
+        <img src="media/border-banners.png" 
+             alt="Workers completing the wall’s final seam at night under floodlights" 
+             loading="lazy" decoding="async">
+        <figcaption>
+          Official broadcast still: citizens affix the ceremonial banners to the completed wall, under amber light and national supervision.
+        </figcaption>
+      </figure>
+
       <header>
+        <div class="kicker">INFRASTRUCTURE</div>
         <h1>Grundy Praises the Wall’s Final Seam</h1>
-        <p class="byline">
-          Under floodlights and broadcast silence, the First Citizen commemorated the completion of the nation’s edge.
-        </p>
+        <p class="dek">Under floodlights and broadcast silence, the First Citizen commemorated the completion of the nation’s edge.</p>
+        <p class="byline">By OTI Service Staff — One True Infotainment</p>
+        <p class="dateline">NEW CHICAGO —</p>
       </header>
 
-      <!-- Top Nav -->
+      <!-- Top navigation -->
       <nav class="footer-nav" aria-label="Story navigation (top)">
         <a class="btn" href="veteran-visibility.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="grundy-accuses-show-host.html">Next Story →</a>
       </nav>
 
-      <!-- Hero -->
-      <figure class="story-hero">
-        <img src="media/border-banners.png" alt="Workers completing the wall’s final seam at night under floodlights" />
-        <figcaption>
-          Official broadcast still: citizens affix the ceremonial banners to the completed wall, under amber light and national supervision.
-        </figcaption>
-      </figure>
-
-      <!-- BODY (preserved verbatim) -->
+      <!-- Story body (preserved verbatim) -->
       <section>
         <p>
           The wall is finished. In a ceremony measured by decibel, lumen, and loyalty,
@@ -82,9 +97,11 @@
           as “The Last Citizen Outside,” a new national archetype representing closure and vigilance.
           “He looked small,” one presenter said, “but that’s the scale of completion.”
         </p>
+
+        <p class="note"><em>Editor’s note: OTI reminds viewers that vigilance is a posture, not a destination.</em></p>
       </section>
 
-      <!-- Bottom Nav -->
+      <!-- Bottom navigation -->
       <nav class="footer-nav" aria-label="Story navigation (bottom)">
         <a class="btn" href="veteran-visibility.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
@@ -92,18 +109,18 @@
       </nav>
     </article>
 
-    <!-- Bottom ads row (auto-filled by ads.js) -->
+    <!-- Bottom ads (auto-filled by ads.js) -->
     <div class="ad-row"></div>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer disclaimer -->
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. 
+    Irony is resistance, satire a pitchfork.
   </footer>
 
-  <!-- Scripts -->
+  <!-- Flat /oti scripts -->
   <script src="ticker.js" defer></script>
-  <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
