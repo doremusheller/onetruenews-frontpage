@@ -1,122 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="index-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>One True Infotainment — The Voice of the Corrected State</title>
-  <meta name="description" content="Official news and infotainment of the Corrected States of America — sanctioned stories, morale guidance, and broadcast clarity.">
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=124" />
+  <meta name="description" content="Official news and satire from One True Infotainment." />
+
+  <!-- Canonical style and scripts -->
+  <link rel="stylesheet" href="style.css?v=133" />
+  <script src="ticker.js" defer></script>
+  <script src="grid.js" defer></script>
+  <script src="ads.js" defer></script>
 </head>
-<body class="index-page">
+
+<body>
   <!-- Live Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
-    <a href="index.html" aria-label="Return to OTI Home">
-      <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
-    </a>
+    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
   </header>
 
-  <!-- MAIN PAGE -->
+  <!-- Page layout -->
   <main class="page">
-    <!-- Sidebar -->
+    <!-- Left ad / threatmeter -->
     <aside class="tafa-sidebar">
-      <a href="tafaj-latex-panic.html">
-        <img src="media/threatmeter.png" alt="TAFAJ Threat Meter — National Alert Indicator" />
-      </a>
       <div class="ad-container-left"></div>
     </aside>
 
-    <!-- STORY GRID -->
-    <section id="storyGrid" class="grid">
-      <!-- 🔶 BREAKING NEWS — Grundy Health Check -->
+    <!-- Story Grid -->
+    <section class="grid">
+      <!-- Breaking story (always first) -->
       <article class="tile breaking">
         <span class="breaking-pill">Breaking</span>
         <a href="grundy-checkup.html">
-          <img src="media/grundy-checkup.png" alt="First Citizen Grundy during routine morale checkup at Walter Reed">
-          <h2>Walter Reed Declares First Citizen ‘Picture of Health’</h2>
-          <p>State physician hails immaculate vitals amid minor, harmless anomalies of patriotic biology.</p>
+          <img src="media/grundy-checkup.png" alt="First Citizen Grundy during morale inspection at Walter Reed" />
+          <h2>Walter Reed Declares First Citizen “Picture of Health”</h2>
+          <p>Dr. Flint hails immaculate vitals; minor irregularities dismissed as patriotic phenomena.</p>
         </a>
       </article>
 
-      <!-- 🟦 Grundy Visits Troops -->
+      <!-- Example standard stories -->
       <article class="tile">
-        <a href="veteran-visibility.html">
-          <img src="media/veteran-visibility.png" alt="First Citizen Grundy greeting soldiers at a field post">
-          <h2>Grundy Visits Troops</h2>
-          <p>The First Citizen makes himself heroically visible with wounded veterans</p>
-        </a>
-      </article>
-
-      <!-- Vigiles Respond After TAFAJ -->
-      <article class="tile">
-        <a href="tafaj-latex-panic.html">
-          <img src="media/tafajsatan.png" alt="First Citizen during TAFAJ follow-up broadcast">
-          <h2>Vigiles Respond After TAFAJ Broadcast</h2>
-          <p>Clarifications ripple after latex is framed as ideological lubricant.</p>
-        </a>
-      </article>
-
-      <!-- River Glow -->
-      <article class="tile">
-        <a href="river-glow.html">
-          <img src="media/river-glow.png" alt="The glowing Mississippi River after industrial spill">
-          <h2>River Glow Declared “A Triumph of Industrial Creativity”</h2>
-          <p>Officials hail patriotic luminescence as evidence of productive harmony.</p>
-        </a>
-      </article>
-
-      <!-- Grundy Doubts Game Show Host -->
-      <article class="tile">
-        <a href="grundy-accuses-show-host.html">
-          <img src="media/grundy-accuses-host.png" alt="First Citizen addressing reporters about a televised charity">
+        <a href="grundy-doubts-game-show-host.html">
+          <img src="media/grundy-accuses-host.png" alt="Grundy doubts game show host’s motives" />
           <h2>Grundy Doubts Game Show Host’s Motives</h2>
-          <p>Interpretive leadership meets televised charity in a burst of suspicion.</p>
+          <p>The First Citizen questions the moral geometry of televised charity.</p>
         </a>
       </article>
 
-      <!-- Grundy Explains: Cancer -->
       <article class="tile">
         <a href="grundy-explains-cancer.html">
-          <img src="media/grundy-explains-health.png" alt="Administrator Grundy during a televised explainer segment">
+          <img src="media/grundy-explains-health.png" alt="Grundy explains national prevention through snacks" />
           <h2>Grundy Explains: Cancer</h2>
-          <p>Funyons, faith, and national digestion — a televised lesson in prevention.</p>
+          <p>Faith, crunch, and Funyons — prevention redefined as patriotic geometry.</p>
         </a>
       </article>
 
-      <!-- Hammer of Grundy -->
       <article class="tile">
-        <a href="hammer-of-grundy.html">
-          <img src="media/hammer-of-grundy-concert.png" alt="Hammer of Grundy performing under national spotlight">
-          <h2>Hammer of Grundy Shakes the Faithful</h2>
-          <p>The sanctioned metal ministry returns to the stage in righteous volume.</p>
-        </a>
-      </article>
-
-      <!-- Public Smiling Hours -->
-      <article class="tile">
-        <a href="public-smiling-hours.html">
-          <img src="media/domestic-smiles.png" alt="Citizens smiling under Ministry supervision">
-          <h2>Public Smiling Hours Extended Through Winter</h2>
-          <p>Nationwide grin initiative credited with increased warmth and cheek resilience.</p>
+        <a href="border-banners.html">
+          <img src="media/border-banners.png" alt="Workers completing the wall’s final seam under floodlights" />
+          <h2>Grundy Praises the Wall’s Final Seam</h2>
+          <p>The nation’s edge sealed beneath floodlights and loyal applause.</p>
         </a>
       </article>
     </section>
 
-    <!-- Bottom ads row (auto-filled by ads.js) -->
+    <!-- Bottom Ads -->
     <div class="ad-row"></div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- Footer Disclaimer -->
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
   </footer>
-
-  <!-- Scripts -->
-  <script src="ticker.js" defer></script>
-  <script src="grid.js" defer></script>
-  <script src="ads.js" defer></script>
 </body>
 </html>
