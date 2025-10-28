@@ -1,93 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="story-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{TITLE}} — One True Infotainment</title>
-  <meta name="description" content="{{DESCRIPTION}}" />
 
-  <!-- Open Graph (flat, canonical) -->
-  <meta property="og:title" content="{{OG_TITLE}}" />
-  <meta property="og:description" content="{{OG_DESC}}" />
+  <!-- 🔹 TITLE & META -->
+  <title>Story Title — One True Infotainment</title>
+  <meta name="description" content="Short, vivid summary (under 160 chars)." />
+
+  <!-- 🔹 Open Graph -->
+  <meta property="og:title" content="Story Title — One True Infotainment" />
+  <meta property="og:description" content="Short share summary matching meta description." />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="media/{{OG_IMAGE}}" />
+  <meta property="og:image" content="media/placeholder.png" />
   <meta property="og:site_name" content="One True Infotainment" />
-  <link rel="canonical" href="{{FILENAME}}.html" />
 
-  <!-- Flat /oti assets -->
+  <link rel="canonical" href="story-file-name.html" />
   <link rel="stylesheet" href="style.css?v=139" />
+
+  <!-- Flat /oti scripts -->
+  <script src="ticker.js" defer></script>
+  <script src="ads.js" defer></script>
 </head>
 
-<body class="story-page">
-  <!-- Live Ticker (sticky, topmost) -->
+<body>
+  <!-- Live Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
     <a href="index.html" aria-label="Return to OTI Home">
-      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State">
+      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
     </a>
   </header>
 
-  <main class="page">
+  <!-- PAGE CONTENT -->
+  <main>
     <article>
-
-      <!-- Hero image FIRST so headline/dek can wrap on desktop -->
-      <figure class="story-hero wrap-left">
-        <img src="media/{{HERO_SRC}}" 
-             alt="{{HERO_ALT}}" 
-             loading="lazy" decoding="async">
-        <figcaption>{{CAPTION}}</figcaption>
-      </figure>
-
+      <!-- 🔹 Header -->
       <header>
-        <div class="kicker">{{KICKER}}</div>
-        <h1>{{TITLE}}</h1>
-        <p class="dek">{{DEK}}</p>
-        <p class="byline">By {{AUTHOR}} — One True Infotainment</p>
-        <p class="dateline">{{DATELINE}}</p>
+        <div class="kicker">Category • Desk</div>
+        <h1>Story Title Goes Here</h1>
+        <p class="dek">Short deck/summary line — tone matches satirical style.</p>
+        <p class="byline">By Fictional Author — One True Infotainment</p>
+        <p class="dateline">CITY, STATE — Month Day, Year</p>
       </header>
 
-      <!-- Top navigation -->
+      <!-- 🔹 Navigation (top) -->
       <nav class="footer-nav" aria-label="Story navigation (top)">
-        <a class="btn" href="{{PREV_LINK}}">← Last Story</a>
+        <a class="btn" href="previous-story.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
-        <a class="btn" href="{{NEXT_LINK}}">Next Story →</a>
+        <a class="btn" href="next-story.html">Next Story →</a>
       </nav>
 
-      <!-- Story body -->
+      <!-- 🔹 Hero Image -->
+      <figure class="story-hero wrap-left">
+        <img src="media/placeholder.png" alt="Descriptive alt text for main image" loading="lazy" decoding="async" />
+        <figcaption>Official still: concise caption explaining image context.</figcaption>
+      </figure>
+
+      <!-- 🔹 BODY (replace verbatim with story content) -->
       <section>
-        <p>{{P1}}</p>
-        <p>{{P2}}</p>
-        <p>{{P3}}</p>
-        <p>{{P4}}</p>
+        <p>Opening paragraph sets scene — tone consistent with OTI satire and canon.</p>
 
-        <!-- Optional pull quote -->
-        <!-- <blockquote class="pull">{{PULL_QUOTE}}</blockquote> -->
+        <p>Subsequent paragraphs continue the story, using structured HTML paragraphs, blockquotes if needed, and minimal inline styling.</p>
 
-        <p class="note">{{ITALIC_STINGER}}</p>
+        <blockquote>Example of a pull quote — “Irony is resistance, satire a pitchfork.”</blockquote>
+
+        <p>Closing paragraph ties back to OTI’s tone and fictional propaganda voice.</p>
       </section>
 
-      <!-- Bottom navigation -->
+      <!-- 🔹 Navigation (bottom) -->
       <nav class="footer-nav" aria-label="Story navigation (bottom)">
-        <a class="btn" href="{{PREV_LINK}}">← Last Story</a>
+        <a class="btn" href="previous-story.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
-        <a class="btn" href="{{NEXT_LINK}}">Next Story →</a>
+        <a class="btn" href="next-story.html">Next Story →</a>
       </nav>
-    </article>
 
-    <!-- Bottom ads (auto-filled by ads.js) -->
-    <div class="ad-row"></div>
+      <!-- 🔹 Ads -->
+      <div class="ad-row"></div>
+    </article>
   </main>
 
-  <!-- Footer disclaimer (exact text) -->
+  <!-- 🔹 Footer Disclaimer -->
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. 
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
     Irony is resistance, satire a pitchfork.
   </footer>
-
-  <!-- Flat /oti scripts -->
-  <script src="ticker.js" defer></script>
-  <script src="ads.js" defer></script>
 </body>
 </html>
