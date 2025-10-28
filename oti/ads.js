@@ -1,15 +1,13 @@
 /* ============================================================
    ads.js — One True Infotainment
    Auto-fills ad containers (left rail + bottom row)
+   v2: seamless desktop scroll, user-respecting motion
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const targets = [
-    ...document.querySelectorAll(".ad-container-left, .ad-row")
-  ];
+  const targets = [...document.querySelectorAll(".ad-container-left, .ad-row")];
   if (!targets.length) return;
 
-  // Canonical inventory (from /media)
   const mediaInventory = [
     "Angels-AD.png",
     "patriot-beer-AD.png",
@@ -17,13 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "you-AD-here.png"
   ];
 
-  // Filter only valid ad images (contains “AD”)
+  // pick only names that look like ads
   const adImages = mediaInventory.filter(n =>
-    /(^|[-_])ad(\.|-)/i.test(n) || /-AD\.png$/i.test(n) || /AD/i.test(n)
+    /ad/i.test(n)
   );
   if (!adImages.length) return;
 
-  // Shuffle once
+  // shuffle helper
   const shuffled = adImages.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -31,38 +29,49 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   targets.forEach(container => {
-    container.innerHTML = "";
     const isRow = container.classList.contains("ad-row");
+    container.innerHTML = "";
 
-    // Left ad: 1 random image; Bottom row: up to 4
-    const list = isRow
-      ? shuffled.slice(0, Math.min(4, Math.max(2, shuffled.length)))
-      : [shuffled[Math.floor(Math.random() * shuffled.length)]];
+    if (isRow) {
+      // bottom row — build seamless belt
+      const track = document.createElement("div");
+      track.className = "track";
+      const list = shuffled.slice(0, Math.min(4, shuffled.length));
 
-    list.forEach(name => {
+      // helper to make one full set of ad tiles
+      function makeSet() {
+        return list.map(name => {
+          const tile = document.createElement("div");
+          tile.className = "ad-tile";
+          const pill = document.createElement("span");
+          pill.className = "ad-pill";
+          pill.textContent = "Financial Patriotism";
+          const img = document.createElement("img");
+          img.src = `media/${name}`;
+          img.alt = "Promotional image";
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.draggable = false;
+          tile.append(pill, img);
+          return tile;
+        });
+      }
+
+      // append two identical sets for seamless loop
+      makeSet().forEach(t => track.appendChild(t));
+      makeSet().forEach(t => track.appendChild(t));
+
+      container.appendChild(track);
+    } else {
+      // left-rail single ad
+      const name = shuffled[Math.floor(Math.random() * shuffled.length)];
       const img = document.createElement("img");
       img.src = `media/${name}`;
       img.alt = "Promotional image";
       img.loading = "lazy";
       img.decoding = "async";
       img.draggable = false;
-
-      // Create tile wrapper for bottom ads
-      if (isRow) {
-        const tile = document.createElement("div");
-        tile.className = "ad-tile";
-
-        // Add “Financial Patriotism” pill
-        const pill = document.createElement("span");
-        pill.className = "ad-pill";
-        pill.textContent = "Financial Patriotism";
-        tile.appendChild(pill);
-
-        tile.appendChild(img);
-        container.appendChild(tile);
-      } else {
-        container.appendChild(img);
-      }
-    });
+      container.appendChild(img);
+    }
   });
 });
