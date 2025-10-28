@@ -212,3 +212,8 @@ body{
 @media(max-width:700px){
   .tile.breaking .breaking-pill{font-size:.6rem;padding:.2rem .4rem;}
 }
+/* Anti-stack guard: ensure multi-col grid for typical desktops even if site zoom nudges CSS px under 700 */
+@media (min-width: 820px) {
+  .index-page .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+}
+
