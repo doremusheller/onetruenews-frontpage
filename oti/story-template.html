@@ -1,19 +1,26 @@
-<!doctype html>
-<html lang="en" class="story-page">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title><!-- STORY_TITLE -->Story Title — One True Infotainment</title>
   <meta name="description" content="Official story from One True Infotainment." />
 
+  <!-- Open Graph (flat, canonical) -->
+  <meta property="og:title" content="<!-- STORY_TITLE -->Story Title" />
+  <meta property="og:description" content="Official story from One True Infotainment." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="media/<!-- HERO_FILENAME -->placeholder-hero.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+  <link rel="canonical" href="<!-- CANONICAL_SLUG -->story-template.html" />
+
   <!-- Flat /oti assets -->
-  <link rel="stylesheet" href="style.css?v=122" />
+  <link rel="stylesheet" href="style.css?v=%%BUILD%%" />
 </head>
 
-<body>
+<body class="story-page">
   <!-- Live Ticker (sticky, topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
-  <script src="ticker.js" defer></script>
 
   <!-- Banner -->
   <header class="site-header">
@@ -22,24 +29,24 @@
     </a>
   </header>
 
-  <main>
+  <main class="page">
     <article>
       <header>
         <h1><!-- STORY_TITLE -->Story Title</h1>
-        <div class="byline"><!-- BYLINE -->By Cultural Bureau</div>
+        <p class="byline"><!-- BYLINE -->By Cultural Bureau</p>
       </header>
 
       <!-- Story navigation (top) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
-        <a class="btn" href="previous-story.html">← Last Story</a>
+      <nav class="footer-nav" aria-label="Story navigation (top)">
+        <a class="btn" href="<!-- PREV_SLUG -->previous-story.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
-        <a class="btn" href="next-story.html">Next Story →</a>
+        <a class="btn" href="<!-- NEXT_SLUG -->next-story.html">Next Story →</a>
       </nav>
 
-      <!-- Hero image: locks top-left; caption self-contained; text wraps -->
+      <!-- Hero image: caption self-contained; text wraps on desktop -->
       <figure class="story-hero">
-        <img src="media/placeholder-hero.png"
-             alt="Neutral, descriptive scene from within the fictional world">
+        <img src="media/<!-- HERO_FILENAME -->placeholder-hero.png"
+             alt="<!-- HERO_ALT -->Neutral, descriptive scene from within the fictional world">
         <figcaption><!-- CAPTION -->Neutral descriptive caption. Keep concise; do not duplicate body text.</figcaption>
       </figure>
 
@@ -52,24 +59,26 @@
         <p><!-- BODY_P5 -->Paragraph five…</p>
       </section>
 
-      <!-- Story navigation (bottom, above ads) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
-        <a class="btn" href="previous-story.html">← Last Story</a>
+      <!-- Story navigation (bottom) -->
+      <nav class="footer-nav" aria-label="Story navigation (bottom)">
+        <a class="btn" href="<!-- PREV_SLUG -->previous-story.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
-        <a class="btn" href="next-story.html">Next Story →</a>
+        <a class="btn" href="<!-- NEXT_SLUG -->next-story.html">Next Story →</a>
       </nav>
-
-      <!-- Bottom ads (auto-filled by ads.js) -->
-      <div class="ad-row"></div>
     </article>
+
+    <!-- Bottom ads (auto-filled by ads.js) -->
+    <div class="ad-row"></div>
   </main>
 
   <!-- Footer disclaimer (exact text) -->
-  <div class="footer-banner">
+  <footer class="footer-banner">
     The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
-  </div>
+  </footer>
 
-  <!-- Flat /oti scripts -->
+  <!-- Flat /oti scripts (ordered) -->
+  <script src="ticker.js" defer></script>
+  <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
