@@ -1,4 +1,9 @@
+# Minimal patch: fix three tile href targets in /oti/index.html
+# Context-only unified diff (apply to current live index.html)
 
+--- a/index.html
++++ b/index.html
+@@
 -      <article class="tile">
 -        <a href="grundy-sends-towels.html">
 +      <article class="tile">
@@ -233,3 +238,102 @@
 @media (max-width:700px){
   .ad-row .track{animation:mobile-ad-parade 84s linear infinite;} /* was 120s */
 }
+
+
+---
+# /oti/index.html — full clean file (artifact-free, v137)
+
+<!doctype html>
+<html lang="en" class="index-page">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One True Infotainment — The Voice of the Corrected State</title>
+  <meta name="description" content="Official news and satire from One True Infotainment." />
+
+  <!-- Canonical style and scripts -->
+  <link rel="stylesheet" href="style.css?v=137" />
+  <script src="ticker.js" defer></script>
+  <script src="grid.js" defer></script>
+  <script src="ads.js" defer></script>
+</head>
+
+<body>
+  <!-- Live Ticker -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
+
+  <!-- Banner -->
+  <header class="site-header">
+    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+  </header>
+
+  <!-- Page layout -->
+  <main class="page">
+    <!-- TAFAJ Threat Meter + Left Ad -->
+    <aside class="tafa-sidebar">
+      <a href="tafaj-latex-panic.html">
+        <img src="media/threatmeter.png" alt="TAFAJ threat meter, current advisory" />
+      </a>
+      <div class="ad-container-left"></div>
+    </aside>
+
+    <!-- Story Grid -->
+    <section id="storyGrid" class="grid">
+      <!-- Breaking story (always first) -->
+      <article class="tile breaking">
+        <span class="breaking-pill">Breaking</span>
+        <a href="grundy-checkup.html">
+          <img src="media/grundy-checkup.png" alt="First Citizen Grundy during morale inspection at Walter Reed" />
+          <h2>Walter Reed Declares First Citizen “Picture of Health”</h2>
+          <p>Dr. Flint hails immaculate vitals; minor irregularities dismissed as patriotic phenomena.</p>
+        </a>
+      </article>
+
+      <!-- Grundy Towels story -->
+      <article class="tile">
+        <a href="grundy-towels.html">
+          <img src="media/grundy-towels.png" alt="First Citizen Grundy holds aloft a roll of towels at the podium" />
+          <h2>First Citizen Sends Thoughts, Towels to Jamaica</h2>
+          <p>Symbolic aid descends: slogans, sunshine, and absorbency.</p>
+        </a>
+      </article>
+
+      <!-- Game Show Host story -->
+      <article class="tile">
+        <a href="grundy-accuses-show-host.html">
+          <img src="media/grundy-accuses-host.png" alt="Grundy doubts game show host’s motives" />
+          <h2>Grundy Doubts Game Show Host’s Motives</h2>
+          <p>The First Citizen questions the moral geometry of televised charity.</p>
+        </a>
+      </article>
+
+      <!-- Grundy Explains: Cancer -->
+      <article class="tile">
+        <a href="grundy-explains-cancer.html">
+          <img src="media/grundy-explains-health.png" alt="Grundy explains national prevention through snacks" />
+          <h2>Grundy Explains: Cancer</h2>
+          <p>Faith, crunch, and Funyons — prevention redefined as patriotic geometry.</p>
+        </a>
+      </article>
+
+      <!-- Final Seam story -->
+      <article class="tile">
+        <a href="final-seam.html">
+          <img src="media/border-banners.png" alt="Workers completing the wall’s final seam under floodlights" />
+          <h2>Grundy Praises the Wall’s Final Seam</h2>
+          <p>The nation’s edge sealed beneath floodlights and loyal applause.</p>
+        </a>
+      </article>
+    </section>
+
+    <!-- Bottom Ads -->
+    <div class="ad-row"></div>
+  </main>
+
+  <!-- Footer Disclaimer -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </footer>
+</body>
+</html>
