@@ -12,14 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "Angels-AD.png",
     "patriot-beer-AD.png",
     "patriot-games-AD.png",
-    "you-AD-here.png"
-     "golden-streets.png"
+    "you-AD-here.png",
+    "golden-streets.png"
   ];
 
   // pick only names that look like ads
-  const adImages = mediaInventory.filter(n =>
-    /ad/i.test(n)
-  );
+  const adImages = mediaInventory.filter(n => /ad/i.test(n));
   if (!adImages.length) return;
 
   // shuffle helper
@@ -44,15 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return list.map(name => {
           const tile = document.createElement("div");
           tile.className = "ad-tile";
+
           const pill = document.createElement("span");
           pill.className = "ad-pill";
           pill.textContent = "Financial Patriotism";
+
           const img = document.createElement("img");
           img.src = `media/${name}`;
           img.alt = "Promotional image";
           img.loading = "lazy";
           img.decoding = "async";
           img.draggable = false;
+
           tile.append(pill, img);
           return tile;
         });
