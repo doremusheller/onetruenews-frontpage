@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en" class="story-page">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,45 +15,48 @@
   <meta property="og:site_name" content="One True Infotainment" />
 
   <link rel="canonical" href="public-smiling-hours.html" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="ticker.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=139" />
 </head>
 
-<body>
+<body class="story-page">
   <!-- Ticker (topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
-    <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner" />
+    <a href="index.html" aria-label="Return to OTI Home">
+      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+    </a>
   </header>
 
-  <main>
+  <main class="page">
     <article>
-      <header>
-        <h1>Public Smiling Hours Extended Through Winter</h1>
-        <div class="byline">
-          By Staff Correspondent — Ministry of Wellbeing Desk ·
-          <time datetime="2025-10-24">October 24, 2025</time>
-        </div>
-      </header>
 
-      <!-- Story navigation (top) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
-        <a class="btn" href="index.html">← OTI Home</a>
-        <a class="btn" href="grundy-explains-collection.html">Next Story →</a>
-      </nav>
-
-      <!-- Hero: top-left anchored, proportionate, captioned -->
-      <figure class="story-hero">
+      <!-- Hero: first for wrap on desktop -->
+      <figure class="story-hero wrap-left">
         <img src="media/domestic-smiles.png"
-             alt="Residents perform synchronized smiles under ministry supervision during the evening audit.">
+             alt="Residents perform synchronized smiles under ministry supervision during the evening audit."
+             loading="lazy" decoding="async">
         <figcaption>
           Residents perform synchronized smiles under ministry supervision during the evening audit.
         </figcaption>
       </figure>
 
-      <!-- Story body -->
+      <header>
+        <div class="kicker">WELLBEING • MORALE</div>
+        <h1>Public Smiling Hours Extended Through Winter</h1>
+        <p class="dek">Nationwide grin initiative credited with increased warmth and cheek resilience.</p>
+        <p class="byline">By Staff Correspondent — Ministry of Wellbeing Desk</p>
+        <p class="dateline"><time datetime="2025-10-24">October 24, 2025</time></p>
+      </header>
+
+      <!-- Story navigation (top) -->
+      <nav class="footer-nav" aria-label="Story navigation (top)">
+        <a class="btn" href="index.html">← OTI Home</a>
+        <a class="btn" href="grundy-explains-collection.html">Next Story →</a>
+      </nav>
+
+      <!-- Story body (preserved verbatim) -->
       <section>
         <p>Nationwide grin initiative credited with “increased warmth and cheek resilience.” The Ministry of Wellbeing announced the official extension of Public Smiling Hours to preserve morale visibility through the darker quarter, increasing daily duration from fourteen to sixteen hours.</p>
 
@@ -66,21 +69,25 @@
         <p>The extension, effective immediately, will remain in place through March, subject to solar review and cheek elasticity studies. Citizens are encouraged to “prepare their faces for faith-based endurance.”</p>
       </section>
 
-      <!-- Story navigation (bottom, above ads) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
+      <!-- Story navigation (bottom) -->
+      <nav class="footer-nav" aria-label="Story navigation (bottom)">
         <a class="btn" href="index.html">← OTI Home</a>
         <a class="btn" href="grundy-explains-collection.html">Next Story →</a>
       </nav>
 
-      <!-- Bottom ads (auto) -->
+      <!-- Bottom ads -->
       <div class="ad-row"></div>
     </article>
   </main>
 
-  <div class="footer-banner">
-    “The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.”
-  </div>
+  <!-- Footer -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. 
+    Irony is resistance, satire a pitchfork.
+  </footer>
 
+  <!-- Scripts -->
+  <script src="ticker.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
