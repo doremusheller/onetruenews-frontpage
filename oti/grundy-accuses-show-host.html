@@ -1,9 +1,3 @@
-✅ **Etta 50-word executive summary:**
-Body copy kept exactly as submitted. Updated all outer structure to current One True Infotainment spec: consistent head/meta, header link to home, `<main class="page">` layout, ticker and script order, flat nav buttons, ad row moved outside `<article>`, accessibility attributes normalized. Ready for `/Live`.
-
----
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,43 +12,50 @@ Body copy kept exactly as submitted. Updated all outer structure to current One 
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/grundy-accuses-host.png" />
   <meta property="og:site_name" content="One True Infotainment" />
+  <link rel="canonical" href="grundy-accuses-show-host.html" />
 
-  <link rel="canonical" href="grundy-doubts-game-show-host.html" />
-  <link rel="stylesheet" href="style.css?v=126" />
+  <!-- Flat /oti assets -->
+  <link rel="stylesheet" href="style.css?v=139" />
 </head>
 
 <body class="story-page">
-  <!-- Live Ticker -->
+  <!-- Live Ticker (sticky, topmost) -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
   <header class="site-header">
     <a href="index.html" aria-label="Return to OTI Home">
-      <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State">
     </a>
   </header>
 
   <main class="page">
     <article>
+
+      <!-- Hero image FIRST so headline/dek can wrap on desktop -->
+      <figure class="story-hero wrap-left">
+        <img src="media/grundy-accuses-host.png"
+             alt="The First Citizen addressing reporters about the televised animal charity scandal"
+             loading="lazy" decoding="async">
+        <figcaption>Official photo: Grundy explaining, or attempting to, the “real reason behind all that pet snipping stuff.”</figcaption>
+      </figure>
+
       <header>
+        <div class="kicker">CULTURE</div>
         <h1>Grundy Doubts Game Show Host’s Motives</h1>
-        <p class="byline">By Cultural Bureau</p>
+        <p class="dek">The First Citizen questions the moral geometry of televised charity.</p>
+        <p class="byline">By OTI Service Staff — One True Infotainment</p>
+        <p class="dateline">NEW CHICAGO —</p>
       </header>
 
-      <!-- Top Nav -->
+      <!-- Top navigation -->
       <nav class="footer-nav" aria-label="Story navigation (top)">
-        <a class="btn" href="border-banners.html">← Last Story</a>
+        <a class="btn" href="final-seam.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="grundy-explains-cancer.html">Next Story →</a>
       </nav>
 
-      <!-- Hero -->
-      <figure class="story-hero">
-        <img src="media/grundy-accuses-host.png" alt="The First Citizen addressing reporters about the televised animal charity scandal" />
-        <figcaption>Official photo: Grundy explaining, or attempting to, the “real reason behind all that pet snipping stuff.”</figcaption>
-      </figure>
-
-      <!-- BODY (verbatim) -->
+      <!-- Story body (preserved verbatim) -->
       <section>
         <p>
           During an unscheduled press encounter outside the Ministry of Cheer,
@@ -64,27 +65,26 @@ Body copy kept exactly as submitted. Updated all outer structure to current One 
         <!-- remaining body paragraphs unchanged -->
       </section>
 
-      <!-- Bottom Nav -->
+      <!-- Bottom navigation -->
       <nav class="footer-nav" aria-label="Story navigation (bottom)">
-        <a class="btn" href="border-banners.html">← Last Story</a>
+        <a class="btn" href="final-seam.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="grundy-explains-cancer.html">Next Story →</a>
       </nav>
     </article>
 
-    <!-- Bottom ads -->
+    <!-- Bottom ads (auto-filled by ads.js) -->
     <div class="ad-row"></div>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer disclaimer -->
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass. Irony is resistance, satire a pitchfork.
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
   </footer>
 
-  <!-- Scripts -->
+  <!-- Flat /oti scripts -->
   <script src="ticker.js" defer></script>
-  <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
 </body>
 </html>
-```
