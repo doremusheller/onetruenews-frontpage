@@ -80,3 +80,21 @@ body { background:var(--cream); color:#111; font-family:system-ui,-apple-system,
     min-height:3.8em;
   }
 }
+
+/* ===== Etta Hotfix: Ticker should be single-line, fixed height ===== */
+.ticker{
+  white-space: nowrap;           /* prevent wrapping */
+  height: var(--ticker-h);       /* lock height */
+  line-height: var(--ticker-h);  /* vertically center text */
+}
+
+.ticker p{
+  display: inline-block;
+  white-space: nowrap;           /* ensure the scroller line never wraps */
+  padding-left: 100%;            /* start off-screen to the right */
+}
+
+/* Safety for reduced motion users */
+@media (prefers-reduced-motion: reduce){
+  .ticker p{ animation: none; padding-left: 0; }
+}
