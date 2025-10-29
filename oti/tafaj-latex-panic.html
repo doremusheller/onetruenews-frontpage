@@ -23,32 +23,40 @@
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <img class="banner-img" src="media/banner.png" alt="One True Infotainment site banner" />
   </header>
 
-  <main>
-    <article>
-      <header>
-        <h1>Vigiles Respond After TAFAJ Broadcast; Grundy Calls Latex “Ideological Lubricant”</h1>
-        <div class="byline">By Cultural Bureau</div>
+  <main id="main" role="main">
+    <article class="story" itemscope itemtype="http://schema.org/NewsArticle">
+      <header class="story-header">
+        <h1 class="hed" itemprop="headline">Vigiles Respond After TAFAJ Broadcast; Grundy Calls Latex “Ideological Lubricant”</h1>
+        <!-- Subhead / Deck from meta description per template spec -->
+        <p class="dek" itemprop="alternativeHeadline">Following the First Citizen’s televised remarks redefining national material priorities, Vigiles issue clarifications after a TAFAJ broadcast.</p>
+        <!-- Byline and Dateline module -->
+        <div class="byline-block">
+          <div class="byline" itemprop="author" itemscope itemtype="http://schema.org/Organization">
+            By <span itemprop="name">Cultural Bureau</span>
+          </div>
+          <div class="dateline" itemprop="datePublished" content="2025-10-28">NEW CHICAGO — October 28, 2025</div>
+        </div>
       </header>
 
       <!-- Story navigation (top) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
+      <nav class="story-nav" aria-label="Story Navigation">
         <a class="btn" href="grundy-doubts-game-show-host.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="river-glow.html">Next Story →</a>
       </nav>
 
-      <!-- Hero -->
-      <figure class="story-hero">
-        <img src="media/tafajsatan.png" alt="First Citizen addressing Vigiles during a TAFAJ debrief" />
+      <!-- Lead image locked upper-left with wrapping per template -->
+      <figure class="story-lead left">
+        <img src="media/tafajsatan.png" alt="First Citizen addressing Vigiles during a TAFAJ debrief" itemprop="image" />
         <figcaption>Official still: The First Citizen mid-explanation during the TAFAJ follow-up broadcast.</figcaption>
       </figure>
 
-      <!-- Updated Story Body -->
-      <section>
+      <!-- Story Body (kept intact) -->
+      <section class="story-body" itemprop="articleBody">
         <p>
           The Ministry of Tone confirmed this morning that a new <strong>TAFAJ</strong> video had “disturbed the peace of mind of loyal citizens” after six masked performers appeared in a downtown garage, gyrating in latex under strobe light and fog. Officials immediately labeled the clip a “moral hazard event,” and encouraged viewers to remember that “not every rhythm is freedom.”
         </p>
@@ -83,14 +91,19 @@
       </section>
 
       <!-- Story navigation (bottom) -->
-      <nav class="footer-nav" aria-label="Story Navigation">
+      <nav class="story-nav" aria-label="Story Navigation">
         <a class="btn" href="grundy-doubts-game-show-host.html">← Last Story</a>
         <a class="btn" href="index.html">OTI Home</a>
         <a class="btn" href="river-glow.html">Next Story →</a>
       </nav>
 
+      <!-- Attribution footer per template -->
+      <footer class="story-attrib">
+        <div class="credits">Cultural Bureau • One True Infotainment — New Chicago Desk</div>
+      </footer>
+
       <!-- Bottom ads -->
-      <div class="ad-row"></div>
+      <div class="ad-row" aria-label="Sponsored"></div>
     </article>
   </main>
 
