@@ -1,7 +1,6 @@
 /* ============================================================
    ads.js — One True Infotainment
-   Auto-fills ad containers (left rail + bottom row)
-   v2: seamless desktop scroll, user-respecting motion
+   v3: clickable ads, patriotic glow
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,15 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     "patriot-beer-AD.png",
     "patriot-games-AD.png",
     "you-AD-here.png",
-    "golden-streets.png"
-     "max-supplement-AD.png"
+    "golden-streets.png",
+    "grundymax-ad.png",
+    "max-supplement-AD.png"
   ];
 
-  // pick only names that look like ads
   const adImages = mediaInventory.filter(n => /ad/i.test(n));
   if (!adImages.length) return;
 
-  // shuffle helper
   const shuffled = adImages.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -32,49 +30,48 @@ document.addEventListener("DOMContentLoaded", () => {
     const isRow = container.classList.contains("ad-row");
     container.innerHTML = "";
 
-    if (isRow) {
-      // bottom row — build seamless belt
-      const track = document.createElement("div");
-      track.className = "track";
-      const list = shuffled.slice(0, Math.min(4, shuffled.length));
+    function createAdLink(name) {
+      const link = document.createElement("a");
+      link.href = name.replace(/\\.png$/i, ".html");
+      link.className = "ad-link";
 
-      // helper to make one full set of ad tiles
-      function makeSet() {
-        return list.map(name => {
-          const tile = document.createElement("div");
-          tile.className = "ad-tile";
+      const pill = document.createElement("span");
+      pill.className = "ad-pill";
+      pill.textContent = "Financial Patriotism";
 
-          const pill = document.createElement("span");
-          pill.className = "ad-pill";
-          pill.textContent = "Financial Patriotism";
-
-          const img = document.createElement("img");
-          img.src = `media/${name}`;
-          img.alt = "Promotional image";
-          img.loading = "lazy";
-          img.decoding = "async";
-          img.draggable = false;
-
-          tile.append(pill, img);
-          return tile;
-        });
-      }
-
-      // append two identical sets for seamless loop
-      makeSet().forEach(t => track.appendChild(t));
-      makeSet().forEach(t => track.appendChild(t));
-
-      container.appendChild(track);
-    } else {
-      // left-rail single ad
-      const name = shuffled[Math.floor(Math.random() * shuffled.length)];
       const img = document.createElement("img");
       img.src = `media/${name}`;
       img.alt = "Promotional image";
       img.loading = "lazy";
       img.decoding = "async";
       img.draggable = false;
-      container.appendChild(img);
+
+      link.append(pill, img);
+      return link;
+    }
+
+    if (isRow) {
+      const track = document.createElement("div");
+      track.className = "track";
+      const list = shuffled.slice(0, Math.min(4, shuffled.length));
+
+      const makeSet = () => list.map(name => {
+        const tile = document.createElement("div");
+        tile.className = "ad-tile";
+        tile.appendChild(createAdLink(name));
+        return tile;
+      });
+
+      makeSet().forEach(t => track.appendChild(t));
+      makeSet().forEach(t => track.appendChild(t));
+      container.appendChild(track);
+
+    } else {
+      const name = shuffled[Math.floor(Math.random() * shuffled.length)];
+      const tile = document.createElement("div");
+      tile.className = "ad-tile";
+      tile.appendChild(createAdLink(name));
+      container.appendChild(tile);
     }
   });
 });
