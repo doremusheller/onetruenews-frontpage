@@ -1,6 +1,6 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v3: clickable ads, patriotic glow
+   v4: clickable ads, patriotic glow, 404 redirect
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,8 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
     container.innerHTML = "";
 
     function createAdLink(name) {
+      const htmlTarget = "./" + name.replace(/\.png$/i, ".html");
       const link = document.createElement("a");
-      link.href = name.replace(/\\.png$/i, ".html");
+      link.href = htmlTarget;
+
+      // fallback redirect to 404 if the ad page doesn’t exist
+      fetch(htmlTarget, { method: "HEAD" })
+        .then(res => { if (!res.ok) link.href = "./404.html"; })
+        .catch(() => { link.href = "./404.html"; });
+
       link.className = "ad-link";
 
       const pill = document.createElement("span");
