@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" class="ad-page">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You Have NEVER Seen Some Shit Like THIS! — One True Infotainment</title>
+  <meta name="description" content="Friday Night at 8pm eastern on One True Justice!" />
+
+  <!-- Global styles/scripts (inherit site frame) -->
+  <link rel="stylesheet" href="style.css?v=139" />
+  <script src="ticker.js" defer></script>
+  <script src="ads.js" defer></script>
+
+  <style>
+    :root { --ad-accent: #0a1630; }
+    body.ad-tinted { background: radial-gradient(1200px 800px at 60% 20%, color-mix(in oklab, var(--ad-accent) 25%, #ffffff 75%), #0b0f1a) no-repeat fixed; }
+
+    .ad-wrap { max-width: 1200px; margin: 0 auto; padding: 1.25rem; }
+    .slogan { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: .02em; margin: 1rem 0 1.25rem; text-wrap: balance; opacity: 0; transform: translateY(8px); }
+    .slogan.show { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+    .hero-figure { margin: 0; }
+    .hero-figure img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 35px rgba(0,0,0,.35); }
+    .hero-figure figcaption { font-size: .875rem; opacity: .75; margin-top: .5rem; }
+    .ad-legal { font-style: italic; font-size: .85rem; opacity: .85; margin-top: 1rem; }
+    .story-nav { display: flex; gap: .5rem; margin: 1rem 0; }
+    .story-nav .btn { padding: .4rem .75rem; border-radius: 6px; text-decoration: none; }
+    .back-pill { border: 1px solid rgba(255,255,255,.2); padding: .35rem .6rem; border-radius: 999px; font-size: .85rem; text-decoration: none; opacity: .9; }
+  </style>
+</head>
+
+<body>
+  <!-- Live Ticker (shared) -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
+
+  <!-- Banner (shared) -->
+  <header class="site-header" role="banner">
+    <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
+  </header>
+
+  <main class="page ad-wrap" id="main">
+    <!-- Mirror story nav structure (optional prev/next ad pages) -->
+    <nav class="story-nav" aria-label="Ad Navigation">
+      <a class="btn" href="ad-prev.html">← Last Ad</a>
+      <a class="btn back-pill" href="index.html">Back to OTI</a>
+      <a class="btn" href="ad-next.html">Next Ad →</a>
+    </nav>
+
+    <!-- Big, slogany headline -->
+    <h1 class="slogan" id="slogan">YOU HAVE NEVER SEEN SOME SHIT LIKE THIS!</h1>
+
+    <!-- Max hero image (page ↔ image name assoc.) -->
+    <figure class="hero-figure">
+      <img id="adHero" src="media/patriot-games-AD.png" alt="Patriot Games promotion" />
+      <figcaption>Official campaign image.</figcaption>
+    </figure>
+
+    <!-- Minimalist microcopy / deck -->
+    <p class="dek" style="margin-top:.75rem; max-width: 65ch;">Friday Night at 8pm eastern on One True Justice!</p>
+
+    <!-- Legal/attribution line -->
+    <div class="ad-legal"><em>This message of optimism and national pride brought to you by Taxpayers For Grundy.</em></div>
+
+    <!-- Mirror story nav (bottom) -->
+    <nav class="story-nav" aria-label="Ad Navigation">
+      <a class="btn" href="ad-prev.html">← Last Ad</a>
+      <a class="btn back-pill" href="index.html">Back to OTI</a>
+      <a class="btn" href="ad-next.html">Next Ad →</a>
+    </nav>
+  </main>
+
+  <!-- Footer Disclaimer (shared) -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </footer>
+
+  <!-- Local, self-contained color extraction + motion -->
+  <script>
+    (function(){
+      const img = document.getElementById('adHero');
+      const slogan = document.getElementById('slogan');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function tintFromImage(el){
+        try {
+          const c = document.createElement('canvas');
+          const ctx = c.getContext('2d', { willReadFrequently: true });
+          const w = c.width = Math.min(el.naturalWidth, 200);
+          const h = c.height = Math.min(el.naturalHeight, 200);
+          ctx.drawImage(el, 0, 0, w, h);
+          const data = ctx.getImageData(0,0,w,h).data;
+          let r=0,g=0,b=0,count=0;
+          for (let i=0;i<data.length;i+=16){ r += data[i]; g += data[i+1]; b += data[i+2]; count++; }
+          r = Math.round(r/count); g = Math.round(g/count); b = Math.round(b/count);
+          const accent = `rgb(${r}, ${g}, ${b})`;
+          document.documentElement.style.setProperty('--ad-accent', accent);
+          document.body.classList.add('ad-tinted');
+        } catch(e){ /* silent fail retains default */ }
+      }
+
+      function reveal(){ if(!prefersReduced) slogan.classList.add('show'); else slogan.style.opacity = 1; }
+
+      if (img.complete) { tintFromImage(img); reveal(); }
+      else { img.addEventListener('load', () => { tintFromImage(img); reveal(); }, { once: true }); }
+    })();
+  </script>
+</body>
+</html>
