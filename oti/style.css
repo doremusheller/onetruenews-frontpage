@@ -212,8 +212,28 @@ body{
 @media(max-width:700px){
   .tile.breaking .breaking-pill{font-size:.6rem;padding:.2rem .4rem;}
 }
+
 /* Anti-stack guard: ensure multi-col grid for typical desktops even if site zoom nudges CSS px under 700 */
 @media (min-width: 820px) {
   .index-page .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 }
 
+/* ===== Patriotic Glow for Clickable Ads ===== */
+.ad-link img {
+  transition: box-shadow 1s ease, transform 1s ease;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 8px rgba(255,0,0,0.6); }
+  33% { box-shadow: 0 0 12px rgba(255,255,255,0.7); }
+  66% { box-shadow: 0 0 10px rgba(0,102,255,0.6); }
+  100% { box-shadow: 0 0 8px rgba(255,0,0,0.6); }
+}
+
+.ad-link img:hover,
+.ad-link img:focus {
+  transform: scale(1.03);
+  animation: glowPulse 6s ease-in-out infinite;
+}
