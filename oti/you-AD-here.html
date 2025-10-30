@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Get Heard — One True Infotainment</title>
-  <meta name="description" content="Contact the Ministry of Donations today to learn more — A message of optimism and national pride brought to you by Taxpayers for Grundy." />
+  <title>Don’t Whisper Like a Little Citizen — One True Infotainment</title>
+  <meta name="description" content="Get Heard — A message of optimism and national pride brought to you by Taxpayers for Grundy." />
 
   <!-- Global styles/scripts (inherit site frame) -->
   <link rel="stylesheet" href="style.css?v=139" />
@@ -13,8 +13,8 @@
 
   <style>
     :root { --ad-accent: #0a1630; }
-    body.ad-tinted { 
-      background: radial-gradient(1200px 800px at 60% 20%, color-mix(in oklab, var(--ad-accent) 25%, #ffffff 75%), #0b0f1a) no-repeat fixed; 
+    body.ad-tinted {
+      background: radial-gradient(1200px 800px at 60% 20%, color-mix(in oklab, var(--ad-accent) 25%, #ffffff 75%), #0b0f1a) no-repeat fixed;
     }
 
     .ad-wrap { max-width: 1200px; margin: 0 auto; padding: 1.25rem; }
@@ -53,7 +53,7 @@
     </nav>
 
     <!-- Ad Headline -->
-    <h1 class="slogan" id="slogan">Get Heard.</h1>
+    <h1 class="slogan" id="slogan">Don’t Whisper Like a Little Citizen</h1>
 
     <!-- Image -->
     <figure class="hero-figure">
@@ -62,4 +62,56 @@
     </figure>
 
     <!-- Deckline -->
-    <p class="dek" style="margin-top:.75rem; max-width:65ch;
+    <p class="dek" style="margin-top:.75rem; max-width:65ch;">Get Heard</p>
+
+    <!-- Legal -->
+    <div class="ad-legal"><em>This message of optimism and national pride brought to you by Taxpayers For Grundy.</em></div>
+
+    <!-- Bottom Nav -->
+    <nav class="story-nav" aria-label="Ad Navigation">
+      <a class="btn" href="ad-prev.html">← Last Ad</a>
+      <a class="btn back-pill" href="index.html">Back to OTI</a>
+      <a class="btn" href="ad-next.html">Next Ad →</a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </footer>
+
+  <!-- Local motion/tint -->
+  <script>
+    (function(){
+      const img = document.getElementById('adHero');
+      const slogan = document.getElementById('slogan');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function tintFromImage(el){
+        try {
+          const c = document.createElement('canvas');
+          const ctx = c.getContext('2d', { willReadFrequently: true });
+          const w = c.width = Math.min(el.naturalWidth, 200);
+          const h = c.height = Math.min(el.naturalHeight, 200);
+          ctx.drawImage(el, 0, 0, w, h);
+          const data = ctx.getImageData(0,0,w,h).data;
+          let r=0,g=0,b=0,count=0;
+          for (let i=0;i<data.length;i+=16){
+            r += data[i]; g += data[i+1]; b += data[i+2]; count++;
+          }
+          r = Math.round(r/count); g = Math.round(g/count); b = Math.round(b/count);
+          const accent = `rgb(${r}, ${g}, ${b})`;
+          document.documentElement.style.setProperty('--ad-accent', accent);
+          document.body.classList.add('ad-tinted');
+        } catch(e){}
+      }
+
+      function reveal(){ if(!prefersReduced) slogan.classList.add('show'); else slogan.style.opacity = 1; }
+
+      if (img.complete) { tintFromImage(img); reveal(); }
+      else { img.addEventListener('load', () => { tintFromImage(img); reveal(); }, { once: true }); }
+    })();
+  </script>
+</body>
+</html>
