@@ -29,7 +29,7 @@
   <script src="ticker.js" defer></script>
   <script src="ads.js" defer></script>
 
-  <!-- Hero alignment and animation (from GrundyMax) -->
+  <!-- Hero alignment and animation (GrundyMax parity) -->
   <style>
     .story-hero img {
       width: 100%;
@@ -78,36 +78,34 @@
         <figcaption>Official recruitment advertisement.</figcaption>
       </figure>
 
-      <!-- Header block -->
+      <!-- Ad header block (headline + deck only) -->
       <header>
         <div class="kicker">Promotions • National Service</div>
         <h1>You Don’t Have the Fucking Balls, Do You?</h1>
-        <p class="dek">Inquire today at <a href="https://Angels.men" target="_blank" rel="noopener">Angels.men</a> — a message of strength and discipline brought to you by Taxpayers for Grundy.</p>
-        <p class="byline">By Taxpayers for Grundy — One True Infotainment</p>
-        <p class="dateline">New Chicago, Corrected States of America — October 29, 2025</p>
+        <p class="dek">
+          Inquire today at
+          <a href="https://Angels.men" target="_blank" rel="noopener">Angels.men</a>
+          — a message of strength and discipline brought to you by Taxpayers for Grundy.
+        </p>
       </header>
 
-      <!-- Top nav -->
-      <nav class="footer-nav" aria-label="Story navigation (top)">
+      <!-- Nav -->
+      <nav class="footer-nav" aria-label="Ad navigation (top)">
         <a class="btn" href="ad-next.html">Next Ad →</a>
         <a class="btn" href="index.html">OTI Home</a>
       </nav>
 
-      <!-- Story body -->
-      <section>
-        <p>Strength is a choice. The Angels choose it every day—discipline at dawn, duty at dusk. If you’re ready to trade excuses for excellence, your path begins at <a href="https://Angels.men" target="_blank" rel="noopener">Angels.men</a>.</p>
-        <p>Requirements are simple: unwavering loyalty, physical readiness, and the resolve to carry the banner of the Corrected States wherever duty calls. We provide the training. You bring the will.</p>
-        <p><em>Paid message:</em> This invitation is presented by Taxpayers for Grundy. Service opportunities vary by district and qualification. Visit <a href="https://Angels.men" target="_blank" rel="noopener">Angels.men</a> for details.</p>
-      </section>
+      <!-- Legal only (no story body) -->
+      <p class="note"><em>This message of optimism and national pride brought to you by Taxpayers for Grundy.</em></p>
 
       <!-- Bottom nav -->
-      <nav class="footer-nav" aria-label="Story navigation (bottom)">
+      <nav class="footer-nav" aria-label="Ad navigation (bottom)">
         <a class="btn" href="ad-next.html">Next Ad →</a>
         <a class="btn" href="index.html">OTI Home</a>
       </nav>
     </article>
 
-    <!-- Bottom ads -->
+    <!-- Bottom ads (placeholder for network injection) -->
     <div class="ad-row"></div>
   </main>
 
@@ -140,7 +138,7 @@
     });
   </script>
 
-  <!-- Optional caption fallback -->
+  <!-- Optional caption fallback (no-op since figcaption exists) -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       if (!document.body.classList.contains("story-page")) return;
