@@ -35,4 +35,143 @@
       width: 100%;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 6p
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    @media (min-width: 900px) {
+      .story-hero img {
+        display: block;
+        margin: 0 auto;
+        max-height: 62vh;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    }
+  </style>
+</head>
+
+<body class="story-page">
+  <!-- Live Ticker -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
+
+  <!-- Banner -->
+  <header class="site-header" role="banner">
+    <a href="index.html" aria-label="Return to OTI Home">
+      <img
+        class="banner-img"
+        src="media/banner.png"
+        alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+    </a>
+  </header>
+
+  <main class="page">
+    <article>
+      <!-- Hero image -->
+      <figure class="story-hero wrap-left">
+        <img
+          src="media/goden-mark.png"
+          alt="Golden graffiti symbol spreading through Corrected cities"
+          decoding="async"
+          fetchpriority="high" />
+        <figcaption>Ministry photo of the first recovered emblem, New Chicago Sector.</figcaption>
+      </figure>
+
+      <!-- Header block -->
+      <header>
+        <div class="kicker">Public Safety • Behavioral Sanitation</div>
+        <h1>The Golden Traitor Mark Spreads Unchecked</h1>
+        <p class="dek">Authorities scramble as a mysterious golden symbol multiplies across Corrected cities. Experts warn of “Narrative Drift Syndrome” among the creatively inclined.</p>
+        <p class="byline">By Lysa Trent — One True Infotainment</p>
+        <p class="dateline">New Chicago, Corrected States — October 29, 2025</p>
+      </header>
+
+      <!-- Top nav -->
+      <nav class="footer-nav" aria-label="Story navigation (top)">
+        <a class="btn" href="index.html">Next Story →</a>
+        <a class="btn" href="index.html">OTI Home</a>
+      </nav>
+
+      <!-- Body -->
+      <section>
+        <p>It began as a single gleaming circle on a transit wall in New Chicago. Now, the golden emblem—a hat and coat painted with surgical precision—is appearing faster than crews can erase it. From alleyways to underpasses, from freight depots to public schools, the mark is moving on its own.</p>
+
+        <p>Authorities describe the situation as “visually contagious.” Four Corrected cities have reported confirmed sightings: New Chicago, Cincinnati Sector, Phoenix-North, and Greater Tallahatta. More are expected by week’s end.</p>
+
+        <p>“This isn’t art, it’s recruitment,” warned Commander Hoss Reddin of the New Chicago Vigiles Division, now heading a multi-district containment team. “Gold’s the color of arrogance. Whoever’s behind this thinks they can outshine the State. We’ll remind them who controls the light.”</p>
+
+        <p>The Ministry of Truth and Continuity has classified the symbol as “a rogue narrative artifact.” Surveillance drones track new appearances hourly, yet no suspect has been recorded in the act of painting. “That suggests coordinated automation or something worse,” Reddin added. “Belief.”</p>
+
+        <p>The Behavioral Sanitation Bureau has issued its first nationwide creative-health advisory since the “Red Pen Riots” of Year Two. “Individuals drawn to reproduce this image often present early symptoms of Narrative Drift Syndrome,” explained Dr. Thelma Korr, Senior Analyst at the Bureau. “Grandiosity, nostalgia, creative ideation without permission—it starts small. Then it spreads. If you feel compelled to draw circles, report immediately.”</p>
+
+        <p>Within hours, Dr. Korr’s image appeared on every municipal screen, her voice overlaid with the new Ministry slogan: <strong>“Contain the Thought Before It Contains You.”</strong></p>
+
+        <p>Still, the reaction on the ground has been less compliant than hoped. “It’s just a hat and coat,” said one homemaker in New Chicago’s Midline district. “But it feels like someone remembering something they’re not supposed to. My daughter said it looked alive under the streetlight.”</p>
+
+        <p>In response, Vigiles units have redeployed from ration warehouses to wall patrol. Cleanup crews in white hoods work through the night applying solvent foam. Residents report a faint chemical mist in the air that smells like lemon and static. By morning, the walls are bare—but only for a while.</p>
+
+        <p>Officials admit the pigment is unusually persistent. “Industrial-grade metallic,” Reddin confirmed. “Which means organization, money, intent.”</p>
+
+        <p>Meanwhile, OTI’s Forensic Symbolism Unit has been tasked with decoding the emblem’s geometry. Analysts note a subtle rotational pattern within the circle that some claim forms a stylized quill or pen. The Ministry denies this. “There is no author,” Reddin stated flatly. “Only enforcement.”</p>
+
+        <p>At dawn, crews return to the first site in New Chicago. The wall, freshly scrubbed, glints faintly under the lamps. A passerby pauses and whispers what the cameras can’t record: <em>“It’s writing itself back.”</em></p>
+      </section>
+
+      <!-- Bottom nav -->
+      <nav class="footer-nav" aria-label="Story navigation (bottom)">
+        <a class="btn" href="index.html">Next Story →</a>
+        <a class="btn" href="index.html">OTI Home</a>
+      </nav>
+    </article>
+
+    <!-- Bottom ads -->
+    <div class="ad-row"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </footer>
+
+  <!-- Inline fade-in motion -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!document.body.classList.contains('story-page')) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const H = document.querySelector('article h1');
+      const D = document.querySelector('article .dek');
+      const I = document.querySelector('.story-hero img');
+      if (reduce) { [H, D, I].forEach(el => el && (el.style.opacity = 1)); return; }
+
+      const fadeIn = (el, delay = 0) => el && el.animate(
+        [{ opacity: 0, transform: 'translateY(8px)' },
+         { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 600, easing: 'ease', fill: 'forwards', delay }
+      );
+
+      fadeIn(H, 0);
+      fadeIn(D, 150);
+      if (I?.complete) fadeIn(I, 300);
+      else I?.addEventListener('load', () => fadeIn(I, 300), { once: true });
+    });
+  </script>
+
+  <!-- Optional caption fallback -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!document.body.classList.contains("story-page")) return;
+      const fig = document.querySelector(".story-hero");
+      if (!fig || fig.querySelector("figcaption")) return;
+      const firstP = document.querySelector("article section p");
+      if (firstP) {
+        const caption = document.createElement("figcaption");
+        caption.textContent = firstP.textContent.slice(0, 140).trim() + "…";
+        fig.appendChild(caption);
+      }
+    });
+  </script>
+</body>
+</html>
