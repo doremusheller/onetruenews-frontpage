@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Edge of Power — One True Infotainment</title>
+  <title>Manhood by the Heaping Scoop — One True Infotainment</title>
   <meta name="description" content="Official promotional message landing page." />
 
   <!-- Shared OTI frame -->
@@ -12,42 +12,52 @@
   <script src="ads.js" defer></script>
 
   <style>
+    /* Magazine-style ad; match story-page background */
     body { background: var(--cream); color: var(--indigo); }
     .ad-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 3rem; text-align: center; }
 
-    .slogan {
-      font-family: "Libre Baskerville", Georgia, serif;
-      font-weight: 800;
-      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-      line-height: 1.1;
-      letter-spacing: .02em;
-      margin: 1.25rem 0 .6rem;
-      opacity: 0; transform: translateY(8px);
+    /* Headline + Deck */
+    .slogan{
+      font-family:"Libre Baskerville", Georgia, serif;
+      font-weight:800;
+      font-size:clamp(2.2rem,4.5vw,3.8rem);
+      line-height:1.1; letter-spacing:.02em;
+      margin:1.25rem 0 .6rem;
+      opacity:0; transform:translateY(8px);
     }
-    .dek {
-      font-weight: 700;
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: rgba(7,27,54,.9);
-      max-width: 60ch; margin: 0 auto 1.5rem;
-      opacity: 0; transform: translateY(8px);
-    }
-
-    .hero-figure { margin: 1rem auto 1.5rem; max-width: 80%; }
-    .hero-figure img {
-      width: 100%; height: auto; border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.25);
-      opacity: 0; transform: translateY(8px);
-    }
-    .hero-figure figcaption {
-      font-style: italic; font-size: .875rem; color: rgba(7,27,54,.75); margin-top: .5rem;
+    .dek{
+      font-weight:700; /* bolder than body, under headline */
+      font-size:clamp(1.05rem,2vw,1.25rem);
+      color:rgba(7,27,54,.9);
+      max-width:60ch; margin:0 auto 1.25rem;
+      opacity:0; transform:translateY(8px);
     }
 
-    .ad-legal { font-style: italic; font-size: .85rem; color: rgba(7,27,54,.7); margin-top: 1.25rem; }
+    /* Image sizing: mobile generous; desktop capped by viewport */
+    .hero-figure{ margin:1rem auto 1.5rem; max-width:95%; }
+    .hero-figure img{
+      width:100%; height:auto; border-radius:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+      opacity:0; transform:translateY(8px);
+    }
+    .hero-figure figcaption{
+      font-style:italic; font-size:.875rem; color:rgba(7,27,54,.75); margin-top:.5rem;
+    }
 
-    .story-nav { display:flex; gap:.5rem; justify-content:center; margin:1.5rem 0; flex-wrap:wrap; }
-    .story-nav .btn { padding:.5rem .9rem; border-radius:6px; text-decoration:none; font-weight:700; }
+    /* Desktop constraints to prevent “Godzilla” overflow */
+    @media (min-width: 900px){
+      .hero-figure{ max-width:min(960px, 78vw); }
+      .hero-figure img{
+        display:block; margin:0 auto;
+        max-height:62vh;         /* cap by viewport so image alone never forces scroll */
+        width:auto; max-width:100%;
+        object-fit:contain;
+      }
+    }
 
-    @media(max-width:700px){ .hero-figure{max-width:95%} .slogan{font-size:2rem} }
+    /* Nav */
+    .story-nav{ display:flex; gap:.5rem; justify-content:center; margin:1.5rem 0; flex-wrap:wrap; }
+    .story-nav .btn{ padding:.5rem .9rem; border-radius:6px; text-decoration:none; font-weight:700; }
   </style>
 </head>
 
@@ -69,7 +79,7 @@
     </nav>
 
     <!-- Headline + Deck (on top) -->
-    <h1 class="slogan" id="slogan">EDGE OF POWER</h1>
+    <h1 class="slogan" id="slogan">Manhood by the Heaping Scoop</h1>
     <p class="dek" id="dek">Clinically unproven. Spiritually unstoppable.</p>
 
     <!-- Sensibly sized image -->
