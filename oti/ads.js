@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "you-AD-here.png",
     "golden-streets.png",
     "grundymax-AD.png",        // corrected asset name (was grundymax-ad.png)
-    "max-supplement-AD.png"
+  
   ];
 
   // Whitelist images whose names clearly indicate ads (e.g., *ad*/*AD*)
