@@ -5,36 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Get Heard — One True Infotainment</title>
   <meta name="description" content="Contact the Ministry of Donations today to learn more — A message of optimism and national pride brought to you by Taxpayers for Grundy." />
+
+  <!-- Global styles/scripts (inherit site frame) -->
   <link rel="stylesheet" href="style.css?v=139" />
   <script src="ticker.js" defer></script>
+  <script src="ads.js" defer></script>
+
+  <style>
+    :root { --ad-accent: #0a1630; }
+    body.ad-tinted { 
+      background: radial-gradient(1200px 800px at 60% 20%, color-mix(in oklab, var(--ad-accent) 25%, #ffffff 75%), #0b0f1a) no-repeat fixed; 
+    }
+
+    .ad-wrap { max-width: 1200px; margin: 0 auto; padding: 1.25rem; }
+    .ad-header { display: flex; justify-content: space-between; align-items: center; gap: .75rem; }
+    .back-pill { border: 1px solid rgba(255,255,255,.2); padding: .35rem .6rem; border-radius: 999px; font-size: .85rem; text-decoration: none; opacity: .9; }
+    .back-pill:hover { opacity: 1; }
+
+    .slogan { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: .02em; margin: 1rem 0 1.25rem; text-wrap: balance; opacity: 0; transform: translateY(8px); }
+    .slogan.show { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+
+    .hero-figure img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 35px rgba(0,0,0,.35); }
+    .hero-figure figcaption { font-size: .875rem; opacity: .75; margin-top: .5rem; }
+
+    .ad-legal { font-style: italic; font-size: .85rem; opacity: .85; margin-top: 1rem; }
+
+    .story-nav { display: flex; gap: .5rem; margin: 1rem 0; }
+    .story-nav .btn { padding: .4rem .75rem; border-radius: 6px; text-decoration: none; }
+  </style>
 </head>
 
 <body>
-  <!-- Ticker -->
+  <!-- Live Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
   </header>
 
-  <main class="page">
-    <article class="ad-landing">
-      <header class="ad-hero">
-        <img src="media/you-AD-here.png" alt="Promotional placeholder for advertising opportunities" />
-        <h1 class="slogan">Get Heard.</h1>
-        <p class="dek">Contact the Ministry of Donations today to learn more.</p>
-      </header>
+  <main class="page ad-wrap" id="main">
+    <!-- Nav -->
+    <nav class="story-nav" aria-label="Ad Navigation">
+      <a class="btn" href="ad-prev.html">← Last Ad</a>
+      <a class="btn back-pill" href="index.html">Back to OTI</a>
+      <a class="btn" href="ad-next.html">Next Ad →</a>
+    </nav>
 
-      <footer class="ad-footer">
-        <p><em>This message of optimism and national pride brought to you by Taxpayers for Grundy.</em></p>
-      </footer>
-    </article>
-  </main>
+    <!-- Ad Headline -->
+    <h1 class="slogan" id="slogan">Get Heard.</h1>
 
-  <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
-    Irony is resistance, satire a pitchfork.
-  </footer>
-</body>
-</html>
+    <!-- Image -->
+    <figure class="hero-figure">
+      <img id="adHero" src="media/you-AD-here.png" alt="Promotional placeholder for advertising opportunities" />
+      <figcaption>Official campaign image.</figcaption>
+    </figure>
+
+    <!-- Deckline -->
+    <p class="dek" style="margin-top:.75rem; max-width:65ch;
