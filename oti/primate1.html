@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Page Title & Description -->
+  <title>CITIZENS URGED TO AVOID “PROVOCATIVE FRUIT DISPLAYS” — One True Infotainment</title>
+  <meta name="description" content="The Ministry urges modest fruit presentation after the final primate misunderstanding; reassurances and guidance for New Chicago shoppers." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CITIZENS URGED TO AVOID ‘PROVOCATIVE FRUIT DISPLAYS’" />
+  <meta property="og:description" content="The Ministry urges modest fruit presentation after the final primate misunderstanding; reassurances and guidance for New Chicago shoppers." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="primate1.png" />
+  <meta property="og:site_name" content="One True Infotainment" />
+  <link rel="canonical" href="primate1.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CITIZENS URGED TO AVOID ‘PROVOCATIVE FRUIT DISPLAYS’" />
+  <meta name="twitter:description" content="The Ministry urges modest fruit presentation after the final primate misunderstanding; reassurances and guidance for New Chicago shoppers." />
+  <meta name="twitter:image" content="primate1.png" />
+
+  <!-- Canonical OTI styles -->
+  <link rel="stylesheet" href="style.css?v=140" />
+
+  <!-- Scripts placed in head to match GrundyMax structure -->
+  <script src="ticker.js" defer></script>
+  <script src="ads.js" defer></script>
+
+  <!-- Hero alignment and animation (from GrundyMax) -->
+  <style>
+    .story-hero img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    @media (min-width: 900px) {
+      .story-hero img {
+        display: block;
+        margin: 0 auto;
+        max-height: 62vh;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    }
+  </style>
+</head>
+
+<body class="story-page">
+  <!-- Live Ticker -->
+  <div id="ticker" class="ticker" aria-live="polite"></div>
+
+  <!-- Banner -->
+  <header class="site-header" role="banner">
+    <a href="index.html" aria-label="Return to OTI Home">
+      <img
+        class="banner-img"
+        src="media/banner.png"
+        alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+    </a>
+  </header>
+
+  <main class="page">
+    <article>
+      <!-- Hero image -->
+      <figure class="story-hero wrap-left">
+        <img
+          src="primate1.png"
+          alt="Downtown New Chicago, a chimp clings to a lightpost holding a captured toupee as pedestrians flee."
+          decoding="async"
+          fetchpriority="high" />
+        <figcaption>Authorities called the episode “the final primate misunderstanding,” even as shoppers clutched their groceries.</figcaption>
+      </figure>
+
+      <!-- Header block -->
+      <header>
+        <div class="kicker">Public Safety • Urban Equilibrium</div>
+        <h1>CITIZENS URGED TO AVOID “PROVOCATIVE FRUIT DISPLAYS”</h1>
+        <p class="dek">Ministry declares containment; offers polite guidance on produce placement amid lingering rooftop rumors.</p>
+        <p class="byline">By Tremont V. Stagwell — One True Infotainment</p>
+        <p class="dateline">NEW CHICAGO, CORRECTED STATES — November 1, 2025</p>
+      </header>
+
+      <!-- Navigation -->
+      <nav class="footer-nav" aria-label="Story navigation (top)">
+        <a class="btn" href="index.html">Next Story →</a>
+        <a class="btn" href="index.html">OTI Home</a>
+      </nav>
+
+      <!-- Body -->
+      <section>
+        <p>The Ministry of Urban Equilibrium urged restraint today, asking citizens to “practice modesty in fruit presentation” after what officials described as “the final primate misunderstanding.” “The situation is fully resolved,” said Deputy Minister Rake Strumm. “We remind the public: isolated curiosity is not a movement.”</p>
+        <p>Still, rumors linger. Reports of rooftop burglaries, vanished hubcaps, and a stolen delivery van “misinterpreted by animals” remain under quiet review. “There is no coordinated monkey effort,” Strumm said. “We are dealing with individuals—perhaps a small family—drawn to novelty and scent.” In affected neighborhoods, relief mingled with suspicion. “They say it’s over,” said one witness, “but I saw a chimp on the Skybridge holding keys.”</p>
+        <p>To prevent “further confusion,” the Ministry issued guidance: keep fruit indoors and covered; refrain from arranging produce near windows; avoid mixing citrus and tropical varieties. “These are precautionary habits,” said spokesperson Lin Morven. When asked about footage showing a capuchin opening a patrol car, Morven smiled: “Digital trickery.” An official post declaring <em>OPERATION ORCHARD CLOSED</em> appeared briefly before deletion—“premature but accurate,” the Ministry said. Tonight, reassurance drones will circle open markets broadcasting a calm refrain: <em>Containment is real. The fruit is yours.</em></p>
+      </section>
+
+      <!-- Bottom navigation -->
+      <nav class="footer-nav" aria-label="Story navigation (bottom)">
+        <a class="btn" href="index.html">Next Story →</a>
+        <a class="btn" href="index.html">OTI Home</a>
+      </nav>
+    </article>
+
+    <!-- Bottom ads -->
+    <div class="ad-row"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </footer>
+
+  <!-- Inline fade-in motion -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!document.body.classList.contains('story-page')) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const H = document.querySelector('article h1');
+      const D = document.querySelector('article .dek');
+      const I = document.querySelector('.story-hero img');
+      if (reduce) { [H, D, I].forEach(el => el && (el.style.opacity = 1)); return; }
+
+      const fadeIn = (el, delay = 0) => el && el.animate(
+        [{ opacity: 0, transform: 'translateY(8px)' },
+         { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 600, easing: 'ease', fill: 'forwards', delay }
+      );
+
+      fadeIn(H, 0);
+      fadeIn(D, 150);
+      if (I?.complete) fadeIn(I, 300);
+      else I?.addEventListener('load', () => fadeIn(I, 300), { once: true });
+    });
+  </script>
+
+  <!-- Optional caption fallback -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!document.body.classList.contains("story-page")) return;
+      const fig = document.querySelector(".story-hero");
+      if (!fig || fig.querySelector("figcaption")) return;
+      const firstP = document.querySelector("article section p");
+      if (firstP) {
+        const caption = document.createElement("figcaption");
+        caption.textContent = firstP.textContent.slice(0, 140).trim() + "…";
+        fig.appendChild(caption);
+      }
+    });
+  </script>
+</body>
+</html>
