@@ -1,13 +1,10 @@
-Del: Understood. Here’s the complete `style.css` with the new **Breaking tile pin** rule included:
-
-```css
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v141
+   One True Infotainment — Canonical Style Sheet v142
    ============================================================ */
 
 :root {
   --indigo:#071b36;
-  --amber:#b80000;
+  --amber:#b80000;   /* RED — shared accent for breaking + ticker */
   --cream:#faf5ef;
   --shadow:rgba(0,0,0,.08);
   --ticker-h:2.6rem;
@@ -20,11 +17,11 @@ body{
   background:var(--cream);
   color:#111;
   font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-  padding-top:var(--ticker-h);
+  padding-top:var(--ticker-h);  /* keeps content below fixed ticker */
   overflow-x:hidden;
 }
 
-/* ===== Ticker ===== */
+/* ===== Ticker (fixed, topmost, red bg, white text) ===== */
 .ticker{
   position:fixed;top:0;left:0;right:0;z-index:10000;
   background:var(--amber);border-bottom:2px solid rgba(0,0,0,.1);
@@ -66,7 +63,7 @@ body{
 .tile:hover{transform:translateY(-3px);box-shadow:0 6px 12px var(--shadow);}
 .tile img{width:100%;height:130px;object-fit:cover;display:block}
 
-/* ===== Pin Breaking Tile ===== */
+/* ===== Pin Breaking Tile to first cell (desktop + mobile) ===== */
 .index-page .grid { grid-auto-flow: dense; }
 .index-page .grid .tile.breaking {
   grid-column: 1;
@@ -82,7 +79,7 @@ body{
 /* double-space story paragraphs */
 .story-page article section p{margin-bottom:1.25rem;}
 
-/* ===== New: Story note style ===== */
+/* ===== Story note style ===== */
 .story-page .note {
   margin-top: 1.25rem;
   color: rgba(7,27,54,.9);
@@ -217,7 +214,7 @@ body{
   .ad-pill{font-size:.55rem;padding:.2rem .4rem;top:8px;left:8px;}
 }
 
-/* ===== Breaking Pill ===== */
+/* ===== Breaking Pill (explicit red) ===== */
 .tile.breaking{position:relative;border:2px solid var(--amber)}
 .tile.breaking .breaking-pill{
   position:absolute;top:8px;left:8px;z-index:2;background:var(--amber);
@@ -253,4 +250,3 @@ body{
   transform: scale(1.03);
   animation: glowPulse 6s ease-in-out infinite;
 }
-```
