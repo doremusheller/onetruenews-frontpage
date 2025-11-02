@@ -1,5 +1,8 @@
+Del: Understood. Here’s the complete `style.css` with the new **Breaking tile pin** rule included:
+
+```css
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v140
+   One True Infotainment — Canonical Style Sheet v141
    ============================================================ */
 
 :root {
@@ -62,6 +65,13 @@ body{
 }
 .tile:hover{transform:translateY(-3px);box-shadow:0 6px 12px var(--shadow);}
 .tile img{width:100%;height:130px;object-fit:cover;display:block}
+
+/* ===== Pin Breaking Tile ===== */
+.index-page .grid { grid-auto-flow: dense; }
+.index-page .grid .tile.breaking {
+  grid-column: 1;
+  grid-row: 1;
+}
 
 /* ===== Story Page ===== */
 .story-page article{
@@ -243,3 +253,4 @@ body{
   transform: scale(1.03);
   animation: glowPulse 6s ease-in-out infinite;
 }
+```
