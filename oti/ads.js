@@ -1,11 +1,10 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.3: full-row population + desktop sidebar stack (no CSS edits)
-   - .ad-row uses ALL AD images (duplicated set for seamless scroll)
-   - .ad-container-left stacks N tiles to page bottom on desktop only
-   - Zero HTML/CSS changes required; inline style applied to sidebar container
-   - Optional discovery via window.OTI_ADS or media/ads-manifest.json
-   - Retains page mapping & 404 safety
+   v4.4: desktop sidebar unique tiles + page-synced height (no CSS edits)
+   - Left sidebar shows each AD exactly once (no duplicates)
+   - Sidebar height clamps to page bottom & viewport, never extends page
+   - Recalculates on resize, grid mutations, and breakpoint changes
+   - Ad row remains full inventory with seamless track
    ============================================================ */
 
 (function(){
@@ -14,7 +13,6 @@
     "grundymax-AD.png": "grundymax-ad.html" // case-insensitive support
   };
 
-  // Legacy built-in inventory as final fallback
   const LEGACY_INVENTORY = [
     "Angels-AD.png",
     "patriot-beer-AD.png",
@@ -39,7 +37,6 @@
     const htmlTarget = resolveAdPage(name);
     link.href = htmlTarget;
 
-    // 404 fallback if target page is missing
     try {
       fetch(htmlTarget, { method: "HEAD" })
         .then(res => { if (!res.ok) link.href = "./404.html"; })
@@ -61,6 +58,7 @@
 
     const tile = document.createElement("div");
     tile.className = "ad-tile";
+    tile.dataset.name = name; // for diffing
     tile.appendChild(link);
     return tile;
   }
@@ -75,12 +73,7 @@
   }
 
   async function discoverInventory(){
-    // Priority 1: window.OTI_ADS provided by page
-    if (Array.isArray(window.OTI_ADS)) {
-      return filterAdImages(window.OTI_ADS);
-    }
-
-    // Priority 2: try manifest at media/ads-manifest.json (array of filenames)
+    if (Array.isArray(window.OTI_ADS)) return filterAdImages(window.OTI_ADS);
     try {
       const res = await fetch("media/ads-manifest.json", { cache: "no-store" });
       if (res.ok) {
@@ -88,15 +81,11 @@
         const ads = filterAdImages(arr);
         if (ads.length) return ads;
       }
-    } catch(_) { /* noop fallback */ }
-
-    // Priority 3: fallback to legacy list
+    } catch(_){}
     return filterAdImages(LEGACY_INVENTORY);
   }
 
-  function isDesktop(){
-    return window.matchMedia('(min-width:701px)').matches;
-  }
+  function isDesktop(){ return window.matchMedia('(min-width:701px)').matches; }
 
   function batchAppend(parent, nodes){
     const frag = document.createDocumentFragment();
@@ -104,43 +93,60 @@
     parent.appendChild(frag);
   }
 
-  // Sidebar stack: compute how many tiles fit without extending page
-  function populateSidebarStack(container, inventory){
-    if (!isDesktop()) return; // mobile sidebar is hidden by CSS anyway
+  function namesIn(container){
+    return Array.from(container.querySelectorAll('.ad-tile')).map(t => t.dataset.name);
+  }
 
-    // Inline styles avoid stylesheet edits
+  function uniquePick(list, count){
+    const slice = list.slice(0, Math.max(0, Math.min(count, list.length)));
+    return slice;
+  }
+
+  // Sidebar stack synced to page height, no duplicates
+  function populateSidebarStack(container, inventory){
+    if (!isDesktop()) { container.innerHTML = ''; return; }
+
+    // Inline styles (no stylesheet edits)
     container.style.display = 'grid';
     container.style.gridAutoRows = 'auto';
     container.style.rowGap = '8px';
     container.style.overflow = 'hidden';
 
-    // Prepare a sample tile to measure actual height
+    // Create a temporary sample tile for accurate measurement
     const sample = createAdLink(inventory[0]);
     sample.style.visibility = 'hidden';
     sample.style.pointerEvents = 'none';
     container.innerHTML = '';
     container.appendChild(sample);
 
-    // Defer measurement until next frame to ensure styles applied
     requestAnimationFrame(() => {
       const tileH = Math.max(1, sample.getBoundingClientRect().height);
-      // remove sample before real render
-      container.removeChild(sample);
+      const gap = 8; // matches rowGap
 
-      const gap = 8; // matches rowGap above
       const rect = container.getBoundingClientRect();
       const viewportH = window.innerHeight || document.documentElement.clientHeight;
-      const footerReserve = 12; // small breathing room
-      const available = Math.max(0, Math.floor(viewportH - rect.top - footerReserve));
+
+      // Sync to page bottom: use the .page container as boundary if present
+      const page = document.querySelector('.page');
+      const pageRect = page ? page.getBoundingClientRect() : { bottom: viewportH };
+
+      const footerReserve = 12;
+      const limitByViewport = Math.max(0, Math.floor(viewportH - rect.top - footerReserve));
+      const limitByPage = Math.max(0, Math.floor(pageRect.bottom - rect.top - footerReserve));
+      const maxHeight = Math.min(limitByViewport, limitByPage);
+
+      container.style.maxHeight = maxHeight + 'px';
 
       const block = tileH + gap;
-      let count = Math.floor((available + gap) / block); // +gap allows last tile to sit flush
-      if (!Number.isFinite(count) || count < 1) count = 1;
+      let slots = Math.floor((maxHeight + gap) / block);
+      if (!Number.isFinite(slots) || slots < 1) slots = 1;
 
-      // Choose distinct ads up to count
-      const pool = shuffle(inventory);
-      const picks = [];
-      for (let i=0; i<count; i++) picks.push(createAdLink(pool[i % pool.length]));
+      const picks = uniquePick(shuffle(inventory), slots).map(createAdLink);
+
+      // Diff against current content to avoid unnecessary rerenders
+      const current = namesIn(container).join(',');
+      const next = picks.map(t => t.dataset.name).join(',');
+      if (current === next) { container.removeChild(sample); return; }
 
       container.innerHTML = '';
       batchAppend(container, picks);
@@ -154,7 +160,6 @@
     const inventory = await discoverInventory();
     if (!inventory.length) return;
 
-    // Randomize once per page for variety
     const shuffled = shuffle(inventory);
 
     targets.forEach(container => {
@@ -164,23 +169,31 @@
       if (isRow) {
         const track = document.createElement("div");
         track.className = "track";
-
-        // Use ALL available ads (no 4-cap). Duplicate set for seamless marquee.
         const set = shuffled.map(name => createAdLink(name));
         set.forEach(t => track.appendChild(t.cloneNode(true)));
         set.forEach(t => track.appendChild(t.cloneNode(true)));
         container.appendChild(track);
-
       } else {
-        // Desktop-only stacked sidebar tiles to page bottom
         const render = () => populateSidebarStack(container, shuffled);
+        const debounced = debounce(render, 120);
         render();
 
-        // Recalculate on resize/desktop toggle
-        const ro = new ResizeObserver(() => render());
+        // Observe size and grid mutations to keep in sync with index height
+        const ro = new ResizeObserver(() => debounced());
         ro.observe(document.documentElement);
-        window.matchMedia('(min-width:701px)').addEventListener('change', render);
+
+        const grid = document.getElementById('storyGrid');
+        if (grid) {
+          const mo = new MutationObserver(() => debounced());
+          mo.observe(grid, { childList: true, subtree: false });
+        }
+
+        window.matchMedia('(min-width:701px)').addEventListener('change', () => debounced());
       }
     });
   });
+
+  function debounce(fn, ms){
+    let t; return function(){ clearTimeout(t); t = setTimeout(fn, ms); };
+  }
 })();
