@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v142.1
+   One True Infotainment — Canonical Style Sheet v142.2
    ============================================================ */
 
 :root {
@@ -219,8 +219,8 @@ body{
   .tile.breaking .breaking-pill{font-size:.6rem;padding:.2rem .4rem;}
 }
 
-/* Anti-stack guard */
-@media (min-width: 820px) {
+/* Anti-stack guard — scoped to 820–1099px so it doesn't override desktop */
+@media (min-width: 820px) and (max-width: 1099px) {
   .index-page .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 }
 
@@ -243,7 +243,7 @@ body{
 }
 
 /* ============================================================
-   Desktop Grid Enhancement — v142.1
+   Desktop Grid Enhancement — v142.2
    Force 3 columns + subtle breathing room
    ============================================================ */
 @media (min-width: 1100px) {
