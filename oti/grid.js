@@ -1,6 +1,10 @@
 /* ============================================================
    grid.js — One True Infotainment
-   Desktop story randomizer with anchored Breaking tile
+   v1.2 (surgical): optimized desktop randomizer, Breaking tile excluded
+   - Zero HTML/CSS changes required
+   - Minimizes reflow/paint via DocumentFragment + batched style writes
+   - Pauses swaps when tab not visible; respects reduced motion
+   - Tile cap raised to 40
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,9 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Collect tiles but keep BREAKING anchored
   const breaking = grid.querySelector(".tile.breaking");
   const allTiles = Array.from(grid.querySelectorAll(".tile")).filter(t => t !== breaking);
-
   if (!allTiles.length) return;
 
+  // Fisher–Yates
   function shuffle(arr){
     for (let i = arr.length - 1; i > 0; i--){
       const j = Math.floor(Math.random() * (i + 1));
@@ -25,39 +29,63 @@ document.addEventListener("DOMContentLoaded", () => {
     return arr;
   }
 
-  const LIMIT = 20;
+  const LIMIT = 40;
+  const INTERVAL_MS = 45000; // keep existing cadence
+
   const shuffled = shuffle(allTiles.slice());
   const showNow = shuffled.slice(0, Math.min(LIMIT, shuffled.length));
   const hideNow = shuffled.slice(LIMIT);
 
-  allTiles.forEach(t => (t.style.display = "none"));
-  showNow.forEach(t => { t.style.display = ""; grid.appendChild(t); });
+  // Batch initial visibility changes to reduce layout thrash
+  (function initialLayout(){
+    // hide all first (batch write)
+    allTiles.forEach(t => { t.style.display = "none"; t.style.opacity = ""; t.style.transition = ""; });
 
-  if (!prefersReduced && hideNow.length > 0) {
-    let poolVisible = showNow;
-    let poolHidden = hideNow;
+    // then show the chosen ones using a fragment
+    const frag = document.createDocumentFragment();
+    showNow.forEach(t => { t.style.display = ""; frag.appendChild(t); });
+    grid.appendChild(frag);
+  })();
 
-    function fadeOut(el){ el.style.transition = "opacity .3s ease"; el.style.opacity = "0"; }
-    function fadeIn(el){ el.style.transition = "opacity .3s ease"; el.style.opacity = "1"; }
+  if (prefersReduced || hideNow.length === 0) return;
 
-    setInterval(() => {
-      if (!window.matchMedia("(min-width:1100px)").matches) return; // stay desktop-only
-      if (!poolHidden.length) return;
+  let poolVisible = showNow.slice();
+  let poolHidden = hideNow.slice();
 
-      const victim = poolVisible[Math.floor(Math.random() * poolVisible.length)];
-      const newcomer = poolHidden.splice(Math.floor(Math.random() * poolHidden.length), 1)[0];
-
-      fadeOut(victim);
-      setTimeout(() => {
-        victim.style.display = "none";
-        newcomer.style.opacity = "0";
-        newcomer.style.display = "";
-        grid.appendChild(newcomer);
-        requestAnimationFrame(() => fadeIn(newcomer));
-
-        poolVisible = poolVisible.filter(t => t !== victim).concat(newcomer);
-        poolHidden.push(victim);
-      }, 320);
-    }, 45000);
+  function fade(el, to){
+    el.style.transition = "opacity .3s ease";
+    el.style.opacity = to;
   }
+
+  const swap = () => {
+    // maintain desktop-only + visibility guard
+    if (!window.matchMedia("(min-width:1100px)").matches) return;
+    if (document.visibilityState === "hidden") return;
+    if (!poolHidden.length || !poolVisible.length) return;
+
+    const victim = poolVisible[Math.floor(Math.random() * poolVisible.length)];
+    const idx = Math.floor(Math.random() * poolHidden.length);
+    const newcomer = poolHidden.splice(idx, 1)[0];
+
+    // Fade out victim, then replace in a rAF to batch style writes
+    fade(victim, "0");
+    setTimeout(() => {
+      victim.style.display = "none";
+      newcomer.style.opacity = "0";
+      newcomer.style.display = "";
+
+      // Append newcomer in a fragment to avoid multiple reflows
+      const frag = document.createDocumentFragment();
+      frag.appendChild(newcomer);
+      grid.appendChild(frag);
+
+      requestAnimationFrame(() => fade(newcomer, "1"));
+
+      // rotate pools
+      poolVisible = poolVisible.filter(t => t !== victim).concat(newcomer);
+      poolHidden.push(victim);
+    }, 320);
+  };
+
+  setInterval(swap, INTERVAL_MS);
 });
