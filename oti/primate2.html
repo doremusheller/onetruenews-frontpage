@@ -69,16 +69,6 @@
 
   <main class="page">
     <article>
-      <!-- Hero image -->
-      <figure class="story-hero wrap-left">
-        <img
-          src="media/primate2.png"
-          alt="OTI man-on-the-street interview; in the background an unidentified convertible departs a New Chicago intersection."
-          decoding="async"
-          fetchpriority="high" />
-        <figcaption>Ministry says reports of organized auto theft are statistical misunderstandings; any apparent departures are "voluntary relocations."</figcaption>
-      </figure>
-
       <!-- Header block -->
       <header>
         <div class="kicker">Public Safety • Urban Equilibrium</div>
@@ -93,6 +83,15 @@
         <a class="btn" href="index.html">Next Story →</a>
         <a class="btn" href="index.html">OTI Home</a>
       </nav>
+
+      <!-- Hero image (wrapped left under headline) -->
+      <figure class="story-hero wrap-left">
+        <img
+          src="media/primate2.png"
+          alt="OTI man-on-the-street interview; background convertible departs a New Chicago intersection."
+          decoding="async"
+          fetchpriority="high" />
+      </figure>
 
       <!-- Body -->
       <section>
@@ -155,7 +154,7 @@
     });
   </script>
 
-  <!-- Optional caption fallback -->
+  <!-- Optional caption fallback (kept safe; will not fire since figcaption removed) -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       if (!document.body.classList.contains("story-page")) return;
