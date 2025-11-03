@@ -1,9 +1,9 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.5: sidebar floor + stable remeasure (no template/CSS edits)
-   - Left sidebar shows unique AD tiles, never duplicates
-   - Sidebar height clamps to page & viewport with a hard floor (>=120px)
-   - Safe remeasure after grid randomization; debounced observers
+   v4.5: desktop sidebar unique tiles + page-synced height (fixed clamp)
+   - Left sidebar shows each AD exactly once (no duplicates)
+   - Sidebar height synced to .page content (not self-truncating)
+   - Recalculates on resize, grid mutations, and breakpoint changes
    - Ad row remains full inventory with seamless track
    ============================================================ */
 
@@ -86,8 +86,7 @@
     return filterAdImages(LEGACY_INVENTORY);
   }
 
-  const mqDesktop = window.matchMedia('(min-width:701px)');
-  function isDesktop(){ return mqDesktop.matches; }
+  function isDesktop(){ return window.matchMedia('(min-width:701px)').matches; }
 
   function batchAppend(parent, nodes){
     const frag = document.createDocumentFragment();
@@ -100,29 +99,22 @@
   }
 
   function uniquePick(list, count){
-    return list.slice(0, Math.max(0, Math.min(count, list.length)));
+    const slice = list.slice(0, Math.max(0, Math.min(count, list.length)));
+    return slice;
   }
 
-  // Compute a stable page bottom using total document height
-  function getDocumentBottom(){
-    return Math.max(
-      document.documentElement.scrollHeight,
-      document.body ? document.body.scrollHeight : 0
-    );
-  }
-
-  // Sidebar stack synced to page height, with a hard floor
+  // Sidebar stack synced to .page height, no duplicates
   function populateSidebarStack(container, inventory){
     if (!isDesktop()) { container.innerHTML = ''; return; }
 
-    // Inline styles (no stylesheet edits)
+    // Inline styles
     container.style.display = 'grid';
     container.style.gridAutoRows = 'auto';
     container.style.rowGap = '8px';
     container.style.overflow = 'hidden';
 
-    // Sample tile for measurement
-    const sample = createAdLink(inventory[0] || LEGACY_INVENTORY[0]);
+    // Create sample tile for measurement
+    const sample = createAdLink(inventory[0]);
     sample.style.visibility = 'hidden';
     sample.style.pointerEvents = 'none';
     container.innerHTML = '';
@@ -130,24 +122,24 @@
 
     requestAnimationFrame(() => {
       const tileH = Math.max(1, sample.getBoundingClientRect().height);
-      const gap = 8; // matches rowGap
+      const gap = 8; // row gap
 
       const rect = container.getBoundingClientRect();
       const viewportH = window.innerHeight || document.documentElement.clientHeight;
-      const scrollY = window.scrollY || window.pageYOffset || 0;
 
-      // Stable bottom vs. viewport
-      const docBottom = getDocumentBottom();
-      const containerTopInDoc = rect.top + scrollY;
+      // ==== FIX: Clamp to .page height, not self ====
+      const pageEl = document.querySelector('.page');
+      const pageTop = pageEl ? (pageEl.getBoundingClientRect().top + (window.scrollY||0)) : 0;
+      const pageHeight = pageEl ? pageEl.scrollHeight : (document.documentElement.scrollHeight);
+      const sidebarTopDoc = rect.top + (window.scrollY||0);
 
       const footerReserve = 12;
       const limitByViewport = Math.max(0, Math.floor(viewportH - rect.top - footerReserve));
-      const limitByDoc = Math.max(0, Math.floor((docBottom - scrollY) - rect.top - footerReserve));
-      let maxHeight = Math.min(limitByViewport, limitByDoc);
-
-      // Hard floor: never collapse below one small tile
-      if (!Number.isFinite(maxHeight) || maxHeight < 120) maxHeight = 120;
+      const limitByPage = Math.max(0, Math.floor((pageTop + pageHeight) - sidebarTopDoc - footerReserve));
+      let maxHeight = Math.min(limitByViewport, limitByPage);
+      if (!Number.isFinite(maxHeight) || maxHeight < 120) maxHeight = 120; // floor
       container.style.maxHeight = maxHeight + 'px';
+      // =============================================
 
       const block = tileH + gap;
       let slots = Math.floor((maxHeight + gap) / block);
@@ -155,7 +147,7 @@
 
       const picks = uniquePick(shuffle(inventory), slots).map(createAdLink);
 
-      // Diff to avoid unnecessary rerenders
+      // Diff check
       const current = namesIn(container).join(',');
       const next = picks.map(t => t.dataset.name).join(',');
       if (current === next) { container.removeChild(sample); return; }
@@ -163,11 +155,6 @@
       container.innerHTML = '';
       batchAppend(container, picks);
     });
-  }
-
-  function safeRemeasure(container, inventory){
-    // Re-run after grid randomization settles
-    setTimeout(() => populateSidebarStack(container, inventory), 400);
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
@@ -184,21 +171,18 @@
       container.innerHTML = "";
 
       if (isRow) {
-        try {
-          const track = document.createElement("div");
-          track.className = "track";
-          const set = shuffled.map(name => createAdLink(name));
-          set.forEach(t => track.appendChild(t.cloneNode(true)));
-          set.forEach(t => track.appendChild(t.cloneNode(true)));
-          container.appendChild(track);
-        } catch(_) { /* fail-soft: leave empty */ }
+        const track = document.createElement("div");
+        track.className = "track";
+        const set = shuffled.map(name => createAdLink(name));
+        set.forEach(t => track.appendChild(t.cloneNode(true)));
+        set.forEach(t => track.appendChild(t.cloneNode(true)));
+        container.appendChild(track);
       } else {
         const render = () => populateSidebarStack(container, shuffled);
         const debounced = debounce(render, 120);
         render();
-        safeRemeasure(container, shuffled);
 
-        // Observe for size/layout changes
+        // Observe for sync with index height
         const ro = new ResizeObserver(() => debounced());
         ro.observe(document.documentElement);
 
@@ -208,7 +192,7 @@
           mo.observe(grid, { childList: true, subtree: false });
         }
 
-        mqDesktop.addEventListener('change', () => debounced());
+        window.matchMedia('(min-width:701px)').addEventListener('change', () => debounced());
       }
     });
   });
