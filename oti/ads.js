@@ -1,16 +1,12 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.5: desktop sidebar unique tiles + page-synced height (fixed clamp)
-   - Left sidebar shows each AD exactly once (no duplicates)
-   - Sidebar height synced to .page content (not self-truncating)
-   - Recalculates on resize, grid mutations, and breakpoint changes
-   - Ad row remains full inventory with seamless track
+   v4.5: autoscaling sidebar, page-synced height, unique ads
    ============================================================ */
 
 (function(){
   const PAGE_MAP = {
     "grundymax-ad.png": "grundymax-ad.html",
-    "grundymax-AD.png": "grundymax-ad.html" // case-insensitive support
+    "grundymax-AD.png": "grundymax-ad.html"
   };
 
   const LEGACY_INVENTORY = [
@@ -35,14 +31,12 @@
   function createAdLink(name){
     const link = document.createElement("a");
     link.className = "ad-link";
-    const htmlTarget = resolveAdPage(name);
-    link.href = htmlTarget;
+    link.href = resolveAdPage(name);
 
-    try {
-      fetch(htmlTarget, { method: "HEAD" })
-        .then(res => { if (!res.ok) link.href = "./404.html"; })
-        .catch(() => { link.href = "./404.html"; });
-    } catch(_) { link.href = "./404.html"; }
+    // fallback 404 redirect if page not found
+    fetch(link.href, { method: "HEAD" })
+      .then(res => { if (!res.ok) link.href = "./404.html"; })
+      .catch(() => { link.href = "./404.html"; });
 
     const pill = document.createElement("span");
     pill.className = "ad-pill";
@@ -59,15 +53,15 @@
 
     const tile = document.createElement("div");
     tile.className = "ad-tile";
-    tile.dataset.name = name; // for diffing
+    tile.dataset.name = name;
     tile.appendChild(link);
     return tile;
   }
 
   function shuffle(arr){
     const a = arr.slice();
-    for (let i=a.length-1; i>0; i--){
-      const j = Math.floor(Math.random()*(i+1));
+    for (let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
@@ -94,26 +88,20 @@
     parent.appendChild(frag);
   }
 
-  function namesIn(container){
-    return Array.from(container.querySelectorAll('.ad-tile')).map(t => t.dataset.name);
-  }
-
   function uniquePick(list, count){
     const slice = list.slice(0, Math.max(0, Math.min(count, list.length)));
     return slice;
   }
 
-  // Sidebar stack synced to .page height, no duplicates
-  function populateSidebarStack(container, inventory){
+  // Sidebar auto-scaling and sync with page height
+  function populateSidebar(container, inventory){
     if (!isDesktop()) { container.innerHTML = ''; return; }
 
-    // Inline styles
     container.style.display = 'grid';
     container.style.gridAutoRows = 'auto';
     container.style.rowGap = '8px';
     container.style.overflow = 'hidden';
 
-    // Create sample tile for measurement
     const sample = createAdLink(inventory[0]);
     sample.style.visibility = 'hidden';
     sample.style.pointerEvents = 'none';
@@ -122,35 +110,17 @@
 
     requestAnimationFrame(() => {
       const tileH = Math.max(1, sample.getBoundingClientRect().height);
-      const gap = 8; // row gap
+      const gap = 8;
 
-      const rect = container.getBoundingClientRect();
-      const viewportH = window.innerHeight || document.documentElement.clientHeight;
+      const page = document.querySelector('.page');
+      const pageRect = page ? page.getBoundingClientRect() : { bottom: window.innerHeight };
+      const containerRect = container.getBoundingClientRect();
 
-      // ==== FIX: Clamp to .page height, not self ====
-      const pageEl = document.querySelector('.page');
-      const pageTop = pageEl ? (pageEl.getBoundingClientRect().top + (window.scrollY||0)) : 0;
-      const pageHeight = pageEl ? pageEl.scrollHeight : (document.documentElement.scrollHeight);
-      const sidebarTopDoc = rect.top + (window.scrollY||0);
-
-      const footerReserve = 12;
-      const limitByViewport = Math.max(0, Math.floor(viewportH - rect.top - footerReserve));
-      const limitByPage = Math.max(0, Math.floor((pageTop + pageHeight) - sidebarTopDoc - footerReserve));
-      let maxHeight = Math.min(limitByViewport, limitByPage);
-      if (!Number.isFinite(maxHeight) || maxHeight < 120) maxHeight = 120; // floor
+      const maxHeight = Math.max(120, Math.floor(pageRect.bottom - containerRect.top - 12)); // clamp to page
       container.style.maxHeight = maxHeight + 'px';
-      // =============================================
 
-      const block = tileH + gap;
-      let slots = Math.floor((maxHeight + gap) / block);
-      if (!Number.isFinite(slots) || slots < 1) slots = 1;
-
+      const slots = Math.max(1, Math.floor((maxHeight + gap) / (tileH + gap)));
       const picks = uniquePick(shuffle(inventory), slots).map(createAdLink);
-
-      // Diff check
-      const current = namesIn(container).join(',');
-      const next = picks.map(t => t.dataset.name).join(',');
-      if (current === next) { container.removeChild(sample); return; }
 
       container.innerHTML = '';
       batchAppend(container, picks);
@@ -173,23 +143,23 @@
       if (isRow) {
         const track = document.createElement("div");
         track.className = "track";
-        const set = shuffled.map(name => createAdLink(name));
-        set.forEach(t => track.appendChild(t.cloneNode(true)));
-        set.forEach(t => track.appendChild(t.cloneNode(true)));
+        const ads = shuffled.map(createAdLink);
+        ads.forEach(t => track.appendChild(t.cloneNode(true)));
+        ads.forEach(t => track.appendChild(t.cloneNode(true)));
         container.appendChild(track);
       } else {
-        const render = () => populateSidebarStack(container, shuffled);
+        const render = () => populateSidebar(container, shuffled);
         const debounced = debounce(render, 120);
         render();
 
-        // Observe for sync with index height
+        // Recalculate when grid changes or viewport resizes
         const ro = new ResizeObserver(() => debounced());
         ro.observe(document.documentElement);
 
         const grid = document.getElementById('storyGrid');
         if (grid) {
           const mo = new MutationObserver(() => debounced());
-          mo.observe(grid, { childList: true, subtree: false });
+          mo.observe(grid, { childList: true });
         }
 
         window.matchMedia('(min-width:701px)').addEventListener('change', () => debounced());
