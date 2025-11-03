@@ -1,7 +1,9 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.2: full-row population, optional manifest, graceful fallbacks
-   - Autopopulates .ad-row with ALL available AD images (no hard 4-cap)
+   v4.3: full-row population + desktop sidebar stack (no CSS edits)
+   - .ad-row uses ALL AD images (duplicated set for seamless scroll)
+   - .ad-container-left stacks N tiles to page bottom on desktop only
+   - Zero HTML/CSS changes required; inline style applied to sidebar container
    - Optional discovery via window.OTI_ADS or media/ads-manifest.json
    - Retains page mapping & 404 safety
    ============================================================ */
@@ -56,7 +58,11 @@
     img.draggable = false;
 
     link.append(pill, img);
-    return link;
+
+    const tile = document.createElement("div");
+    tile.className = "ad-tile";
+    tile.appendChild(link);
+    return tile;
   }
 
   function shuffle(arr){
@@ -88,6 +94,59 @@
     return filterAdImages(LEGACY_INVENTORY);
   }
 
+  function isDesktop(){
+    return window.matchMedia('(min-width:701px)').matches;
+  }
+
+  function batchAppend(parent, nodes){
+    const frag = document.createDocumentFragment();
+    nodes.forEach(n => frag.appendChild(n));
+    parent.appendChild(frag);
+  }
+
+  // Sidebar stack: compute how many tiles fit without extending page
+  function populateSidebarStack(container, inventory){
+    if (!isDesktop()) return; // mobile sidebar is hidden by CSS anyway
+
+    // Inline styles avoid stylesheet edits
+    container.style.display = 'grid';
+    container.style.gridAutoRows = 'auto';
+    container.style.rowGap = '8px';
+    container.style.overflow = 'hidden';
+
+    // Prepare a sample tile to measure actual height
+    const sample = createAdLink(inventory[0]);
+    sample.style.visibility = 'hidden';
+    sample.style.pointerEvents = 'none';
+    container.innerHTML = '';
+    container.appendChild(sample);
+
+    // Defer measurement until next frame to ensure styles applied
+    requestAnimationFrame(() => {
+      const tileH = Math.max(1, sample.getBoundingClientRect().height);
+      // remove sample before real render
+      container.removeChild(sample);
+
+      const gap = 8; // matches rowGap above
+      const rect = container.getBoundingClientRect();
+      const viewportH = window.innerHeight || document.documentElement.clientHeight;
+      const footerReserve = 12; // small breathing room
+      const available = Math.max(0, Math.floor(viewportH - rect.top - footerReserve));
+
+      const block = tileH + gap;
+      let count = Math.floor((available + gap) / block); // +gap allows last tile to sit flush
+      if (!Number.isFinite(count) || count < 1) count = 1;
+
+      // Choose distinct ads up to count
+      const pool = shuffle(inventory);
+      const picks = [];
+      for (let i=0; i<count; i++) picks.push(createAdLink(pool[i % pool.length]));
+
+      container.innerHTML = '';
+      batchAppend(container, picks);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
     const targets = [...document.querySelectorAll(".ad-container-left, .ad-row")];
     if (!targets.length) return;
@@ -106,26 +165,21 @@
         const track = document.createElement("div");
         track.className = "track";
 
-        // Use ALL available ads (no 4-cap). Duplicate set for seamless scroll.
-        const set = shuffled.map(name => {
-          const tile = document.createElement("div");
-          tile.className = "ad-tile";
-          tile.appendChild(createAdLink(name));
-          return tile;
-        });
-
-        // Append two full sets to allow continuous marquee effect in CSS
+        // Use ALL available ads (no 4-cap). Duplicate set for seamless marquee.
+        const set = shuffled.map(name => createAdLink(name));
         set.forEach(t => track.appendChild(t.cloneNode(true)));
         set.forEach(t => track.appendChild(t.cloneNode(true)));
-
         container.appendChild(track);
+
       } else {
-        // Sidebar container: single random ad from the shuffled list
-        const name = shuffled[Math.floor(Math.random()*shuffled.length)];
-        const tile = document.createElement("div");
-        tile.className = "ad-tile";
-        tile.appendChild(createAdLink(name));
-        container.appendChild(tile);
+        // Desktop-only stacked sidebar tiles to page bottom
+        const render = () => populateSidebarStack(container, shuffled);
+        render();
+
+        // Recalculate on resize/desktop toggle
+        const ro = new ResizeObserver(() => render());
+        ro.observe(document.documentElement);
+        window.matchMedia('(min-width:701px)').addEventListener('change', render);
       }
     });
   });
