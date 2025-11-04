@@ -19,12 +19,14 @@
     "grundymax-AD.jpg"
   ];
 
+  // CHANGE #1: accept both PNG and JPG ad assets
   function filterAdImages(list){
-    return (list || []).filter(n => /AD\.png$/i.test(n));
+    return (list || []).filter(n => /AD\.(png|jpg)$/i.test(n));
   }
 
+  // CHANGE #2: resolve .png OR .jpg to .html
   function resolveAdPage(name){
-    const mapped = PAGE_MAP[name] || name.replace(/\.png$/i, ".html");
+    const mapped = PAGE_MAP[name] || name.replace(/\.(png|jpg)$/i, ".html");
     return "./" + mapped;
   }
 
