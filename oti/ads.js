@@ -5,18 +5,18 @@
 
 (function(){
   const PAGE_MAP = {
-    "grundymax-ad.png": "grundymax-ad.html",
-    "grundymax-AD.png": "grundymax-ad.html"
+    "grundymax-ad.jpg": "grundymax-ad.html",
+    "grundymax-AD.jpg": "grundymax-ad.html"
   };
 
   const LEGACY_INVENTORY = [
-    "Angels-AD.png",
-    "patriot-beer-AD.png",
-    "patriot-games-AD.png",
-    "you-AD-here.png",
-    "golden-streets-AD.png",
-    "primate-guidelines-AD.png",
-    "grundymax-AD.png"
+    "Angels-AD.jpg",
+    "patriot-beer-AD.jpg",
+    "patriot-games-AD.jpg",
+    "you-AD-here.jpg",
+    "golden-streets-AD.jpg",
+    "primate-guidelines-AD.jpg",
+    "grundymax-AD.jpg"
   ];
 
   function filterAdImages(list){
