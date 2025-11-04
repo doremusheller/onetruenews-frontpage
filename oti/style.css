@@ -102,4 +102,45 @@ body{
 
 /* ===== Mobile Ad-Row Containment ===== */
 @keyframes mobile-ad-parade{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@media(max-width:700px){.ad-row{flex-direction:row;align-items:center;justify-content:flex-start;animation:none;overflow-x:auto;overflow-y:hidden;gap:.75rem;padding:1rem 0;min
+@media(max-width:700px){.ad-row{flex-direction:row;align-items:center;justify-content:flex-start;animation:none;overflow-x:auto;overflow-y:hidden;gap:.75rem;padding:1rem 0;min-height:unset;}.ad-row .track{display:flex;animation:mobile-ad-parade 84s linear infinite;}.ad-tile{width:80vw;max-width:320px;margin:0;}.ad-tile img{height:auto;}.story-hero.wrap-left{float:none;width:100%;margin:0 0 1rem 0;}}
+
+/* ===== Financial Patriotism Pill ===== */
+.ad-pill{position:absolute;top:6px;left:6px;z-index:2;background:var(--amber);color:#fff;font-weight:700;font-size:.6rem;padding:.25rem .45rem;border-radius:6px;box-shadow:0 2px 4px var(--shadow);text-transform:uppercase;letter-spacing:.05em;opacity:0;transition:opacity .2s ease;}
+.ad-tile:hover .ad-pill{opacity:1}
+@media(max-width:700px){.ad-pill{font-size:.55rem;padding:.2rem .4rem;top:8px;left:8px;}}
+
+/* ===== Breaking Pill ===== */
+.tile.breaking{position:relative;border:2px solid var(--amber)}
+.tile.breaking .breaking-pill{position:absolute;top:8px;left:8px;z-index:2;background:var(--amber);color:#fff;font-weight:700;font-size:.7rem;padding:.25rem .5rem;border-radius:6px;box-shadow:0 2px 4px var(--shadow);text-transform:uppercase;letter-spacing:.05em;}
+@media(max-width:700px){.tile.breaking .breaking-pill{font-size:.6rem;padding:.2rem .4rem;}}
+
+/* Anti-stack guard */
+@media (min-width: 820px) and (max-width: 1099px) {.index-page .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }}
+
+/* ===== Patriotic Glow ===== */
+.ad-link img {transition: box-shadow 1s ease, transform 1s ease;border-radius: 6px;box-shadow: 0 0 10px rgba(255,255,255,0.3);}
+@keyframes glowPulse {0% { box-shadow: 0 0 8px rgba(255,0,0,0.6); }33% { box-shadow: 0 0 12px rgba(255,255,255,0.7); }66% { box-shadow: 0 0 10px rgba(0,102,255,0.6); }100% { box-shadow: 0 0 8px rgba(255,0,0,0.6); }}
+.ad-link img:hover,.ad-link img:focus {transform: scale(1.03);animation: glowPulse 6s ease-in-out infinite;}
+
+/* ============================================================
+   Desktop Grid Enhancement — v145
+   Fix: Enforce 3 columns and allow shrink without overflow
+   ============================================================ */
+@media (min-width: 1100px) {
+  .index-page .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1rem;
+  }
+  .index-page .grid .tile.breaking {
+    grid-column: 1 / span 1;
+    grid-row: 1;
+  }
+  .index-page .grid > .tile {
+    min-width: 0;
+  }
+  .index-page .grid .tile h2,
+  .index-page .grid .tile p {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+}
