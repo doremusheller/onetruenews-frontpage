@@ -264,3 +264,22 @@ body{
     hyphens: auto;
   }
 }
+/* ===== OTI Ads: minimal clickability hotfix (safe to remove) ===== */
+.site-header {           /* keep header below ads so it doesn't steal clicks */
+  position: relative;
+  z-index: 1;
+}
+.ad-row,
+.ad-container-left {     /* raise ad layers just above header */
+  position: relative;
+  z-index: 2;
+}
+.ad-link {               /* make the entire tile a reliable click target */
+  display: block;
+  position: relative;
+}
+.ad-link img {           /* ensure images accept pointer events */
+  pointer-events: auto;
+  display: block;
+}
+
