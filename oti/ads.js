@@ -1,24 +1,33 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.9: Fix hyperlinks for Premium/Collection/Cover, PNG support,
-         lowercase-first href, HEAD cache + fallback, inventory sync
+   v5.0: Deterministic links (no async HEAD), consolidated PAGE_MAP,
+         PNG+JPG support, case-stable hrefs, cleaned inventory
    ============================================================ */
 (function(){
-  const VERSION = '4.9';
+  const VERSION = '5.0';
 
+  // Deterministic mapping for assets → pages (no network probe)
   const PAGE_MAP = {
+    // GrundyMax
     "grundymax-ad.jpg": "grundymax-ad.html",
     "grundymax-AD.jpg": "grundymax-ad.html",
+    "grundymax-AD.png": "grundymax-ad.html",
+
+    // OTI Premium
     "OTI-premium-AD.jpg": "oti-premium-ad.html",
     "OTI-premium-AD.png": "oti-premium-ad.html",
+
+    // Blacks Love Grundy
     "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html",
     "blacks-love-grundy-AD.png": "blacks-love-grundy-ad.html",
-    // Cover ad: allow JPG or PNG asset, route to unified page
+
+    // Book Cover
     "cover-AD.jpg": "cover-ad.html",
     "cover-AD.png": "cover-ad.html"
   };
 
   const LEGACY_INVENTORY = [
+    // Historic
     "Angels-AD.jpg",
     "patriot-beer-AD.jpg",
     "patriot-games-AD.jpg",
@@ -26,10 +35,11 @@
     "golden-streets-AD.jpg",
     "primate-guidelines-AD.jpg",
     "grundymax-AD.jpg",
-    // Priority ad tiles
+
+    // Priority placements
     "OTI-premium-AD.jpg",
     "blacks-love-grundy-AD.jpg",
-    // Cover tile prefers PNG if present; fallback handled by manifest or map
+    // Prefer PNG for cover if present; JPG fallback still resolves via map
     "cover-AD.png"
   ];
 
@@ -37,62 +47,32 @@
     return (list || []).filter(n => /AD\.(png|jpg)$/i.test(n));
   }
 
-  // Returns the preferred html target for an asset name
   function resolveAdPage(name){
-    const mapped = PAGE_MAP[name];
-    if (mapped) return "./" + mapped;
-    return "./" + name.replace(/\.(png|jpg)$/i, ".html");
-  }
-
-  // Prefer lowercase page href immediately to avoid early clicks breaking
-  function toLowerHref(href){
-    return href.replace(/([^\/]+)$/,(m)=>m.toLowerCase());
-  }
-
-  const headCache = new Map();
-  async function verifyOrFallback(primaryHref){
-    if (headCache.has(primaryHref)) return headCache.get(primaryHref);
-    let target = primaryHref;
-    try {
-      let res = await fetch(target, { method: 'HEAD' });
-      if (!res.ok) {
-        const lower = toLowerHref(primaryHref);
-        res = await fetch(lower, { method: 'HEAD' });
-        target = res.ok ? lower : './404.html';
-      }
-    } catch(_) {
-      target = './404.html';
-    }
-    headCache.set(primaryHref, target);
-    return target;
+    if (PAGE_MAP[name]) return './' + PAGE_MAP[name];
+    // Generic fallback: same basename → .html (case preserved)
+    return './' + name.replace(/\.(png|jpg)$/i, '.html');
   }
 
   function createAdLink(name){
-    const link = document.createElement("a");
-    link.className = "ad-link";
+    const link = document.createElement('a');
+    link.className = 'ad-link';
+    link.href = resolveAdPage(name); // set once; no async mutation
 
-    const primary = resolveAdPage(name);
-    // Set an immediate, safer default while we verify primary
-    link.href = toLowerHref(primary);
+    const pill = document.createElement('span');
+    pill.className = 'ad-pill';
+    pill.textContent = 'Financial Patriotism';
 
-    // Async verify preferred target and update when resolved
-    verifyOrFallback(primary).then(valid => { link.href = valid; });
-
-    const pill = document.createElement("span");
-    pill.className = "ad-pill";
-    pill.textContent = "Financial Patriotism";
-
-    const img = document.createElement("img");
+    const img = document.createElement('img');
     img.src = `media/${name}`;
-    img.alt = "Promotional image";
-    img.loading = "lazy";
-    img.decoding = "async";
+    img.alt = 'Promotional image';
+    img.loading = 'lazy';
+    img.decoding = 'async';
     img.draggable = false;
 
     link.append(pill, img);
 
-    const tile = document.createElement("div");
-    tile.className = "ad-tile";
+    const tile = document.createElement('div');
+    tile.className = 'ad-tile';
     tile.dataset.name = name;
     tile.appendChild(link);
     return tile;
@@ -110,13 +90,13 @@
   async function discoverInventory(){
     if (Array.isArray(window.OTI_ADS)) return filterAdImages(window.OTI_ADS);
     try {
-      const res = await fetch("media/ads-manifest.json", { cache: "no-store" });
+      const res = await fetch('media/ads-manifest.json', { cache: 'no-store' });
       if (res.ok) {
         const arr = await res.json();
         const ads = filterAdImages(arr);
         if (ads.length) return ads;
       }
-    } catch(_){ /* manifest optional */ }
+    } catch(_){}
     return filterAdImages(LEGACY_INVENTORY);
   }
 
@@ -166,8 +146,8 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const targets = [...document.querySelectorAll(".ad-container-left, .ad-row")];
+  document.addEventListener('DOMContentLoaded', async () => {
+    const targets = [...document.querySelectorAll('.ad-container-left, .ad-row')];
     if (!targets.length) return;
 
     const inventory = await discoverInventory();
@@ -176,12 +156,12 @@
     const shuffled = shuffle(inventory);
 
     targets.forEach(container => {
-      const isRow = container.classList.contains("ad-row");
-      container.innerHTML = "";
+      const isRow = container.classList.contains('ad-row');
+      container.innerHTML = '';
 
       if (isRow) {
-        const track = document.createElement("div");
-        track.className = "track";
+        const track = document.createElement('div');
+        track.className = 'track';
         const ads = shuffled.map(createAdLink);
         ads.forEach(t => track.appendChild(t.cloneNode(true)));
         ads.forEach(t => track.appendChild(t.cloneNode(true)));
