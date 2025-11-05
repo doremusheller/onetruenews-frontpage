@@ -1,12 +1,16 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.5: autoscaling sidebar, page-synced height, unique ads
+   v4.7: Added blacks-love-grundy ad mapping and inventory entry
    ============================================================ */
-
 (function(){
+  const VERSION = '4.7';
+
   const PAGE_MAP = {
     "grundymax-ad.jpg": "grundymax-ad.html",
-    "grundymax-AD.jpg": "grundymax-ad.html"
+    "grundymax-AD.jpg": "grundymax-ad.html",
+    "OTI-premium-AD.jpg": "oti-premium-ad.html",
+    // New: explicit mapping for blacks-love-grundy asset
+    "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html"
   };
 
   const LEGACY_INVENTORY = [
@@ -16,18 +20,36 @@
     "you-AD-here.jpg",
     "golden-streets-AD.jpg",
     "primate-guidelines-AD.jpg",
-    "grundymax-AD.jpg"
+    "grundymax-AD.jpg",
+    "OTI-premium-AD.jpg",
+    // Added new ad to legacy inventory
+    "blacks-love-grundy-AD.jpg"
   ];
 
-  // CHANGE #1: accept both PNG and JPG ad assets
   function filterAdImages(list){
     return (list || []).filter(n => /AD\.(png|jpg)$/i.test(n));
   }
 
-  // CHANGE #2: resolve .png OR .jpg to .html
   function resolveAdPage(name){
-    const mapped = PAGE_MAP[name] || name.replace(/\.(png|jpg)$/i, ".html");
-    return "./" + mapped;
+    if (PAGE_MAP[name]) return "./" + PAGE_MAP[name];
+    const html = name.replace(/\.(png|jpg)$/i, ".html");
+    return "./" + html;
+  }
+
+  const headCache = new Map();
+  async function verifyOrFallback(href){
+    if (headCache.has(href)) return headCache.get(href);
+    let target = href;
+    try {
+      let res = await fetch(target, { method: 'HEAD' });
+      if (!res.ok) {
+        const lower = target.replace(/([^\/]+)$/, m => m.toLowerCase());
+        res = await fetch(lower, { method: 'HEAD' });
+        target = res.ok ? lower : './404.html';
+      }
+    } catch(_) { target = './404.html'; }
+    headCache.set(href, target);
+    return target;
   }
 
   function createAdLink(name){
@@ -35,10 +57,7 @@
     link.className = "ad-link";
     link.href = resolveAdPage(name);
 
-    // fallback 404 redirect if page not found
-    fetch(link.href, { method: "HEAD" })
-      .then(res => { if (!res.ok) link.href = "./404.html"; })
-      .catch(() => { link.href = "./404.html"; });
+    verifyOrFallback(link.href).then(valid => { link.href = valid; });
 
     const pill = document.createElement("span");
     pill.className = "ad-pill";
@@ -95,7 +114,6 @@
     return slice;
   }
 
-  // Sidebar auto-scaling and sync with page height
   function populateSidebar(container, inventory){
     if (!isDesktop()) { container.innerHTML = ''; return; }
 
@@ -118,7 +136,7 @@
       const pageRect = page ? page.getBoundingClientRect() : { bottom: window.innerHeight };
       const containerRect = container.getBoundingClientRect();
 
-      const maxHeight = Math.max(120, Math.floor(pageRect.bottom - containerRect.top - 12)); // clamp to page
+      const maxHeight = Math.max(120, Math.floor(pageRect.bottom - containerRect.top - 12));
       container.style.maxHeight = maxHeight + 'px';
 
       const slots = Math.max(1, Math.floor((maxHeight + gap) / (tileH + gap)));
@@ -154,7 +172,6 @@
         const debounced = debounce(render, 120);
         render();
 
-        // Recalculate when grid changes or viewport resizes
         const ro = new ResizeObserver(() => debounced());
         ro.observe(document.documentElement);
 
