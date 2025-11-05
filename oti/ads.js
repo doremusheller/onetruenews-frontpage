@@ -1,17 +1,21 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.8: Added cover ad mapping and inventory entry
+   v4.9: Fix hyperlinks for Premium/Collection/Cover, PNG support,
+         lowercase-first href, HEAD cache + fallback, inventory sync
    ============================================================ */
 (function(){
-  const VERSION = '4.8';
+  const VERSION = '4.9';
 
   const PAGE_MAP = {
     "grundymax-ad.jpg": "grundymax-ad.html",
     "grundymax-AD.jpg": "grundymax-ad.html",
     "OTI-premium-AD.jpg": "oti-premium-ad.html",
+    "OTI-premium-AD.png": "oti-premium-ad.html",
     "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html",
-    // New: explicit mapping for cover ad
-    "cover-AD.jpg": "cover-ad.html"
+    "blacks-love-grundy-AD.png": "blacks-love-grundy-ad.html",
+    // Cover ad: allow JPG or PNG asset, route to unified page
+    "cover-AD.jpg": "cover-ad.html",
+    "cover-AD.png": "cover-ad.html"
   };
 
   const LEGACY_INVENTORY = [
@@ -22,44 +26,57 @@
     "golden-streets-AD.jpg",
     "primate-guidelines-AD.jpg",
     "grundymax-AD.jpg",
+    // Priority ad tiles
     "OTI-premium-AD.jpg",
     "blacks-love-grundy-AD.jpg",
-    // Added cover ad to legacy inventory
-    "cover-AD.jpg"
+    // Cover tile prefers PNG if present; fallback handled by manifest or map
+    "cover-AD.png"
   ];
 
   function filterAdImages(list){
     return (list || []).filter(n => /AD\.(png|jpg)$/i.test(n));
   }
 
+  // Returns the preferred html target for an asset name
   function resolveAdPage(name){
-    if (PAGE_MAP[name]) return "./" + PAGE_MAP[name];
-    const html = name.replace(/\.(png|jpg)$/i, ".html");
-    return "./" + html;
+    const mapped = PAGE_MAP[name];
+    if (mapped) return "./" + mapped;
+    return "./" + name.replace(/\.(png|jpg)$/i, ".html");
+  }
+
+  // Prefer lowercase page href immediately to avoid early clicks breaking
+  function toLowerHref(href){
+    return href.replace(/([^\/]+)$/,(m)=>m.toLowerCase());
   }
 
   const headCache = new Map();
-  async function verifyOrFallback(href){
-    if (headCache.has(href)) return headCache.get(href);
-    let target = href;
+  async function verifyOrFallback(primaryHref){
+    if (headCache.has(primaryHref)) return headCache.get(primaryHref);
+    let target = primaryHref;
     try {
       let res = await fetch(target, { method: 'HEAD' });
       if (!res.ok) {
-        const lower = target.replace(/([^\/]+)$/, m => m.toLowerCase());
+        const lower = toLowerHref(primaryHref);
         res = await fetch(lower, { method: 'HEAD' });
         target = res.ok ? lower : './404.html';
       }
-    } catch(_) { target = './404.html'; }
-    headCache.set(href, target);
+    } catch(_) {
+      target = './404.html';
+    }
+    headCache.set(primaryHref, target);
     return target;
   }
 
   function createAdLink(name){
     const link = document.createElement("a");
     link.className = "ad-link";
-    link.href = resolveAdPage(name);
 
-    verifyOrFallback(link.href).then(valid => { link.href = valid; });
+    const primary = resolveAdPage(name);
+    // Set an immediate, safer default while we verify primary
+    link.href = toLowerHref(primary);
+
+    // Async verify preferred target and update when resolved
+    verifyOrFallback(primary).then(valid => { link.href = valid; });
 
     const pill = document.createElement("span");
     pill.className = "ad-pill";
@@ -99,7 +116,7 @@
         const ads = filterAdImages(arr);
         if (ads.length) return ads;
       }
-    } catch(_){}
+    } catch(_){ /* manifest optional */ }
     return filterAdImages(LEGACY_INVENTORY);
   }
 
