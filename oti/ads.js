@@ -1,98 +1,150 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.0 stable
+   v4.1 (desktop: left rail only • mobile: bottom stack)
    ============================================================ */
-(function(){
-  const VERSION = '4.0';
+(function () {
+  const VERSION = '4.1';
   window.OTI_ADS_VERSION = VERSION;
 
-  async function getAdsList(){
-    try{
-      const res = await fetch('media/ads-manifest.json', { cache: 'no-store' });
-      if (res.ok){
-        const list = await res.json();
-        return list.filter(n => /AD\.(jpg|png)$/i.test(n));
-      }
-    }catch(e){}
-    // fallback list if manifest fails
-    return [
-      "Angels-AD.jpg",
-      "patriot-beer-AD.jpg",
-      "patriot-games-AD.jpg",
-      "you-AD-here.jpg",
-      "blacks-love-grundy-AD.jpg",
-      "OTI-premium-AD.jpg",
-      "grundymax-AD.jpg",
-      "golden-streets-AD.jpg",
-      "cover-AD.png",
-      "primate-guidelines-AD.jpg"
-    ];
+  // ------- helpers -------
+  const isMobile = () => matchMedia('(max-width:700px)').matches;
+
+  function normalizeList(list) {
+    // keep only .jpg/.png that look like ads
+    const seen = new Set();
+    return list
+      .filter(n => /\.(jpg|png)$/i.test(n))
+      .filter(n => /-?AD\.(jpg|png)$/i.test(n))
+      .map(n => n.trim())
+      .filter(n => (seen.has(n) ? false : seen.add(n)));
   }
 
-  function adLinkFor(name){
-    // generic rule: same basename, but .html
-    const base = name.replace(/\.(jpg|png)$/i, '');
+  function pageHrefFor(imageName) {
+    // turn "patriot-beer-AD.jpg" -> "./patriot-beer.html"
+    const justName = imageName.split('/').pop();               // drop any folder prefix
+    const base = justName.replace(/\.(jpg|png)$/i, '')         // remove extension
+                         .replace(/-AD$/i, '');                 // drop "-AD" suffix if present
     return `./${base}.html`;
   }
 
-  function createAdTile(name){
-    const link = document.createElement('a');
-    link.className = 'ad-link';
-    link.href = adLinkFor(name);
+  function imageSrcFor(name) {
+    // accept absolute URLs, root-relative, or items already under "media/"
+    if (/^https?:\/\//i.test(name) || name.startsWith('/') || /^media\//i.test(name)) {
+      return name;
+    }
+    return `media/${name}`;
+  }
+
+  function createTile(name) {
+    const a = document.createElement('a');
+    a.className = 'ad-link';
+    a.href = pageHrefFor(name);
 
     const pill = document.createElement('span');
     pill.className = 'ad-pill';
     pill.textContent = 'Financial Patriotism';
 
     const img = document.createElement('img');
-    img.src = `media/${name}`;
+    img.src = imageSrcFor(name);
     img.alt = 'Promotional image';
     img.loading = 'lazy';
     img.decoding = 'async';
 
-    link.append(pill, img);
-
     const tile = document.createElement('div');
     tile.className = 'ad-tile';
-    tile.appendChild(link);
+    a.append(pill, img);
+    tile.appendChild(a);
     return tile;
   }
 
-  function shuffle(arr){
-    const a = arr.slice();
-    for(let i=a.length-1; i>0; i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+  function empty(el) { while (el && el.firstChild) el.removeChild(el.firstChild); }
+
+  // ------- rendering -------
+  function renderDesktop(ads) {
+    // left rail only; hide any bottom row if present
+    const left = document.querySelector('.ad-container-left');
+    const bottom = document.querySelector('.ad-row');
+
+    if (bottom) bottom.style.display = 'none';
+    if (!left) return;
+
+    // ensure vertical stack in the narrow gutter, without touching site CSS files
+    left.style.display = 'flex';
+    left.style.flexDirection = 'column';
+    left.style.alignItems = 'stretch';
+    left.style.gap = '8px';
+
+    empty(left);
+    // a tidy set in the gutter — keep it focused
+    ads.slice(0, 6).forEach(n => left.appendChild(createTile(n)));
   }
 
-  function renderRow(container, ads){
-    const track = document.createElement('div');
-    track.className = 'track';
-    ads.forEach(n => track.appendChild(createAdTile(n)));
-    container.appendChild(track);
+  function renderMobile(ads) {
+    // bottom stack only; no left rail on mobile
+    const bottom = document.querySelector('.ad-row');
+    const left = document.querySelector('.ad-container-left');
+
+    if (left) left.style.display = 'none';
+    if (!bottom) return;
+
+    // make it a simple vertical list at the very bottom
+    bottom.style.display = 'flex';
+    bottom.style.flexDirection = 'column';
+    bottom.style.alignItems = 'stretch';
+    bottom.style.gap = '12px';
+    bottom.style.overflowX = 'visible';
+
+    // kill any old scroller track if it exists
+    empty(bottom);
+
+    ads.forEach(n => bottom.appendChild(createTile(n)));
   }
 
-  function renderSidebar(container, ads){
-    ads.slice(0,6).forEach(n => container.appendChild(createAdTile(n)));
+  // ------- data -------
+  async function getAds() {
+    try {
+      const res = await fetch('media/ads-manifest.json', { cache: 'no-store' });
+      if (res.ok) {
+        const list = await res.json();
+        const cleaned = normalizeList(list);
+        if (cleaned.length) return cleaned;
+      }
+    } catch (e) {}
+    // fallback
+    return normalizeList([
+      'Angels-AD.jpg',
+      'patriot-beer-AD.jpg',
+      'patriot-games-AD.jpg',
+      'you-AD-here.jpg',
+      'blacks-love-grundy-AD.jpg',
+      'OTI-premium-AD.jpg',
+      'grundymax-AD.jpg',
+      'golden-streets-AD.jpg',
+      'cover-AD.png',
+      'primate-guidelines-AD.jpg'
+    ]);
   }
 
-  document.addEventListener('DOMContentLoaded', async ()=>{
-    const containers = document.querySelectorAll('.ad-row, .ad-container-left');
-    if (!containers.length) return;
+  // ------- boot -------
+  let lastMode = null; // 'mobile' | 'desktop'
 
-    const ads = await getAdsList();
+  async function boot() {
+    const ads = await getAds();
     if (!ads.length) return;
 
-    const shuffled = shuffle(ads);
+    const mode = isMobile() ? 'mobile' : 'desktop';
+    if (mode === lastMode) return; // avoid redundant re-renders
+    lastMode = mode;
 
-    containers.forEach(container => {
-      if (container.classList.contains('ad-row')){
-        renderRow(container, shuffled);
-      } else {
-        renderSidebar(container, shuffled);
-      }
-    });
+    if (mode === 'desktop') renderDesktop(ads);
+    else renderMobile(ads);
+  }
+
+  document.addEventListener('DOMContentLoaded', boot);
+  // Optional responsiveness if the user resizes the window
+  window.addEventListener('resize', () => {
+    // basic debounce
+    clearTimeout(window.__oti_ads_rs__);
+    window.__oti_ads_rs__ = setTimeout(boot, 120);
   });
 })();
