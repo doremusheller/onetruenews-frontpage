@@ -4,7 +4,9 @@
          PNG+JPG support, case-stable hrefs, cleaned inventory
    ============================================================ */
 (function(){
-  const VERSION = '5.0';
+  const VERSION = '5.1';
+  // Expose for diagnostics
+  window.OTI_ADS_VERSION = VERSION;
 
   // Deterministic mapping for assets → pages (no network probe)
   const PAGE_MAP = {
@@ -13,17 +15,23 @@
     "grundymax-AD.jpg": "grundymax-ad.html",
     "grundymax-AD.png": "grundymax-ad.html",
 
-    // OTI Premium
+    // OTI Premium (any case/format)
     "OTI-premium-AD.jpg": "oti-premium-ad.html",
+    "oti-premium-ad.jpg": "oti-premium-ad.html",
     "OTI-premium-AD.png": "oti-premium-ad.html",
+    "oti-premium-ad.png": "oti-premium-ad.html",
 
-    // Blacks Love Grundy
+    // Blacks Love Grundy (any case/format)
     "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html",
+    "blacks-love-grundy-ad.jpg": "blacks-love-grundy-ad.html",
     "blacks-love-grundy-AD.png": "blacks-love-grundy-ad.html",
+    "blacks-love-grundy-ad.png": "blacks-love-grundy-ad.html",
 
-    // Book Cover
+    // Book Cover (any case/format)
     "cover-AD.jpg": "cover-ad.html",
-    "cover-AD.png": "cover-ad.html"
+    "cover-ad.jpg": "cover-ad.html",
+    "cover-AD.png": "cover-ad.html",
+    "cover-ad.png": "cover-ad.html"
   };
 
   const LEGACY_INVENTORY = [
@@ -36,10 +44,12 @@
     "primate-guidelines-AD.jpg",
     "grundymax-AD.jpg",
 
-    // Priority placements
+    // Priority placements (include both formats explicitly)
     "OTI-premium-AD.jpg",
+    "OTI-premium-AD.png",
     "blacks-love-grundy-AD.jpg",
-    // Prefer PNG for cover if present; JPG fallback still resolves via map
+    "blacks-love-grundy-AD.png",
+    "cover-AD.jpg",
     "cover-AD.png"
   ];
 
@@ -49,7 +59,11 @@
 
   function resolveAdPage(name){
     if (PAGE_MAP[name]) return './' + PAGE_MAP[name];
-    // Generic fallback: same basename → .html (case preserved)
+    // Generic regex routes (case-insensitive) for robustness
+    const low = name.toLowerCase();
+    if (/oti[-_]premium[-_]ad\.(png|jpg)$/i.test(name)) return './oti-premium-ad.html';
+    if (/blacks[-_]love[-_]grundy[-_]ad\.(png|jpg)$/i.test(name)) return './blacks-love-grundy-ad.html';
+    if (/cover[-_]ad\.(png|jpg)$/i.test(name)) return './cover-ad.html';
     return './' + name.replace(/\.(png|jpg)$/i, '.html');
   }
 
