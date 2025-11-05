@@ -1,16 +1,17 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.7: Added blacks-love-grundy ad mapping and inventory entry
+   v4.8: Added cover ad mapping and inventory entry
    ============================================================ */
 (function(){
-  const VERSION = '4.7';
+  const VERSION = '4.8';
 
   const PAGE_MAP = {
     "grundymax-ad.jpg": "grundymax-ad.html",
     "grundymax-AD.jpg": "grundymax-ad.html",
     "OTI-premium-AD.jpg": "oti-premium-ad.html",
-    // New: explicit mapping for blacks-love-grundy asset
-    "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html"
+    "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html",
+    // New: explicit mapping for cover ad
+    "cover-AD.jpg": "cover-ad.html"
   };
 
   const LEGACY_INVENTORY = [
@@ -22,8 +23,9 @@
     "primate-guidelines-AD.jpg",
     "grundymax-AD.jpg",
     "OTI-premium-AD.jpg",
-    // Added new ad to legacy inventory
-    "blacks-love-grundy-AD.jpg"
+    "blacks-love-grundy-AD.jpg",
+    // Added cover ad to legacy inventory
+    "cover-AD.jpg"
   ];
 
   function filterAdImages(list){
