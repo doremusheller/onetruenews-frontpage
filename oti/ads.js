@@ -1,107 +1,36 @@
 /* ============================================================
-   ads.js — One True Infotainment
-   v5.0: Deterministic links (no async HEAD), consolidated PAGE_MAP,
-         PNG+JPG support, case-stable hrefs, cleaned inventory
+   ads.js — One True Infotainment (SIMPLE)
+   v6.0: zero special-cases, zero async, deterministic links
    ============================================================ */
-(function(){
-  const VERSION = '5.1';
-  // Expose for diagnostics
+(function () {
+  const VERSION = '6.0';
   window.OTI_ADS_VERSION = VERSION;
 
-  // Deterministic mapping for assets → pages (no network probe)
-  const PAGE_MAP = {
-    // GrundyMax
-    "grundymax-ad.jpg": "grundymax-ad.html",
-    "grundymax-AD.jpg": "grundymax-ad.html",
-    "grundymax-AD.png": "grundymax-ad.html",
-
-    // OTI Premium (any case/format)
-    "OTI-premium-AD.jpg": "oti-premium-ad.html",
-    "oti-premium-ad.jpg": "oti-premium-ad.html",
-    "OTI-premium-AD.png": "oti-premium-ad.html",
-    "oti-premium-ad.png": "oti-premium-ad.html",
-
-    // Blacks Love Grundy (any case/format)
-    "blacks-love-grundy-AD.jpg": "blacks-love-grundy-ad.html",
-    "blacks-love-grundy-ad.jpg": "blacks-love-grundy-ad.html",
-    "blacks-love-grundy-AD.png": "blacks-love-grundy-ad.html",
-    "blacks-love-grundy-ad.png": "blacks-love-grundy-ad.html",
-
-    // Book Cover (any case/format)
-    "cover-AD.jpg": "cover-ad.html",
-    "cover-ad.jpg": "cover-ad.html",
-    "cover-AD.png": "cover-ad.html",
-    "cover-ad.png": "cover-ad.html"
-  };
-
-  const LEGACY_INVENTORY = [
-    // Historic
+  // Minimal fallback inventory (only used if no window.OTI_ADS and no manifest)
+  const LEGACY = [
     "Angels-AD.jpg",
     "patriot-beer-AD.jpg",
     "patriot-games-AD.jpg",
-    "you-AD-here.jpg",
-    "golden-streets-AD.jpg",
     "primate-guidelines-AD.jpg",
     "grundymax-AD.jpg",
-
-    // Priority placements (include both formats explicitly)
-    "OTI-premium-AD.jpg",
-    "OTI-premium-AD.png",
     "blacks-love-grundy-AD.jpg",
-    "blacks-love-grundy-AD.png",
-    "cover-AD.jpg",
+    "OTI-premium-AD.jpg",
     "cover-AD.png"
   ];
 
-  function filterAdImages(list){
+  // ---- Core helpers --------------------------------------------------------
+  function toHtmlHref(name) {
+    // derive ./<basename>.html, lowercased for the page only
+    const base = String(name).split('/').pop();
+    const html = base.replace(/\.(png|jpg)$/i, '.html').toLowerCase();
+    return './' + html;
+  }
+
+  function filterAdImages(list) {
     return (list || []).filter(n => /AD\.(png|jpg)$/i.test(n));
   }
 
-  function resolveAdPage(name){
-    if (PAGE_MAP[name]) return './' + PAGE_MAP[name];
-    // Generic regex routes (case-insensitive) for robustness
-    const low = name.toLowerCase();
-    if (/oti[-_]premium[-_]ad\.(png|jpg)$/i.test(name)) return './oti-premium-ad.html';
-    if (/blacks[-_]love[-_]grundy[-_]ad\.(png|jpg)$/i.test(name)) return './blacks-love-grundy-ad.html';
-    if (/cover[-_]ad\.(png|jpg)$/i.test(name)) return './cover-ad.html';
-    return './' + name.replace(/\.(png|jpg)$/i, '.html');
-  }
-
-  function createAdLink(name){
-    const link = document.createElement('a');
-    link.className = 'ad-link';
-    link.href = resolveAdPage(name); // set once; no async mutation
-
-    const pill = document.createElement('span');
-    pill.className = 'ad-pill';
-    pill.textContent = 'Financial Patriotism';
-
-    const img = document.createElement('img');
-    img.src = `media/${name}`;
-    img.alt = 'Promotional image';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.draggable = false;
-
-    link.append(pill, img);
-
-    const tile = document.createElement('div');
-    tile.className = 'ad-tile';
-    tile.dataset.name = name;
-    tile.appendChild(link);
-    return tile;
-  }
-
-  function shuffle(arr){
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  async function discoverInventory(){
+  async function discoverInventory() {
     if (Array.isArray(window.OTI_ADS)) return filterAdImages(window.OTI_ADS);
     try {
       const res = await fetch('media/ads-manifest.json', { cache: 'no-store' });
@@ -110,26 +39,52 @@
         const ads = filterAdImages(arr);
         if (ads.length) return ads;
       }
-    } catch(_){}
-    return filterAdImages(LEGACY_INVENTORY);
+    } catch (_) { /* optional manifest */ }
+    return filterAdImages(LEGACY);
   }
 
-  function isDesktop(){ return window.matchMedia('(min-width:701px)').matches; }
+  function createAdLink(name) {
+    const a = document.createElement('a');
+    a.className = 'ad-link';
+    a.href = toHtmlHref(name);            // single, deterministic assignment
 
-  function batchAppend(parent, nodes){
+    const pill = document.createElement('span');
+    pill.className = 'ad-pill';
+    pill.textContent = 'Financial Patriotism';
+
+    const img = document.createElement('img');
+    img.src = `media/${name}`;            // use exact case for the IMAGE
+    img.alt = 'Promotional image';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.draggable = false;
+
+    a.append(pill, img);
+
+    const tile = document.createElement('div');
+    tile.className = 'ad-tile';
+    tile.dataset.name = name;
+    tile.appendChild(a);
+    return tile;
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function batchAppend(parent, nodes) {
     const frag = document.createDocumentFragment();
     nodes.forEach(n => frag.appendChild(n));
     parent.appendChild(frag);
   }
 
-  function uniquePick(list, count){
-    const slice = list.slice(0, Math.max(0, Math.min(count, list.length)));
-    return slice;
-  }
-
-  function populateSidebar(container, inventory){
-    if (!isDesktop()) { container.innerHTML = ''; return; }
-
+  function populateSidebar(container, inventory) {
+    if (!window.matchMedia('(min-width:701px)').matches) { container.innerHTML = ''; return; }
     container.style.display = 'grid';
     container.style.gridAutoRows = 'auto';
     container.style.rowGap = '8px';
@@ -144,7 +99,6 @@
     requestAnimationFrame(() => {
       const tileH = Math.max(1, sample.getBoundingClientRect().height);
       const gap = 8;
-
       const page = document.querySelector('.page');
       const pageRect = page ? page.getBoundingClientRect() : { bottom: window.innerHeight };
       const containerRect = container.getBoundingClientRect();
@@ -153,13 +107,14 @@
       container.style.maxHeight = maxHeight + 'px';
 
       const slots = Math.max(1, Math.floor((maxHeight + gap) / (tileH + gap)));
-      const picks = uniquePick(shuffle(inventory), slots).map(createAdLink);
+      const picks = shuffle(inventory).slice(0, slots).map(createAdLink);
 
       container.innerHTML = '';
       batchAppend(container, picks);
     });
   }
 
+  // ---- Boot ---------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', async () => {
     const targets = [...document.querySelectorAll('.ad-container-left, .ad-row')];
     if (!targets.length) return;
@@ -167,39 +122,31 @@
     const inventory = await discoverInventory();
     if (!inventory.length) return;
 
-    const shuffled = shuffle(inventory);
+    const ads = shuffle(inventory).map(createAdLink);
 
     targets.forEach(container => {
-      const isRow = container.classList.contains('ad-row');
       container.innerHTML = '';
-
+      const isRow = container.classList.contains('ad-row');
       if (isRow) {
         const track = document.createElement('div');
         track.className = 'track';
-        const ads = shuffled.map(createAdLink);
+        // duplicate for seamless scroll
         ads.forEach(t => track.appendChild(t.cloneNode(true)));
         ads.forEach(t => track.appendChild(t.cloneNode(true)));
         container.appendChild(track);
       } else {
-        const render = () => populateSidebar(container, shuffled);
-        const debounced = debounce(render, 120);
+        const render = () => populateSidebar(container, inventory);
+        const debounced = (fn => { let t; return () => { clearTimeout(t); t = setTimeout(fn, 120); }; })(render);
         render();
-
         const ro = new ResizeObserver(() => debounced());
         ro.observe(document.documentElement);
-
         const grid = document.getElementById('storyGrid');
         if (grid) {
           const mo = new MutationObserver(() => debounced());
           mo.observe(grid, { childList: true });
         }
-
         window.matchMedia('(min-width:701px)').addEventListener('change', () => debounced());
       }
     });
   });
-
-  function debounce(fn, ms){
-    let t; return function(){ clearTimeout(t); t = setTimeout(fn, ms); };
-  }
 })();
