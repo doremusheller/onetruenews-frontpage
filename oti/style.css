@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v153 (IT WORKED)
+   One True Infotainment — Canonical Style Sheet v153
    ============================================================ */
 
 :root {
@@ -22,18 +22,26 @@ body{
 
 /* ===== Ticker ===== */
 .ticker{
-  position:fixed; top:0; left:0; right:0; z-index:999999;
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:999999;
   background:var(--amber);
   border-bottom:2px solid rgba(0,0,0,.1);
-  overflow:hidden; height:var(--ticker-h); line-height:var(--ticker-h);
+  overflow:hidden;height:var(--ticker-h);
+  line-height:var(--ticker-h);
   white-space:nowrap;
   font-family:"Libre Baskerville",Georgia,serif;
-  font-weight:700; font-size:clamp(.9rem,.9vw + .6rem,1rem);
+  font-weight:700;
+  font-size:clamp(.9rem,.9vw + .6rem,1rem);
   color:#fff;
 }
 .ticker>*{
-  display:inline-block; white-space:nowrap; padding-left:100%; margin:0;
-  animation:ticker-scroll 46s linear infinite; color:#fff;
+  display:inline-block;
+  white-space:nowrap;
+  padding-left:100%;
+  margin:0;
+  animation:ticker-scroll 46s linear infinite;
+  color:#fff;
 }
 @keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @media(prefers-reduced-motion:reduce){.ticker>*{animation:none;padding-left:0}}
@@ -44,152 +52,191 @@ body{
 
 /* ===== Page Layout ===== */
 .page{
-  position:relative; max-width:1100px; margin:0 auto;
+  position:relative;
+  max-width:1100px;
+  margin:0 auto;
   padding:24px 16px 48px;
 }
 
 /* ===== Grid ===== */
 .grid{
-  display:grid; gap:.8rem;
+  display:grid;gap:.8rem;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  position:relative; z-index:1;
+  position:relative;z-index:1;
 }
 .tile{
-  background:#fff; border-radius:10px; overflow:hidden;
-  box-shadow:0 2px 5px var(--shadow); transition:transform .2s ease;
+  background:#fff;border-radius:10px;overflow:hidden;
+  box-shadow:0 2px 5px var(--shadow);transition:transform .2s ease;
 }
 .tile:hover{
   transform:translateY(-3px);
   box-shadow:0 6px 12px var(--shadow);
 }
 .tile img{
-  width:100%; height:130px; object-fit:cover; display:block;
+  width:100%;height:130px;object-fit:cover;display:block;
 }
 
 /* ===== Breaking ===== */
 .index-page .grid{grid-auto-flow:dense;}
-.tile.breaking{position:relative; border:2px solid var(--amber)}
+.tile.breaking{position:relative;border:2px solid var(--amber)}
 .tile.breaking .breaking-pill{
-  position:absolute; top:8px; left:8px; z-index:2;
-  background:var(--amber); color:#fff; font-weight:700; font-size:.7rem;
-  padding:.25rem .5rem; border-radius:6px;
-  box-shadow:0 2px 4px var(--shadow); text-transform:uppercase;
+  position:absolute;top:8px;left:8px;z-index:2;
+  background:var(--amber);color:#fff;font-weight:700;font-size:.7rem;
+  padding:.25rem .5rem;border-radius:6px;
+  box-shadow:0 2px 4px var(--shadow);text-transform:uppercase;
 }
 @media(max-width:700px){
-  .tile.breaking .breaking-pill{font-size:.6rem; padding:.2rem .4rem;}
+  .tile.breaking .breaking-pill{
+    font-size:.6rem;padding:.2rem .4rem;
+  }
 }
 
 /* ===== Story Page ===== */
 .story-page article{
-  max-width:940px; margin:2rem auto; padding:0 .75rem;
-  line-height:1.7; font-family:"Libre Baskerville",Georgia,serif;
+  max-width:940px;margin:2rem auto;padding:0 .75rem;
+  line-height:1.7;font-family:"Libre Baskerville",Georgia,serif;
 }
 .story-hero img{
-  width:100%; border-radius:12px;
+  width:100%;border-radius:12px;
   box-shadow:0 6px 12px var(--shadow);
 }
 .story-hero.wrap-left{
-  float:left; width:min(360px,48%);
+  float:left;width:min(360px,48%);
   margin:.25rem 1rem .75rem 0;
 }
 .story-hero figcaption{
-  font-style:italic; color:rgba(7,27,54,.75);
-  font-size:.9rem; margin-top:.4rem;
+  font-style:italic;color:rgba(7,27,54,.75);
+  font-size:.9rem;margin-top:.4rem;
 }
 .byline,.dateline{
   font-family:"Libre Baskerville",Georgia,serif;
-  color:rgba(7,27,54,.8); margin:.25rem 0; font-size:.9rem;
+  color:rgba(7,27,54,.8);margin:.25rem 0;font-size:.9rem;
 }
-.dateline{font-style:italic; color:rgba(7,27,54,.65)}
+.dateline{font-style:italic;color:rgba(7,27,54,.65)}
 
 /* ===== Footer ===== */
 .footer-banner{
-  background:var(--cream); color:rgba(7,27,54,.6);
+  background:var(--cream);color:rgba(7,27,54,.6);
   font-family:"Libre Baskerville",Georgia,serif;
-  font-size:.45rem; text-align:center; line-height:1.4;
+  font-size:.45rem;text-align:center;line-height:1.4;
   padding:1.5rem .5rem 1.75rem;
   border-top:1px solid var(--shadow);
   font-style:italic;
 }
 
-/* ===== Desktop niceties ===== */
+/* ===== Desktop Grid ===== */
 @media(min-width:1100px){
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem;}
-  .tile h2,.tile p{overflow-wrap:anywhere; hyphens:auto;}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;}
+  .tile h2,.tile p{overflow-wrap:anywhere;hyphens:auto;}
 }
 
 /* ===== Mobile ===== */
 @media(max-width:700px){
   .page{padding:16px 12px 48px}
   .grid{grid-template-columns:1fr}
-  .story-hero.wrap-left{float:none; width:100%; margin:0 0 1rem 0;}
+  .story-hero.wrap-left{
+    float:none;width:100%;margin:0 0 1rem 0;
+  }
 }
 
-/* ===== OTI Ads — fixed left rail (desktop), dock on mobile) ===== */
+/* ===== OTI Ads — fixed layout & visuals ===== */
 
 /* Desktop: fixed, visible left rail */
 @media (min-width:1100px){
   #ads-rail{
     position:fixed;
     top:var(--ticker-h);
-    left:0; bottom:0; width:220px;
-    display:flex; flex-direction:column; gap:10px;
-    background:transparent; z-index:5000; overflow-y:auto;
+    left:0;
+    bottom:0;
+    width:220px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:transparent;
+    z-index:5000;
+    overflow-y:auto;
   }
+
   /* Give the page space for the rail */
-  .index-page .page{padding-left:260px !important;}
+  .index-page .page{
+    padding-left:260px !important; /* 220px rail + gutter */
+  }
 }
 
-/* Rail content */
+/* Left Ads Rail Content */
 #ads-rail .ad-fixed{
-  position:relative; flex:0 0 auto;
-  display:flex; align-items:center; justify-content:center;
-  min-height:88px; border-radius:8px; background:transparent;
+  position:relative;
+  flex:0 0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  min-height:auto;
+  border-radius:8px;
+  background:transparent;
+  gap:6px;
 }
 #ads-rail .ad-fixed-label{
-  font-weight:800; font-size:.8rem; letter-spacing:.02em;
+  font-weight:800;
+  font-size:.8rem;
+  letter-spacing:.02em;
   color:rgba(7,27,54,.8);
 }
 #ads-rail .ad-scroll{
-  flex:1 1 auto; background:transparent;
-  display:flex; flex-direction:column; gap:10px; padding:0;
+  flex:1 1 auto;
+  background:transparent;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:0;
 }
 
-/* Ad tiles */
-.ad-tile{position:relative; display:block; border-radius:8px; overflow:hidden;}
+/* New rule: make the ad tile inside HOT AD fill full width */
+#ads-rail .ad-fixed .ad-tile {
+  width:100%;
+}
+
+/* Generic Ad Tile */
+.ad-tile{position:relative;display:block;border-radius:8px;overflow:hidden;}
 .ad-img{
-  width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block;
+  width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;
   box-shadow:0 2px 4px var(--shadow);
 }
+
+/* Hover-only red pill */
 .ad-pill{
-  position:absolute; top:6px; left:6px; z-index:2;
-  background:var(--amber); color:#fff; font-weight:700; font-size:.6rem;
-  padding:.25rem .45rem; border-radius:999px; text-transform:none;
-  opacity:0; transition:opacity .2s ease;
+  position:absolute;top:6px;left:6px;z-index:2;
+  background:var(--amber);color:#fff;font-weight:700;font-size:.6rem;
+  padding:.25rem .45rem;border-radius:999px;text-transform:none;
+  opacity:0;transition:opacity .2s ease;
 }
 .ad-tile:hover .ad-pill,
 .ad-tile:focus-within .ad-pill{opacity:1;}
 
-/* Mobile: bottom ads dock */
+/* Mobile: Bottom Ads Dock */
 @media (max-width:700px){
   #ads-dock{
-    position:fixed; left:0; right:0; bottom:0;
-    background:transparent; padding:.4rem .5rem; z-index:5000;
+    position:fixed;left:0;right:0;bottom:0;
+    background:transparent;padding:.4rem .5rem;z-index:5000;
   }
   #ads-dock .ad-track{
-    display:flex; flex-wrap:nowrap; gap:8px;
-    overflow-x:auto; overflow-y:hidden; background:transparent;
-    -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
+    display:flex;flex-wrap:nowrap;gap:8px;
+    overflow-x:auto;overflow-y:hidden;
+    background:transparent;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x proximity;
   }
-  #ads-dock .ad-tile{flex:0 0 auto; width:160px; scroll-snap-align:start;}
+  #ads-dock .ad-tile{
+    flex:0 0 auto;width:160px;scroll-snap-align:start;
+  }
   body{padding-bottom:84px;}
 }
 
-/* Safety */
+/* Safety: prevent empty ad rail from blocking clicks */
 #ads-rail{pointer-events:none;}
 #ads-rail[data-live="1"]{pointer-events:auto;}
 
-/* Desktop-only: hide mobile dock */
+/* Desktop-only: hide mobile dock above 700px */
 @media (min-width:701px){
   #ads-dock{display:none;}
 }
