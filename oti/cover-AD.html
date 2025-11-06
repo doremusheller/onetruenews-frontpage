@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>So...WTF, then? — One True Infotainment</title>
-  <meta name="description" content="Exactly. The media made the book. The book made the machine. The machine makes the media." />
+  <meta name="description" content="A story built to warn became the story being told. The media made the book. The book made the machine. The machine makes the media." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="So...WTF, then?" />
-  <meta property="og:description" content="Exactly. The media made the book. The book made the machine. The machine makes the media." />
+  <meta property="og:description" content="A story built to warn became the story being told. The media made the book. The book made the machine. The machine makes the media." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/cover-AD.jpg" />
   <meta property="og:site_name" content="One True Infotainment" />
@@ -18,7 +18,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="So...WTF, then?" />
-  <meta name="twitter:description" content="Exactly. The media made the book. The book made the machine. The machine makes the media." />
+  <meta name="twitter:description" content="A story built to warn became the story being told. The media made the book. The book made the machine. The machine makes the media." />
   <meta name="twitter:image" content="media/cover-AD.jpg" />
 
   <link rel="stylesheet" href="style.css?v=140" />
@@ -26,11 +26,8 @@
   <script src="ads.js" defer></script>
 
   <style>
-    /* --- FIX 1: remove hardcoded opacity:0 so broken loads don’t render invisibly --- */
     .story-hero img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.25); transform: translateY(8px); }
-    /* clickable area should be the whole image */
     .story-hero a { display: inline-block; line-height: 0; }
-    /* progressive reveal handled with this class instead of default opacity:0 */
     .story-hero img.is-hidden { opacity: 0; }
 
     @media (min-width: 900px) {
@@ -52,10 +49,6 @@
   <main class="page">
     <article>
       <figure class="story-hero wrap-left">
-        <!--
-          FIX 2: Ensure the hero is always a link and visibly clickable.
-          Added loading="eager" and class="is-hidden" for controlled fade-in.
-        -->
         <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener">
           <img
             src="media/cover-AD.jpg"
@@ -76,8 +69,11 @@
       </header>
 
       <section class="summary">
-        <p>It started as satire. It became self-aware. The book that mocked the news — now makes it. Read <a href="https://a.co/d/d9GtIHl">When It Happened Here on Kindle.</a></p>
-        <p></p>
+        <p><em>A story built to warn became the story being told.</em></p>
+        <p>The media made the book.<br>
+        The book made the machine.<br>
+        The machine makes the media.</p>
+        <p><em>When It Happened Here.</em> Available now.</p>
       </section>
 
       <nav class="footer-nav" aria-label="Ad navigation">
@@ -102,7 +98,6 @@
       const D = document.querySelector('article .dek');
       const I = document.querySelector('.story-hero img');
 
-      // If motion reduced, reveal immediately (and don’t rely on image load timing)
       if (reduce) {
         [H, D, I].forEach(el => el && (el.style.opacity = 1, el.style.transform = 'translateY(0)'));
         I && I.classList.remove('is-hidden');
@@ -119,13 +114,11 @@
 
       const showImage = () => { I.classList.remove('is-hidden'); fadeIn(I, 300); };
 
-      // If already loaded (or cached), show immediately. If it errors, still unhide so the link is clickable.
       if (I && I.complete && I.naturalWidth > 0) {
         showImage();
       } else if (I) {
         I.addEventListener('load', showImage, { once: true });
         I.addEventListener('error', () => { I.classList.remove('is-hidden'); }, { once: true });
-        // Failsafe: if neither event fires (e.g., blocked resource), unhide after 2s so link remains visible/clickable
         setTimeout(() => I.classList.remove('is-hidden'), 2000);
       }
     });
