@@ -34,16 +34,9 @@
 
   <!-- Page layout -->
   <main class="page">
-    <!-- Left Rail: Ad Stack + TAFAJ Threatmeter -->
-    <aside class="tafa-sidebar">
-      <!-- Scrollable Ad Stack -->
-      <div class="ad-container-left"></div>
 
-      <!-- Bottom-Pinned Threatmeter -->
-      <a href="tafaj-latex-panic.html" class="tile threatmeter">
-        <img src="media/threatmeter.jpg" alt="TAFAJ threat meter, current advisory" />
-      </a>
-    </aside>
+    <!-- Left Ads Rail mount (desktop) -->
+    <aside id="ads-rail" aria-label="Sponsored stories"></aside>
 
     <!-- Story Grid -->
     <section id="storyGrid" class="grid">
@@ -201,8 +194,8 @@
       </article>
     </section>
 
-    <!-- Bottom Ads -->
-    <div class="ad-row"></div>
+    <!-- Mobile Ads Dock mount -->
+    <nav id="ads-dock" aria-label="Sponsored stories"></nav>
   </main>
 
   <!-- Footer Disclaimer -->
@@ -212,4 +205,3 @@
   </footer>
 </body>
 </html>
-```
