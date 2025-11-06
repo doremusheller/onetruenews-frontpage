@@ -1,6 +1,3 @@
-Here’s your **current `style.css`**, exactly as it stands now — complete, with the new safety rule added at the end to prevent empty ad rails from blocking clicks:
-
-```css
 /* ============================================================
    One True Infotainment — Canonical Style Sheet v149
    ============================================================ */
@@ -25,14 +22,27 @@ body{
 
 /* ===== Ticker ===== */
 .ticker{
-  position:fixed;top:0;left:0;right:0;z-index:10000;
-  background:var(--amber);border-bottom:2px solid rgba(0,0,0,.1);
-  overflow:hidden;height:var(--ticker-h);line-height:var(--ticker-h);
-  white-space:nowrap;font-family:"Libre Baskerville",Georgia,serif;
-  font-weight:700;font-size:clamp(.9rem,.9vw + .6rem,1rem);color:#fff;
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:999999;  /* raised from 10000 so it always stays above all layers */
+  background:var(--amber);
+  border-bottom:2px solid rgba(0,0,0,.1);
+  overflow:hidden;height:var(--ticker-h);
+  line-height:var(--ticker-h);
+  white-space:nowrap;
+  font-family:"Libre Baskerville",Georgia,serif;
+  font-weight:700;
+  font-size:clamp(.9rem,.9vw + .6rem,1rem);
+  color:#fff;
 }
-.ticker>*{display:inline-block;white-space:nowrap;padding-left:100%;
-  margin:0;animation:ticker-scroll 46s linear infinite;color:#fff}
+.ticker>*{
+  display:inline-block;
+  white-space:nowrap;
+  padding-left:100%;
+  margin:0;
+  animation:ticker-scroll 46s linear infinite;
+  color:#fff;
+}
 @keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @media(prefers-reduced-motion:reduce){.ticker>*{animation:none;padding-left:0}}
 
@@ -209,4 +219,3 @@ body{
 /* ===== Safety Rule: prevent empty ad rail from blocking clicks ===== */
 #ads-rail { pointer-events: none; }
 #ads-rail[data-live="1"] { pointer-events: auto; }
-```
