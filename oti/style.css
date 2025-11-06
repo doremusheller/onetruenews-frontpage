@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v151
+   One True Infotainment — Canonical Style Sheet v152
    ============================================================ */
 
 :root {
@@ -170,6 +170,8 @@ body{
     z-index:5000;
     overflow-y:auto;
   }
+
+  /* Give the page space for the rail */
   .index-page .page{
     padding-left:260px !important; /* 220px rail + gutter */
   }
