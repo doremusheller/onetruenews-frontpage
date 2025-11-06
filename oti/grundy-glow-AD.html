@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GRUNDY‑GLO™ — Liberty. Loyalty. Luminosity.</title>
+  <meta name="description" content="Official Grundy‑Glo ad page in DHL/OTI canon style." />
+  <style>
+    :root{
+      --bg:#0b0b0b;           /* OTI midnight */
+      --ink:#f2f2f2;          /* near-white copy */
+      --gold:#d4af37;         /* regime gold */
+      --red:#b20000;          /* OTI signal red */
+      --tan:#ff8f2b;          /* Grundy-Glo hue */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:radial-gradient(1200px 800px at 15% 10%, rgba(212,175,55,.15), transparent 60%),
+               linear-gradient(180deg, #0e0e0e 0%, #000 100%);
+      color:var(--ink); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .wrap{max-width:1080px; margin:0 auto; padding: clamp(20px,4vw,48px)}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:20px; border-bottom:1px solid rgba(255,255,255,.06)}
+    .mark{display:inline-flex; align-items:center; gap:12px; text-decoration:none;}
+    .mark .gg{width:36px; height:36px; border-radius:50%; background:conic-gradient(from 0turn, var(--gold), #8c6a1a 60%, var(--gold)); display:grid; place-items:center; box-shadow:0 0 0 2px #111, inset 0 0 20px rgba(0,0,0,.35)}
+    .mark .gg::after{content:'GG'; font-weight:800; color:var(--red)}
+    .mark span{font-weight:700; letter-spacing:.04em}
+
+    .hero{display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:center; padding:32px 0}
+    .shot{position:relative; border-radius:18px; overflow:hidden; background:#111; box-shadow: 0 20px 60px rgba(0,0,0,.6)}
+    .shot img{display:block; width:100%; height:auto}
+    .ribbon{position:absolute; inset:auto 16px 16px auto; background:linear-gradient(135deg, var(--gold), #a98224); color:#1a1200; font-weight:800; padding:8px 12px; border-radius:12px}
+
+    .tag{font-size:clamp(22px,3vw,30px); font-weight:800; color:var(--gold); letter-spacing:.06em; text-transform:uppercase}
+    .hed{font-size:clamp(36px,6vw,64px); line-height:1.05; margin:.25em 0 .35em; font-weight:900}
+    .lede{font-size:clamp(16px,2.2vw,20px); color:#cfcfcf}
+
+    .copy{margin-top:22px; padding:20px; border-left:4px solid var(--tan); background:linear-gradient(180deg, rgba(255,143,43,.08), rgba(255,143,43,.02)); border-radius:10px}
+    .smallcaps{font-variant:small-caps; letter-spacing:.06em}
+
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
+    .btn{appearance:none; border:none; cursor:pointer; font-weight:800; letter-spacing:.04em; padding:12px 18px; border-radius:999px;}
+    .btn.primary{background:var(--red); color:white}
+    .btn.ghost{background:transparent; color:var(--gold); outline:1px solid rgba(212,175,55,.35)}
+
+    footer{margin-top:48px; padding-top:18px; border-top:1px solid rgba(255,255,255,.06); color:#bdbdbd; font-size:13px}
+
+    @media (max-width: 880px){
+      .hero{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="mark" href="#" aria-label="Grundy‑Glo">
+        <span class="gg" aria-hidden="true"></span>
+        <span>GRUNDY‑GLO™</span>
+      </a>
+      <div class="tag">Liberty. Loyalty. Luminosity.</div>
+    </header>
+
+    <section class="hero" aria-labelledby="hed">
+      <figure class="shot">
+        <!-- Replace this path with your deployed asset location -->
+        <img src="media/grundy-glow-AD.jpg" alt="Gold Grundy‑Glo aerosol can on rumpled white satin, stained orange by overspray." />
+        <figcaption class="ribbon">Official Shade: Totalitarian Tangerine</figcaption>
+      </figure>
+
+      <div>
+        <h1 id="hed" class="hed">The Official Radiance of the Corrected States.</h1>
+        <p class="lede">Why hide in the shadows of mediocrity when you can <strong>shine like the First Citizen</strong> himself?</p>
+        <div class="copy">
+          <p><span class="smallcaps">Introducing Grundy‑Glo™.</span> The only government‑approved tanning elixir guaranteed to deliver that <em>authentic national orange</em> — the hue of leadership, loyalty, and televised greatness.</p>
+          <p>Crafted from <strong>pure patriotic minerals</strong> and <strong>trace amounts of gold dust</strong> (reclaimed from noncompliant jewelry), Grundy‑Glo™ bonds directly to the skin, forming a radiant shell of confidence that never cracks… even when democracy does.</p>
+          <blockquote>
+            “When I look in the mirror, I see America.” — <em>First Citizen Galen Grundy</em>
+          </blockquote>
+          <p>Available in shades: <strong>Sunset Empire</strong>, <strong>Executive Bronze</strong>, <strong>Taxpayer Gold</strong>, and <strong>Totalitarian Tangerine</strong>.</p>
+          <p>Apply nightly before addressing your followers or condemning your enemies. <strong>Grundy‑Glo™</strong>: Because freedom should glisten.</p>
+        </div>
+        <div class="cta">
+          <button class="btn primary" aria-label="Buy Grundy‑Glo now">Buy Now</button>
+          <button class="btn ghost" aria-label="Find your shade">Find Your Shade</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © OTI / Doremus Heller Literary Agency — Satirical Advertisement. All elements adhere to DHL canon color style.
+    </footer>
+  </div>
+</body>
+</html>
