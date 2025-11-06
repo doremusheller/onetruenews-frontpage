@@ -1,7 +1,11 @@
-/* ads.js — OTI Ads Rail/Dock (HOT AD / BOTTOM AD framing, safe + simple) */
+/* ============================================================
+   ads.js — One True Infotainment
+   Clean version: content only, layout handled by CSS
+   ============================================================ */
+
 (() => {
   const MANIFEST_PATH = 'ads-manifest.json';   // same folder as index.html
-  const IMG_BASE = 'media/';                   // fixed: relative path for /oti/ deployment
+  const IMG_BASE = 'media/';                   // relative path for /oti/ structure
   const LINK_BASE = './';                      // flat links
 
   const SELECTOR_RAIL = '#ads-rail';
@@ -42,7 +46,7 @@
 
     const img = el('img', {
       class: 'ad-img',
-      attrs: { src, loading: 'lazy', decoding: 'async', alt: '' }
+      attrs: { src, loading: 'lazy', decoding: 'async', alt: slug }
     });
 
     const pill = el('span', { class: 'ad-pill', text: 'Financial Patriotism' });
@@ -83,27 +87,6 @@
       const scaled = raw * SPEED;
       if (axis === 'x') container.scrollLeft += scaled; else container.scrollTop += scaled;
     }, { passive: false });
-
-    let active = false, startX = 0, startY = 0, baseLeft = 0, baseTop = 0;
-    container.addEventListener('pointerdown', (e) => {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        active = true; startX = e.clientX; startY = e.clientY;
-        baseLeft = container.scrollLeft; baseTop = container.scrollTop;
-        container.setPointerCapture?.(e.pointerId);
-      }
-    });
-    container.addEventListener('pointermove', (e) => {
-      if (!active) return;
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        e.preventDefault();
-        const dx = (e.clientX - startX) * SPEED;
-        const dy = (e.clientY - startY) * SPEED;
-        if (axis === 'x') container.scrollLeft = baseLeft - dx; else container.scrollTop = baseTop - dy;
-      }
-    }, { passive: false });
-    const stop = () => { active = false; };
-    container.addEventListener('pointerup', stop);
-    container.addEventListener('pointercancel', stop);
   }
 
   function mountDesktopRail(rail, files) {
@@ -123,7 +106,6 @@
     rail.appendChild(fixedBottom);
 
     attachDamping(scroller, 'y');
-
     rail.setAttribute('data-live', '1');
   }
 
