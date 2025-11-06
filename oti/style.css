@@ -1,5 +1,9 @@
+✅ **Delilah:**
+Here is the updated **style.css (v149)** — includes visibility and stacking fixes for the left ad rail.
+
+```css
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v148
+   One True Infotainment — Canonical Style Sheet v149
    ============================================================ */
 
 :root {
@@ -43,36 +47,41 @@ body{
   padding:24px 16px 48px 260px;
 }
 
-/* ===== Sidebar (full-height) ===== */
+/* ===== Sidebar (full-height, visible, clickable) ===== */
 .tafa-sidebar{
   position:absolute;top:24px;left:0;bottom:24px;width:220px;
   display:flex;flex-direction:column;
-  justify-content:space-between; /* ads top, threatmeter bottom */
-  background:transparent;
+  justify-content:space-between;
+  z-index:5000; /* raised above grid and header */
+  pointer-events:auto;
 }
+
 .ad-container-left{
   flex:1 1 auto;
   display:flex;flex-direction:column;
   align-items:center;justify-content:flex-start;
-  background:#fff;
+  background:rgba(255,255,255,0.97); /* slight contrast to page */
   border:1px solid rgba(7,27,54,.18);
   box-shadow:0 2px 6px var(--shadow);
   border-radius:8px;
-  overflow-y:auto;
-  overflow-x:hidden;
+  overflow-y:auto;overflow-x:hidden;
   padding:8px;
+  position:relative;
+  z-index:5001; /* ensure clickability */
 }
-.ad-container-left img{width:100%;object-fit:contain}
+.ad-container-left img{width:100%;object-fit:contain;display:block;pointer-events:auto;}
+
 .tafa-sidebar .tile.threatmeter{
   flex:0 0 auto;
   border:2px solid var(--amber);
   border-radius:10px;
   overflow:hidden;
   box-shadow:0 2px 6px var(--shadow);
+  z-index:5002;
 }
 
 /* ===== Grid ===== */
-.grid{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.grid{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));position:relative;z-index:1;}
 .tile{
   background:#fff;border-radius:10px;overflow:hidden;
   box-shadow:0 2px 5px var(--shadow);transition:transform .2s ease;
@@ -133,7 +142,7 @@ body{
 /* ===== Mobile ===== */
 @media(max-width:700px){
   .page{padding:16px 12px 48px}
-  .tafa-sidebar{position:static;width:100%;max-width:320px;margin:0 auto 1rem;}
+  .tafa-sidebar{position:static;width:100%;max-width:320px;margin:0 auto 1rem;z-index:auto;}
   .ad-container-left{display:none}
   .grid{grid-template-columns:1fr}
   .story-hero.wrap-left{float:none;width:100%;margin:0 0 1rem 0;}
@@ -157,3 +166,4 @@ body{
   transform:scale(1.03);
   animation:glowPulse 6s ease-in-out infinite;
 }
+```
