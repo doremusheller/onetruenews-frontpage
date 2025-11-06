@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" class="index-page">
 <head>
@@ -9,6 +8,12 @@
 
   <!-- Canonical style and scripts -->
   <link rel="stylesheet" href="style.css?v=150" />
+  <style>
+    /* Guaranteed override: ensure the story grid shifts for left ads rail */
+    @media (min-width:1100px){
+      .index-page .page{ padding-left:260px !important; }
+    }
+  </style>
   <script src="ticker.js" defer></script>
   <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
@@ -34,9 +39,16 @@
 
   <!-- Page layout -->
   <main class="page">
+    <!-- Left Rail: Ad Stack + TAFAJ Threatmeter -->
+    <aside class="tafa-sidebar">
+      <!-- Scrollable Ad Stack -->
+      <div class="ad-container-left"></div>
 
-    <!-- Left Ads Rail mount (desktop) -->
-    <aside id="ads-rail" aria-label="Sponsored stories"></aside>
+      <!-- Bottom-Pinned Threatmeter -->
+      <a href="tafaj-latex-panic.html" class="tile threatmeter">
+        <img src="media/threatmeter.jpg" alt="TAFAJ threat meter, current advisory" />
+      </a>
+    </aside>
 
     <!-- Story Grid -->
     <section id="storyGrid" class="grid">
@@ -194,8 +206,8 @@
       </article>
     </section>
 
-    <!-- Mobile Ads Dock mount -->
-    <nav id="ads-dock" aria-label="Sponsored stories"></nav>
+    <!-- Bottom Ads -->
+    <div class="ad-row"></div>
   </main>
 
   <!-- Footer Disclaimer -->
