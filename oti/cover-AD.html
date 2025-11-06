@@ -1,24 +1,27 @@
+Here’s your finalized HTML for **“Learn & Listen — One True Infotainment”** ready to publish or print:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>So...WTF, then? — One True Infotainment</title>
-  <meta name="description" content="A story built to warn became the story being told. The media made the book. The book made the machine. The machine makes the media." />
+  <title>Learn & Listen — One True Infotainment</title>
+  <meta name="description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="So...WTF, then?" />
-  <meta property="og:description" content="How a story built to warn started telling itself. First, the media made the book. Then book made the machine. Now the machine watches us...and makes the media we want." />
+  <meta property="og:title" content="Learn & Listen" />
+  <meta property="og:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/cover-AD.jpg" />
   <meta property="og:site_name" content="One True Infotainment" />
-  <link rel="canonical" href="cover-ad.html" />
+  <link rel="canonical" href="learn-and-listen.html" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="So...WTF, then?" />
-  <meta name="twitter:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now machine makes our media. On its own." />
+  <meta name="twitter:title" content="Learn & Listen" />
+  <meta name="twitter:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta name="twitter:image" content="media/cover-AD.jpg" />
 
   <link rel="stylesheet" href="style.css?v=140" />
@@ -33,8 +36,36 @@
     @media (min-width: 900px) {
       .story-hero img { display: block; margin: 0 auto; max-height: 62vh; width: auto; max-width: 100%; object-fit: contain; }
     }
-    body.has-logo .oti-logo { position: fixed; right: 18px; bottom: 18px; width: 120px; opacity: .95; filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); }
+
+    .summary .standalone {
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    .summary .standalone a {
+      color: inherit;
+      text-decoration: underline;
+    }
   </style>
+
+  <noscript>
+    <style>
+      .story-hero img.is-hidden { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Learn & Listen",
+    "description": "A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave.",
+    "image": ["media/cover-AD.jpg"],
+    "author": {"@type": "Person", "name": "Doremus Heller"},
+    "publisher": {"@type": "Organization", "name": "One True Infotainment"}
+  }
+  </script>
 </head>
 
 <body class="story-page has-logo">
@@ -46,39 +77,48 @@
     </a>
   </header>
 
-  <main class="page">
+  <main class="page" role="main">
     <article>
       <figure class="story-hero wrap-left">
-        <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener">
+        <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener noreferrer">
           <img
             src="media/cover-AD.jpg"
-            alt="Book cover advertisement for When It Happened Here"
+            alt="Book cover for ‘When It Happened Here’ — official release advertisement"
             decoding="async"
             fetchpriority="high"
             loading="eager"
             class="is-hidden"
           />
         </a>
-        <figcaption>Official book release advertisement.</figcaption>
+        <figcaption>Official book release advertisement</figcaption>
       </figure>
 
       <header>
         <div class="kicker">Promotions • Publication</div>
-        <h1>So...WTF, then?</h1>
-        <p class="dek">Exactly.</p>
+        <h1>Learn & Listen</h1>
+        <p class="dek">So… WTF, then? Exactly.</p>
       </header>
+
+      <p></p>
 
       <section class="summary">
         <p><em>A story built to warn became the story being told.</em></p>
-        <p>First, our media inspired the novel.<br>
+        <p><em>First, our media inspired the novel.<br>
         Then the novel trained a machine.<br>
-        Now the machine makes our media. On its own.<br>
+        Now the machine makes our media.</em><br>
         </p>
-        <p><em>When It Happened Here.</em> Available now.</p>
+
+        <p class="standalone"><em><a href="https://a.co/d/6F5z5xj" target="_blank" rel="noopener noreferrer">When It Happened Here.</a></em> Available now.</p>
       </section>
-<p></p>
+
       <section class="note">
-        <p><em>Writer and technologist Doremus Heller created One True Infotainment after writing</em> When It Happened Here—<em>a novel born of alarm at a nation that mistakes entertainment for truth. When words weren’t enough, he built a language model to speak them louder. The AI now monitors our feeds and measures our appetites, its hourly reports suggesting we still prefer noise to signal. OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</em></p>
+        <p><em>Writer and technologist Doremus Heller created One True Infotainment after writing</em> <em>When It Happened Here</em>—<em>a novel born of alarm at a nation that mistakes entertainment for truth.</em></p>
+
+        <p><em>When words weren’t enough, he built a language model to speak them louder.</em></p>
+
+        <p><em>The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</em></p>
+
+        <p><em>OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it, and ourselves. Doremus Heller still believes we think for ourselves. He and the system argue daily.</em></p>
       </section>
 
       <nav class="footer-nav" aria-label="Ad navigation">
@@ -91,7 +131,7 @@
   </main>
 
   <footer class="footer-banner">
-    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    The persons, events, and depictions of One True Infotainment are fictional and may not yet have come to pass.
     Irony is resistance, satire a pitchfork.
   </footer>
 
@@ -129,6 +169,11 @@
     });
   </script>
 
-  <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" aria-hidden="true" />
+  <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" aria-hidden="false"
+       onclick="window.open('https://www.onetrueinfotainment.com', '_blank')"
+       style="position: absolute; right: 18px; bottom: 18px; width: 120px; opacity: .95; filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); cursor: pointer;" />
 </body>
 </html>
+```
+
+Would you like a print stylesheet (for clean hardcopy/export to PDF)? I can generate that too — simple, grayscale, logo-on, no ads or navigation.
