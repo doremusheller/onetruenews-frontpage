@@ -1,154 +1,226 @@
-✅ **Delilah:** Ready.
-Here is the optimized **ads.js** (v4.6).
+/* ads.js — OTI Ads Rail/Dock
+   Requirements captured:
+   - Read ads-manifest.json (array of "*.jpg")
+   - For each image, make a story tile:
+       • IMG src="media/<file>.jpg" (relative)
+       • LINK href="./<slug>.html"    (flat link)
+       • Hover-only pill: "Financial Patriotism" (DOM present; CSS controls visibility)
+   - Desktop: vertical left column scroller with transparent background; scroll damped to 0.3×
+   - Mobile: horizontal bottom scroller with transparent background; scroll damped to 0.3×
+   - No uninvited DOM beyond mounting into existing #ads-rail and/or #ads-dock
+*/
 
-```javascript
-/* ============================================================
-   ads.js — One True Infotainment
-   v4.6 (aligned with style v147 and index v147)
-   ============================================================ */
-(function () {
-  const VERSION = '4.6';
-  window.OTI_ADS_VERSION = VERSION;
+(() => {
+  const MANIFEST_PATH = 'ads-manifest.json';
+  const IMG_BASE = 'media/';
+  const LINK_BASE = './'; // flat links at the root
 
-  const isMobile = () => matchMedia('(max-width:700px)').matches;
+  const SELECTOR_RAIL = '#ads-rail'; // vertical (desktop, left)
+  const SELECTOR_DOCK = '#ads-dock'; // horizontal (mobile, bottom)
 
-  function normalizeList(list) {
-    const seen = new Set(), out = [];
-    for (const n of list || []) {
-      const name = String(n).trim();
-      if (!/\.jpg$/i.test(name)) continue;
-      if (seen.has(name)) continue;
-      seen.add(name);
-      out.push(name);
+  const SPEED = 0.3; // 30% speed
+  const REDUCED_MOTION = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+
+  // Utility: create an element with classes/attrs
+  function el(tag, opts = {}) {
+    const node = document.createElement(tag);
+    if (opts.class) node.className = opts.class;
+    if (opts.attrs) for (const [k, v] of Object.entries(opts.attrs)) node.setAttribute(k, v);
+    if (opts.text != null) node.textContent = opts.text;
+    if (opts.children) opts.children.forEach(c => c && node.appendChild(c));
+    return node;
+  }
+
+  function filenameToSlug(file) {
+    // "grundy-glow-AD.jpg" => "grundy-glow-AD"
+    return file.replace(/\.jpg$/i, '');
+  }
+
+  function buildTile(file) {
+    const slug = filenameToSlug(file);
+    const href = `${LINK_BASE}${slug}.html`;
+    const src = `${IMG_BASE}${file}`;
+
+    const img = el('img', {
+      class: 'ad-img',
+      attrs: {
+        src,
+        loading: 'lazy',
+        decoding: 'async',
+        alt: '' // decorative by default; consider aria-label on the link
+      }
+    });
+
+    const pill = el('span', {
+      class: 'ad-pill',
+      text: 'Financial Patriotism'
+    });
+
+    const link = el('a', {
+      class: 'ad-tile',
+      attrs: {
+        href,
+        'aria-label': slug // simple label; you can override via CSS-generated content if needed
+      },
+      children: [img, pill]
+    });
+
+    // Keyboard focus should reveal the pill via :focus-within (CSS).
+    link.addEventListener('keydown', (e) => {
+      // Enter/Space to activate
+      if ((e.key === 'Enter' || e.key === ' ') && !e.defaultPrevented) {
+        e.preventDefault();
+        link.click();
+      }
+    });
+
+    return link;
+  }
+
+  async function loadManifest(path) {
+    const res = await fetch(path, { credentials: 'same-origin' });
+    if (!res.ok) throw new Error(`ads.js: failed to load ${path} (${res.status})`);
+    const data = await res.json();
+    if (!Array.isArray(data)) throw new Error('ads.js: manifest must be an array of filenames');
+    // filter to *.jpg only, preserve order
+    return data.filter(name => /\.jpg$/i.test(name));
+  }
+
+  function mountTiles(container, files) {
+    if (!container) return;
+    const frag = document.createDocumentFragment();
+    for (const file of files) frag.appendChild(buildTile(file));
+    container.appendChild(frag);
+
+    // Make the container keyboard-focusable for arrow scrolling; CSS can override outline.
+    if (!container.hasAttribute('tabindex')) container.tabIndex = 0;
+
+    // Attach scroll damping only if motion is not reduced
+    if (!REDUCED_MOTION) {
+      const isHorizontal = getComputedStyle(container).overflowX === 'auto' || container.dataset.axis === 'x';
+
+      // Wheel damping
+      container.addEventListener('wheel', (e) => {
+        // allow native zoom with ctrl/cmd
+        if (e.ctrlKey || e.metaKey) return;
+        e.preventDefault();
+        const delta = isHorizontal ? (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) : e.deltaY;
+        const scaled = delta * SPEED;
+
+        if (isHorizontal) {
+          container.scrollLeft += scaled;
+        } else {
+          container.scrollTop += scaled;
+        }
+      }, { passive: false });
+
+      // Touch/Pointer damping (mobile)
+      let active = false, startX = 0, startY = 0, baseLeft = 0, baseTop = 0;
+
+      container.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+          active = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          baseLeft = container.scrollLeft;
+          baseTop = container.scrollTop;
+          container.setPointerCapture?.(e.pointerId);
+        }
+      });
+
+      container.addEventListener('pointermove', (e) => {
+        if (!active) return;
+        if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+          e.preventDefault();
+          const dx = (e.clientX - startX) * SPEED;
+          const dy = (e.clientY - startY) * SPEED;
+
+          if (isHorizontal) {
+            container.scrollLeft = baseLeft - dx;
+          } else {
+            container.scrollTop = baseTop - dy;
+          }
+        }
+      }, { passive: false });
+
+      container.addEventListener('pointerup', () => { active = false; });
+      container.addEventListener('pointercancel', () => { active = false; });
+
+      // Keyboard nudge
+      container.addEventListener('keydown', (e) => {
+        if (e.defaultPrevented) return;
+        const H = isHorizontal;
+        const key = e.key;
+        let delta = 0;
+
+        if (H && (key === 'ArrowRight' || key === 'ArrowLeft')) {
+          delta = (key === 'ArrowRight' ? 80 : -80) * SPEED;
+          e.preventDefault();
+          container.scrollLeft += delta;
+        } else if (!H && (key === 'ArrowDown' || key === 'ArrowUp')) {
+          delta = (key === 'ArrowDown' ? 80 : -80) * SPEED;
+          e.preventDefault();
+          container.scrollTop += delta;
+        }
+      });
     }
-    return out;
   }
 
-  function pageHrefFor(imageName) {
-    const justName = imageName.split('/').pop();
-    const base = justName.replace(/\.jpg$/i, '');
-    return `./${base}.html`;
+  function whichAxis(container, fallbackAxis = 'y') {
+    // Allow opting-in via data-axis, else infer from CSS overflow directions.
+    if (container?.dataset?.axis) return container.dataset.axis;
+    const cs = container ? getComputedStyle(container) : null;
+    if (!cs) return fallbackAxis;
+    if ((cs.overflowX === 'auto' || cs.overflowX === 'scroll') &&
+        (cs.overflowY !== 'auto' && cs.overflowY !== 'scroll')) return 'x';
+    return 'y';
   }
 
-  function imageSrcFor(name) {
-    if (/^(https?:\/\/|\/|media\/)/i.test(name)) return name;
-    return `media/${name}`;
+  function flagAxis(container) {
+    if (!container) return;
+    const axis = whichAxis(container);
+    container.dataset.axis = axis;
   }
 
-  const REQUIRED_ADS = normalizeList([
-    'OTI-premium-AD.jpg',
-    'primate-guidelines-AD.jpg',
-    'cover-AD.jpg',
-    'golden-streets-AD.jpg'
-  ]);
+  async function init() {
+    const rail = document.querySelector(SELECTOR_RAIL);
+    const dock = document.querySelector(SELECTOR_DOCK);
 
-  function ensureRequiredFirst(list) {
-    const have = new Set(list);
-    return [...REQUIRED_ADS.filter(n => !have.has(n)), ...list];
-  }
+    // If neither mount exists, do nothing (no uninvited DOM work)
+    if (!rail && !dock) return;
 
-  function createTile(name) {
-    const a = document.createElement('a');
-    a.className = 'ad-link';
-    a.href = pageHrefFor(name);
+    flagAxis(rail);
+    flagAxis(dock);
 
-    const pill = document.createElement('span');
-    pill.className = 'ad-pill';
-    pill.textContent = 'Financial Patriotism';
-
-    const img = document.createElement('img');
-    img.src = imageSrcFor(name);
-    img.alt = 'Promotional image';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.style.width = '100%';
-    img.style.height = 'auto';
-    img.style.display = 'block';
-
-    const tile = document.createElement('div');
-    tile.className = 'ad-tile';
-    a.append(pill, img);
-    tile.appendChild(a);
-
-    img.onerror = () => tile.remove();
-    return tile;
-  }
-
-  function empty(el) { while (el && el.firstChild) el.removeChild(el.firstChild); }
-
-  async function getAds() {
-    let cleaned = [];
+    let files = [];
     try {
-      const res = await fetch('media/ads-manifest.json', { cache: 'no-store' });
-      if (res.ok) cleaned = normalizeList(await res.json());
-    } catch (e) {}
-
-    if (!cleaned.length) {
-      cleaned = normalizeList([
-        'Angels-AD.jpg',
-        'patriot-beer-AD.jpg',
-        'patriot-games-AD.jpg',
-        'you-AD-here.jpg',
-        'blacks-love-grundy-AD.jpg',
-        'OTI-premium-AD.jpg',
-        'grundymax-AD.jpg',
-        'golden-streets-AD.jpg',
-        'cover-AD.jpg',
-        'primate-guidelines-AD.jpg'
-      ]);
+      files = await loadManifest(MANIFEST_PATH);
+    } catch (err) {
+      console.error(err);
+      return;
     }
-    return ensureRequiredFirst(cleaned);
+
+    // Render into whichever containers exist. CSS decides which is visible per viewport.
+    if (rail) mountTiles(rail, files);
+    if (dock) mountTiles(dock, files);
+
+    // Expose a tiny API for later tweaks
+    window.OTIAds = {
+      refresh: async () => {
+        // Clear and re-render (e.g., if manifest changes)
+        if (rail) rail.innerHTML = '';
+        if (dock) dock.innerHTML = '';
+        const fresh = await loadManifest(MANIFEST_PATH);
+        if (rail) mountTiles(rail, fresh);
+        if (dock) mountTiles(dock, fresh);
+      }
+    };
   }
 
-  function renderDesktop(ads) {
-    const left = document.querySelector('.ad-container-left');
-    const bottom = document.querySelector('.ad-row');
-    if (bottom) bottom.style.display = 'none';
-    if (!left) return;
-
-    empty(left);
-    left.style.display = 'flex';
-    left.style.flexDirection = 'column';
-    left.style.alignItems = 'stretch';
-    left.style.gap = '8px';
-    left.style.overflowY = 'auto';
-    left.style.overflowX = 'hidden';
-    left.style.maxHeight = 'calc(100vh - var(--ticker-h) - 12px)';
-
-    ads.forEach(n => left.appendChild(createTile(n)));
+  // Kickoff after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
   }
-
-  function renderMobile(ads) {
-    const bottom = document.querySelector('.ad-row');
-    const left = document.querySelector('.ad-container-left');
-    if (left) left.style.display = 'none';
-    if (!bottom) return;
-
-    empty(bottom);
-    bottom.style.display = 'flex';
-    bottom.style.flexDirection = 'column';
-    bottom.style.alignItems = 'stretch';
-    bottom.style.gap = '12px';
-    ads.forEach(n => bottom.appendChild(createTile(n)));
-  }
-
-  let lastMode = null;
-  async function boot() {
-    const ads = await getAds();
-    if (!ads.length) return;
-
-    const mode = isMobile() ? 'mobile' : 'desktop';
-    if (mode === lastMode) return;
-    lastMode = mode;
-
-    if (mode === 'desktop') renderDesktop(ads);
-    else renderMobile(ads);
-  }
-
-  document.addEventListener('DOMContentLoaded', boot);
-  window.addEventListener('resize', () => {
-    clearTimeout(window.__oti_ads_rs__);
-    window.__oti_ads_rs__ = setTimeout(boot, 120);
-  });
 })();
-```
