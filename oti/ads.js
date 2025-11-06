@@ -1,6 +1,7 @@
 /* ============================================================
    ads.js — One True Infotainment
    Clean version: content only, layout handled by CSS
+   HOT AD now shows cover-AD.jpg as a full ad tile
    ============================================================ */
 
 (() => {
@@ -58,10 +59,17 @@
     });
   };
 
-  const buildFixedTile = (label) => {
-    const h = el('div', { class: 'ad-fixed-label', text: label });
+  // Fixed tile can optionally include a real ad (e.g., cover-AD.jpg)
+  const buildFixedTile = (label, file /* optional */) => {
+    const header = el('div', { class: 'ad-fixed-label', text: label });
     const pill = el('span', { class: 'ad-pill', text: 'Financial Patriotism' });
-    return el('div', { class: 'ad-fixed', children: [h, pill] });
+    const children = [header, pill];
+
+    if (file) {
+      // Insert a full ad tile under the label
+      children.push(buildTile(file));
+    }
+    return el('div', { class: 'ad-fixed', children });
   };
 
   async function loadManifest(path) {
@@ -93,7 +101,8 @@
     if (!rail) return;
     rail.innerHTML = '';
 
-    const fixedTop = buildFixedTile('HOT AD');
+    // HOT AD shows the cover ad as a full tile; BOTTOM AD remains a label block
+    const fixedTop = buildFixedTile('HOT AD', 'cover-AD.jpg');
     const fixedBottom = buildFixedTile('BOTTOM AD');
     const scroller = el('div', { class: 'ad-scroll', attrs: { tabindex: '0', 'aria-label': 'Sponsored stories' } });
 
