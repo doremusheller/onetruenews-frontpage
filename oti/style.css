@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v153
+   One True Infotainment — Canonical Style Sheet v154
    ============================================================ */
 
 :root {
@@ -139,28 +139,29 @@ body{
   }
 }
 
-/* ===== OTI Ads — stable layout & visuals ===== */
+/* ===== OTI Ads — fixed layout & visuals ===== */
 
-/* Fixed left ad rail (desktop) */
-#ads-rail{
-  position:fixed;
-  top:var(--ticker-h);
-  left:0;
-  bottom:0;
-  width:220px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  background:transparent;
-  z-index:5000;
-  overflow-y:auto;
-  pointer-events:none;
-}
-#ads-rail[data-live="1"]{pointer-events:auto;}
+/* Desktop: sticky, visible left rail below banner */
+@media (min-width:1100px){
+  #ads-rail{
+    position:sticky;
+    top:var(--ticker-h);
+    align-self:flex-start;
+    left:0;
+    bottom:auto;
+    width:220px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:transparent;
+    z-index:5000;
+    overflow-y:auto;
+  }
 
-/* Give the page space for the rail */
-.index-page .page{
-  padding-left:260px !important; /* rail + gutter */
+  /* Give the page space for the rail */
+  .index-page .page{
+    padding-left:260px !important; /* 220px rail + gutter */
+  }
 }
 
 /* Left Ads Rail Content */
@@ -195,6 +196,8 @@ body{
   width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;
   box-shadow:0 2px 4px var(--shadow);
 }
+
+/* Hover-only red pill */
 .ad-pill{
   position:absolute;top:6px;left:6px;z-index:2;
   background:var(--amber);color:#fff;font-weight:700;font-size:.6rem;
@@ -221,10 +224,13 @@ body{
     flex:0 0 auto;width:160px;scroll-snap-align:start;
   }
   body{padding-bottom:84px;}
-  #ads-rail{display:none;}
 }
 
-/* Hide mobile dock above 700px */
+/* Safety: prevent empty ad rail from blocking clicks */
+#ads-rail{pointer-events:none;}
+#ads-rail[data-live="1"]{pointer-events:auto;}
+
+/* Desktop-only: hide mobile dock above 700px */
 @media (min-width:701px){
   #ads-dock{display:none;}
 }
