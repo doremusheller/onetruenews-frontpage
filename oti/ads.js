@@ -1,9 +1,13 @@
+✅ **Delilah:** Ready.
+Here is the optimized **ads.js** (v4.6).
+
+```javascript
 /* ============================================================
    ads.js — One True Infotainment
-   v4.5 (JPG-only • correct links • scrollable left rail • img guard)
+   v4.6 (aligned with style v147 and index v147)
    ============================================================ */
 (function () {
-  const VERSION = '4.5';
+  const VERSION = '4.6';
   window.OTI_ADS_VERSION = VERSION;
 
   const isMobile = () => matchMedia('(max-width:700px)').matches;
@@ -12,7 +16,7 @@
     const seen = new Set(), out = [];
     for (const n of list || []) {
       const name = String(n).trim();
-      if (!/\.jpg$/i.test(name)) continue;     // JPG only
+      if (!/\.jpg$/i.test(name)) continue;
       if (seen.has(name)) continue;
       seen.add(name);
       out.push(name);
@@ -22,16 +26,15 @@
 
   function pageHrefFor(imageName) {
     const justName = imageName.split('/').pop();
-    const base = justName.replace(/\.jpg$/i, ''); // keep -AD
+    const base = justName.replace(/\.jpg$/i, '');
     return `./${base}.html`;
   }
 
   function imageSrcFor(name) {
-    if (/^https?:\/\//i.test(name) || name.startsWith('/') || /^media\//i.test(name)) return name;
+    if (/^(https?:\/\/|\/|media\/)/i.test(name)) return name;
     return `media/${name}`;
   }
 
-  // required ads (prepended)
   const REQUIRED_ADS = normalizeList([
     'OTI-premium-AD.jpg',
     'primate-guidelines-AD.jpg',
@@ -41,9 +44,7 @@
 
   function ensureRequiredFirst(list) {
     const have = new Set(list);
-    const out = [...REQUIRED_ADS.filter(n => !have.has(n)), ...list];
-    return out;
-    // result = required first, then everything else de-duped
+    return [...REQUIRED_ADS.filter(n => !have.has(n)), ...list];
   }
 
   function createTile(name) {
@@ -60,62 +61,21 @@
     img.alt = 'Promotional image';
     img.loading = 'lazy';
     img.decoding = 'async';
-    // make images fit the gutter and avoid truncation
     img.style.width = '100%';
     img.style.height = 'auto';
     img.style.display = 'block';
 
-    // if an image fails (e.g., file missing), drop the tile
-    img.onerror = () => tile.remove();
-
     const tile = document.createElement('div');
     tile.className = 'ad-tile';
-    tile.style.display = 'block';  // ensure block stacking
     a.append(pill, img);
     tile.appendChild(a);
+
+    img.onerror = () => tile.remove();
     return tile;
   }
 
   function empty(el) { while (el && el.firstChild) el.removeChild(el.firstChild); }
 
-  // ------- rendering -------
-  function renderDesktop(ads) {
-    const left = document.querySelector('.ad-container-left');
-    const bottom = document.querySelector('.ad-row');
-    if (bottom) bottom.style.display = 'none';
-    if (!left) return;
-
-    // vertical stack, viewport-limited height with scroll
-    left.style.display = 'flex';
-    left.style.flexDirection = 'column';
-    left.style.alignItems = 'stretch';
-    left.style.gap = '8px';
-    left.style.maxHeight = 'calc(100vh - 16px)';
-    left.style.overflowY = 'auto';
-    left.style.overflowX = 'hidden';
-
-    empty(left);
-    // render ALL ads; scroll will handle overflow
-    ads.forEach(n => left.appendChild(createTile(n)));
-  }
-
-  function renderMobile(ads) {
-    const bottom = document.querySelector('.ad-row');
-    const left = document.querySelector('.ad-container-left');
-    if (left) left.style.display = 'none';
-    if (!bottom) return;
-
-    bottom.style.display = 'flex';
-    bottom.style.flexDirection = 'column';
-    bottom.style.alignItems = 'stretch';
-    bottom.style.gap = '12px';
-    bottom.style.overflowX = 'visible';
-
-    empty(bottom);
-    ads.forEach(n => bottom.appendChild(createTile(n)));
-  }
-
-  // ------- data -------
   async function getAds() {
     let cleaned = [];
     try {
@@ -140,7 +100,38 @@
     return ensureRequiredFirst(cleaned);
   }
 
-  // ------- boot -------
+  function renderDesktop(ads) {
+    const left = document.querySelector('.ad-container-left');
+    const bottom = document.querySelector('.ad-row');
+    if (bottom) bottom.style.display = 'none';
+    if (!left) return;
+
+    empty(left);
+    left.style.display = 'flex';
+    left.style.flexDirection = 'column';
+    left.style.alignItems = 'stretch';
+    left.style.gap = '8px';
+    left.style.overflowY = 'auto';
+    left.style.overflowX = 'hidden';
+    left.style.maxHeight = 'calc(100vh - var(--ticker-h) - 12px)';
+
+    ads.forEach(n => left.appendChild(createTile(n)));
+  }
+
+  function renderMobile(ads) {
+    const bottom = document.querySelector('.ad-row');
+    const left = document.querySelector('.ad-container-left');
+    if (left) left.style.display = 'none';
+    if (!bottom) return;
+
+    empty(bottom);
+    bottom.style.display = 'flex';
+    bottom.style.flexDirection = 'column';
+    bottom.style.alignItems = 'stretch';
+    bottom.style.gap = '12px';
+    ads.forEach(n => bottom.appendChild(createTile(n)));
+  }
+
   let lastMode = null;
   async function boot() {
     const ads = await getAds();
@@ -160,3 +151,4 @@
     window.__oti_ads_rs__ = setTimeout(boot, 120);
   });
 })();
+```
