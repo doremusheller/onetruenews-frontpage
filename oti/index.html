@@ -1,3 +1,7 @@
+✅ **Delilah:** Ready.
+Here is the optimized **index.html** (aligned with v147 stylesheet and ads.js v4.5 logic).
+
+```html
 <!doctype html>
 <html lang="en" class="index-page">
 <head>
@@ -7,7 +11,7 @@
   <meta name="description" content="Official news and satire from One True Infotainment." />
 
   <!-- Canonical style and scripts -->
-  <link rel="stylesheet" href="style.css?v=146" />
+  <link rel="stylesheet" href="style.css?v=147" />
   <script src="ticker.js" defer></script>
   <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
@@ -21,7 +25,7 @@
   gtag('config', 'G-NHWXLEENTR');
 </script>
 <body>
-  <!-- Live Ticker (fixed red bar, white scrolling text) -->
+  <!-- Live Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
   <!-- Banner -->
@@ -31,18 +35,19 @@
 
   <!-- Page layout -->
   <main class="page">
-    <!-- TAFAJ Threat Meter + Left Ad -->
+    <!-- Left Rail: TAFAJ + Ads -->
     <aside class="tafa-sidebar">
-      <a href="tafaj-latex-panic.html">
+      <!-- Ad rail dynamically filled by ads.js -->
+      <div class="ad-container-left"></div>
+
+      <!-- Threatmeter pinned bottom -->
+      <a href="tafaj-latex-panic.html" class="tile threatmeter">
         <img src="media/threatmeter.jpg" alt="TAFAJ threat meter, current advisory" />
       </a>
-      <div class="ad-container-left"></div>
     </aside>
 
     <!-- Story Grid -->
     <section id="storyGrid" class="grid">
-
-      <!-- BREAKING: Moose Knuckle story (new breaking pin) -->
       <article class="tile breaking">
         <span class="breaking-pill">Breaking</span>
         <a href="mooseknuckle.html">
@@ -52,7 +57,6 @@
         </a>
       </article>
 
-      <!-- Former breaking story released to grid: Primate Incident advisory (no breaking class/pill) -->
       <article class="tile">
         <a href="primate1.html">
           <img src="media/primate1.jpg" alt="Ministry advisory on fruit presentation following primate incident" />
@@ -61,7 +65,6 @@
         </a>
       </article>
 
-      <!-- Terror Plot Thwarted! -->
       <article class="tile">
         <a href="terror-family.html">
           <img src="media/terror-family.jpg" alt="Angels thwart ‘sophisticated plot to live’" />
@@ -69,8 +72,7 @@
           <p>Patriotic relocation efforts on track after daring deeds</p>
         </a>
       </article>
-      
-      <!-- Follow-up story: Car theft denial -->
+
       <article class="tile">
         <a href="primate2.html">
           <img src="media/primate2.jpg" alt="Ministry denies organized car theft amid street interview scene" />
@@ -79,7 +81,6 @@
         </a>
       </article>
 
-      <!-- Homeless Choice story -->
       <article class="tile">
         <a href="homeless-choice.html">
           <img src="media/homeless-choice.jpg" alt="Arena of Opportunity: Redeemable vs Gladiator of Grace" />
@@ -88,7 +89,6 @@
         </a>
       </article>
 
-      <!-- Home Re-Education Movement -->
       <article class="tile">
         <a href="home-school.html">
           <img src="media/home-school.jpg" alt="Parents attend the Ministry’s Home Re-Education launch" />
@@ -97,7 +97,6 @@
         </a>
       </article>
 
-      <!-- Dead Fish story -->
       <article class="tile">
         <a href="dead-fish.html">
           <img src="media/dead-fish.jpg" alt="Aftermath of Operation Righteous Tide" />
@@ -106,7 +105,6 @@
         </a>
       </article>
 
-      <!-- Golden Mark story -->
       <article class="tile">
         <a href="golden-mark.html">
           <img src="media/golden-mark.jpg" alt="Golden graffiti spreading through Corrected cities" />
@@ -115,7 +113,6 @@
         </a>
       </article>
 
-      <!-- Golden Mark — Mapping update -->
       <article class="tile">
         <a href="golden-mark2.html">
           <img src="media/golden-mark2.jpg" alt="Ministry maps the forbidden golden emblem beneath New Chicago" />
@@ -124,7 +121,6 @@
         </a>
       </article>
 
-      <!-- Grundy Towels -->
       <article class="tile">
         <a href="grundy-towels.html">
           <img src="media/grundy-towels.jpg" alt="Grundy presenting towels at the podium" />
@@ -133,7 +129,6 @@
         </a>
       </article>
 
-      <!-- Grundy Checkup -->
       <article class="tile">
         <a href="grundy-checkup.html">
           <img src="media/grundy-checkup.jpg" alt="First Citizen Grundy during morale inspection at Walter Reed" />
@@ -142,7 +137,6 @@
         </a>
       </article>
 
-      <!-- Grundy Doubts Game Show Host -->
       <article class="tile">
         <a href="grundy-accuses-show-host.html">
           <img src="media/grundy-accuses-host.jpg" alt="Grundy addressing reporters about TV charity" />
@@ -151,7 +145,6 @@
         </a>
       </article>
 
-      <!-- Grundy Explains: Cancer -->
       <article class="tile">
         <a href="grundy-explains-cancer.html">
           <img src="media/grundy-explains-health.jpg" alt="Grundy holding a bag of Funyons on air" />
@@ -160,7 +153,6 @@
         </a>
       </article>
 
-      <!-- Grundy Praises the Wall’s Final Seam -->
       <article class="tile">
         <a href="final-seam.html">
           <img src="media/border-banners.jpg" alt="Ceremonial banners at the wall’s last seam" />
@@ -169,7 +161,6 @@
         </a>
       </article>
 
-      <!-- Veteran Visibility -->
       <article class="tile">
         <a href="veteran-visibility.html">
           <img src="media/veteran-visibility.jpg" alt="Grundy visiting Angels at the hospital" />
@@ -178,7 +169,6 @@
         </a>
       </article>
 
-      <!-- River Glow -->
       <article class="tile">
         <a href="river-glow.html">
           <img src="media/river-glow.jpg" alt="Glowing Mississippi River after industrial spill" />
@@ -187,7 +177,6 @@
         </a>
       </article>
 
-      <!-- Latex Panic -->
       <article class="tile">
         <a href="tafaj-latex-panic.html">
           <img src="media/tafajsatan.jpg" alt="TAFAJ follow-up broadcast still" />
@@ -196,7 +185,6 @@
         </a>
       </article>
 
-      <!-- Color-Coded Census -->
       <article class="tile">
         <a href="patriotic-census.html">
           <img src="media/patriotic-census.jpg" alt="The First Citizen during the Color-Coded Census announcement" />
@@ -205,7 +193,6 @@
         </a>
       </article>
 
-      <!-- Public Smiling Hours -->
       <article class="tile">
         <a href="public-smiling-hours.html">
           <img src="media/public-smiling.jpg" alt="Residents in synchronized smiles under supervision" />
@@ -213,7 +200,6 @@
           <p>Morale visibility increases to sixteen hours daily.</p>
         </a>
       </article>
-
     </section>
 
     <!-- Bottom Ads -->
@@ -227,3 +213,4 @@
   </footer>
 </body>
 </html>
+```
