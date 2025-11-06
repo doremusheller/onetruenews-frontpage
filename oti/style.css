@@ -1,8 +1,9 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v157
+   One True Infotainment — Canonical Style Sheet v158
+   (safe: rail/dock fail-safes; no layout fights)
    ============================================================ */
 
-:root {
+:root{
   --indigo:#071b36;
   --amber:#b80000;
   --cream:#faf5ef;
@@ -54,6 +55,7 @@ body{
 }
 .tile:hover{ transform:translateY(-3px); box-shadow:0 6px 12px var(--shadow); }
 .tile img{ width:100%; height:130px; object-fit:cover; display:block; }
+.tile a{ color:inherit; text-decoration:none; display:block; }
 
 /* ===== Breaking ===== */
 .index-page .grid{grid-auto-flow:dense;}
@@ -89,6 +91,34 @@ body{
 @media(min-width:1100px){
   .grid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem;}
   .tile h2,.tile p{overflow-wrap:anywhere; hyphens:auto;}
+
+  /* Desktop: 2-col layout (220px rail + content). Banner is outside .page. */
+  .index-page .page{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    column-gap:40px;
+    padding-left:16px;
+  }
+
+  /* Left rail: sticky and capped; below ticker */
+  #ads-rail{
+    position:sticky;
+    top:var(--ticker-h);
+    align-self:start;
+    width:220px;
+    max-height:calc(100vh - var(--ticker-h));
+    display:flex; flex-direction:column; gap:10px;
+    background:transparent;
+    z-index:1;
+  }
+
+  /* If rail is empty, collapse back to single column (modern browsers) */
+  .index-page .page:has(#ads-rail:empty){
+    display:block;
+  }
+
+  /* Ensure grid sits in the right column naturally */
+  #storyGrid{ align-self:start; }
 }
 
 /* ===== Mobile ===== */
@@ -98,33 +128,7 @@ body{
   .story-hero.wrap-left{float:none; width:100%; margin:0 0 1rem 0;}
 }
 
-/* ===== OTI Ads — Desktop: sticky rail inside page grid ===== */
-@media (min-width:1100px){
-  /* Turn the page into a 2-column layout: 220px rail + content */
-  .index-page .page{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    column-gap:40px;           /* 220px rail + 40px gutter ≈ prior 260px */
-    padding-left:16px;         /* normal inner padding; no big left offset */
-  }
-
-  /* Left rail: sticky inside .page so it stops at page end */
-  #ads-rail{
-    position:sticky;
-    top:var(--ticker-h);       /* starts below the ticker; banner is above .page */
-    align-self:start;
-    width:220px;
-    max-height:calc(100vh - var(--ticker-h));
-    display:flex; flex-direction:column; gap:10px;
-    background:transparent;
-    z-index:1;                 /* below ticker, alongside content */
-  }
-
-  /* Ensure the grid occupies the right column naturally */
-  #storyGrid{ align-self:start; }
-}
-
-/* ===== Rail Content ===== */
+/* ===== OTI Ads — Rail content containers ===== */
 #ads-rail .ad-fixed{
   position:relative;
   flex:0 0 auto;
@@ -132,11 +136,11 @@ body{
   align-items:center; justify-content:flex-start;
   border-radius:8px; background:transparent; gap:6px;
 }
-#ads-rail .ad-fixed .ad-tile{ width:100%; } /* cover ad fills the rail width */
+#ads-rail .ad-fixed .ad-tile{ width:100%; }
 
 #ads-rail .ad-scroll{
   flex:1 1 auto;
-  min-height:0;               /* critical so inner overflow can work */
+  min-height:0;
   display:flex; flex-direction:column; gap:10px;
   overflow-y:auto; overflow-x:hidden;
   background:transparent; padding:0;
@@ -155,6 +159,7 @@ body{
   opacity:0; transition:opacity .2s ease;
 }
 .ad-tile:hover .ad-pill, .ad-tile:focus-within .ad-pill{ opacity:1; }
+.ad-tile:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
 
 /* ===== Mobile: Bottom Ads Dock ===== */
 @media (max-width:700px){
@@ -175,6 +180,10 @@ body{
 /* ===== Safety ===== */
 #ads-rail{ pointer-events:none; }
 #ads-rail[data-live="1"]{ pointer-events:auto; }
+
+/* Hide empty ad containers (prevents blank rails/docks) */
+#ads-rail:empty{ display:none; }
+#ads-dock:empty{ display:none; }
 
 /* ===== Desktop-only: Hide mobile dock ===== */
 @media (min-width:701px){ #ads-dock{ display:none; } }
