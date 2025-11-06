@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v150
+   One True Infotainment — Canonical Style Sheet v151
    ============================================================ */
 
 :root {
@@ -24,7 +24,7 @@ body{
 .ticker{
   position:fixed;
   top:0; left:0; right:0;
-  z-index:999999;  /* raised from 10000 so it always stays above all layers */
+  z-index:999999;
   background:var(--amber);
   border-bottom:2px solid rgba(0,0,0,.1);
   overflow:hidden;height:var(--ticker-h);
@@ -52,7 +52,9 @@ body{
 
 /* ===== Page Layout ===== */
 .page{
-  position:relative;max-width:1100px;margin:0 auto;
+  position:relative;
+  max-width:1100px;
+  margin:0 auto;
   padding:24px 16px 48px;
 }
 
@@ -151,89 +153,95 @@ body{
   }
 }
 
-/* ===== OTI Ads — minimal layout & visuals ===== */
+/* ===== OTI Ads — fixed layout & visuals ===== */
 
-/* Desktop: reserve space for left rail on index pages */
+/* Desktop: fixed, visible left rail */
 @media (min-width:1100px){
-  .index-page .page{ padding-left:260px !important; } /* 220px rail + gutter */
+  #ads-rail{
+    position:fixed;
+    top:var(--ticker-h);
+    left:0;
+    bottom:0;
+    width:220px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:transparent;
+    z-index:5000;
+    overflow-y:auto;
+  }
+  .index-page .page{
+    padding-left:260px !important; /* 220px rail + gutter */
+  }
 }
 
-/* Left Ads Rail */
-#ads-rail{
-  position:absolute; top:24px; left:0; bottom:24px; width:220px;
-  display:flex; flex-direction:column; gap:10px;
-  background:transparent; pointer-events:auto; z-index:5000;
-}
+/* Left Ads Rail Content */
 #ads-rail .ad-fixed{
-  position:relative; flex:0 0 auto;
-  display:flex; align-items:center; justify-content:center;
-  min-height:88px; border-radius:8px;
+  position:relative;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:88px;
+  border-radius:8px;
   background:transparent;
 }
 #ads-rail .ad-fixed-label{
-  font-weight:800; font-size:.8rem; letter-spacing:.02em;
+  font-weight:800;
+  font-size:.8rem;
+  letter-spacing:.02em;
   color:rgba(7,27,54,.8);
 }
 #ads-rail .ad-scroll{
-  flex:1 1 auto; overflow-y:auto; overflow-x:hidden;
+  flex:1 1 auto;
   background:transparent;
-  display:flex; flex-direction:column; gap:10px; padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:0;
 }
 
 /* Generic Ad Tile */
-.ad-tile{ position:relative; display:block; border-radius:8px; overflow:hidden; }
+.ad-tile{position:relative;display:block;border-radius:8px;overflow:hidden;}
 .ad-img{
-  width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block;
+  width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;
   box-shadow:0 2px 4px var(--shadow);
 }
 
 /* Hover-only red pill */
 .ad-pill{
-  position:absolute; top:6px; left:6px; z-index:2;
-  background:var(--amber); color:#fff; font-weight:700; font-size:.6rem;
-  padding:.25rem .45rem; border-radius:999px; text-transform:none;
-  opacity:0; transition:opacity .2s ease;
+  position:absolute;top:6px;left:6px;z-index:2;
+  background:var(--amber);color:#fff;font-weight:700;font-size:.6rem;
+  padding:.25rem .45rem;border-radius:999px;text-transform:none;
+  opacity:0;transition:opacity .2s ease;
 }
 .ad-tile:hover .ad-pill,
-.ad-tile:focus-within .ad-pill{ opacity:1; }
+.ad-tile:focus-within .ad-pill{opacity:1;}
 
 /* Mobile: Bottom Ads Dock */
 @media (max-width:700px){
   #ads-dock{
-    position:fixed; left:0; right:0; bottom:0;
-    background:transparent; padding:.4rem .5rem; z-index:5000;
+    position:fixed;left:0;right:0;bottom:0;
+    background:transparent;padding:.4rem .5rem;z-index:5000;
   }
   #ads-dock .ad-track{
-    display:flex; flex-wrap:nowrap; gap:8px;
-    overflow-x:auto; overflow-y:hidden;
+    display:flex;flex-wrap:nowrap;gap:8px;
+    overflow-x:auto;overflow-y:hidden;
     background:transparent;
     -webkit-overflow-scrolling:touch;
     scroll-snap-type:x proximity;
   }
   #ads-dock .ad-tile{
-    flex:0 0 auto; width:160px; scroll-snap-align:start;
+    flex:0 0 auto;width:160px;scroll-snap-align:start;
   }
-  body{ padding-bottom:84px; } /* make room for dock */
+  body{padding-bottom:84px;}
 }
 
-/* ===== Safety Rule: prevent empty ad rail from blocking clicks ===== */
-#ads-rail { pointer-events: none; }
-#ads-rail[data-live="1"] { pointer-events: auto; }
-/* --- Ads rail visibility & layout (simple + deterministic) --- */
+/* Safety: prevent empty ad rail from blocking clicks */
+#ads-rail{pointer-events:none;}
+#ads-rail[data-live="1"]{pointer-events:auto;}
 
-/* Off by default so it never overlays the grid on small widths */
-#ads-rail{ display:none; }
-
-/* Desktop ON — and make room for it */
-@media (min-width:1100px){
-  #ads-rail{ display:flex; }                     /* rail visible */
-  .index-page .page{ padding-left:260px !important; } /* grid scoots right */
-}
-
-/* Desktop-only: hide the mobile dock above 700px (optional, keeps things clean) */
+/* Desktop-only: hide mobile dock above 700px */
 @media (min-width:701px){
-  #ads-dock{ display:none; }
+  #ads-dock{display:none;}
 }
-
-
-
