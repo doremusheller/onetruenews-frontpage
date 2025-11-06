@@ -8,6 +8,11 @@
 
   <!-- Canonical style and scripts -->
   <link rel="stylesheet" href="style.css?v=154" />
+  <style>
+    @media (min-width:1100px){
+      .index-page .page{ padding-left:260px !important; }
+    }
+  </style>
   <script src="ticker.js" defer></script>
   <script src="grid.js" defer></script>
   <script src="ads.js" defer></script>
@@ -34,14 +39,24 @@
   <!-- Page layout -->
   <main class="page">
 
-    <!-- Left Ads Rail (desktop) -->
+    <!-- Left Ads Rail -->
     <aside id="ads-rail" aria-label="Sponsored stories"></aside>
 
     <!-- Story Grid -->
     <section id="storyGrid" class="grid">
 
+      <!-- New Breaking Story -->
       <article class="tile breaking">
         <span class="breaking-pill">Breaking</span>
+        <a href="patriot-victim.html">
+          <img src="media/patriot-victim.jpg" alt="Patriotic citizen salutes through the smoke of a recent correction" />
+          <h2>Patriot Victim Declared Voluntary</h2>
+          <p>Ministry clarifies the citizen’s enthusiasm for sacrifice was “self-reported and appropriately televised.”</p>
+        </a>
+      </article>
+
+      <!-- Former breaking story (now standard) -->
+      <article class="tile">
         <a href="mooseknuckle.html">
           <img src="media/keel-mooseknuckle.jpg" alt="Moose Knuckle ceremony as fresh asphalt covers golden streets; Minister Keel applauds decorative democracy" />
           <h2>The Color of Compliance?</h2>
@@ -192,7 +207,6 @@
           <p>Morale visibility increases to sixteen hours daily.</p>
         </a>
       </article>
-
     </section>
 
     <!-- Mobile Ads Dock -->
@@ -200,7 +214,7 @@
 
   </main>
 
-  <!-- Footer -->
+  <!-- Footer Disclaimer -->
   <footer class="footer-banner">
     The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
     Irony is resistance, satire a pitchfork.
