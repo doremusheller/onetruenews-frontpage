@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v155 (restored fixed rail)
+   One True Infotainment — Canonical Style Sheet v154
    ============================================================ */
 
 :root {
@@ -8,7 +8,6 @@
   --cream:#faf5ef;
   --shadow:rgba(0,0,0,.08);
   --ticker-h:2.6rem;
-  --banner-h:180px; /* adjustable if banner height changes */
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -140,13 +139,11 @@ body{
   }
 }
 
-/* ===== OTI Ads — fixed layout & visuals ===== */
-
-/* Desktop: fixed, visible left rail under ticker, above grid */
+/* ===== OTI Ads — fixed left rail (desktop) ===== */
 @media (min-width:1100px){
   #ads-rail{
     position:fixed;
-    top:calc(var(--ticker-h) + var(--banner-h));
+    top:calc(var(--ticker-h) + 180px); /* surgical offset fix */
     left:0;
     bottom:0;
     width:220px;
@@ -164,7 +161,7 @@ body{
   }
 }
 
-/* Left Ads Rail Content */
+/* ===== Rail Content ===== */
 #ads-rail .ad-fixed{
   position:relative;
   flex:0 0 auto;
@@ -190,14 +187,12 @@ body{
   padding:0;
 }
 
-/* Generic Ad Tile */
+/* ===== Generic Ad Tile ===== */
 .ad-tile{position:relative;display:block;border-radius:8px;overflow:hidden;}
 .ad-img{
   width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;
   box-shadow:0 2px 4px var(--shadow);
 }
-
-/* Hover-only red pill */
 .ad-pill{
   position:absolute;top:6px;left:6px;z-index:2;
   background:var(--amber);color:#fff;font-weight:700;font-size:.6rem;
@@ -207,7 +202,7 @@ body{
 .ad-tile:hover .ad-pill,
 .ad-tile:focus-within .ad-pill{opacity:1;}
 
-/* Mobile: Bottom Ads Dock */
+/* ===== Mobile: Bottom Ads Dock ===== */
 @media (max-width:700px){
   #ads-dock{
     position:fixed;left:0;right:0;bottom:0;
@@ -226,11 +221,11 @@ body{
   body{padding-bottom:84px;}
 }
 
-/* Safety: prevent empty ad rail from blocking clicks */
+/* ===== Safety ===== */
 #ads-rail{pointer-events:none;}
 #ads-rail[data-live="1"]{pointer-events:auto;}
 
-/* Desktop-only: hide mobile dock above 700px */
+/* ===== Desktop-only: Hide mobile dock ===== */
 @media (min-width:701px){
   #ads-dock{display:none;}
 }
