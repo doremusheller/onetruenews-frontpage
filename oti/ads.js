@@ -1,4 +1,4 @@
-Here is the complete, current **`ads.js`** file in full — this is the synchronized version used in your workspace:
+Here’s your **current `ads.js`** — the latest version with only one small addition: it now marks the rail as “live” after ads are added (to re-enable clicks).
 
 ```javascript
 /* ads.js — OTI Ads Rail/Dock (updated for HOT AD / BOTTOM AD framing)
@@ -180,6 +180,9 @@ Here is the complete, current **`ads.js`** file in full — this is the synchron
     scroller.style.overflowY = scroller.style.overflowY || 'auto';
     scroller.style.overflowX = 'hidden';
     scroller.style.background = 'transparent';
+
+    // ✅ New line: mark rail as live once ads exist
+    rail?.setAttribute('data-live', '1');
   }
 
   function mountMobileDock(dock, files) {
