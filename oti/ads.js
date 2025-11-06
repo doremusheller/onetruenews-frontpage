@@ -1,3 +1,6 @@
+Here is the complete, current **`ads.js`** file in full — this is the synchronized version used in your workspace:
+
+```javascript
 /* ads.js — OTI Ads Rail/Dock (updated for HOT AD / BOTTOM AD framing)
    - Reads ads-manifest.json (array of "*.jpg")
    - Builds a DESKTOP left rail with two fixed tiles:
@@ -15,7 +18,6 @@
   const IMG_BASE = 'media/';
   const LINK_BASE = './';
 
-  // Mount points expected in DOM
   const SELECTOR_RAIL = '#ads-rail'; // desktop left column
   const SELECTOR_DOCK = '#ads-dock'; // mobile bottom bar
 
@@ -62,10 +64,16 @@
   };
 
   const buildFixedTile = (label) => {
-    // Fixed story tile with a label headline and pill
-    const h = el('div', { class: 'ad-fixed-label', text: label });
-    const pill = el('span', { class: 'ad-pill', text: 'Financial Patriotism' });
-    const frame = el('div', { class: 'ad-fixed' , children: [h, pill] });
+    const h = document.createElement('div');
+    h.className = 'ad-fixed-label';
+    h.textContent = label;
+    const pill = document.createElement('span');
+    pill.className = 'ad-pill';
+    pill.textContent = 'Financial Patriotism';
+    const frame = document.createElement('div');
+    frame.className = 'ad-fixed';
+    frame.appendChild(h);
+    frame.appendChild(pill);
     return frame;
   };
 
@@ -87,7 +95,7 @@
       const raw = axis === 'x'
         ? (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY)
         : e.deltaY;
-      const scaled = raw * SPEED;
+      const scaled = raw * 0.3;
       if (axis === 'x') container.scrollLeft += scaled;
       else container.scrollTop += scaled;
     }, { passive: false });
@@ -110,8 +118,8 @@
       if (!active) return;
       if (e.pointerType === 'touch' || e.pointerType === 'pen') {
         e.preventDefault();
-        const dx = (e.clientX - startX) * SPEED;
-        const dy = (e.clientY - startY) * SPEED;
+        const dx = (e.clientX - startX) * 0.3;
+        const dy = (e.clientY - startY) * 0.3;
         if (axis === 'x') container.scrollLeft = baseLeft - dx;
         else container.scrollTop = baseTop - dy;
       }
@@ -126,11 +134,11 @@
       if (e.defaultPrevented) return;
       let delta = 0;
       if (axis === 'x' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-        delta = (e.key === 'ArrowRight' ? 80 : -80) * SPEED;
+        delta = (e.key === 'ArrowRight' ? 80 : -80) * 0.3;
         e.preventDefault();
         container.scrollLeft += delta;
       } else if (axis === 'y' && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
-        delta = (e.key === 'ArrowDown' ? 80 : -80) * SPEED;
+        delta = (e.key === 'ArrowDown' ? 80 : -80) * 0.3;
         e.preventDefault();
         container.scrollTop += delta;
       }
@@ -139,15 +147,6 @@
 
   function mountDesktopRail(rail, files) {
     if (!rail) return;
-
-    // Structure:
-    // <div id="ads-rail">
-    //   <div class="ad-fixed-top">HOT AD</div>
-    //   <div class="ad-scroll" tabindex="0">...tiles...</div>
-    //   <div class="ad-fixed-bottom">BOTTOM AD</div>
-    // </div>
-
-    // Clear any prior content
     rail.innerHTML = '';
 
     const fixedTop = buildFixedTile('HOT AD');
@@ -161,46 +160,32 @@
       attrs: { tabindex: '0', 'aria-label': 'Sponsored stories' }
     });
 
-    // Populate scrolling tiles (all manifest images)
     const frag = document.createDocumentFragment();
     files.forEach(f => frag.appendChild(buildTile(f)));
     scroller.appendChild(frag);
 
-    // Assemble
     rail.appendChild(fixedTop);
     rail.appendChild(scroller);
     rail.appendChild(fixedBottom);
 
-    // Behavior: vertical damping on the scroll area only
     attachDamping(scroller, 'y');
 
-    // Ensure the scroller fills space between the fixed tiles without JS resizing assumptions.
-    // If CSS isn’t ready, fall back to a minimal inline layout to guarantee behavior.
-    // (Safe, non-invasive; remove once style.css handles it.)
-    const ensureLayout = () => {
-      // Use flex column to let scroller expand between fixed blocks
-      rail.style.display = rail.style.display || 'flex';
-      rail.style.flexDirection = rail.style.flexDirection || 'column';
-      rail.style.background = rail.style.background || 'transparent';
-
-      fixedTop.style.flex = '0 0 auto';
-      fixedBottom.style.flex = '0 0 auto';
-
-      scroller.style.flex = '1 1 auto';
-      scroller.style.overflowY = scroller.style.overflowY || 'auto';
-      scroller.style.overflowX = 'hidden';
-      scroller.style.background = 'transparent';
-    };
-    ensureLayout();
+    // Minimal layout guarantees (non-invasive)
+    rail.style.display = rail.style.display || 'flex';
+    rail.style.flexDirection = rail.style.flexDirection || 'column';
+    rail.style.background = rail.style.background || 'transparent';
+    fixedTop.style.flex = '0 0 auto';
+    fixedBottom.style.flex = '0 0 auto';
+    scroller.style.flex = '1 1 auto';
+    scroller.style.overflowY = scroller.style.overflowY || 'auto';
+    scroller.style.overflowX = 'hidden';
+    scroller.style.background = 'transparent';
   }
 
   function mountMobileDock(dock, files) {
     if (!dock) return;
-
-    // Clear prior
     dock.innerHTML = '';
 
-    // Track container (kept simple; CSS can style)
     const track = el('div', { class: 'ad-track', attrs: { tabindex: '0', 'aria-label': 'Sponsored stories' } });
 
     const frag = document.createDocumentFragment();
@@ -209,10 +194,9 @@
 
     dock.appendChild(track);
 
-    // Horizontal damping on the track
     attachDamping(track, 'x');
 
-    // Minimal inline layout to ensure horizontal scrolling if CSS isn’t present
+    // Minimal layout guarantees (non-invasive)
     dock.style.background = 'transparent';
     dock.style.overflow = 'hidden';
     track.style.display = 'flex';
@@ -225,7 +209,6 @@
   async function init() {
     const rail = document.querySelector(SELECTOR_RAIL);
     const dock = document.querySelector(SELECTOR_DOCK);
-
     if (!rail && !dock) return;
 
     let files = [];
@@ -236,13 +219,9 @@
       return;
     }
 
-    // Desktop left rail: HOT AD (top) / scroller / BOTTOM AD (bottom)
     if (rail) mountDesktopRail(rail, files);
-
-    // Mobile bottom dock: horizontal scroller
     if (dock) mountMobileDock(dock, files);
 
-    // Tiny API
     window.OTIAds = {
       refresh: async () => {
         const fresh = await loadManifest(MANIFEST_PATH);
@@ -258,3 +237,4 @@
     init();
   }
 })();
+```
