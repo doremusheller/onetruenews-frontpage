@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v149
+   One True Infotainment — Canonical Style Sheet v150
    ============================================================ */
 
 :root {
@@ -219,3 +219,4 @@ body{
 /* ===== Safety Rule: prevent empty ad rail from blocking clicks ===== */
 #ads-rail { pointer-events: none; }
 #ads-rail[data-live="1"] { pointer-events: auto; }
+
