@@ -1,31 +1,37 @@
 /* ============================================================
    ads.js — One True Infotainment
-   v4.3 (JPG-only • correct links)
+   v4.4 (JPG-only • correct links • required ads)
    ============================================================ */
 (function () {
-  const VERSION = '4.3';
+  const VERSION = '4.4';
   window.OTI_ADS_VERSION = VERSION;
 
   // ------- helpers -------
   const isMobile = () => matchMedia('(max-width:700px)').matches;
 
   function normalizeList(list) {
-    // JPGs only; keep order, trim, and de-dupe
+    // JPGs only; trim & de-dupe; keep original order for manifest-provided items
     const seen = new Set();
-    return list
-      .map(n => String(n).trim())
-      .filter(n => /\.jpg$/i.test(n))
-      .filter(n => (seen.has(n) ? false : seen.add(n)));
+    const out = [];
+    for (const n of list || []) {
+      const name = String(n).trim();
+      if (!/\.jpg$/i.test(name)) continue;
+      if (seen.has(name)) continue;
+      seen.add(name);
+      out.push(name);
+    }
+    return out;
   }
 
   function pageHrefFor(imageName) {
-    // Map "patriot-beer-AD.jpg" -> "./patriot-beer-AD.html"
+    // "patriot-beer-AD.jpg" -> "./patriot-beer-AD.html"
     const justName = imageName.split('/').pop();
-    const base = justName.replace(/\.jpg$/i, ''); // only drop extension
+    const base = justName.replace(/\.jpg$/i, '');
     return `./${base}.html`;
   }
 
   function imageSrcFor(name) {
+    // accept absolute, root-relative, or items already under "media/"
     if (/^https?:\/\//i.test(name) || name.startsWith('/') || /^media\//i.test(name)) {
       return name;
     }
@@ -55,6 +61,25 @@
   }
 
   function empty(el) { while (el && el.firstChild) el.removeChild(el.firstChild); }
+
+  // ------- ensure required ads -------
+  const REQUIRED_ADS = normalizeList([
+    'OTI-premium-AD.jpg',
+    'primate-guidelines-AD.jpg',
+    'cover-AD.jpg',
+    'golden-streets-AD.jpg'
+  ]);
+
+  function ensureRequiredAds(list) {
+    const set = new Set(list);
+    for (const req of REQUIRED_ADS) {
+      if (!set.has(req)) {
+        set.add(req);
+        list.push(req); // append any missing required items
+      }
+    }
+    return list;
+  }
 
   // ------- rendering -------
   function renderDesktop(ads) {
@@ -90,27 +115,33 @@
 
   // ------- data -------
   async function getAds() {
+    let cleaned = [];
     try {
       const res = await fetch('media/ads-manifest.json', { cache: 'no-store' });
       if (res.ok) {
         const list = await res.json();
-        const cleaned = normalizeList(list);
-        if (cleaned.length) return cleaned;
+        cleaned = normalizeList(list);
       }
     } catch (e) {}
-    // JPG-only fallback list (filenames must match .html pages 1:1)
-    return normalizeList([
-      'Angels-AD.jpg',
-      'patriot-beer-AD.jpg',
-      'patriot-games-AD.jpg',
-      'you-AD-here.jpg',
-      'blacks-love-grundy-AD.jpg',
-      'OTI-premium-AD.jpg',
-      'grundymax-AD.jpg',
-      'golden-streets-AD.jpg',
-      'cover-AD.jpg',
-      'primate-guidelines-AD.jpg'
-    ]);
+
+    if (!cleaned.length) {
+      // JPG-only fallback; safe defaults
+      cleaned = normalizeList([
+        'Angels-AD.jpg',
+        'patriot-beer-AD.jpg',
+        'patriot-games-AD.jpg',
+        'you-AD-here.jpg',
+        'blacks-love-grundy-AD.jpg',
+        'OTI-premium-AD.jpg',
+        'grundymax-AD.jpg',
+        'golden-streets-AD.jpg',
+        'cover-AD.jpg',
+        'primate-guidelines-AD.jpg'
+      ]);
+    }
+
+    // Always make sure required items are present
+    return ensureRequiredAds(cleaned);
   }
 
   // ------- boot -------
