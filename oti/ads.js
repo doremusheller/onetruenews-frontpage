@@ -1,7 +1,7 @@
 /* ads.js — OTI Ads Rail/Dock (HOT AD / BOTTOM AD framing, safe + simple) */
 (() => {
   const MANIFEST_PATH = 'ads-manifest.json';   // same folder as index.html
-  const IMG_BASE = '/media/';                  // absolute to avoid path confusion
+  const IMG_BASE = 'media/';                   // fixed: relative path for /oti/ deployment
   const LINK_BASE = './';                      // flat links
 
   const SELECTOR_RAIL = '#ads-rail';
@@ -10,7 +10,6 @@
   const SPEED = 0.3;
   const REDUCED_MOTION = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
-  // Guaranteed list so ads show even if the JSON can’t be read
   const FALLBACK_MANIFEST = [
     'Angels-AD.jpg',
     'patriot-beer-AD.jpg',
@@ -69,7 +68,7 @@
       if (!Array.isArray(data)) throw new Error('manifest must be an array');
       return data.filter(n => /\.jpg$/i.test(n));
     } catch {
-      return FALLBACK_MANIFEST; // render anyway
+      return FALLBACK_MANIFEST;
     }
   }
 
@@ -125,17 +124,6 @@
 
     attachDamping(scroller, 'y');
 
-    // minimal layout guarantees (non-invasive)
-    rail.style.display = rail.style.display || 'flex';
-    rail.style.flexDirection = rail.style.flexDirection || 'column';
-    rail.style.background = rail.style.background || 'transparent';
-    fixedTop.style.flex = '0 0 auto';
-    fixedBottom.style.flex = '0 0 auto';
-    scroller.style.flex = '1 1 auto';
-    scroller.style.overflowY = scroller.style.overflowY || 'auto';
-    scroller.style.overflowX = 'hidden';
-
-    // enable clicks only when ads exist
     rail.setAttribute('data-live', '1');
   }
 
@@ -150,14 +138,6 @@
     dock.appendChild(track);
 
     attachDamping(track, 'x');
-
-    // minimal layout guarantees
-    dock.style.background = 'transparent';
-    dock.style.overflow = 'hidden';
-    track.style.display = 'flex';
-    track.style.flexWrap = 'nowrap';
-    track.style.overflowX = 'auto';
-    track.style.overflowY = 'hidden';
   }
 
   async function init() {
