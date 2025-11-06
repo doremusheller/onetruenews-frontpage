@@ -1,5 +1,5 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v154
+   One True Infotainment — Canonical Style Sheet v155 (restored fixed rail)
    ============================================================ */
 
 :root {
@@ -8,6 +8,7 @@
   --cream:#faf5ef;
   --shadow:rgba(0,0,0,.08);
   --ticker-h:2.6rem;
+  --banner-h:180px; /* adjustable if banner height changes */
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -141,14 +142,13 @@ body{
 
 /* ===== OTI Ads — fixed layout & visuals ===== */
 
-/* Desktop: sticky, visible left rail below banner */
+/* Desktop: fixed, visible left rail under ticker, above grid */
 @media (min-width:1100px){
   #ads-rail{
-    position:sticky;
-    top:var(--ticker-h);
-    align-self:flex-start;
+    position:fixed;
+    top:calc(var(--ticker-h) + var(--banner-h));
     left:0;
-    bottom:auto;
+    bottom:0;
     width:220px;
     display:flex;
     flex-direction:column;
