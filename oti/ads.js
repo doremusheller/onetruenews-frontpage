@@ -1,73 +1,57 @@
-/* ads.js — OTI Ads Rail/Dock
-   Requirements captured:
-   - Read ads-manifest.json (array of "*.jpg")
-   - For each image, make a story tile:
-       • IMG src="media/<file>.jpg" (relative)
-       • LINK href="./<slug>.html"    (flat link)
-       • Hover-only pill: "Financial Patriotism" (DOM present; CSS controls visibility)
-   - Desktop: vertical left column scroller with transparent background; scroll damped to 0.3×
-   - Mobile: horizontal bottom scroller with transparent background; scroll damped to 0.3×
-   - No uninvited DOM beyond mounting into existing #ads-rail and/or #ads-dock
+/* ads.js — OTI Ads Rail/Dock (updated for HOT AD / BOTTOM AD framing)
+   - Reads ads-manifest.json (array of "*.jpg")
+   - Builds a DESKTOP left rail with two fixed tiles:
+       HOT AD (top) and BOTTOM AD (bottom)
+     and a scrollable list BETWEEN them.
+   - Builds a MOBILE bottom dock (horizontal scroller).
+   - Tiles: image from "media/<file>.jpg", link to "./<slug>.html"
+   - Hover-only red pill text: "Financial Patriotism"
+   - Scroll damping at 0.3× for both rail (vertical) and dock (horizontal)
+   - No CSS injection; structure only. Style via site style.css.
 */
 
 (() => {
   const MANIFEST_PATH = 'ads-manifest.json';
   const IMG_BASE = 'media/';
-  const LINK_BASE = './'; // flat links at the root
+  const LINK_BASE = './';
 
-  const SELECTOR_RAIL = '#ads-rail'; // vertical (desktop, left)
-  const SELECTOR_DOCK = '#ads-dock'; // horizontal (mobile, bottom)
+  // Mount points expected in DOM
+  const SELECTOR_RAIL = '#ads-rail'; // desktop left column
+  const SELECTOR_DOCK = '#ads-dock'; // mobile bottom bar
 
-  const SPEED = 0.3; // 30% speed
+  const SPEED = 0.3;
   const REDUCED_MOTION = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
-  // Utility: create an element with classes/attrs
-  function el(tag, opts = {}) {
-    const node = document.createElement(tag);
-    if (opts.class) node.className = opts.class;
-    if (opts.attrs) for (const [k, v] of Object.entries(opts.attrs)) node.setAttribute(k, v);
-    if (opts.text != null) node.textContent = opts.text;
-    if (opts.children) opts.children.forEach(c => c && node.appendChild(c));
-    return node;
-  }
+  const el = (tag, { class: cls, attrs, text, children } = {}) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (attrs) for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+    if (text != null) n.textContent = text;
+    if (children) children.forEach(c => c && n.appendChild(c));
+    return n;
+  };
 
-  function filenameToSlug(file) {
-    // "grundy-glow-AD.jpg" => "grundy-glow-AD"
-    return file.replace(/\.jpg$/i, '');
-  }
+  const toSlug = (file) => file.replace(/\.jpg$/i, '');
 
-  function buildTile(file) {
-    const slug = filenameToSlug(file);
+  const buildTile = (file) => {
+    const slug = toSlug(file);
     const href = `${LINK_BASE}${slug}.html`;
     const src = `${IMG_BASE}${file}`;
 
     const img = el('img', {
       class: 'ad-img',
-      attrs: {
-        src,
-        loading: 'lazy',
-        decoding: 'async',
-        alt: '' // decorative by default; consider aria-label on the link
-      }
+      attrs: { src, loading: 'lazy', decoding: 'async', alt: '' }
     });
 
-    const pill = el('span', {
-      class: 'ad-pill',
-      text: 'Financial Patriotism'
-    });
+    const pill = el('span', { class: 'ad-pill', text: 'Financial Patriotism' });
 
     const link = el('a', {
       class: 'ad-tile',
-      attrs: {
-        href,
-        'aria-label': slug // simple label; you can override via CSS-generated content if needed
-      },
+      attrs: { href, 'aria-label': slug },
       children: [img, pill]
     });
 
-    // Keyboard focus should reveal the pill via :focus-within (CSS).
     link.addEventListener('keydown', (e) => {
-      // Enter/Space to activate
       if ((e.key === 'Enter' || e.key === ' ') && !e.defaultPrevented) {
         e.preventDefault();
         link.click();
@@ -75,122 +59,174 @@
     });
 
     return link;
-  }
+  };
+
+  const buildFixedTile = (label) => {
+    // Fixed story tile with a label headline and pill
+    const h = el('div', { class: 'ad-fixed-label', text: label });
+    const pill = el('span', { class: 'ad-pill', text: 'Financial Patriotism' });
+    const frame = el('div', { class: 'ad-fixed' , children: [h, pill] });
+    return frame;
+  };
 
   async function loadManifest(path) {
     const res = await fetch(path, { credentials: 'same-origin' });
     if (!res.ok) throw new Error(`ads.js: failed to load ${path} (${res.status})`);
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error('ads.js: manifest must be an array of filenames');
-    // filter to *.jpg only, preserve order
-    return data.filter(name => /\.jpg$/i.test(name));
+    return data.filter(n => /\.jpg$/i.test(n));
   }
 
-  function mountTiles(container, files) {
-    if (!container) return;
-    const frag = document.createDocumentFragment();
-    for (const file of files) frag.appendChild(buildTile(file));
-    container.appendChild(frag);
+  function attachDamping(container, axis /* 'x' or 'y' */) {
+    if (REDUCED_MOTION || !container) return;
 
-    // Make the container keyboard-focusable for arrow scrolling; CSS can override outline.
-    if (!container.hasAttribute('tabindex')) container.tabIndex = 0;
+    // Wheel
+    container.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.metaKey) return;
+      e.preventDefault();
+      const raw = axis === 'x'
+        ? (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY)
+        : e.deltaY;
+      const scaled = raw * SPEED;
+      if (axis === 'x') container.scrollLeft += scaled;
+      else container.scrollTop += scaled;
+    }, { passive: false });
 
-    // Attach scroll damping only if motion is not reduced
-    if (!REDUCED_MOTION) {
-      const isHorizontal = getComputedStyle(container).overflowX === 'auto' || container.dataset.axis === 'x';
+    // Touch/Pointer
+    let active = false, startX = 0, startY = 0, baseLeft = 0, baseTop = 0;
 
-      // Wheel damping
-      container.addEventListener('wheel', (e) => {
-        // allow native zoom with ctrl/cmd
-        if (e.ctrlKey || e.metaKey) return;
+    container.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        active = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        baseLeft = container.scrollLeft;
+        baseTop = container.scrollTop;
+        container.setPointerCapture?.(e.pointerId);
+      }
+    });
+
+    container.addEventListener('pointermove', (e) => {
+      if (!active) return;
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
         e.preventDefault();
-        const delta = isHorizontal ? (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) : e.deltaY;
-        const scaled = delta * SPEED;
+        const dx = (e.clientX - startX) * SPEED;
+        const dy = (e.clientY - startY) * SPEED;
+        if (axis === 'x') container.scrollLeft = baseLeft - dx;
+        else container.scrollTop = baseTop - dy;
+      }
+    }, { passive: false });
 
-        if (isHorizontal) {
-          container.scrollLeft += scaled;
-        } else {
-          container.scrollTop += scaled;
-        }
-      }, { passive: false });
+    const stop = () => { active = false; };
+    container.addEventListener('pointerup', stop);
+    container.addEventListener('pointercancel', stop);
 
-      // Touch/Pointer damping (mobile)
-      let active = false, startX = 0, startY = 0, baseLeft = 0, baseTop = 0;
-
-      container.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-          active = true;
-          startX = e.clientX;
-          startY = e.clientY;
-          baseLeft = container.scrollLeft;
-          baseTop = container.scrollTop;
-          container.setPointerCapture?.(e.pointerId);
-        }
-      });
-
-      container.addEventListener('pointermove', (e) => {
-        if (!active) return;
-        if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-          e.preventDefault();
-          const dx = (e.clientX - startX) * SPEED;
-          const dy = (e.clientY - startY) * SPEED;
-
-          if (isHorizontal) {
-            container.scrollLeft = baseLeft - dx;
-          } else {
-            container.scrollTop = baseTop - dy;
-          }
-        }
-      }, { passive: false });
-
-      container.addEventListener('pointerup', () => { active = false; });
-      container.addEventListener('pointercancel', () => { active = false; });
-
-      // Keyboard nudge
-      container.addEventListener('keydown', (e) => {
-        if (e.defaultPrevented) return;
-        const H = isHorizontal;
-        const key = e.key;
-        let delta = 0;
-
-        if (H && (key === 'ArrowRight' || key === 'ArrowLeft')) {
-          delta = (key === 'ArrowRight' ? 80 : -80) * SPEED;
-          e.preventDefault();
-          container.scrollLeft += delta;
-        } else if (!H && (key === 'ArrowDown' || key === 'ArrowUp')) {
-          delta = (key === 'ArrowDown' ? 80 : -80) * SPEED;
-          e.preventDefault();
-          container.scrollTop += delta;
-        }
-      });
-    }
+    // Keyboard nudge
+    container.addEventListener('keydown', (e) => {
+      if (e.defaultPrevented) return;
+      let delta = 0;
+      if (axis === 'x' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+        delta = (e.key === 'ArrowRight' ? 80 : -80) * SPEED;
+        e.preventDefault();
+        container.scrollLeft += delta;
+      } else if (axis === 'y' && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+        delta = (e.key === 'ArrowDown' ? 80 : -80) * SPEED;
+        e.preventDefault();
+        container.scrollTop += delta;
+      }
+    });
   }
 
-  function whichAxis(container, fallbackAxis = 'y') {
-    // Allow opting-in via data-axis, else infer from CSS overflow directions.
-    if (container?.dataset?.axis) return container.dataset.axis;
-    const cs = container ? getComputedStyle(container) : null;
-    if (!cs) return fallbackAxis;
-    if ((cs.overflowX === 'auto' || cs.overflowX === 'scroll') &&
-        (cs.overflowY !== 'auto' && cs.overflowY !== 'scroll')) return 'x';
-    return 'y';
+  function mountDesktopRail(rail, files) {
+    if (!rail) return;
+
+    // Structure:
+    // <div id="ads-rail">
+    //   <div class="ad-fixed-top">HOT AD</div>
+    //   <div class="ad-scroll" tabindex="0">...tiles...</div>
+    //   <div class="ad-fixed-bottom">BOTTOM AD</div>
+    // </div>
+
+    // Clear any prior content
+    rail.innerHTML = '';
+
+    const fixedTop = buildFixedTile('HOT AD');
+    fixedTop.classList.add('ad-fixed-top');
+
+    const fixedBottom = buildFixedTile('BOTTOM AD');
+    fixedBottom.classList.add('ad-fixed-bottom');
+
+    const scroller = el('div', {
+      class: 'ad-scroll',
+      attrs: { tabindex: '0', 'aria-label': 'Sponsored stories' }
+    });
+
+    // Populate scrolling tiles (all manifest images)
+    const frag = document.createDocumentFragment();
+    files.forEach(f => frag.appendChild(buildTile(f)));
+    scroller.appendChild(frag);
+
+    // Assemble
+    rail.appendChild(fixedTop);
+    rail.appendChild(scroller);
+    rail.appendChild(fixedBottom);
+
+    // Behavior: vertical damping on the scroll area only
+    attachDamping(scroller, 'y');
+
+    // Ensure the scroller fills space between the fixed tiles without JS resizing assumptions.
+    // If CSS isn’t ready, fall back to a minimal inline layout to guarantee behavior.
+    // (Safe, non-invasive; remove once style.css handles it.)
+    const ensureLayout = () => {
+      // Use flex column to let scroller expand between fixed blocks
+      rail.style.display = rail.style.display || 'flex';
+      rail.style.flexDirection = rail.style.flexDirection || 'column';
+      rail.style.background = rail.style.background || 'transparent';
+
+      fixedTop.style.flex = '0 0 auto';
+      fixedBottom.style.flex = '0 0 auto';
+
+      scroller.style.flex = '1 1 auto';
+      scroller.style.overflowY = scroller.style.overflowY || 'auto';
+      scroller.style.overflowX = 'hidden';
+      scroller.style.background = 'transparent';
+    };
+    ensureLayout();
   }
 
-  function flagAxis(container) {
-    if (!container) return;
-    const axis = whichAxis(container);
-    container.dataset.axis = axis;
+  function mountMobileDock(dock, files) {
+    if (!dock) return;
+
+    // Clear prior
+    dock.innerHTML = '';
+
+    // Track container (kept simple; CSS can style)
+    const track = el('div', { class: 'ad-track', attrs: { tabindex: '0', 'aria-label': 'Sponsored stories' } });
+
+    const frag = document.createDocumentFragment();
+    files.forEach(f => frag.appendChild(buildTile(f)));
+    track.appendChild(frag);
+
+    dock.appendChild(track);
+
+    // Horizontal damping on the track
+    attachDamping(track, 'x');
+
+    // Minimal inline layout to ensure horizontal scrolling if CSS isn’t present
+    dock.style.background = 'transparent';
+    dock.style.overflow = 'hidden';
+    track.style.display = 'flex';
+    track.style.flexWrap = 'nowrap';
+    track.style.overflowX = 'auto';
+    track.style.overflowY = 'hidden';
+    track.style.background = 'transparent';
   }
 
   async function init() {
     const rail = document.querySelector(SELECTOR_RAIL);
     const dock = document.querySelector(SELECTOR_DOCK);
 
-    // If neither mount exists, do nothing (no uninvited DOM work)
     if (!rail && !dock) return;
-
-    flagAxis(rail);
-    flagAxis(dock);
 
     let files = [];
     try {
@@ -200,24 +236,22 @@
       return;
     }
 
-    // Render into whichever containers exist. CSS decides which is visible per viewport.
-    if (rail) mountTiles(rail, files);
-    if (dock) mountTiles(dock, files);
+    // Desktop left rail: HOT AD (top) / scroller / BOTTOM AD (bottom)
+    if (rail) mountDesktopRail(rail, files);
 
-    // Expose a tiny API for later tweaks
+    // Mobile bottom dock: horizontal scroller
+    if (dock) mountMobileDock(dock, files);
+
+    // Tiny API
     window.OTIAds = {
       refresh: async () => {
-        // Clear and re-render (e.g., if manifest changes)
-        if (rail) rail.innerHTML = '';
-        if (dock) dock.innerHTML = '';
         const fresh = await loadManifest(MANIFEST_PATH);
-        if (rail) mountTiles(rail, fresh);
-        if (dock) mountTiles(dock, fresh);
+        if (rail) mountDesktopRail(rail, fresh);
+        if (dock) mountMobileDock(dock, fresh);
       }
     };
   }
 
-  // Kickoff after DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init, { once: true });
   } else {
