@@ -155,7 +155,7 @@ body{
 
 /* Desktop: reserve space for left rail on index pages */
 @media (min-width:1100px){
-  .index-page .page{ padding-left:260px; } /* rail width (220) + gutter */
+  .index-page .page{ padding-left:260px !important; } /* 220px rail + gutter */
 }
 
 /* Left Ads Rail */
