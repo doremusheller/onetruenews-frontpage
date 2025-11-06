@@ -219,4 +219,21 @@ body{
 /* ===== Safety Rule: prevent empty ad rail from blocking clicks ===== */
 #ads-rail { pointer-events: none; }
 #ads-rail[data-live="1"] { pointer-events: auto; }
+/* --- Ads rail visibility & layout (simple + deterministic) --- */
+
+/* Off by default so it never overlays the grid on small widths */
+#ads-rail{ display:none; }
+
+/* Desktop ON — and make room for it */
+@media (min-width:1100px){
+  #ads-rail{ display:flex; }                     /* rail visible */
+  .index-page .page{ padding-left:260px !important; } /* grid scoots right */
+}
+
+/* Desktop-only: hide the mobile dock above 700px (optional, keeps things clean) */
+@media (min-width:701px){
+  #ads-dock{ display:none; }
+}
+
+
 
