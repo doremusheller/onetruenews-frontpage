@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" class="index-page">
 <head>
@@ -7,8 +6,13 @@
   <title>One True Infotainment — The Voice of the Corrected State</title>
   <meta name="description" content="Official news and satire from One True Infotainment." />
 
+  <!-- Load Libre Baskerville font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
   <!-- Canonical style and scripts -->
-  <link rel="stylesheet" href="style.css?v=159" />
+  <link rel="stylesheet" href="style.css?v=161" />
   <script src="ticker.js" defer></script>
   <script src="grid.js" defer></script>
   <script src="gags.js" defer></script>
@@ -35,7 +39,7 @@
   <!-- Page layout -->
   <main class="page">
 
-    <!-- Left Gags Rail -->
+    <!-- Left Gags Rail (inactive placeholder) -->
     <aside id="gags-rail" aria-label="Sponsored stories"></aside>
 
     <!-- Story Grid -->
@@ -45,9 +49,18 @@
       <article class="tile breaking">
         <span class="breaking-pill">Breaking</span>
         <a href="cover-GAG.html">
-          <img src="media/WIHH-ban1.jpg" alt="Grundy bans living fuck out of book" />
-          <h2>Grundy bans living fuck out of book</h2>
-          <p>The Ministry confirms the ban aligns with “nationwide emotional safety crises”</p>
+          <img src="media/WIHH-ban1.jpg" alt="Grundy bans living fuck out book">
+          <h2>Grundy bans living fuck out book</h2>
+          <p>The Ministry confirms the ban aligns with “nationwide emotional safety priorities.”</p>
+        </a>
+      </article>
+
+      <!-- Hammer of Grundy -->
+      <article class="tile">
+        <a href="hammer-of-grundy.html">
+          <img src="media/hammer-of-grundy.jpg" alt="The Hammer of Grundy — First Citizen delivers moral maintenance nationwide" />
+          <h2>The Hammer of Grundy Falls Again</h2>
+          <p>Citizens praise the First Citizen’s decisive restoration of moral order and home improvement.</p>
         </a>
       </article>
 
@@ -60,6 +73,7 @@
         </a>
       </article>
 
+      <!-- Remaining existing stories follow unchanged -->
       <article class="tile">
         <a href="mooseknuckle.html">
           <img src="media/keel-mooseknuckle.jpg" alt="Moose Knuckle ceremony as fresh asphalt covers golden streets; Minister Keel applauds decorative democracy" />
@@ -211,10 +225,9 @@
           <p>Morale visibility increases to sixteen hours daily.</p>
         </a>
       </article>
-
     </section>
 
-    <!-- Mobile Gags Dock -->
+    <!-- Mobile/Universal Gags Dock -->
     <nav id="gags-dock" aria-label="Sponsored stories"></nav>
 
   </main>
@@ -243,4 +256,3 @@
   </script>
 </body>
 </html>
-```
