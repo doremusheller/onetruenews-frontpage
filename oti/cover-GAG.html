@@ -179,5 +179,70 @@
   <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" aria-hidden="false"
        onclick="window.open('https://www.onetrueinfotainment.com', '_blank')"
        style="position: fixed; z-index: 9999; right: 18px; bottom: 18px; width: 120px; opacity: .95; filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); cursor: pointer;" />
+
+<!-- AUTHOR CONTACT (lower-left, JS-assembled to avoid simple scraping) -->
+<style>
+  /* matches the logo placement: fixed in the lower-left, subtle */
+  .author-contact {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 9999;
+    background: rgba(255,255,255,0.98);
+    border-radius: 8px;
+    padding: 10px 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    font-size: 0.95rem;
+    line-height: 1.2;
+    max-width: 260px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  .author-contact .label { font-weight: 600; margin-bottom: 6px; display:block; }
+  .author-contact .email { word-break: break-word; margin-bottom: 8px; }
+  .author-contact .postal { font-size: 0.85rem; color: rgba(0,0,0,0.7); margin-bottom: 8px; }
+  .author-contact .contact-btn {
+    display:inline-block;
+    padding: 6px 10px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:600;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  @media (max-width:520px){
+    .author-contact { left: 12px; bottom: 12px; max-width: 44vw; font-size:0.9rem; }
+  }
+</style>
+
+<div class="author-contact" aria-label="Author contact">
+  <span class="label">Official author contact</span>
+  <span class="email" id="author-email">Loading…</span>
+  <div class="postal">PO Box 1776<br/>Chicago, IL 60601</div>
+  <a id="author-mailto" class="contact-btn" role="button">Email the author</a>
+</div>
+
+<script>
+  (function(){
+    // split the address so it isn't present verbatim in the HTML source
+    const local = "contact";               // left of @
+    const domainParts = ["doremusheller","com"]; // domain split for extra obfuscation
+    const domain = domainParts.join(".");
+    const addr = local + "@" + domain;
+
+    // Render visible text (human readable)
+    const emailEl = document.getElementById("author-email");
+    const mailtoEl = document.getElementById("author-mailto");
+
+    if (emailEl && mailtoEl) {
+      // show a normal-looking address for reviewers
+      emailEl.innerHTML = `<a href="mailto:${addr}" rel="noopener noreferrer">${addr}</a>`;
+
+      // set the mailto link (assembled in JS)
+      mailtoEl.setAttribute("href", `mailto:${addr}`);
+      mailtoEl.setAttribute("aria-label", `Email ${addr}`);
+      mailtoEl.addEventListener("click", function(){ /* noop — lets mailto work */ }, false);
+    }
+  })();
+</script>
+
 </body>
 </html>
