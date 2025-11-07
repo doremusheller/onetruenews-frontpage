@@ -26,12 +26,19 @@
   <script src="ads.js" defer></script>
 
   <style>
-    .story-hero img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.25); transform: translateY(8px); }
     .story-hero a { display: inline-block; line-height: 0; }
+    .story-hero img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.25); transform: translateY(8px); }
     .story-hero img.is-hidden { opacity: 0; }
 
-    @media (min-width: 900px) {
-      .story-hero img { display: block; margin: 0 auto; max-height: 62vh; width: auto; max-width: 100%; object-fit: contain; }
+    /* One-off responsive layout for hero image + text wrap */
+    @media (min-width: 700px) {
+      .story-hero { float: left; margin: 0 1.5rem 1rem 0; }
+      .story-hero img { width: 45%; max-width: 520px; display: block; margin: 0; }
+      .story-hero.wrap-left { float: none; } /* keep figure structure; image width controls layout */
+    }
+    @media (max-width: 699.98px) {
+      .story-hero { float: none; margin: 0 0 1rem 0; }
+      .story-hero img { width: 100%; height: auto; display: block; margin: 0 auto; }
     }
 
     .summary .standalone {
@@ -51,9 +58,7 @@
       text-align: left;
       font-size: 1.1em;
     }
-    .note {
-      clear: both;
-    }
+    .note { clear: both; }
 
     /* Contact row styling */
     .contact-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; justify-content: space-between; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,.08); }
@@ -65,8 +70,10 @@
     .contact-form input, .contact-form textarea { width: 100%; padding: .6rem .7rem; border: 1px solid rgba(0,0,0,.18); border-radius: 8px; font: inherit; }
     .contact-form .btn.feed { margin-top: .4rem; border-radius: 10px; padding: .6rem 1rem; font-weight: 700; }
     .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
-    .contact-logo-right { flex: 0 0 auto; align-self: flex-end; }
-    .contact-logo-right .oti-logo { display:block; width: 120px; max-width: 22vw; height: auto; opacity: .95; filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); }
+
+    /* Centered OTI logo near bottom */
+    .oti-logo-wrap { text-align: center; margin: 2.2rem 0 1rem; }
+    .oti-logo-wrap .oti-logo { width: 120px; max-width: 30vw; height: auto; opacity: .95; filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); }
   </style>
 
   <noscript>
@@ -120,23 +127,22 @@
       </header>
 
       <section class="summary">
-        <p>A story told to warn became the story telling itself.</p>
-        <p>First, our media inspired the novel.<br>
+        <p class="standalone"><em>A story told to warn became the story telling itself.<br>
+        First, our media inspired the novel.<br>
         Then the novel trained a machine.<br>
-        Now the machine makes our media.<br>
-        </p>
+        Now the machine makes our media.</em></p>
 
-        <p class="standalone"><a href="https://a.co/d/6F5z5xj" target="_blank" rel="noopener noreferrer">When It Happened Here.</a> Available now.</p>
+        <p class="standalone"><a href="https://a.co/d/6F5z5xj" target="_blank" rel="noopener noreferrer"><em>When It Happened Here.</em></a> Available now.</p>
       </section>
 
       <section class="note">
-        <p class="standalone"><em>Writer and technologist Doremus Heller created One True Infotainment after writing</em> <em>When It Happened Here</em>—<em>a novel born of alarm at a nation that mistakes entertainment for truth.</em></p>
+        <p class="standalone">Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
 
-        <p class="standalone"><em>When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</em></p>
+        <p class="standalone">When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
 
-        <p class="standalone"><em>The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</em></p>
+        <p class="standalone">The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
 
-        <p class="standalone"><em>OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</em></p>
+        <p class="standalone">OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
       </section>
 
       <nav class="footer-nav" aria-label="Ad navigation">
@@ -173,14 +179,17 @@
             Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline">Loading…</span>
           </p>
         </form>
-
-        <div class="contact-logo-right">
-          <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" />
-        </div>
       </section>
-    </article>
 
-    <div class="ad-row"></div>
+      <!-- Centered OTI logo link near bottom -->
+      <div class="oti-logo-wrap">
+        <a href="index.html" aria-label="OTI Home">
+          <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" />
+        </a>
+      </div>
+
+      <div class="ad-row"></div>
+    </article>
   </main>
 
   <footer class="footer-banner">
@@ -228,7 +237,7 @@
 
       const emailInline = document.getElementById('author-email-inline');
       if (emailInline) {
-        emailInline.innerHTML = `<a href=\"mailto:${addr}\" rel=\"noopener noreferrer\">${addr}</a>`;
+        emailInline.innerHTML = `<a href="mailto:${addr}" rel="noopener noreferrer">${addr}</a>`;
       }
 
       const form = document.getElementById('author-contact-form');
@@ -239,7 +248,7 @@
           const email = (document.getElementById('cf-email').value || '').trim();
           const message = (document.getElementById('cf-message').value || '').trim();
           const subject = encodeURIComponent(`OTI Submission from ${name}`);
-          const body = encodeURIComponent(`Name: ${name}\\nEmail: ${email}\\n\\nMessage: \\n${message}`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
           window.location.href = `mailto:${addr}?subject=${subject}&body=${body}`;
         });
       }
