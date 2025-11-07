@@ -1,6 +1,6 @@
 /* ============================================================
    One True Infotainment — ads.js
-   v3.2 (CSS-aligned)
+   v3.3 (Round 32, image-error handler removed)
    - Rail builds ONLY when CSS desktop media query is true
    - Otherwise, build dock (so no blank states, no page-eating rail)
    - Scoped to #ads-rail / #ads-dock only
@@ -37,10 +37,12 @@
     ];
   }
 
-  function ready(fn){
-    if(document.readyState === "loading"){
-      document.addEventListener("DOMContentLoaded", fn, { once:true });
-    } else { fn(); }
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn, { once: true });
+    } else {
+      fn();
+    }
   }
 
   ready(() => {
@@ -59,7 +61,7 @@
       };
     });
 
-    function createTile(ad){
+    function createTile(ad) {
       const a = document.createElement("a");
       a.className = "ad-tile";
       a.href = ad.href;
@@ -76,20 +78,26 @@
       img.decoding = "async";
       img.alt = ad.base.replace(/[-_]/g, " ");
       img.src = ad.img;
-      img.addEventListener("error", () => {
-        img.style.visibility = "hidden";
-        img.style.minHeight = "120px";
-      });
 
       a.appendChild(pill);
       a.appendChild(img);
       return a;
     }
 
-    function clearRail(){ if (rail){ rail.removeAttribute("data-live"); rail.textContent = ""; } }
-    function clearDock(){ if (dock){ dock.textContent = ""; } }
+    function clearRail() {
+      if (rail) {
+        rail.removeAttribute("data-live");
+        rail.textContent = "";
+      }
+    }
 
-    function buildRail(){
+    function clearDock() {
+      if (dock) {
+        dock.textContent = "";
+      }
+    }
+
+    function buildRail() {
       if (!rail || !ads.length) return;
       rail.textContent = "";
       const frag = document.createDocumentFragment();
@@ -108,7 +116,7 @@
       rail.dataset.live = "1";
     }
 
-    function buildDock(){
+    function buildDock() {
       if (!dock || !ads.length) return;
       dock.textContent = "";
       const track = document.createElement("div");
@@ -120,8 +128,8 @@
     // Mirror the CSS desktop breakpoint exactly
     const mqDesktop = window.matchMedia("(min-width:1100px)");
 
-    function apply(){
-      if (mqDesktop.matches){
+    function apply() {
+      if (mqDesktop.matches) {
         // Desktop CSS grid is active → safe to build rail
         buildRail();
         clearDock();
