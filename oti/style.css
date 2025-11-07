@@ -1,6 +1,6 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v160
-   (Refined image framing, centered tile visuals)
+   One True Infotainment — Canonical Style Sheet v161
+   (Refined tile framing + continuous gag filmstrip)
    ============================================================ */
 
 :root {
@@ -225,48 +225,71 @@ body {
   }
 }
 
-/* ===== Gags Dock ===== */
+/* ============================================================
+   GAGS DOCK — Clean Continuous Filmstrip
+   ============================================================ */
 #gags-dock {
-  position:fixed;
-  left:0; right:0; bottom:0;
-  background:transparent;
-  padding:.4rem .5rem;
-  z-index:5000;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--cream);
+  padding: 0;
+  z-index: 5000;
+  overflow: hidden;
 }
+
+/* Container that holds all gag tiles in a single scrolling row */
 #gags-dock .gag-track {
-  display:flex;
-  flex-wrap:nowrap;
-  gap:3px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  -webkit-overflow-scrolling:touch;
-  scroll-snap-type:x proximity;
-  overscroll-behavior:contain;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;                           /* shoulder-to-shoulder */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior: contain;
+  align-items: center;
+  height: 120px;
 }
+
+/* Each tile is a direct clickable link wrapping one image */
 #gags-dock .gag-tile {
-  flex:0 0 auto;
-  width:auto;
-  scroll-snap-align:start;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:120px;
+  flex: 0 0 auto;
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  text-decoration: none;
+  border: none;
+  background: none;
 }
+
+/* Poster images — clean, centered, no margin or overlay */
 #gags-dock .gag-img {
-  height:100%;
-  width:auto;
-  object-fit:contain;
-  background:rgba(0,0,0,.02);
-  box-shadow:0 2px 4px var(--shadow);
-  border-radius:6px;
+  display: block;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Remove any remaining hover or pill behavior */
+.gag-pill { display: none !important; }
+
+/* Hide dock entirely if empty */
+#gags-dock:empty { display: none; }
+
+/* Maintain desktop visibility */
+@media (min-width: 701px) {
+  #gags-dock { display: block; }
 }
 
 /* ===== Safety ===== */
 #gags-rail { pointer-events:none; }
 #gags-rail[data-live="1"] { pointer-events:auto; }
 #gags-rail:empty { display:none; }
-#gags-dock:empty { display:none; }
-
-@media (min-width:701px) {
-  #gags-dock { display:block; }
-}
