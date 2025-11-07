@@ -26,20 +26,47 @@
   <script src="ads.js" defer></script>
 
   <style>
-    .story-hero a { display: inline-block; line-height: 0; }
-    .story-hero img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.25); transform: translateY(8px); }
-    .story-hero img.is-hidden { opacity: 0; }
+    .story-hero { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .story-hero figcaption {
+      font-style: italic;
+      font-size: 1rem;
+      text-align: left;
+      margin-bottom: .5rem;
+      flex-basis: 100%;
+    }
+    .story-hero img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    }
+    @media (min-width: 768px) {
+      .story-hero img { width: 45%; max-width: 500px; }
+      .story-hero .contact-form { flex: 1 1 320px; }
+    }
 
-    /* One-off responsive layout for hero image + text wrap */
-    @media (min-width: 700px) {
-      .story-hero { float: left; margin: 0 1.5rem 1rem 0; }
-      .story-hero img { width: 45%; max-width: 520px; display: block; margin: 0; }
-      .story-hero.wrap-left { float: none; } /* keep figure structure; image width controls layout */
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .5rem;
+      flex: 1 1 100%;
     }
-    @media (max-width: 699.98px) {
-      .story-hero { float: none; margin: 0 0 1rem 0; }
-      .story-hero img { width: 100%; height: auto; display: block; margin: 0 auto; }
+    .contact-form label { font-weight: 600; font-size: .95rem; }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: .6rem .7rem;
+      border: 1px solid rgba(0,0,0,.18);
+      border-radius: 8px;
+      font: inherit;
     }
+    .contact-form .btn.feed {
+      margin-top: .4rem;
+      border-radius: 10px;
+      padding: .6rem 1rem;
+      font-weight: 700;
+    }
+    .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
 
     .summary .standalone {
       margin-top: 2em;
@@ -47,33 +74,20 @@
       text-align: left;
       font-size: 1.1em;
     }
-    .summary .standalone a {
-      color: inherit;
-      text-decoration: underline;
-    }
-
     .note .standalone {
       margin-top: 1em;
       margin-bottom: 1em;
       text-align: left;
       font-size: 1.1em;
     }
-    .note { clear: both; }
 
-    /* Contact row styling */
-    .contact-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; justify-content: space-between; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,.08); }
-    .contact-info-left { flex: 1 1 280px; min-width: 260px; }
-    .contact-info-left h2 { font-size: 1.4rem; margin: 0 0 .4rem; }
-    .contact-info-left p { margin: .5rem 0; }
-    .contact-form { flex: 1 1 320px; min-width: 300px; display: grid; grid-template-columns: 1fr; gap: .5rem; }
-    .contact-form label { font-weight: 600; font-size: .95rem; }
-    .contact-form input, .contact-form textarea { width: 100%; padding: .6rem .7rem; border: 1px solid rgba(0,0,0,.18); border-radius: 8px; font: inherit; }
-    .contact-form .btn.feed { margin-top: .4rem; border-radius: 10px; padding: .6rem 1rem; font-weight: 700; }
-    .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
-
-    /* Centered OTI logo near bottom */
-    .oti-logo-wrap { text-align: center; margin: 2.2rem 0 1rem; }
-    .oti-logo-wrap .oti-logo { width: 120px; max-width: 30vw; height: auto; opacity: .95; filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); }
+    .oti-logo-wrap { text-align: center; margin: 2rem 0; }
+    .oti-logo-wrap .oti-logo {
+      width: 120px;
+      max-width: 30vw;
+      opacity: .95;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
+    }
   </style>
 
   <noscript>
@@ -106,18 +120,28 @@
 
   <main class="page" role="main">
     <article>
-      <figure class="story-hero wrap-left">
+      <figure class="story-hero">
+        <figcaption>Get in on the gag... that's already running on you.</figcaption>
         <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener noreferrer">
-          <img
-            src="media/cover-GAG.jpg"
-            alt="Book cover for ‘When It Happened Here’ — official release advertisement"
-            decoding="async"
-            fetchpriority="high"
-            loading="eager"
-            class="is-hidden"
-          />
+          <img src="media/cover-GAG.jpg" alt="Book cover for ‘When It Happened Here’ — official release advertisement" />
         </a>
-        <figcaption>Get in on the gag...that's already running on you.</figcaption>
+
+        <form id="author-contact-form" class="contact-form">
+          <label for="cf-name">Your Name</label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name" />
+
+          <label for="cf-email">Your Email</label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email" />
+
+          <label for="cf-message">Your Story / Idea / Rant</label>
+          <textarea id="cf-message" name="message" rows="5" required></textarea>
+
+          <button type="submit" class="btn feed">FEED THE SYSTEM</button>
+
+          <p class="contact-meta">
+            Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline">Loading…</span>
+          </p>
+        </form>
       </figure>
 
       <header>
@@ -136,13 +160,10 @@
       </section>
 
       <section class="note">
-        <p class="standalone">Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
-
-        <p class="standalone">When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
-
-        <p class="standalone">The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
-
-        <p class="standalone">OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
+        <p>Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
+        <p>When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
+        <p>The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
+        <p>OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
       </section>
 
       <nav class="footer-nav" aria-label="Ad navigation">
@@ -150,40 +171,8 @@
         <a class="btn" href="index.html">OTI Home</a>
       </nav>
 
-      <section class="contact-row">
-        <div class="contact-info-left">
-          <h2>WANT TO MAKE THE NEWS?</h2>
-          <p>You’ve seen what happens when <em>they</em> write the story. Time to try it yourself.</p>
-          <p>
-            <strong>Step 1:</strong> Read <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener noreferrer"><em>When It Happened Here.</em></a><br>
-            <strong>Step 2:</strong> Tell the world what you think — leave your review on Goodreads so the System knows you’re real.<br>
-            <strong>Step 3:</strong> Use the form to pitch your idea: a headline, a rumor, an ad, a dream.
-          </p>
-          <p>The OTI engine is always hungry. Feed it something good and it might put your story on the front page — for everyone to see, share, argue about, and forget by morning.</p>
-          <p>Go on. You’ve been consuming long enough. Time to contribute.</p>
-        </div>
-
-        <form id="author-contact-form" class="contact-form">
-          <label for="cf-name">Your Name</label>
-          <input id="cf-name" name="name" type="text" required autocomplete="name" />
-
-          <label for="cf-email">Your Email</label>
-          <input id="cf-email" name="email" type="email" required autocomplete="email" />
-
-          <label for="cf-message">Your Story / Idea / Rant</label>
-          <textarea id="cf-message" name="message" rows="5" required></textarea>
-
-          <button type="submit" class="btn feed">FEED THE SYSTEM</button>
-
-          <p class="contact-meta">
-            Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline">Loading…</span>
-          </p>
-        </form>
-      </section>
-
-      <!-- Centered OTI logo link near bottom -->
       <div class="oti-logo-wrap">
-        <a href="index.html" aria-label="OTI Home">
+        <a href="index.html">
           <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" />
         </a>
       </div>
@@ -198,43 +187,8 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (!document.body.classList.contains('story-page')) return;
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const H = document.querySelector('article h1');
-      const D = document.querySelector('article .dek');
-      const I = document.querySelector('.story-hero img');
-
-      if (reduce) {
-        [H, D, I].forEach(el => el && (el.style.opacity = 1, el.style.transform = 'translateY(0)'));
-        I && I.classList.remove('is-hidden');
-        return;
-      }
-
-      const fadeIn = (el, delay = 0) => el && el.animate(
-        [ { opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' } ],
-        { duration: 600, easing: 'ease', fill: 'forwards', delay }
-      );
-
-      fadeIn(H, 0);
-      fadeIn(D, 150);
-
-      const showImage = () => { I.classList.remove('is-hidden'); fadeIn(I, 300); };
-
-      if (I && I.complete && I.naturalWidth > 0) {
-        showImage();
-      } else if (I) {
-        I.addEventListener('load', showImage, { once: true });
-        I.addEventListener('error', () => { I.classList.remove('is-hidden'); }, { once: true });
-        setTimeout(() => I.classList.remove('is-hidden'), 2000);
-      }
-    });
-  </script>
-
-  <script>
     (function(){
       const addr = "doremusheller@gmail.com";
-
       const emailInline = document.getElementById('author-email-inline');
       if (emailInline) {
         emailInline.innerHTML = `<a href="mailto:${addr}" rel="noopener noreferrer">${addr}</a>`;
