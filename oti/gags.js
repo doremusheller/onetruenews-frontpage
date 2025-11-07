@@ -1,10 +1,6 @@
 /* ============================================================
    One True Infotainment — gags.js
-   v4.1 (dock-only + gentle auto-scroll)
-   - Always builds bottom dock
-   - Removes broken tiles
-   - Human-readable ARIA labels
-   - NEW: Continuous, medium-speed auto-scroll with smart pause
+   v4.2 (autoscroll fix)
    ============================================================ */
 
 (function () {
@@ -44,19 +40,9 @@
     } else { fn(); }
   }
 
-  function humanizeLabel(slug) {
-    const base = String(slug || "").replace(/\.[^.]+$/, "");
-    const words = base.replace(/[_-]+/g, " ").trim().split(/\s+/);
-    if (!words.length) return base || "Gag";
-    const cleaned = words.filter((w, i) => !(i === words.length - 1 && /^gag$/i.test(w)));
-    const titled = cleaned.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
-    return (titled.join(" ") || "Gag").trim();
-  }
-
   ready(() => {
-    const rail = document.getElementById("gags-rail");
     const dock = document.getElementById("gags-dock");
-    if (!dock && !rail) return;
+    if (!dock) return;
 
     const manifest = getManifest();
     const gags = manifest.map(fn => {
@@ -73,7 +59,8 @@
       const a = document.createElement("a");
       a.className = "gag-tile";
       a.href = gag.href;
-      a.setAttribute("aria-label", humanizeLabel(gag.base));
+      a.rel = "nofollow";
+      a.setAttribute("aria-label", gag.base);
 
       const pill = document.createElement("span");
       pill.className = "gag-pill";
@@ -83,11 +70,11 @@
       img.className = "gag-img";
       img.loading = "lazy";
       img.decoding = "async";
-      img.alt = humanizeLabel(gag.base);
+      img.alt = gag.base.replace(/[-_]/g, " ");
       img.src = gag.img;
       img.addEventListener("error", () => {
-        const parent = a.parentNode;
-        if (parent) parent.removeChild(a);
+        img.style.visibility = "hidden";
+        img.style.minHeight = "120px";
       });
 
       a.appendChild(pill);
@@ -95,11 +82,8 @@
       return a;
     }
 
-    function clearRail() { if (rail) { rail.removeAttribute("data-live"); rail.textContent = ""; } }
-    function clearDock() { if (dock) { dock.textContent = ""; } }
-
     function buildDock() {
-      if (!dock || !gags.length) return;
+      if (!gags.length) return;
       dock.textContent = "";
       const track = document.createElement("div");
       track.className = "gag-track";
@@ -108,90 +92,35 @@
       setupAutoScroll(track);
     }
 
-    // --- Dock-only behavior ---
-    function apply() {
-      buildDock();
-      clearRail();
-    }
-
-    // Gentle auto-scroll that pauses on interaction or user setting
+    // --- AUTO SCROLL (medium speed) ---
     function setupAutoScroll(track) {
-      if (!track) return;
-
-      // Respect user preference
-      const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReduce) return;
-
-      let raf = null;
-      let last = 0;
+      if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      let pos = 0;
       let paused = false;
-      let pauseUntil = 0;
-
-      // ~30 px/sec feels “medium” at 60fps
-      const PX_PER_SEC = 30;
-
-      function tick(ts) {
-        if (paused || ts < pauseUntil) {
-          raf = requestAnimationFrame(tick);
-          return;
+      const speed = 0.4; // medium speed
+      const loop = () => {
+        if (!paused) {
+          pos += speed;
+          if (pos >= track.scrollWidth - track.clientWidth) pos = 0;
+          track.scrollLeft = pos;
         }
-        if (!last) last = ts;
-        const dt = ts - last;
-        last = ts;
+        requestAnimationFrame(loop);
+      };
+      loop();
 
-        // advance
-        track.scrollLeft += (PX_PER_SEC * dt) / 1000;
-
-        // loop seamlessly
-        const max = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= max - 1) {
-          track.scrollLeft = 0;
-        }
-        raf = requestAnimationFrame(tick);
-      }
-
-      function start() {
-        if (raf) return;
-        last = 0;
-        raf = requestAnimationFrame(tick);
-      }
-      function stop() {
-        if (raf) cancelAnimationFrame(raf);
-        raf = null;
-        last = 0;
-      }
-      function pause(ms = 3000) {
-        pauseUntil = performance.now() + ms;
-      }
-
-      // Pause on user interaction; resume on idle
-      track.addEventListener("mouseenter", () => paused = true);
-      track.addEventListener("mouseleave", () => { paused = false; start(); });
-      track.addEventListener("focusin",   () => paused = true);
-      track.addEventListener("focusout",  () => { paused = false; start(); });
-      track.addEventListener("pointerdown", () => pause(5000));
-      track.addEventListener("wheel", () => pause(4000), { passive: true });
-      track.addEventListener("scroll", () => pause(2000));
-
-      // Tab visibility
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) stop(); else start();
-      });
-
-      // Kick off
-      start();
-
-      // Re-kick after images load
-      window.addEventListener("load", () => { pause(1000); start(); }, { once: true });
+      // Pause on user interaction (but not on self-scroll)
+      const pause = (ms = 2000) => {
+        paused = true;
+        clearTimeout(track._resumeTimer);
+        track._resumeTimer = setTimeout(() => { paused = false; }, ms);
+      };
+      track.addEventListener("mouseenter", () => pause());
+      track.addEventListener("focusin", () => pause());
+      track.addEventListener("pointerdown", () => pause(3000));
+      track.addEventListener("wheel", () => pause(3000));
+      // Removed the self-scroll pause that caused auto-scroll lock
     }
 
-    // Init
-    apply();
-
-    window.addEventListener("load", apply);
-    window.addEventListener("resize", () => {
-      clearTimeout(window.__gagResizeTimer);
-      window.__gagResizeTimer = setTimeout(apply, 250);
-    });
+    buildDock();
   });
 })();
