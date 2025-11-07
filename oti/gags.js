@@ -1,10 +1,10 @@
 /* ============================================================
    One True Infotainment — gags.js
-   v4.0 (dock-only, always-on bottom scroller)
-   - Always builds the bottom dock across all screen sizes
-   - Retires the left rail (no desktop rail logic)
-   - Safer image handling (remove broken tiles)
-   - Improved, human-readable ARIA labels
+   v4.1 (dock-only + gentle auto-scroll)
+   - Always builds bottom dock
+   - Removes broken tiles
+   - Human-readable ARIA labels
+   - NEW: Continuous, medium-speed auto-scroll with smart pause
    ============================================================ */
 
 (function () {
@@ -45,11 +45,9 @@
   }
 
   function humanizeLabel(slug) {
-    // Turn "golden-streets-GAG" into "Golden streets"
     const base = String(slug || "").replace(/\.[^.]+$/, "");
     const words = base.replace(/[_-]+/g, " ").trim().split(/\s+/);
     if (!words.length) return base || "Gag";
-    // Drop trailing "GAG" token if present
     const cleaned = words.filter((w, i) => !(i === words.length - 1 && /^gag$/i.test(w)));
     const titled = cleaned.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
     return (titled.join(" ") || "Gag").trim();
@@ -58,7 +56,7 @@
   ready(() => {
     const rail = document.getElementById("gags-rail");
     const dock = document.getElementById("gags-dock");
-    if (!dock && !rail) return; // nothing to do
+    if (!dock && !rail) return;
 
     const manifest = getManifest();
     const gags = manifest.map(fn => {
@@ -74,7 +72,7 @@
     function createTile(gag) {
       const a = document.createElement("a");
       a.className = "gag-tile";
-      a.href = gag.href;                 // keep internal hotlink
+      a.href = gag.href;
       a.setAttribute("aria-label", humanizeLabel(gag.base));
 
       const pill = document.createElement("span");
@@ -88,7 +86,6 @@
       img.alt = humanizeLabel(gag.base);
       img.src = gag.img;
       img.addEventListener("error", () => {
-        // Remove broken tiles to avoid empty holes
         const parent = a.parentNode;
         if (parent) parent.removeChild(a);
       });
@@ -108,22 +105,90 @@
       track.className = "gag-track";
       gags.forEach(gag => track.appendChild(createTile(gag)));
       dock.appendChild(track);
+      setupAutoScroll(track);
     }
 
-    // --- Dock-only behavior: always build dock, retire rail ---
+    // --- Dock-only behavior ---
     function apply() {
-      buildDock();   // populate bottom scroller on all screens
-      clearRail();   // ensure legacy rail is empty/inactive
+      buildDock();
+      clearRail();
     }
-    // ----------------------------------------------------------
 
-    // Run initial build once DOM is ready
+    // Gentle auto-scroll that pauses on interaction or user setting
+    function setupAutoScroll(track) {
+      if (!track) return;
+
+      // Respect user preference
+      const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduce) return;
+
+      let raf = null;
+      let last = 0;
+      let paused = false;
+      let pauseUntil = 0;
+
+      // ~30 px/sec feels “medium” at 60fps
+      const PX_PER_SEC = 30;
+
+      function tick(ts) {
+        if (paused || ts < pauseUntil) {
+          raf = requestAnimationFrame(tick);
+          return;
+        }
+        if (!last) last = ts;
+        const dt = ts - last;
+        last = ts;
+
+        // advance
+        track.scrollLeft += (PX_PER_SEC * dt) / 1000;
+
+        // loop seamlessly
+        const max = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= max - 1) {
+          track.scrollLeft = 0;
+        }
+        raf = requestAnimationFrame(tick);
+      }
+
+      function start() {
+        if (raf) return;
+        last = 0;
+        raf = requestAnimationFrame(tick);
+      }
+      function stop() {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
+        last = 0;
+      }
+      function pause(ms = 3000) {
+        pauseUntil = performance.now() + ms;
+      }
+
+      // Pause on user interaction; resume on idle
+      track.addEventListener("mouseenter", () => paused = true);
+      track.addEventListener("mouseleave", () => { paused = false; start(); });
+      track.addEventListener("focusin",   () => paused = true);
+      track.addEventListener("focusout",  () => { paused = false; start(); });
+      track.addEventListener("pointerdown", () => pause(5000));
+      track.addEventListener("wheel", () => pause(4000), { passive: true });
+      track.addEventListener("scroll", () => pause(2000));
+
+      // Tab visibility
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stop(); else start();
+      });
+
+      // Kick off
+      start();
+
+      // Re-kick after images load
+      window.addEventListener("load", () => { pause(1000); start(); }, { once: true });
+    }
+
+    // Init
     apply();
 
-    // Ensure rebuild after full load (image/layout safety)
     window.addEventListener("load", apply);
-
-    // Throttled rebuild on resize/orientation changes
     window.addEventListener("resize", () => {
       clearTimeout(window.__gagResizeTimer);
       window.__gagResizeTimer = setTimeout(apply, 250);
