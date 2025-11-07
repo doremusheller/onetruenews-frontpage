@@ -212,4 +212,4 @@ body{
 #gags-dock:empty{ display:none; }
 
 /* ===== Desktop-only: Hide mobile dock ===== */
-@media (min-width:1100px){ #gags-dock{ display:none; } }
+@media (min-width:701px){ #gags-dock{ display:none; } }
