@@ -8,7 +8,7 @@
   <meta name="description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Get in on the gag" />
+  <meta property="og:title" content="Learn & Listen" />
   <meta property="og:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/cover-GAG.jpg" />
@@ -17,7 +17,7 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Get in on the gag" />
+  <meta name="twitter:title" content="Learn & Listen" />
   <meta name="twitter:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta name="twitter:image" content="media/cover-GAG.jpg" />
 
@@ -26,7 +26,7 @@
   <script src="ads.js" defer></script>
 
   <style>
-    /* HERO: figcaption above image; form wraps beside image on larger screens */
+    /* HERO: figcaption above image; info + steps + form sit beside image on larger screens */
     .story-hero { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
     .story-hero figcaption {
       font-style: italic;
@@ -42,17 +42,23 @@
       border-radius: 10px;
       box-shadow: 0 6px 18px rgba(0,0,0,.25);
     }
+    .hero-right { flex: 1 1 320px; min-width: 280px; }
+    .contact-lede { font-weight: 700; margin: .2rem 0 .4rem; }
+    .contact-subtitle { font-size: 1.05rem; margin: 0 0 .5rem; }
+    .contact-steps { font-size: .95rem; margin: .5rem 0 .6rem; line-height: 1.35; }
+    .contact-steps strong { font-weight: 700; }
+    .contact-tag { font-style: italic; margin: .4rem 0 .6rem; }
+
     @media (min-width: 768px) {
       .story-hero img { width: 45%; max-width: 500px; }
-      .story-hero .contact-form { flex: 1 1 320px; }
+      .hero-right { flex: 1 1 360px; }
     }
 
-    /* CONTACT FORM UI */
+    /* CONTACT FORM UI (inline beside hero) */
     .contact-form {
       display: grid;
       grid-template-columns: 1fr;
       gap: .5rem;
-      flex: 1 1 100%;
     }
     .contact-form label { font-weight: 600; font-size: .95rem; }
     .contact-form input, .contact-form textarea {
@@ -70,7 +76,7 @@
     }
     .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
 
-    /* SUMMARY: wrap around right-aligned in-article banner image */
+    /* SUMMARY: banner image right-aligned; text wraps on the left */
     .summary { clear: both; }
     .summary .article-banner-right {
       float: right;
@@ -161,9 +167,10 @@
         <p class="dek">Get in on the gag. It’s already in on you.</p>
       </header>
 
-      <!-- FIGCAPTION ABOVE IMAGE; CONTACT FORM BESIDE IMAGE -->
+      <!-- FIGCAPTION ABOVE IMAGE; CONTACT LEDE + STEPS + FORM BESIDE IMAGE -->
       <figure class="story-hero">
         <figcaption>Twain? Orwell? The Onion? Yes.</figcaption>
+
         <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener noreferrer">
           <img
             src="media/cover-GAG.jpg"
@@ -175,22 +182,34 @@
           />
         </a>
 
-        <form id="author-contact-form" class="contact-form">
-          <label for="cf-name">Your Name</label>
-          <input id="cf-name" name="name" type="text" required autocomplete="name" />
+        <div class="hero-right">
+          <div class="contact-subtitle">You’ve seen what happens when <em>they</em> make the news. Make your own.</div>
 
-          <label for="cf-email">Your Email</label>
-          <input id="cf-email" name="email" type="email" required autocomplete="email" />
+          <div class="contact-steps">
+            <p><strong>Step 1:</strong> Read <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener noreferrer"><em>When It Happened Here</em></a>.</p>
+            <p><strong>Step 2:</strong> Leave your review on <a href="https://www.goodreads.com/book/show/243488334-when-it-happened-here" target="_blank" rel="noopener noreferrer">Goodreads</a> so the System knows you’re real.</p>
+            <p><strong>Step 3:</strong> Pitch your idea, complaint, social scream, ad idea, etc. If the Machine finds you in Step 2... your idea makes the front page of OTI. You’re welcome.</p>
+          </div>
 
-          <label for="cf-message">Your Story / Idea / Rant</label>
-          <textarea id="cf-message" name="message" rows="5" required></textarea>
+          <div class="contact-tag">They should be televised.</div>
 
-          <button type="submit" class="btn feed">FEED THE SYSTEM</button>
+          <form id="author-contact-form" class="contact-form">
+            <label for="cf-name">Your Name</label>
+            <input id="cf-name" name="name" type="text" required autocomplete="name" />
 
-          <p class="contact-meta">
-            Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline">Loading…</span>
-          </p>
-        </form>
+            <label for="cf-email">Your Email</label>
+            <input id="cf-email" name="email" type="email" required autocomplete="email" />
+
+            <label for="cf-message">Your Story / Idea / Rant</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn feed">FEED THE SYSTEM</button>
+
+            <p class="contact-meta">
+              Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline">Loading…</span>
+            </p>
+          </form>
+        </div>
       </figure>
 
       <!-- SUMMARY WITH RIGHT-ALIGNED IN-ARTICLE BANNER; TEXT WRAPS LEFT -->
@@ -238,7 +257,7 @@
   </footer>
 
   <script>
-    // Fade-in behavior for headline/dek/image (kept from original)
+    // Minimal fade-in kept from original (headline/dek/image)
     document.addEventListener('DOMContentLoaded', () => {
       if (!document.body.classList.contains('story-page')) return;
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
