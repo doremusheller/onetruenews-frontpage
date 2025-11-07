@@ -1,9 +1,9 @@
 /* ============================================================
    One True Infotainment — gags.js
-   v4.0 (GAGS-aligned)
+   v3.3 (stable desktop fix)
    - Rail builds ONLY when CSS desktop media query is true
-   - Otherwise, builds dock (so no blank states)
-   - Scoped to #gags-rail / #gags-dock only
+   - Otherwise, build dock (so no blank states)
+   - Adds resize + load fallback to ensure desktop rail appears
    ============================================================ */
 
 (function () {
@@ -22,7 +22,6 @@
       } catch (e) {}
     }
 
-    // fallback list if manifest missing
     return [
       "Angels-GAG.jpg",
       "patriot-beer-GAG.jpg",
@@ -41,9 +40,7 @@
   function ready(fn) {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", fn, { once: true });
-    } else {
-      fn();
-    }
+    } else { fn(); }
   }
 
   ready(() => {
@@ -89,18 +86,8 @@
       return a;
     }
 
-    function clearRail() {
-      if (rail) {
-        rail.removeAttribute("data-live");
-        rail.textContent = "";
-      }
-    }
-
-    function clearDock() {
-      if (dock) {
-        dock.textContent = "";
-      }
-    }
+    function clearRail() { if (rail) { rail.removeAttribute("data-live"); rail.textContent = ""; } }
+    function clearDock() { if (dock) { dock.textContent = ""; } }
 
     function buildRail() {
       if (!rail || !gags.length) return;
@@ -135,20 +122,30 @@
 
     function apply() {
       if (mqDesktop.matches) {
-        // Desktop CSS grid active → build rail
+        // Desktop CSS grid is active → safe to build rail
         buildRail();
         clearDock();
       } else {
-        // Not in desktop CSS → build dock
+        // Not in desktop CSS → never build rail; use dock instead
         buildDock();
         clearRail();
       }
     }
 
+    // Run initial build once DOM is ready
     apply();
 
-    // Keep in sync with CSS when window/zoom/scaling changes
+    // Rebuild on breakpoint change (modern browsers)
     if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", apply);
     else mqDesktop.addListener(apply);
+
+    // --- NEW: ensure rebuild after full load and any resize ---
+    window.addEventListener("load", apply);
+    window.addEventListener("resize", () => {
+      // throttle to prevent spam rebuilds
+      clearTimeout(window.__gagResizeTimer);
+      window.__gagResizeTimer = setTimeout(apply, 250);
+    });
+    // --- END NEW FIX ---
   });
 })();
