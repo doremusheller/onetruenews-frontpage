@@ -1,18 +1,20 @@
 /* ============================================================
-   One True Infotainment — ads.js
-   v3.4 (Round 33)
-   - Adds visible test tile + outline to confirm rail is rendering
+   One True Infotainment — gags.js
+   v4.0 (GAGS-aligned)
+   - Rail builds ONLY when CSS desktop media query is true
+   - Otherwise, builds dock (so no blank states)
+   - Scoped to #gags-rail / #gags-dock only
    ============================================================ */
 
 (function () {
-  if (window.__OTI_ADS_INIT__) return;
-  window.__OTI_ADS_INIT__ = true;
+  if (window.__OTI_GAGS_INIT__) return;
+  window.__OTI_GAGS_INIT__ = true;
 
   function getManifest() {
-    if (Array.isArray(window.OTI_ADS_MANIFEST) && window.OTI_ADS_MANIFEST.length)
-      return window.OTI_ADS_MANIFEST.slice();
+    if (Array.isArray(window.OTI_GAGS_MANIFEST) && window.OTI_GAGS_MANIFEST.length)
+      return window.OTI_GAGS_MANIFEST.slice();
 
-    const tag = document.getElementById("ads-manifest");
+    const tag = document.getElementById("gags-manifest");
     if (tag && tag.textContent.trim()) {
       try {
         const parsed = JSON.parse(tag.textContent);
@@ -20,18 +22,19 @@
       } catch (e) {}
     }
 
+    // fallback list if manifest missing
     return [
-      "Angels-AD.jpg",
-      "patriot-beer-AD.jpg",
-      "patriot-games-AD.jpg",
-      "you-AD-here.jpg",
-      "blacks-love-grundy-AD.jpg",
-      "OTI-premium-AD.jpg",
-      "grundymax-AD.jpg",
-      "golden-streets-AD.jpg",
-      "cover-AD.jpg",
-      "primate-guidelines-AD.jpg",
-      "grundy-glow-AD.jpg"
+      "Angels-GAG.jpg",
+      "patriot-beer-GAG.jpg",
+      "patriot-games-GAG.jpg",
+      "you-GAG-here.jpg",
+      "blacks-love-grundy-GAG.jpg",
+      "OTI-premium-GAG.jpg",
+      "grundymax-GAG.jpg",
+      "golden-streets-GAG.jpg",
+      "cover-GAG.jpg",
+      "primate-guidelines-GAG.jpg",
+      "grundy-glow-GAG.jpg"
     ];
   }
 
@@ -44,12 +47,12 @@
   }
 
   ready(() => {
-    const rail = document.getElementById("ads-rail");
-    const dock = document.getElementById("ads-dock");
+    const rail = document.getElementById("gags-rail");
+    const dock = document.getElementById("gags-dock");
     if (!rail && !dock) return;
 
     const manifest = getManifest();
-    const ads = manifest.map(fn => {
+    const gags = manifest.map(fn => {
       const base = fn.replace(/\.[^.]+$/, "");
       return {
         base,
@@ -59,23 +62,27 @@
       };
     });
 
-    function createTile(ad) {
+    function createTile(gag) {
       const a = document.createElement("a");
-      a.className = "ad-tile";
-      a.href = ad.href;
+      a.className = "gag-tile";
+      a.href = gag.href;
       a.rel = "nofollow";
-      a.setAttribute("aria-label", ad.base);
+      a.setAttribute("aria-label", gag.base);
 
       const pill = document.createElement("span");
-      pill.className = "ad-pill";
-      pill.textContent = ad.label;
+      pill.className = "gag-pill";
+      pill.textContent = gag.label;
 
       const img = document.createElement("img");
-      img.className = "ad-img";
+      img.className = "gag-img";
       img.loading = "lazy";
       img.decoding = "async";
-      img.alt = ad.base.replace(/[-_]/g, " ");
-      img.src = ad.img;
+      img.alt = gag.base.replace(/[-_]/g, " ");
+      img.src = gag.img;
+      img.addEventListener("error", () => {
+        img.style.visibility = "hidden";
+        img.style.minHeight = "120px";
+      });
 
       a.appendChild(pill);
       a.appendChild(img);
@@ -95,45 +102,31 @@
       }
     }
 
-    /* ===== PATCH: OTI-AD-RAIL FIX 002 ===== */
-    function addTestTile(target) {
-      if (!target) return;
-      target.style.outline = "2px dashed red"; // temporary visual border
-      const test = document.createElement("div");
-      test.style.cssText =
-        "background:#ffe5e5;color:#900;font-weight:bold;padding:6px;border-radius:6px;text-align:center;";
-      test.textContent = "TEST TILE — RAIL IS ACTIVE";
-      target.prepend(test);
-    }
-    /* ===== END PATCH ===== */
-
     function buildRail() {
-      if (!rail || !ads.length) return;
+      if (!rail || !gags.length) return;
       rail.textContent = "";
       const frag = document.createDocumentFragment();
 
       const fixed = document.createElement("div");
-      fixed.className = "ad-fixed";
-      fixed.appendChild(createTile(ads[0]));
+      fixed.className = "gag-fixed";
+      fixed.appendChild(createTile(gags[0]));
 
       const scroll = document.createElement("div");
-      scroll.className = "ad-scroll";
-      ads.slice(1).forEach(ad => scroll.appendChild(createTile(ad)));
+      scroll.className = "gag-scroll";
+      gags.slice(1).forEach(gag => scroll.appendChild(createTile(gag)));
 
       frag.appendChild(fixed);
       frag.appendChild(scroll);
       rail.appendChild(frag);
       rail.dataset.live = "1";
-
-      addTestTile(rail); // <<< confirm visibility
     }
 
     function buildDock() {
-      if (!dock || !ads.length) return;
+      if (!dock || !gags.length) return;
       dock.textContent = "";
       const track = document.createElement("div");
-      track.className = "ad-track";
-      ads.forEach(ad => track.appendChild(createTile(ad)));
+      track.className = "gag-track";
+      gags.forEach(gag => track.appendChild(createTile(gag)));
       dock.appendChild(track);
     }
 
@@ -142,9 +135,11 @@
 
     function apply() {
       if (mqDesktop.matches) {
+        // Desktop CSS grid active → build rail
         buildRail();
         clearDock();
       } else {
+        // Not in desktop CSS → build dock
         buildDock();
         clearRail();
       }
@@ -152,6 +147,7 @@
 
     apply();
 
+    // Keep in sync with CSS when window/zoom/scaling changes
     if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", apply);
     else mqDesktop.addListener(apply);
   });
