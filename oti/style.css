@@ -1,5 +1,6 @@
+```css
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v158
+   One True Infotainment — Canonical Style Sheet v159 (GAGS)
    (safe: rail/dock fail-safes; no layout fights)
    ============================================================ */
 
@@ -101,7 +102,7 @@ body{
   }
 
   /* Left rail: sticky and capped; below ticker */
-  #ads-rail{
+  #gags-rail{
     position:sticky;
     top:var(--ticker-h);
     align-self:start;
@@ -113,7 +114,7 @@ body{
   }
 
   /* If rail is empty, collapse back to single column (modern browsers) */
-  .index-page .page:has(#ads-rail:empty){
+  .index-page .page:has(#gags-rail:empty){
     display:block;
   }
 
@@ -128,17 +129,17 @@ body{
   .story-hero.wrap-left{float:none; width:100%; margin:0 0 1rem 0;}
 }
 
-/* ===== OTI Ads — Rail content containers ===== */
-#ads-rail .ad-fixed{
+/* ===== OTI Gags — Rail content containers ===== */
+#gags-rail .gag-fixed{
   position:relative;
   flex:0 0 auto;
   display:flex; flex-direction:column;
   align-items:center; justify-content:flex-start;
   border-radius:8px; background:transparent; gap:6px;
 }
-#ads-rail .ad-fixed .ad-tile{ width:100%; }
+#gags-rail .gag-fixed .gag-tile{ width:100%; }
 
-#ads-rail .ad-scroll{
+#gags-rail .gag-scroll{
   flex:1 1 auto;
   min-height:0;
   display:flex; flex-direction:column; gap:10px;
@@ -146,44 +147,45 @@ body{
   background:transparent; padding:0;
 }
 
-/* ===== Generic Ad Tile ===== */
-.ad-tile{ position:relative; display:block; border-radius:8px; overflow:hidden; }
-.ad-img{
+/* ===== Generic Gag Tile ===== */
+.gag-tile{ position:relative; display:block; border-radius:8px; overflow:hidden; }
+.gag-img{
   width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block;
   box-shadow:0 2px 4px var(--shadow);
 }
-.ad-pill{
+.gag-pill{
   position:absolute; top:6px; left:6px; z-index:2;
   background:var(--amber); color:#fff; font-weight:700; font-size:.6rem;
   padding:.25rem .45rem; border-radius:999px; text-transform:none;
   opacity:0; transition:opacity .2s ease;
 }
-.ad-tile:hover .ad-pill, .ad-tile:focus-within .ad-pill{ opacity:1; }
-.ad-tile:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+.gag-tile:hover .gag-pill, .gag-tile:focus-within .gag-pill{ opacity:1; }
+.gag-tile:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
 
-/* ===== Mobile: Bottom Ads Dock ===== */
+/* ===== Mobile: Bottom Gags Dock ===== */
 @media (max-width:700px){
-  #ads-rail{ display:none; }
-  #ads-dock{
+  #gags-rail{ display:none; }
+  #gags-dock{
     position:fixed; left:0; right:0; bottom:0;
     background:transparent; padding:.4rem .5rem; z-index:5000;
   }
-  #ads-dock .ad-track{
+  #gags-dock .gag-track{
     display:flex; flex-wrap:nowrap; gap:8px;
     overflow-x:auto; overflow-y:hidden; background:transparent;
     -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
   }
-  #ads-dock .ad-tile{ flex:0 0 auto; width:160px; scroll-snap-align:start; }
+  #gags-dock .gag-tile{ flex:0 0 auto; width:160px; scroll-snap-align:start; }
   body{ padding-bottom:84px; }
 }
 
 /* ===== Safety ===== */
-#ads-rail{ pointer-events:none; }
-#ads-rail[data-live="1"]{ pointer-events:auto; }
+#gags-rail{ pointer-events:none; }
+#gags-rail[data-live="1"]{ pointer-events:auto; }
 
-/* Hide empty ad containers (prevents blank rails/docks) */
-#ads-rail:empty{ display:none; }
-#ads-dock:empty{ display:none; }
+/* Hide empty gags containers (prevents blank rails/docks) */
+#gags-rail:empty{ display:none; }
+#gags-dock:empty{ display:none; }
 
 /* ===== Desktop-only: Hide mobile dock ===== */
-@media (min-width:701px){ #ads-dock{ display:none; } }
+@media (min-width:701px){ #gags-dock{ display:none; } }
+```
