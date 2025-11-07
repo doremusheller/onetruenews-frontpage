@@ -1,9 +1,7 @@
 /* ============================================================
    One True Infotainment — ads.js
-   v3.3 (Round 32, image-error handler removed)
-   - Rail builds ONLY when CSS desktop media query is true
-   - Otherwise, build dock (so no blank states, no page-eating rail)
-   - Scoped to #ads-rail / #ads-dock only
+   v3.4 (Round 33)
+   - Adds visible test tile + outline to confirm rail is rendering
    ============================================================ */
 
 (function () {
@@ -97,6 +95,18 @@
       }
     }
 
+    /* ===== PATCH: OTI-AD-RAIL FIX 002 ===== */
+    function addTestTile(target) {
+      if (!target) return;
+      target.style.outline = "2px dashed red"; // temporary visual border
+      const test = document.createElement("div");
+      test.style.cssText =
+        "background:#ffe5e5;color:#900;font-weight:bold;padding:6px;border-radius:6px;text-align:center;";
+      test.textContent = "TEST TILE — RAIL IS ACTIVE";
+      target.prepend(test);
+    }
+    /* ===== END PATCH ===== */
+
     function buildRail() {
       if (!rail || !ads.length) return;
       rail.textContent = "";
@@ -114,6 +124,8 @@
       frag.appendChild(scroll);
       rail.appendChild(frag);
       rail.dataset.live = "1";
+
+      addTestTile(rail); // <<< confirm visibility
     }
 
     function buildDock() {
@@ -130,11 +142,9 @@
 
     function apply() {
       if (mqDesktop.matches) {
-        // Desktop CSS grid is active → safe to build rail
         buildRail();
         clearDock();
       } else {
-        // Not in desktop CSS → never build rail; use dock instead
         buildDock();
         clearRail();
       }
@@ -142,7 +152,6 @@
 
     apply();
 
-    // Keep in sync with CSS when window/zoom/scaling changes
     if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", apply);
     else mqDesktop.addListener(apply);
   });
