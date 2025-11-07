@@ -13,20 +13,25 @@
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/cover-GAG.jpg" />
   <meta property="og:site_name" content="One True Infotainment" />
-  <link rel="canonical" href="cover-ad.html" />
+  <link rel="canonical" href="cover-GAG.html" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Learn & Listen" />
+  <meta name="twitter:title" content="Get in on the gag" />
   <meta name="twitter:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta name="twitter:image" content="media/cover-GAG.jpg" />
 
-  <link rel="stylesheet" href="style.css?v=159" />
+  <!-- Fonts to match index -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Canonical style and scripts (match index versions) -->
+  <link rel="stylesheet" href="style.css?v=161" />
   <script src="ticker.js" defer></script>
   <script src="ads.js" defer></script>
 
   <style>
-    /* HERO: caption above image; image floats left; form floats right */
     .story-hero { position: relative; }
     .story-hero figcaption {
       font-style: italic;
@@ -53,7 +58,6 @@
     .contact-steps strong { font-weight: 700; }
     .contact-tag { font-style: italic; margin: .4rem 0 .8rem; }
 
-    /* CONTACT FORM UI */
     .contact-form {
       display: grid;
       grid-template-columns: 1fr;
@@ -75,7 +79,6 @@
     }
     .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
 
-    /* BELOW-TEXT: begins below the image, wraps under the form on desktop */
     .below-text { clear: left; }
     .below-text .standalone {
       margin-top: 2em;
@@ -85,21 +88,19 @@
     }
     .below-text .standalone.em { font-style: italic; }
     .below-text .note-para {
-      margin: 0 0 2em 0; /* double-space look */
+      margin: 0 0 2em 0;
       text-align: left;
       font-size: 1.1em;
-      font-style: normal; /* ensure non-italic for note section */
+      font-style: normal;
     }
     .below-text .standalone a {
       color: inherit;
       text-decoration: underline;
     }
 
-    /* Center the footer nav buttons */
     .footer-nav { text-align: center; margin: 1rem 0; }
     .footer-nav .btn { display: inline-block; margin: 0 .4rem; }
 
-    /* Centered OTI logo near bottom */
     .oti-logo-wrap { text-align: center; margin: 2rem 0; }
     .oti-logo-wrap .oti-logo {
       width: 120px;
@@ -109,7 +110,6 @@
       filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
     }
 
-    /* Mobile stacking */
     @media (max-width: 767.98px) {
       .story-hero img,
       .hero-right { float: none; width: 100%; min-width: 0; margin: 0 0 1rem 0; }
@@ -141,20 +141,21 @@
 
   <header class="site-header" role="banner">
     <a href="index.html" aria-label="Return to OTI Home">
-      <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+      <picture>
+        <source media="(max-width:700px)" srcset="media/banner-mobile.jpg">
+        <img class="banner-img" src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+      </picture>
     </a>
   </header>
 
   <main class="page" role="main">
     <article>
-      <!-- STORY HEADER AT TOP -->
       <header>
         <div class="kicker">Promotions • Publication</div>
         <h1>Get in on the gag.</h1>
         <p class="dek">It’s been in on you for years</p>
       </header>
 
-      <!-- FIGCAPTION ABOVE IMAGE; FORM FLOATS RIGHT OF IMAGE -->
       <figure class="story-hero">
         <figcaption>Twain? Orwell? The Onion? Yes.</figcaption>
 
@@ -193,12 +194,11 @@
             <button type="submit" class="btn feed">FEED THE SYSTEM</button>
 
             <p class="contact-meta">
-              Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline">Loading…</span>
+              Official Contact — Doremus Heller, PO Box 1776 • Chicago, IL 60601 • <span id="author-email-inline" data-user="doremusheller" data-domain="gmail.com">Loading…</span>
             </p>
           </form>
         </div>
 
-        <!-- BELOW-TEXT: starts below image; wraps under the form -->
         <div class="below-text">
           <p class="standalone em"><em>A story told to warn became the story telling itself.<br>
           First, our media inspired the novel.<br>
@@ -217,13 +217,11 @@
         </div>
       </figure>
 
-      <!-- CENTERED NAV BUTTONS -->
       <nav class="footer-nav" aria-label="Ad navigation">
         <a class="btn" href="ad-next.html">Next Ad →</a>
         <a class="btn" href="index.html">OTI Home</a>
       </nav>
 
-      <!-- CENTERED OTI LOGO NEAR BOTTOM -->
       <div class="oti-logo-wrap">
         <a href="index.html" aria-label="OTI Home">
           <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" />
@@ -240,7 +238,6 @@
   </footer>
 
   <script>
-    // Minimal fade-in behavior (from original)
     document.addEventListener('DOMContentLoaded', () => {
       if (!document.body.classList.contains('story-page')) return;
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -275,27 +272,31 @@
   </script>
 
   <script>
-    // JS email reveal + mailto handling
     (function(){
-      const addr = "doremusheller@gmail.com";
-
-      const emailInline = document.getElementById('author-email-inline');
-      if (emailInline) {
-        emailInline.innerHTML = `<a href="mailto:${addr}" rel="noopener noreferrer">${addr}</a>`;
-      }
+      const node = document.getElementById('author-email-inline');
+      if (!node) return;
+      const user = node.getAttribute('data-user') || '';
+      const domain = node.getAttribute('data-domain') || '';
+      const addr = user && domain ? (user + '@' + domain) : '';
+      if (!addr) return;
+      const a = document.createElement('a');
+      a.rel = 'noopener noreferrer';
+      a.href = 'mailto:' + addr;
+      a.textContent = addr;
+      node.textContent = '';
+      node.appendChild(a);
 
       const form = document.getElementById('author-contact-form');
-      if (form) {
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          const name = (document.getElementById('cf-name').value || '').trim();
-          const email = (document.getElementById('cf-email').value || '').trim();
-          const message = (document.getElementById('cf-message').value || '').trim();
-          const subject = encodeURIComponent(`OTI Submission from ${name}`);
-          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-          window.location.href = `mailto:${addr}?subject=${subject}&body=${body}`;
-        });
-      }
+      if (!form) return;
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = (document.getElementById('cf-name').value || '').trim();
+        const email = (document.getElementById('cf-email').value || '').trim();
+        const message = (document.getElementById('cf-message').value || '').trim();
+        const subject = encodeURIComponent(`OTI Submission from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        window.location.href = `mailto:${addr}?subject=${subject}&body=${body}`;
+      });
     })();
   </script>
 </body>
