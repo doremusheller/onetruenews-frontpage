@@ -27,8 +27,8 @@ body{
   left: 0;
   right: 0;
   z-index: 999999;
-  background: var(--amber);        /* red background */
-  color: #fff;                     /* white text */
+  background: var(--amber);
+  color: #fff;
   border-bottom: 2px solid rgba(0,0,0,.1);
   overflow: hidden;
   height: var(--ticker-h);
@@ -37,7 +37,7 @@ body{
   font-family: "Libre Baskerville", Georgia, serif;
   font-weight: 700;
   font-size: clamp(.9rem, .9vw + .6rem, 1rem);
-  pointer-events: none;            /* keeps it topmost but non-blocking */
+  pointer-events: none;
 }
 .ticker > * {
   display: inline-block;
@@ -117,16 +117,12 @@ body{
 @media(min-width:1100px){
   .grid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem;}
   .tile h2,.tile p{overflow-wrap:anywhere; hyphens:auto;}
-
-  /* Desktop: 2-col layout (220px rail + content). Banner is outside .page. */
   .index-page .page{
     display:grid;
     grid-template-columns:220px 1fr;
     column-gap:40px;
     padding-left:16px;
   }
-
-  /* Left rail: sticky and capped; below ticker */
   #gags-rail{
     position:sticky;
     top:var(--ticker-h);
@@ -137,13 +133,9 @@ body{
     background:transparent;
     z-index:1;
   }
-
-  /* If rail is empty, collapse back to single column (modern browsers) */
   .index-page .page:has(#gags-rail:empty){
     display:block;
   }
-
-  /* Ensure grid sits in the right column naturally */
   #storyGrid{ align-self:start; }
 }
 
@@ -195,7 +187,7 @@ body{
     background:transparent; padding:.4rem .5rem; z-index:5000;
   }
   #gags-dock .gag-track{
-    display:flex; flex-wrap:nowrap; gap:8px;
+    display:flex; flex-wrap:nowrap; gap:3px; /* thin buffer */
     overflow-x:auto; overflow-y:hidden; background:transparent;
     -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
   }
@@ -206,23 +198,16 @@ body{
 /* ===== Safety ===== */
 #gags-rail{ pointer-events:none; }
 #gags-rail[data-live="1"]{ pointer-events:auto; }
-
-/* Hide empty gags containers (prevents blank rails/docks) */
 #gags-rail:empty{ display:none; }
 #gags-dock:empty{ display:none; }
-
-/* ===== Desktop-only: Hide mobile dock ===== */
 @media (min-width:701px){ #gags-dock{ display:none; } }
 
 /* =================================================================
    OTI Gags — GLOBAL BOTTOM DOCK OVERRIDES (always-on across devices)
-   Appended to avoid disturbing legacy layout rules above.
    ================================================================= */
 
-/* Retire the left rail everywhere */
 #gags-rail { display: none !important; }
 
-/* Always show and fix the bottom dock */
 #gags-dock {
   position: fixed !important;
   left: 0; right: 0; bottom: 0;
@@ -230,20 +215,17 @@ body{
   padding: .4rem .5rem;
   z-index: 5000;
   display: block !important;
-  /* Safe-area support for iOS devices */
   padding-bottom: calc(.4rem + env(safe-area-inset-bottom));
 }
 
-/* Ensure page content never hides under the fixed dock */
 html body {
   padding-bottom: calc(84px + env(safe-area-inset-bottom)) !important;
 }
 
-/* Make the gag strip scroll smoothly and contain its scroll */
 #gags-dock .gag-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 8px;
+  gap: 3px; /* final narrow buffer */
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -251,23 +233,20 @@ html body {
   overscroll-behavior: contain;
 }
 
-/* Constrain tile size so they never overpower the page */
 #gags-dock .gag-tile {
   flex: 0 0 auto;
-  width: 160px;                  /* keep existing mobile thumb size */
+  width: 160px;
   scroll-snap-align: start;
 }
 
-/* Avoid weird crops in the dock: fit images inside tiles */
 #gags-dock .gag-img {
   aspect-ratio: 16 / 9;
   height: auto;
-  object-fit: contain;           /* letterbox/pillarbox instead of chopping heads */
-  background: rgba(0,0,0,.02);   /* subtle backdrop for letterboxed areas */
+  object-fit: contain;
+  background: rgba(0,0,0,.02);
   box-shadow: 0 2px 4px var(--shadow);
 }
 
-/* Hide dock in print; remove extra bottom padding */
 @media print {
   #gags-dock { display: none !important; }
   html body { padding-bottom: 0 !important; }
