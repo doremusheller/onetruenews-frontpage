@@ -27,8 +27,8 @@ body{
   left: 0;
   right: 0;
   z-index: 999999;
-  background: var(--amber);        /* red background */
-  color: #fff;                     /* white text */
+  background: var(--amber);
+  color: #fff;
   border-bottom: 2px solid rgba(0,0,0,.1);
   overflow: hidden;
   height: var(--ticker-h);
@@ -37,7 +37,7 @@ body{
   font-family: "Libre Baskerville", Georgia, serif;
   font-weight: 700;
   font-size: clamp(.9rem, .9vw + .6rem, 1rem);
-  pointer-events: none;            /* keeps it topmost but non-blocking */
+  pointer-events: none;
 }
 .ticker > * {
   display: inline-block;
@@ -113,80 +113,6 @@ body{
   font-style:italic;
 }
 
-/* ===== Desktop niceties ===== */
-@media(min-width:1100px){
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem;}
-  .tile h2,.tile p{overflow-wrap:anywhere; hyphens:auto;}
-
-  /* Desktop: 2-col layout (220px rail + content). Banner is outside .page. */
-  .index-page .page{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    column-gap:40px;
-    padding-left:16px;
-  }
-
-  /* Left rail: sticky and capped; below ticker */
-  #gags-rail{
-    position:sticky;
-    top:var(--ticker-h);
-    align-self:start;
-    width:220px;
-    max-height:calc(100vh - var(--ticker-h));
-    display:flex; flex-direction:column; gap:10px;
-    background:transparent;
-    z-index:1;
-  }
-
-  /* If rail is empty, collapse back to single column (modern browsers) */
-  .index-page .page:has(#gags-rail:empty){
-    display:block;
-  }
-
-  /* Ensure grid sits in the right column naturally */
-  #storyGrid{ align-self:start; }
-}
-
-/* ===== Mobile ===== */
-@media(max-width:700px){
-  .page{padding:16px 12px 48px}
-  .grid{grid-template-columns:1fr}
-  .story-hero.wrap-left{float:none; width:100%; margin:0 0 1rem 0;}
-}
-
-/* ===== OTI Gags — Rail content containers ===== */
-#gags-rail .gag-fixed{
-  position:relative;
-  flex:0 0 auto;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:flex-start;
-  border-radius:8px; background:transparent; gap:6px;
-}
-#gags-rail .gag-fixed .gag-tile{ width:100%; }
-
-#gags-rail .gag-scroll{
-  flex:1 1 auto;
-  min-height:0;
-  display:flex; flex-direction:column; gap:10px;
-  overflow-y:auto; overflow-x:hidden;
-  background:transparent; padding:0;
-}
-
-/* ===== Generic Gag Tile ===== */
-.gag-tile{ position:relative; display:block; border-radius:8px; overflow:hidden; }
-.gag-img{
-  width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block;
-  box-shadow:0 2px 4px var(--shadow);
-}
-.gag-pill{
-  position:absolute; top:6px; left:6px; z-index:2;
-  background:var(--amber); color:#fff; font-weight:700; font-size:.6rem;
-  padding:.25rem .45rem; border-radius:999px; text-transform:none;
-  opacity:0; transition:opacity .2s ease;
-}
-.gag-tile:hover .gag-pill, .gag-tile:focus-within .gag-pill{ opacity:1; }
-.gag-tile:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
-
 /* ===== Mobile: Bottom Gags Dock ===== */
 @media (max-width:700px){
   #gags-rail{ display:none; }
@@ -195,7 +121,7 @@ body{
     background:transparent; padding:.4rem .5rem; z-index:5000;
   }
   #gags-dock .gag-track{
-    display:flex; flex-wrap:nowrap; gap:8px;
+    display:flex; flex-wrap:nowrap; gap:2px;
     overflow-x:auto; overflow-y:hidden; background:transparent;
     -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
   }
@@ -203,26 +129,9 @@ body{
   body{ padding-bottom:84px; }
 }
 
-/* ===== Safety ===== */
-#gags-rail{ pointer-events:none; }
-#gags-rail[data-live="1"]{ pointer-events:auto; }
-
-/* Hide empty gags containers (prevents blank rails/docks) */
-#gags-rail:empty{ display:none; }
-#gags-dock:empty{ display:none; }
-
-/* ===== Desktop-only: Hide mobile dock ===== */
-@media (min-width:701px){ #gags-dock{ display:none; } }
-
-/* =================================================================
-   OTI Gags — GLOBAL BOTTOM DOCK OVERRIDES (always-on across devices)
-   Appended to avoid disturbing legacy layout rules above.
-   ================================================================= */
-
-/* Retire the left rail everywhere */
+/* ===== GLOBAL BOTTOM DOCK OVERRIDES (Always-on) ===== */
 #gags-rail { display: none !important; }
 
-/* Always show and fix the bottom dock */
 #gags-dock {
   position: fixed !important;
   left: 0; right: 0; bottom: 0;
@@ -230,20 +139,17 @@ body{
   padding: .4rem .5rem;
   z-index: 5000;
   display: block !important;
-  /* Safe-area support for iOS devices */
   padding-bottom: calc(.4rem + env(safe-area-inset-bottom));
 }
 
-/* Ensure page content never hides under the fixed dock */
 html body {
   padding-bottom: calc(84px + env(safe-area-inset-bottom)) !important;
 }
 
-/* Make the gag strip scroll smoothly and contain its scroll */
 #gags-dock .gag-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 8px;
+  gap: 2px; /* Thin visual buffer between gag tiles */
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -251,23 +157,21 @@ html body {
   overscroll-behavior: contain;
 }
 
-/* Constrain tile size so they never overpower the page */
 #gags-dock .gag-tile {
   flex: 0 0 auto;
-  width: 160px;                  /* keep existing mobile thumb size */
+  width: 160px;
   scroll-snap-align: start;
 }
 
-/* Avoid weird crops in the dock: fit images inside tiles */
 #gags-dock .gag-img {
   aspect-ratio: 16 / 9;
   height: auto;
-  object-fit: contain;           /* letterbox/pillarbox instead of chopping heads */
-  background: rgba(0,0,0,.02);   /* subtle backdrop for letterboxed areas */
+  object-fit: contain;
+  background: rgba(0,0,0,.02);
   box-shadow: 0 2px 4px var(--shadow);
 }
 
-/* Hide dock in print; remove extra bottom padding */
+/* Hide dock in print view */
 @media print {
   #gags-dock { display: none !important; }
   html body { padding-bottom: 0 !important; }
