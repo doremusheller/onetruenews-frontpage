@@ -1,10 +1,9 @@
 /* ============================================================
    One True Infotainment — ads.js
-   v3.1 (rail always-on)
-   - Never writes outside #ads-rail / #ads-dock
-   - Uses manifest or fallback list
-   - Desktop and anything over 700px: left rail
-   - Mobile (≤700px): bottom dock
+   v3.2 (CSS-aligned)
+   - Rail builds ONLY when CSS desktop media query is true
+   - Otherwise, build dock (so no blank states, no page-eating rail)
+   - Scoped to #ads-rail / #ads-dock only
    ============================================================ */
 
 (function () {
@@ -38,12 +37,10 @@
     ];
   }
 
-  function ready(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn, { once: true });
-    } else {
-      fn();
-    }
+  function ready(fn){
+    if(document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", fn, { once:true });
+    } else { fn(); }
   }
 
   ready(() => {
@@ -62,7 +59,7 @@
       };
     });
 
-    function createTile(ad) {
+    function createTile(ad){
       const a = document.createElement("a");
       a.className = "ad-tile";
       a.href = ad.href;
@@ -89,15 +86,17 @@
       return a;
     }
 
-    function buildRail() {
+    function clearRail(){ if (rail){ rail.removeAttribute("data-live"); rail.textContent = ""; } }
+    function clearDock(){ if (dock){ dock.textContent = ""; } }
+
+    function buildRail(){
       if (!rail || !ads.length) return;
-      rail.innerHTML = "";
+      rail.textContent = "";
       const frag = document.createDocumentFragment();
 
       const fixed = document.createElement("div");
       fixed.className = "ad-fixed";
-      const topAd = createTile(ads[0]);
-      fixed.appendChild(topAd);
+      fixed.appendChild(createTile(ads[0]));
 
       const scroll = document.createElement("div");
       scroll.className = "ad-scroll";
@@ -109,28 +108,34 @@
       rail.dataset.live = "1";
     }
 
-    function buildDock() {
+    function buildDock(){
       if (!dock || !ads.length) return;
-      dock.innerHTML = "";
+      dock.textContent = "";
       const track = document.createElement("div");
       track.className = "ad-track";
       ads.forEach(ad => track.appendChild(createTile(ad)));
       dock.appendChild(track);
     }
 
-    // Build rail for everything >700px, dock for ≤700px
-    function apply() {
-      const width = window.innerWidth || document.documentElement.clientWidth;
-      if (width <= 700) {
-        if (dock) buildDock();
-        if (rail) rail.innerHTML = "";
+    // Mirror the CSS desktop breakpoint exactly
+    const mqDesktop = window.matchMedia("(min-width:1100px)");
+
+    function apply(){
+      if (mqDesktop.matches){
+        // Desktop CSS grid is active → safe to build rail
+        buildRail();
+        clearDock();
       } else {
-        if (rail) buildRail();
-        if (dock) dock.innerHTML = "";
+        // Not in desktop CSS → never build rail; use dock instead
+        buildDock();
+        clearRail();
       }
     }
 
     apply();
-    window.addEventListener("resize", apply);
+
+    // Keep in sync with CSS when window/zoom/scaling changes
+    if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", apply);
+    else mqDesktop.addListener(apply);
   });
 })();
