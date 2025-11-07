@@ -26,35 +26,34 @@
   <script src="ads.js" defer></script>
 
   <style>
-    /* HERO: figcaption above image; info + steps + form sit beside image on larger screens */
-    .story-hero { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
+    /* HERO: caption above image; image floats left; form floats right */
+    .story-hero { position: relative; }
     .story-hero figcaption {
       font-style: italic;
       font-size: 1rem;
       text-align: left;
       margin-bottom: .5rem;
-      flex-basis: 100%;
     }
     .story-hero img {
-      width: 100%;
-      max-width: 420px;
+      float: left;
+      width: 45%;
+      max-width: 500px;
       height: auto;
       border-radius: 10px;
       box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      margin: 0 1.5rem 1rem 0;
     }
-    .hero-right { flex: 1 1 320px; min-width: 280px; }
-    .contact-lede { font-weight: 700; margin: .2rem 0 .4rem; }
-    .contact-subtitle { font-size: 1.05rem; margin: 0 0 .5rem; }
-    .contact-steps { font-size: .95rem; margin: .5rem 0 .6rem; line-height: 1.35; }
+    .hero-right {
+      float: right;
+      width: 48%;
+      min-width: 320px;
+    }
+    .contact-subtitle { font-size: 1.05rem; margin: .2rem 0 .5rem; font-weight: 700; }
+    .contact-steps { font-size: .95rem; margin: .4rem 0 .6rem; line-height: 1.35; }
     .contact-steps strong { font-weight: 700; }
-    .contact-tag { font-style: italic; margin: .4rem 0 .6rem; }
+    .contact-tag { font-style: italic; margin: .4rem 0 .8rem; }
 
-    @media (min-width: 768px) {
-      .story-hero img { width: 45%; max-width: 500px; }
-      .hero-right { flex: 1 1 360px; }
-    }
-
-    /* CONTACT FORM UI (inline beside hero) */
+    /* CONTACT FORM UI */
     .contact-form {
       display: grid;
       grid-template-columns: 1fr;
@@ -76,44 +75,29 @@
     }
     .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
 
-    /* SUMMARY: banner image right-aligned; text wraps on the left */
-    .summary { clear: both; }
-    .summary .article-banner-right {
-      float: right;
-      width: 42%;
-      max-width: 520px;
-      height: auto;
-      margin: 0 0 1rem 1.5rem;
-      display: block;
-    }
-    @media (max-width: 749.98px) {
-      .summary .article-banner-right {
-        float: none;
-        width: 100%;
-        max-width: none;
-        margin: 0 0 1rem 0;
-      }
-    }
-    .summary .standalone {
+    /* BELOW-TEXT: begins below the image, wraps under the form on desktop */
+    .below-text { clear: left; }
+    .below-text .standalone {
       margin-top: 2em;
       margin-bottom: 2em;
       text-align: left;
       font-size: 1.1em;
     }
-    .summary .standalone a {
+    .below-text .standalone.em { font-style: italic; }
+    .below-text .note-para {
+      margin: 0 0 2em 0; /* double-space look */
+      text-align: left;
+      font-size: 1.1em;
+      font-style: normal; /* ensure non-italic for note section */
+    }
+    .below-text .standalone a {
       color: inherit;
       text-decoration: underline;
     }
 
-    /* NOTE: double space between paragraphs, normal (non-italic) */
-    .note .standalone {
-      margin-top: 0;
-      margin-bottom: 2em; /* double-space look */
-      text-align: left;
-      font-size: 1.1em;
-      font-style: normal;
-    }
-    .note { clear: both; }
+    /* Center the footer nav buttons */
+    .footer-nav { text-align: center; margin: 1rem 0; }
+    .footer-nav .btn { display: inline-block; margin: 0 .4rem; }
 
     /* Centered OTI logo near bottom */
     .oti-logo-wrap { text-align: center; margin: 2rem 0; }
@@ -125,9 +109,12 @@
       filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
     }
 
-    /* Center the footer nav buttons */
-    .footer-nav { text-align: center; margin: 1rem 0; }
-    .footer-nav .btn { display: inline-block; margin: 0 .4rem; }
+    /* Mobile stacking */
+    @media (max-width: 767.98px) {
+      .story-hero img,
+      .hero-right { float: none; width: 100%; min-width: 0; margin: 0 0 1rem 0; }
+      .below-text { clear: both; }
+    }
   </style>
 
   <noscript>
@@ -160,14 +147,14 @@
 
   <main class="page" role="main">
     <article>
-      <!-- STORY HEADER MOVED TO TOP (just below site banner) -->
+      <!-- STORY HEADER AT TOP -->
       <header>
         <div class="kicker">Promotions • Publication</div>
         <h1>So… WTF, then?</h1>
         <p class="dek">Get in on the gag. It’s already in on you.</p>
       </header>
 
-      <!-- FIGCAPTION ABOVE IMAGE; CONTACT LEDE + STEPS + FORM BESIDE IMAGE -->
+      <!-- FIGCAPTION ABOVE IMAGE; FORM FLOATS RIGHT OF IMAGE -->
       <figure class="story-hero">
         <figcaption>Twain? Orwell? The Onion? Yes.</figcaption>
 
@@ -191,7 +178,7 @@
             <p><strong>Step 3:</strong> Pitch your idea, complaint, social scream, ad idea, etc. If the Machine finds you in Step 2... your idea makes the front page of OTI. You’re welcome.</p>
           </div>
 
-          <div class="contact-tag">Because you deserve more press coverage.</div>
+          <div class="contact-tag">They should be televised.</div>
 
           <form id="author-contact-form" class="contact-form">
             <label for="cf-name">Your Name</label>
@@ -210,29 +197,25 @@
             </p>
           </form>
         </div>
+
+        <!-- BELOW-TEXT: starts below image; wraps under the form -->
+        <div class="below-text">
+          <p class="standalone em"><em>A story told to warn became the story telling itself.<br>
+          First, our media inspired the novel.<br>
+          Then the novel trained a machine.<br>
+          Now the machine makes our media.</em></p>
+
+          <p class="standalone"><a href="https://a.co/d/6F5z5xj" target="_blank" rel="noopener noreferrer"><em>When It Happened Here.</em></a> Available now.</p>
+
+          <p class="note-para">Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
+
+          <p class="note-para">When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
+
+          <p class="note-para">The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
+
+          <p class="note-para">OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
+        </div>
       </figure>
-
-      <!-- SUMMARY WITH RIGHT-ALIGNED IN-ARTICLE BANNER; TEXT WRAPS LEFT -->
-      <section class="summary">
-        <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="article-banner-right" />
-        <p class="standalone"><em>A story told to warn became the story telling itself.<br>
-        First, our media inspired the novel.<br>
-        Then the novel trained a machine.<br>
-        Now the machine makes our media.</em></p>
-
-        <p class="standalone"><a href="https://a.co/d/6F5z5xj" target="_blank" rel="noopener noreferrer"><em>When It Happened Here.</em></a> Available now.</p>
-      </section>
-
-      <!-- NOTE SECTION: NORMAL FONT, DOUBLE-SPACED PARAS -->
-      <section class="note">
-        <p class="standalone">Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
-
-        <p class="standalone">When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
-
-        <p class="standalone">The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
-
-        <p class="standalone">OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
-      </section>
 
       <!-- CENTERED NAV BUTTONS -->
       <nav class="footer-nav" aria-label="Ad navigation">
@@ -257,7 +240,7 @@
   </footer>
 
   <script>
-    // Minimal fade-in kept from original (headline/dek/image)
+    // Minimal fade-in behavior (from original)
     document.addEventListener('DOMContentLoaded', () => {
       if (!document.body.classList.contains('story-page')) return;
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
