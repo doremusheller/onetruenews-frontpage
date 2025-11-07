@@ -1,7 +1,5 @@
-```css
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v159 (GAGS)
-   (safe: rail/dock fail-safes; no layout fights)
+   One True Infotainment — Canonical Style Sheet v159 (GAGS + fixed ticker)
    ============================================================ */
 
 :root{
@@ -23,16 +21,43 @@ body{
 }
 
 /* ===== Ticker ===== */
-.ticker{
-  position:fixed; top:0; left:0; right:0; z-index:999999;
-  background:var(--amber); border-bottom:2px solid rgba(0,0,0,.1);
-  overflow:hidden; height:var(--ticker-h); line-height:var(--ticker-h);
-  white-space:nowrap; font-family:"Libre Baskerville",Georgia,serif;
-  font-weight:700; font-size:clamp(.9rem,.9vw + .6rem,1rem); color:#fff;
+.ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  background: var(--amber);        /* red background */
+  color: #fff;                     /* white text */
+  border-bottom: 2px solid rgba(0,0,0,.1);
+  overflow: hidden;
+  height: var(--ticker-h);
+  line-height: var(--ticker-h);
+  white-space: nowrap;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(.9rem, .9vw + .6rem, 1rem);
+  pointer-events: none;            /* keeps it topmost but non-blocking */
 }
-.ticker>*{display:inline-block; white-space:nowrap; padding-left:100%; margin:0; animation:ticker-scroll 46s linear infinite; color:#fff;}
-@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
-@media(prefers-reduced-motion:reduce){.ticker>*{animation:none;padding-left:0}}
+.ticker > * {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  margin: 0;
+  animation: ticker-scroll 46s linear infinite;
+  color: #fff;
+  pointer-events: none;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker > * {
+    animation: none;
+    padding-left: 0;
+  }
+}
 
 /* ===== Banner ===== */
 .site-header{background:var(--indigo);position:relative;z-index:1;}
@@ -188,4 +213,3 @@ body{
 
 /* ===== Desktop-only: Hide mobile dock ===== */
 @media (min-width:701px){ #gags-dock{ display:none; } }
-```
