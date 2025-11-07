@@ -1,9 +1,10 @@
 /* ============================================================
    One True Infotainment — gags.js
-   v3.3 (stable desktop fix)
-   - Rail builds ONLY when CSS desktop media query is true
-   - Otherwise, build dock (so no blank states)
-   - Adds resize + load fallback to ensure desktop rail appears
+   v4.0 (dock-only, always-on bottom scroller)
+   - Always builds the bottom dock across all screen sizes
+   - Retires the left rail (no desktop rail logic)
+   - Safer image handling (remove broken tiles)
+   - Improved, human-readable ARIA labels
    ============================================================ */
 
 (function () {
@@ -43,10 +44,21 @@
     } else { fn(); }
   }
 
+  function humanizeLabel(slug) {
+    // Turn "golden-streets-GAG" into "Golden streets"
+    const base = String(slug || "").replace(/\.[^.]+$/, "");
+    const words = base.replace(/[_-]+/g, " ").trim().split(/\s+/);
+    if (!words.length) return base || "Gag";
+    // Drop trailing "GAG" token if present
+    const cleaned = words.filter((w, i) => !(i === words.length - 1 && /^gag$/i.test(w)));
+    const titled = cleaned.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+    return (titled.join(" ") || "Gag").trim();
+  }
+
   ready(() => {
     const rail = document.getElementById("gags-rail");
     const dock = document.getElementById("gags-dock");
-    if (!rail && !dock) return;
+    if (!dock && !rail) return; // nothing to do
 
     const manifest = getManifest();
     const gags = manifest.map(fn => {
@@ -62,9 +74,8 @@
     function createTile(gag) {
       const a = document.createElement("a");
       a.className = "gag-tile";
-      a.href = gag.href;
-      a.rel = "nofollow";
-      a.setAttribute("aria-label", gag.base);
+      a.href = gag.href;                 // keep internal hotlink
+      a.setAttribute("aria-label", humanizeLabel(gag.base));
 
       const pill = document.createElement("span");
       pill.className = "gag-pill";
@@ -74,11 +85,12 @@
       img.className = "gag-img";
       img.loading = "lazy";
       img.decoding = "async";
-      img.alt = gag.base.replace(/[-_]/g, " ");
+      img.alt = humanizeLabel(gag.base);
       img.src = gag.img;
       img.addEventListener("error", () => {
-        img.style.visibility = "hidden";
-        img.style.minHeight = "120px";
+        // Remove broken tiles to avoid empty holes
+        const parent = a.parentNode;
+        if (parent) parent.removeChild(a);
       });
 
       a.appendChild(pill);
@@ -89,25 +101,6 @@
     function clearRail() { if (rail) { rail.removeAttribute("data-live"); rail.textContent = ""; } }
     function clearDock() { if (dock) { dock.textContent = ""; } }
 
-    function buildRail() {
-      if (!rail || !gags.length) return;
-      rail.textContent = "";
-      const frag = document.createDocumentFragment();
-
-      const fixed = document.createElement("div");
-      fixed.className = "gag-fixed";
-      fixed.appendChild(createTile(gags[0]));
-
-      const scroll = document.createElement("div");
-      scroll.className = "gag-scroll";
-      gags.slice(1).forEach(gag => scroll.appendChild(createTile(gag)));
-
-      frag.appendChild(fixed);
-      frag.appendChild(scroll);
-      rail.appendChild(frag);
-      rail.dataset.live = "1";
-    }
-
     function buildDock() {
       if (!dock || !gags.length) return;
       dock.textContent = "";
@@ -117,35 +110,23 @@
       dock.appendChild(track);
     }
 
-    // Mirror the CSS desktop breakpoint exactly
-    const mqDesktop = window.matchMedia("(min-width:1100px)");
-
+    // --- Dock-only behavior: always build dock, retire rail ---
     function apply() {
-      if (mqDesktop.matches) {
-        // Desktop CSS grid is active → safe to build rail
-        buildRail();
-        clearDock();
-      } else {
-        // Not in desktop CSS → never build rail; use dock instead
-        buildDock();
-        clearRail();
-      }
+      buildDock();   // populate bottom scroller on all screens
+      clearRail();   // ensure legacy rail is empty/inactive
     }
+    // ----------------------------------------------------------
 
     // Run initial build once DOM is ready
     apply();
 
-    // Rebuild on breakpoint change (modern browsers)
-    if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", apply);
-    else mqDesktop.addListener(apply);
-
-    // --- NEW: ensure rebuild after full load and any resize ---
+    // Ensure rebuild after full load (image/layout safety)
     window.addEventListener("load", apply);
+
+    // Throttled rebuild on resize/orientation changes
     window.addEventListener("resize", () => {
-      // throttle to prevent spam rebuilds
       clearTimeout(window.__gagResizeTimer);
       window.__gagResizeTimer = setTimeout(apply, 250);
     });
-    // --- END NEW FIX ---
   });
 })();
