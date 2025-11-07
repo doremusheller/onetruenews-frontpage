@@ -187,7 +187,7 @@ body{
     background:transparent; padding:.4rem .5rem; z-index:5000;
   }
   #gags-dock .gag-track{
-    display:flex; flex-wrap:nowrap; gap:3px; /* thin buffer */
+    display:flex; flex-wrap:nowrap; gap:3px;
     overflow-x:auto; overflow-y:hidden; background:transparent;
     -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
   }
@@ -222,10 +222,11 @@ html body {
   padding-bottom: calc(84px + env(safe-area-inset-bottom)) !important;
 }
 
+/* === NEW CENTERED POSTER STRIP === */
 #gags-dock .gag-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 3px; /* final narrow buffer */
+  gap: 3px;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -235,14 +236,20 @@ html body {
 
 #gags-dock .gag-tile {
   flex: 0 0 auto;
-  width: 160px;
+  display: flex;                /* center the image inside */
+  align-items: center;
+  justify-content: center;
+  height: 120px;                /* fixed height, even horizon line */
   scroll-snap-align: start;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 #gags-dock .gag-img {
-  aspect-ratio: 16 / 9;
-  height: auto;
-  object-fit: contain;
+  height: 100%;                 /* uniform height */
+  width: auto;                  /* variable width, keeps proportions */
+  object-fit: contain;          /* no cropping */
+  display: block;
   background: rgba(0,0,0,.02);
   box-shadow: 0 2px 4px var(--shadow);
 }
