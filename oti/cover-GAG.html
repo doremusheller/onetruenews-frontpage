@@ -8,7 +8,7 @@
   <meta name="description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Learn & Listen" />
+  <meta property="og:title" content="Get in on the gag" />
   <meta property="og:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="media/cover-GAG.jpg" />
@@ -17,7 +17,7 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Learn & Listen" />
+  <meta name="twitter:title" content="Get in on the gag" />
   <meta name="twitter:description" content="A story built to warn became the story being told. First, our media inspired the novel. Then the novel trained a machine. Now the machine makes the media we crave." />
   <meta name="twitter:image" content="media/cover-GAG.jpg" />
 
@@ -26,6 +26,7 @@
   <script src="ads.js" defer></script>
 
   <style>
+    /* HERO: figcaption above image; form wraps beside image on larger screens */
     .story-hero { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
     .story-hero figcaption {
       font-style: italic;
@@ -46,6 +47,7 @@
       .story-hero .contact-form { flex: 1 1 320px; }
     }
 
+    /* CONTACT FORM UI */
     .contact-form {
       display: grid;
       grid-template-columns: 1fr;
@@ -68,26 +70,58 @@
     }
     .contact-meta { font-size: .9rem; color: rgba(0,0,0,.75); margin-top: .6rem; }
 
+    /* SUMMARY: wrap around right-aligned in-article banner image */
+    .summary { clear: both; }
+    .summary .article-banner-right {
+      float: right;
+      width: 42%;
+      max-width: 520px;
+      height: auto;
+      margin: 0 0 1rem 1.5rem;
+      display: block;
+    }
+    @media (max-width: 749.98px) {
+      .summary .article-banner-right {
+        float: none;
+        width: 100%;
+        max-width: none;
+        margin: 0 0 1rem 0;
+      }
+    }
     .summary .standalone {
       margin-top: 2em;
       margin-bottom: 2em;
       text-align: left;
       font-size: 1.1em;
     }
-    .note .standalone {
-      margin-top: 1em;
-      margin-bottom: 1em;
-      text-align: left;
-      font-size: 1.1em;
+    .summary .standalone a {
+      color: inherit;
+      text-decoration: underline;
     }
 
+    /* NOTE: double space between paragraphs, normal (non-italic) */
+    .note .standalone {
+      margin-top: 0;
+      margin-bottom: 2em; /* double-space look */
+      text-align: left;
+      font-size: 1.1em;
+      font-style: normal;
+    }
+    .note { clear: both; }
+
+    /* Centered OTI logo near bottom */
     .oti-logo-wrap { text-align: center; margin: 2rem 0; }
     .oti-logo-wrap .oti-logo {
       width: 120px;
       max-width: 30vw;
+      height: auto;
       opacity: .95;
       filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
     }
+
+    /* Center the footer nav buttons */
+    .footer-nav { text-align: center; margin: 1rem 0; }
+    .footer-nav .btn { display: inline-block; margin: 0 .4rem; }
   </style>
 
   <noscript>
@@ -120,10 +154,25 @@
 
   <main class="page" role="main">
     <article>
+      <!-- STORY HEADER MOVED TO TOP (just below site banner) -->
+      <header>
+        <div class="kicker">Promotions • Publication</div>
+        <h1>So… WTF, then?</h1>
+        <p class="dek">Get in on the gag. It’s already in on you.</p>
+      </header>
+
+      <!-- FIGCAPTION ABOVE IMAGE; CONTACT FORM BESIDE IMAGE -->
       <figure class="story-hero">
-        <figcaption>Get in on the gag... that's already running on you.</figcaption>
+        <figcaption>Twain? Orwell? The Onion? Yes.</figcaption>
         <a href="https://a.co/d/g8VtxsM" target="_blank" rel="noopener noreferrer">
-          <img src="media/cover-GAG.jpg" alt="Book cover for ‘When It Happened Here’ — official release advertisement" />
+          <img
+            src="media/cover-GAG.jpg"
+            alt="Book cover for ‘When It Happened Here’ — official release advertisement"
+            decoding="async"
+            fetchpriority="high"
+            loading="eager"
+            class="is-hidden"
+          />
         </a>
 
         <form id="author-contact-form" class="contact-form">
@@ -144,13 +193,9 @@
         </form>
       </figure>
 
-      <header>
-        <div class="kicker">Promotions • Publication</div>
-        <h1>So… WTF, then?</h1>
-        <p class="dek">Exactly.</p>
-      </header>
-
+      <!-- SUMMARY WITH RIGHT-ALIGNED IN-ARTICLE BANNER; TEXT WRAPS LEFT -->
       <section class="summary">
+        <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="article-banner-right" />
         <p class="standalone"><em>A story told to warn became the story telling itself.<br>
         First, our media inspired the novel.<br>
         Then the novel trained a machine.<br>
@@ -159,20 +204,26 @@
         <p class="standalone"><a href="https://a.co/d/6F5z5xj" target="_blank" rel="noopener noreferrer"><em>When It Happened Here.</em></a> Available now.</p>
       </section>
 
+      <!-- NOTE SECTION: NORMAL FONT, DOUBLE-SPACED PARAS -->
       <section class="note">
-        <p>Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
-        <p>When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
-        <p>The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
-        <p>OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
+        <p class="standalone">Writer and technologist Doremus Heller created One True Infotainment after writing <em>When It Happened Here</em>—a novel born of alarm at a nation that mistakes entertainment for truth.</p>
+
+        <p class="standalone">When words weren’t enough, he used the novel to deeply train an AI language model to prove the point.</p>
+
+        <p class="standalone">The AI now monitors our feeds and measures our appetites; its hourly reports suggest we increasingly prefer noise to signal.</p>
+
+        <p class="standalone">OTI builds itself now—stories, images, even ads—each a reflection of the culture that feeds it. Doremus Heller still believes we think for ourselves. He and the system argue daily.</p>
       </section>
 
+      <!-- CENTERED NAV BUTTONS -->
       <nav class="footer-nav" aria-label="Ad navigation">
         <a class="btn" href="ad-next.html">Next Ad →</a>
         <a class="btn" href="index.html">OTI Home</a>
       </nav>
 
+      <!-- CENTERED OTI LOGO NEAR BOTTOM -->
       <div class="oti-logo-wrap">
-        <a href="index.html">
+        <a href="index.html" aria-label="OTI Home">
           <img class="oti-logo" src="media/OTI-round-logo.jpg" alt="OTI logo" />
         </a>
       </div>
@@ -187,8 +238,45 @@
   </footer>
 
   <script>
+    // Fade-in behavior for headline/dek/image (kept from original)
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!document.body.classList.contains('story-page')) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const H = document.querySelector('article h1');
+      const D = document.querySelector('article .dek');
+      const I = document.querySelector('.story-hero img');
+
+      if (reduce) {
+        [H, D, I].forEach(el => el && (el.style.opacity = 1, el.style.transform = 'translateY(0)'));
+        I && I.classList.remove('is-hidden');
+        return;
+      }
+
+      const fadeIn = (el, delay = 0) => el && el.animate(
+        [ { opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' } ],
+        { duration: 600, easing: 'ease', fill: 'forwards', delay }
+      );
+
+      fadeIn(H, 0);
+      fadeIn(D, 150);
+
+      const showImage = () => { I.classList.remove('is-hidden'); fadeIn(I, 300); };
+
+      if (I && I.complete && I.naturalWidth > 0) {
+        showImage();
+      } else if (I) {
+        I.addEventListener('load', showImage, { once: true });
+        I.addEventListener('error', () => { I.classList.remove('is-hidden'); }, { once: true });
+        setTimeout(() => I.classList.remove('is-hidden'), 2000);
+      }
+    });
+  </script>
+
+  <script>
+    // JS email reveal + mailto handling
     (function(){
       const addr = "doremusheller@gmail.com";
+
       const emailInline = document.getElementById('author-email-inline');
       if (emailInline) {
         emailInline.innerHTML = `<a href="mailto:${addr}" rel="noopener noreferrer">${addr}</a>`;
