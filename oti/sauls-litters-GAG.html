@@ -46,7 +46,13 @@
       background:#ddd;
       overflow:hidden;
     }
-    .media img{width:100%;height:100%;object-fit:cover;display:block}
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      font-size:0;
+    }
     .deck{
       font-family: "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
       margin:20px auto 8px;
@@ -100,8 +106,8 @@
     </header>
 
     <figure class="media" aria-label="Primary image">
-      <!-- Place your rendered ad still at the project root with this exact filename -->
-      <img src="sauls-litters-GAG.jpg" alt="A photorealistic advertisement scene for Saul’s Litter Service: a refined Taxpayer seated on a gilded litter carried by rugged bearers, against a muted sky." />
+      <!-- Image stored in media folder -->
+      <img src="media/sauls-litters-GAG.jpg" alt="Saul’s Litter Service ad" loading="eager" />
     </figure>
 
     <section class="pad" aria-label="Copy">
