@@ -3,122 +3,62 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Saul’s Litter Service — Billboard</title>
-  <meta name="description" content="Billboard layout for Saul’s Litter Service — Walking is for Others. Smooth ride. Social order." />
+  <title>Saul’s Litter Service — OTI Feature</title>
+  <meta name="description" content="Feature layout for Saul’s Litter Service on One True Infotainment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root{
-      --gold:#caa75a; /* Patriot Gold */
-      --gray:#5b5b5b; /* Ministry Gray */
-      --cream:#faf7f0; /* Quiet backdrop */
-      --ink:#121212; /* Rich black */
+      --ink:#111111;
+      --muted:#6b6b6b;
+      --cream:#f5f1ea;
+      --card:#0f1522;
+      --accent:#caa75a; /* Patriot Gold */
     }
-    *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-serif, "Times New Roman", Times, Georgia, serif;
+      font-family:"Libre Baskerville", Georgia, "Times New Roman", serif;
       background:var(--cream);
       color:var(--ink);
-      display:flex;align-items:center;justify-content:center;
     }
-    .board{
-      width:min(1200px, 96vw);
-      background:white;
-      box-shadow:0 20px 60px rgba(0,0,0,.15);
+    .wrap{max-width:1100px;margin:40px auto;padding:0 24px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+    .card{
+      background:var(--card);
       border-radius:16px;
+      box-shadow:0 22px 40px rgba(0,0,0,.25);
       overflow:hidden;
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid rgba(255,255,255,.06);
     }
-    .banner{
-      background:var(--gold);
-      color:#fff;
-      text-align:center;
-      padding:36px 24px 28px;
-      letter-spacing:.08em;
-      font-weight:700;
-      text-transform:uppercase;
-      font-size:clamp(22px,4.2vw,44px);
-      font-family: "Trajan Pro", Trajan, "Times New Roman", serif;
-    }
-    .media{
-      position:relative;
-      aspect-ratio: 16/9;
-      background:#ddd;
-      overflow:hidden;
-    }
-    .media img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      font-size:0;
-    }
-    .deck{
-      font-family: "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
-      margin:20px auto 8px;
-      text-align:center;
-      color:#6d6d6d;
-      font-weight:300;
-      font-size:clamp(16px,2.2vw,22px);
-    }
-    .bodycopy{
-      font-family: "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
-      color:var(--gray);
-      text-align:center;
-      padding:8px 24px 0;
-      font-size:clamp(14px,1.9vw,18px);
-      line-height:1.4;
-    }
-    .url{
-      text-align:center;
-      font-family: "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
-      margin:10px 0 22px;
-      font-weight:700;
-      letter-spacing:.01em;
-      font-size:clamp(14px,1.9vw,18px);
-    }
-    .footer{
-      border-top:1px solid rgba(0,0,0,.08);
-      padding:10px 16px;
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(180deg, #ffffff 0%, #f6f3ea 100%);
-    }
-    .micro{
-      font-family: "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
-      color:#8b8b8b;
-      font-size:10px; /* ~6pt at common print scaling */
-      line-height:1.2;
-      text-align:center;
-      max-width:1000px;
-    }
-    /* Safe padding so no text runs to the edge, per instruction */
-    .pad{padding-left:24px;padding-right:24px}
-
-    @media (max-width:560px){
-      .banner{padding:22px 16px}
-    }
+    .card img{display:block;width:100%;height:auto}
+    .kicker{color:var(--muted);font-size:16px;margin-bottom:10px}
+    h1{font-size:clamp(28px,4.5vw,52px);line-height:1.2;margin:0 0 14px}
+    .dek{font-size:18px;color:#333;margin:0 0 18px}
+    .body{font-size:18px;color:#3a3a3a;margin:0 0 16px;max-width:46ch}
+    .italic{font-style:italic;color:#5a5a5a;margin:0 0 20px}
+    .link a{color:#2a3db8;text-underline-offset:3px}
+    .fineprint{margin-top:26px;font-size:12px;color:#787878}
+    @media (max-width:900px){.grid{grid-template-columns:1fr;gap:24px}.wrap{margin:24px auto}}
   </style>
 </head>
 <body>
-  <main class="board" role="main" aria-label="Saul’s Litter Service billboard composition">
-    <header class="banner" aria-label="Banner">
-      <div>WALKING IS FOR OTHERS.</div>
-    </header>
+  <main class="wrap" role="main" aria-label="Feature: Saul’s Litter Service">
+    <section class="grid">
+      <aside class="card">
+        <img src="media/sauls-litters-GAG.jpg" alt="Feature image for Saul’s Litter Service showing a Taxpayer riding a carried litter." />
+      </aside>
 
-    <figure class="media" aria-label="Primary image">
-      <!-- Image stored in media folder -->
-      <img src="media/sauls-litters-GAG.jpg" alt="Saul’s Litter Service ad" loading="eager" />
-    </figure>
-
-    <section class="pad" aria-label="Copy">
-      <div class="deck">Smooth ride. Social order.</div>
-      <div class="bodycopy">In continuous operation since the Corrections, Saul’s Litters maintains a 100% satisfaction rate among verified Taxpayers.</div>
-      <div class="url"><strong>www.saulslitters.correct</strong></div>
+      <article>
+        <div class="kicker">OTI Feature • Saul’s Litter Service</div>
+        <h1>WALKING IS FOR OTHERS.</h1>
+        <p class="dek">Smooth ride. Social order.</p>
+        <p class="body">In continuous operation since the Corrections, Saul’s Litters maintains a 100% satisfaction rate among verified Taxpayers.</p>
+        <p class="link"><a href="index.html">Next → OTI Home</a></p>
+        <p class="fineprint">In cooperation with the Ministry of Corrections. Litter bearers not paid. Seller assumes no responsibility for revolt.</p>
+      </article>
     </section>
-
-    <footer class="footer">
-      <div class="micro">In cooperation with the Ministry of Corrections. Litter bearers not paid. Seller assumes no responsibility for revolt.</div>
-    </footer>
   </main>
 </body>
 </html>
