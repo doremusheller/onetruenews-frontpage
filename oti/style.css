@@ -252,6 +252,7 @@ body {
   overscroll-behavior: contain;
   align-items: center;
   height: 120px;
+  animation: gag-autoscroll 100s linear infinite;
 }
 
 /* Each tile is a direct clickable link wrapping one image */
@@ -298,3 +299,13 @@ body {
 #gags-rail { pointer-events:none; }
 #gags-rail[data-live="1"] { pointer-events:auto; }
 #gags-rail:empty { display:none; }
+
+/* === GAGS AUTO-SCROLL (additive; non-breaking) ========================= */
+@keyframes gag-autoscroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #gags-dock .gag-track { animation: none; }
+}
