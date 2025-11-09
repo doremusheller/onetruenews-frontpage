@@ -6,19 +6,16 @@
   <title>One True Infotainment — The Voice of the Corrected State</title>
   <meta name="description" content="Official news and satire from One True Infotainment." />
 
-  <!-- Load Libre Baskerville font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- Canonical style and scripts -->
   <link rel="stylesheet" href="style.css?v=161" />
   <script src="ticker.js" defer></script>
   <script src="grid.js" defer></script>
   <script src="gags.js" defer></script>
 </head>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHWXLEENTR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -28,29 +25,22 @@
 </script>
 
 <body>
-  <!-- Live Ticker -->
   <div id="ticker" class="ticker" aria-live="polite"></div>
 
-  <!-- Banner -->
   <header class="site-header">
     <picture>
-      <!-- Mobile banner -->
       <source media="(max-width:700px)" srcset="media/banner-mobile.jpg">
-      <!-- Desktop banner (unchanged) -->
       <img src="media/banner.png" alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" class="banner-img" />
     </picture>
   </header>
 
-  <!-- Page layout -->
   <main class="page">
 
-    <!-- Left Gags Rail (inactive placeholder) -->
     <aside id="gags-rail" aria-label="Sponsored stories"></aside>
 
-    <!-- Story Grid -->
     <section id="storyGrid" class="grid">
 
-      <!-- NEW Breaking Story (Pinned) -->
+      <!-- FIRST Breaking Story (Pinned) -->
       <article class="tile breaking">
         <span class="breaking-pill">Breaking</span>
         <a href="hungry-heroes.html">
@@ -60,7 +50,16 @@
         </a>
       </article>
 
-      <!-- Former Breaking Story (now regular tile) -->
+      <!-- SECOND Breaking Story (Pinned) -->
+      <article class="tile breaking">
+        <span class="breaking-pill">Breaking</span>
+        <a href="faithlynn.html">
+          <img src="media/faithlynn1.jpg" alt="Faithlynn Reece, widow of Rex Reece, weeping at her ministry desk" />
+          <h2>The Widow of the Word</h2>
+          <p>Faithlynn Reece inherits the pulpit, the platform, and the payroll of her late husband’s empire.</p>
+        </a>
+      </article>
+
       <article class="tile">
         <a href="cover-GAG.html">
           <img src="media/WIHH-ban1.jpg" alt="Grundy bans living fuck out of book">
@@ -69,7 +68,6 @@
         </a>
       </article>
 
-      <!-- Hammer of Grundy -->
       <article class="tile">
         <a href="hammer-of-grundy.html">
           <img src="media/hammer-of-grundy.jpg" alt="The Hammer of Grundy — Christian Death Metal Rocks Capitol" />
@@ -78,7 +76,6 @@
         </a>
       </article>
 
-      <!-- Former Breaking Story (now regular tile) -->
       <article class="tile">
         <a href="patriot-victim.html">
           <img src="media/patriot-victim.jpg" alt="Patriotic citizen harassed for performative bigotry" />
@@ -87,7 +84,6 @@
         </a>
       </article>
 
-      <!-- Remaining existing stories -->
       <article class="tile">
         <a href="mooseknuckle.html">
           <img src="media/keel-mooseknuckle.jpg" alt="Moose Knuckle ceremony as fresh asphalt covers golden streets; 'Even performative voting displays can go wrong,' says Ministry." />
@@ -144,7 +140,6 @@
         </a>
       </article>
 
-      <!-- INSERTED: Chimp Heist story tile -->
       <article class="tile">
         <a href="chimp-heist.html">
           <img src="media/chimp-heist.jpg" alt="Red-suited chimps flee scene of Ministry disruption on a street sweeper" />
@@ -250,33 +245,30 @@
       </article>
     </section>
 
-    <!-- Mobile/Universal Gags Dock -->
     <nav id="gags-dock" aria-label="Sponsored stories"></nav>
 
   </main>
 
-  <!-- Footer Disclaimer -->
   <footer class="footer-banner">
     The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
     Irony is resistance, satire a pitchfork.
   </footer>
 
-  <!-- Updated global gag manifest for gags.js -->
   <script>
     window.OTI_GAGS_MANIFEST = [
- "Angels-GAG.jpg",
-  "sauls-litters-GAG.jpg",
-  "patriot-beer-GAG.jpg",
-  "patriot-games-GAG.jpg",
-  "gold-card-GAG.jpg",
-  "you-GAG-here.jpg",
-  "blacks-love-grundy-GAG.jpg",
-  "OTI-premium-GAG.jpg",
-  "grundymax-GAG.jpg",
-  "golden-streets-GAG.jpg",
-  "cover-GAG.jpg",
-  "primate-guidelines-GAG.jpg",
-  "grundy-glow-GAG.jpg"
+      "Angels-GAG.jpg",
+      "sauls-litters-GAG.jpg",
+      "patriot-beer-GAG.jpg",
+      "patriot-games-GAG.jpg",
+      "gold-card-GAG.jpg",
+      "you-GAG-here.jpg",
+      "blacks-love-grundy-GAG.jpg",
+      "OTI-premium-GAG.jpg",
+      "grundymax-GAG.jpg",
+      "golden-streets-GAG.jpg",
+      "cover-GAG.jpg",
+      "primate-guidelines-GAG.jpg",
+      "grundy-glow-GAG.jpg"
     ];
   </script>
 </body>
