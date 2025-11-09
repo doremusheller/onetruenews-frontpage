@@ -31,17 +31,19 @@
     }
 
     return [
-      "Angels-GAG.jpg",
-      "patriot-beer-GAG.jpg",
-      "patriot-games-GAG.jpg",
-      "you-GAG-here.jpg",
-      "blacks-love-grundy-GAG.jpg",
-      "OTI-premium-GAG.jpg",
-      "grundymax-GAG.jpg",
-      "golden-streets-GAG.jpg",
-      "cover-GAG.jpg",
-      "primate-guidelines-GAG.jpg",
-      "grundy-glow-GAG.jpg"
+  "Angels-GAG.jpg",
+  "sauls-litters-GAG.jpg",
+  "patriot-beer-GAG.jpg",
+  "patriot-games-GAG.jpg",
+  "gold-card-GAG.jpg",
+  "you-GAG-here.jpg",
+  "blacks-love-grundy-GAG.jpg",
+  "OTI-premium-GAG.jpg",
+  "grundymax-GAG.jpg",
+  "golden-streets-GAG.jpg",
+  "cover-GAG.jpg",
+  "primate-guidelines-GAG.jpg",
+  "grundy-glow-GAG.jpg"
     ];
   }
 
