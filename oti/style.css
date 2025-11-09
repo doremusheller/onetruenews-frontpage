@@ -227,6 +227,7 @@ body {
 
 /* ============================================================
    GAGS DOCK — Clean Continuous Filmstrip
+   (Updated: borders + small divider)
    ============================================================ */
 #gags-dock {
   position: fixed;
@@ -243,7 +244,7 @@ body {
 #gags-dock .gag-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 0;                           /* shoulder-to-shoulder */
+  gap: 6px;                          /* was 0 — small dividing line between items */
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -263,7 +264,11 @@ body {
   justify-content: center;
   scroll-snap-align: start;
   text-decoration: none;
-  border: none;
+
+  /* NEW: thin border + rounding for each GAG */
+  border: 1px solid #fff;            /* change to #c00 for a thin red border */
+  border-radius: 6px;
+  overflow: hidden;
   background: none;
 }
 
