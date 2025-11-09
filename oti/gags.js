@@ -1,6 +1,6 @@
 /* ============================================================
    One True Infotainment — gags.js
-   v4.4 (seamless loop + no pills + hover pause)
+   v4.4 (seamless loop, no pills, safe DOM scope)
    ============================================================ */
 (function () {
   if (window.__OTI_GAGS_INIT__) return;
@@ -15,43 +15,28 @@
       try {
         const parsed = JSON.parse(tag.textContent);
         if (Array.isArray(parsed)) return parsed;
-      } catch (e) {}
+      } catch(_) {}
     }
-    // Fallback (kept your current default set)
     return [
-      "Angels-GAG.jpg",
-      "sauls-litters-GAG.jpg",
-      "patriot-beer-GAG.jpg",
-      "patriot-games-GAG.jpg",
-      "gold-card-GAG.jpg",
-      "you-GAG-here.jpg",
-      "blacks-love-grundy-GAG.jpg",
-      "OTI-premium-GAG.jpg",
-      "grundymax-GAG.jpg",
-      "golden-streets-GAG.jpg",
-      "cover-GAG.jpg",
-      "primate-guidelines-GAG.jpg",
+      "Angels-GAG.jpg","sauls-litters-GAG.jpg","patriot-beer-GAG.jpg","patriot-games-GAG.jpg",
+      "gold-card-GAG.jpg","you-GAG-here.jpg","blacks-love-grundy-GAG.jpg","OTI-premium-GAG.jpg",
+      "grundymax-GAG.jpg","golden-streets-GAG.jpg","cover-GAG.jpg","primate-guidelines-GAG.jpg",
       "grundy-glow-GAG.jpg"
     ];
   }
 
-  function ready(fn){ 
-    (document.readyState === "loading") ? 
-      document.addEventListener("DOMContentLoaded", fn, {once:true}) : fn();
+  function ready(fn){
+    (document.readyState === "loading")
+      ? document.addEventListener("DOMContentLoaded", fn, { once:true })
+      : fn();
   }
 
   ready(() => {
     const host = document.getElementById("gags-dock");
-    if (!host) return;
+    if (!host) return;                  // never touch anything else
 
-    const manifest = getManifest().map(fn => ({
-      base: fn.replace(/\.[^.]+$/, ""),
-      href: fn.replace(/\.[^.]+$/, "") + ".html",
-      img: "media/" + fn
-    }));
-
-    // Build viewport + track
-    host.textContent = "";
+    // viewport + track
+    host.textContent = "";              // only clear inside the dock
     const viewport = document.createElement("div");
     viewport.className = "gags-viewport";
     const track = document.createElement("div");
@@ -59,8 +44,13 @@
     viewport.appendChild(track);
     host.appendChild(viewport);
 
-    // One pass of items
-    function mountOnce(into) {
+    const manifest = getManifest().map(fn => ({
+      base: fn.replace(/\.[^.]+$/, ""),
+      href: fn.replace(/\.[^.]+$/, "") + ".html",
+      img : "media/" + fn
+    }));
+
+    function mountSet(into){
       manifest.forEach(g => {
         const a = document.createElement("a");
         a.className = "gag-tile";
@@ -84,24 +74,20 @@
       });
     }
 
-    // Duplicate once for seamless loop
-    mountOnce(track);
-    mountOnce(track);
+    // duplicate once for seamless loop
+    mountSet(track);
+    mountSet(track);
 
-    // Smooth auto-scroll using scrollLeft, loop at half width
+    // smooth continuous scroll; loop at half width
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      let pos = 0;
-      let paused = false;
-      const speedPxPerMs = 0.04;     // adjust overall speed here
-      let last = performance.now();
+      let pos = 0, paused = false, last = performance.now();
+      const speed = 0.04; // px per ms — adjust for faster/slower
+      const half = () => (track.scrollWidth / 2) - 1;
 
-      const half = () => (track.scrollWidth / 2) - 1; // loop threshold
-
-      function step(now) {
+      function step(now){
         const dt = now - last; last = now;
         if (!paused) {
-          pos += dt * speedPxPerMs;
-          // when we’ve scrolled one full set, snap back by half
+          pos += dt * speed;
           if (pos >= half()) pos -= half();
           track.scrollLeft = pos;
         }
@@ -112,7 +98,7 @@
       const pause = (ms=2000) => {
         paused = true;
         clearTimeout(track._resumeTimer);
-        track._resumeTimer = setTimeout(()=> paused = false, ms);
+        track._resumeTimer = setTimeout(() => paused = false, ms);
       };
       viewport.addEventListener("mouseenter", () => pause());
       viewport.addEventListener("focusin",   () => pause());
