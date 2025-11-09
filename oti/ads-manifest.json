@@ -1,4 +1,4 @@
-[
+window.OTI_GAGS_MANIFEST = [
   "Angels-GAG.jpg",
   "sauls-litters-GAG.jpg",
   "patriot-beer-GAG.jpg",
@@ -11,5 +11,6 @@
   "golden-streets-GAG.jpg",
   "cover-GAG.jpg",
   "primate-guidelines-GAG.jpg",
-  "grundy-glow-GAG.jpg"
-]
+  "grundy-glow-GAG.jpg",
+  "faithlynn-GAG.jpg"
+];
