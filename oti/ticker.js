@@ -8,16 +8,23 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!el) return;
 
   const headlines = [
-    "Patriot Games relocates; wild monkey still at large",
-    "Ministry clarifies travel restrictions for Holiday Freedom season",
-    "Veteran Visibility Week expands to Reality Show!",
-    "How much do YOU support our troops? Take the quiz!",
-    "First Citizen to provide first-in-class 'Color Coded Census'",
-    "First Citizen addresses wellness rumors with full jerky disclosure",
-    "Nightworks scheduled along riverfront after suspect sighting"
+    "Faithlynn rises from grief to guide the faithful — and the merch line.",
+    "Patriotic hunger declared voluntary in new Grundy nutrition program.",
+    "Ministry confirms the book ban was for everyone’s emotional safety.",
+    "Christian death metal clears the Capitol; decibels under investigation.",
+    "Angels praised for thwarting terror family’s suspicious attempt to live.",
+    "Golden graffiti keeps spreading; officials blame conceptual contagion.",
+    "Public Smiling Hours extended — morale to remain visibly excellent.",
+    "Unauthorized empathy detected in lower districts — swiftly contained.",
+    "Irregular primate threat ongoing; Ministry urges citizens to stay uncurious.",
+    "Homeless Correction Act hailed as ‘a roof you can fight for.’",
+    "First Citizen declares the wall complete and the journey ongoing.",
+    "Color-Coded Census hailed as ‘clarity through chromatics.’",
+    "River glow officially patriotic; officials advise against swimming.",
+    "Faithlynn launches Rexurrection Coffee — brewed in remembrance.",
+    "Ministry reminds citizens: irony is not a moral exemption."
   ];
 
-  // wider spacing between items (NBSPs around the bullet)
   const sep = "\u00A0\u00A0\u00A0•\u00A0\u00A0\u00A0";
   const text = (headlines.join(sep) + sep + headlines.join(sep));
 
