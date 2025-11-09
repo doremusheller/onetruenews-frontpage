@@ -1,5 +1,8 @@
 /* ============================================================
-   OTI gags.js — Seamless, Fixed Window, Continuous GAG Reel
+   OTI gags.js — Seamless Fixed Window + Interactive Autoscroll
+   - Users can drag/scroll with finger, wheel, or pointer
+   - Dock stays fixed; tiles loop smoothly inside
+   - Autoscroll targets a ~100s cycle, pauses on interaction
    ============================================================ */
 (function () {
   try {
@@ -12,7 +15,6 @@
       window.__OTI_GAGS_INIT__ = 'done';
       return;
     }
-
     window.__OTI_GAGS_INIT__ = 'done';
 
     // Read manifest or fall back
@@ -36,7 +38,7 @@
             "faithlynn-GAG.jpg"
           ]);
 
-    // Helper to build a track of tiles
+    // Helper to build a single track of tiles
     const buildTrack = () => {
       const track = document.createElement('div');
       track.className = 'gag-track';
@@ -68,12 +70,11 @@
     // <nav id="gags-dock">
     //   <div class="gag-mask">
     //     <div class="gag-reel">
-    //       <div class="gag-track">…</div>
-    //       <div class="gag-track">…</div>
+    //       <div class="gag-track">…(tiles)…</div>
+    //       <div class="gag-track">…(tiles)…</div>
     //     </div>
     //   </div>
     // </nav>
-
     const mask = document.createElement('div');
     mask.className = 'gag-mask';
 
@@ -87,9 +88,89 @@
     reel.appendChild(track2);
     mask.appendChild(reel);
 
-    // Replace host contents with mask
     host.textContent = '';
     host.appendChild(mask);
+
+    // === INTERACTIVE AUTOSCROLL CONTROLLER ====================
+    // Make the viewport natively scrollable (finger/wheel drag),
+    // and run a gentle JS autoscroll that loops seamlessly.
+    // We also disable any CSS animation set on .gag-reel to avoid conflicts.
+    reel.style.animation = 'none';
+
+    // Ensure native horizontal scroll on the mask (CSS fallback guard)
+    mask.style.overflowX = 'auto';
+    mask.style.overflowY = 'hidden';
+    mask.style.webkitOverflowScrolling = 'touch';
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let rafId = null;
+    let paused = false;
+    let resumeTimer = null;
+    let pxPerFrame = 0.5; // will be recalculated to target ~100s per loop
+    let wrapWidth = 0;
+
+    const getGap = () => {
+      const g = getComputedStyle(reel).gap;
+      const n = parseFloat(g);
+      return Number.isFinite(n) ? n : 0;
+    };
+
+    const measure = () => {
+      // Width of a single track + the inter-track gap
+      const gap = getGap();
+      // Use scrollWidth for full content width; fallback to offsetWidth
+      const w1 = track1.scrollWidth || track1.offsetWidth || 0;
+      wrapWidth = w1 + gap;
+
+      // Target duration ~100s per full cycle
+      if (wrapWidth > 0) {
+        const targetSeconds = 100;
+        const framesPerSecond = 60;
+        pxPerFrame = wrapWidth / (targetSeconds * framesPerSecond);
+      }
+    };
+
+    // Recalculate when images load, and on resize
+    const imgs = reel.querySelectorAll('img');
+    imgs.forEach(img => img.addEventListener('load', measure, { once: true }));
+    window.addEventListener('resize', () => {
+      measure();
+      // Keep scroll position within new bounds
+      if (wrapWidth && mask.scrollLeft >= wrapWidth) {
+        mask.scrollLeft = mask.scrollLeft % wrapWidth;
+      }
+    });
+
+    // Initial measure (may be refined as images load)
+    measure();
+
+    // Autoscroll loop
+    const tick = () => {
+      if (!paused && !prefersReduced && wrapWidth > 0) {
+        mask.scrollLeft += pxPerFrame;
+        if (mask.scrollLeft >= wrapWidth) {
+          mask.scrollLeft -= wrapWidth; // seamless wrap
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    // Pause on any user interaction; resume after quiet period
+    const pauseAndResumeSoon = () => {
+      paused = true;
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; }, 2000);
+    };
+
+    ['pointerdown','touchstart','wheel'].forEach(evt =>
+      mask.addEventListener(evt, pauseAndResumeSoon, { passive: true })
+    );
+
+    if (!prefersReduced) {
+      rafId = requestAnimationFrame(tick);
+    }
+
   } catch (e) {
     // Fail-safe: mark done and silently stop
     window.__OTI_GAGS_INIT__ = 'done';
