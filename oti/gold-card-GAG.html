@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Justice Is Blind — Dignity Through Donation™</title>
+  <style>
+    :root{
+      --bg:#0e0f12; --ink:#e7e5e4; --muted:#a8a29e; --gold:#d6b55b; --red:#b91c1c;
+    }
+    body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;}
+    .page{display:grid; grid-template-columns:minmax(260px,34vw) 1fr; gap:3rem; min-height:100vh; padding:3rem clamp(1rem,3vw,3rem);}
+    .left{position:sticky; top:3rem; align-self:start;}
+    .goldcard{width:100%; height:auto; border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,.55); max-height:85vh; object-fit:cover;}
+    .eyebrow{letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:600}
+    h1{margin:.25rem 0 0; font-size:clamp(36px,5vw,64px); line-height:1.05; color:var(--ink);}
+    .deck{font-size:clamp(16px,1.6vw,22px); color:var(--gold); font-style:italic; margin:.75rem 0 1.75rem}
+    .body{max-width:68ch; font-size:1.05rem}
+    .body p{margin:0 0 1rem}
+    .fineprint{margin-top:2rem; font-size:.72rem; color:var(--muted); opacity:.9}
+    @media(max-width:900px){.page{grid-template-columns:1fr; gap:2rem; padding:2rem 1.25rem}.left{position:relative; top:0}.goldcard{max-height:60vh}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <aside class="left">
+      <img src="media/gold-card-GAG.jpg" alt="Golden Taxpayer Card" class="goldcard" />
+    </aside>
+
+    <section class="right">
+      <div class="eyebrow">Ministry of Donations</div>
+      <h1>JUSTICE IS BLIND.</h1>
+      <p class="deck">But she knows a Taxpayer when she sees one.</p>
+
+      <div class="body">
+        <p>
+          Join the <strong>Dignity Through Donation™</strong> program — where civic virtue meets convenience. One contribution, one clean slate. Justice simplified for those who keep the lights on.
+        </p>
+
+        <p class="fineprint">
+          See your local Minister for enrollment. Gold Card valid once per year. Not liable for accidents, oversight, or unexpected resistance from disloyal Others.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
