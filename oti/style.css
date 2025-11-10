@@ -1,6 +1,6 @@
 /* ============================================================
-   One True Infotainment — Canonical Style Sheet v161
-   (Refined tile framing + continuous gag filmstrip)
+   One True Infotainment — Canonical Style Sheet v161.1
+   (Refined tile framing + continuous gag filmstrip + 4-column desktop)
    ============================================================ */
 
 :root {
@@ -43,7 +43,7 @@ body {
   white-space:nowrap;
   padding-left:100%;
   margin:0;
-  animation:ticker-scroll 95s linear infinite;
+  animation:ticker-scroll 100s linear infinite;
   color:#fff;
   pointer-events:none;
 }
@@ -52,7 +52,10 @@ body {
   to { transform:translateX(-100%); }
 }
 @media (prefers-reduced-motion:reduce) {
-  .ticker > * { animation:none; padding-left:0; }
+  .ticker > * {
+    animation:none;
+    padding-left:0;
+  }
 }
 
 /* ===== Banner ===== */
@@ -179,7 +182,7 @@ body {
 /* ===== Desktop niceties ===== */
 @media (min-width:1100px) {
   .grid {
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr)); /* CHANGED: 3 → 4 */
     gap:1rem;
   }
   .tile h2, .tile p {
@@ -233,39 +236,38 @@ body {
   background: var(--cream);
   padding: 0;
   z-index: 5000;
-  overflow: hidden; /* window stays fixed */
+  overflow: hidden;
 }
 
-/* Mask is the scrollable viewport users can drag/scroll */
 #gags-dock .gag-mask {
-  overflow-x: auto;                 /* enable native finger/wheel scroll */
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;    /* snap-friendly */
+  position: relative;
   width: 100%;
   height: 120px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  align-items: center;
 }
 
-/* Reel contains two tracks for seamless looping (JS controls motion now) */
 #gags-dock .gag-reel {
   display: flex;
   flex-wrap: nowrap;
   gap: 6px;
   align-items: center;
-  height: 120px;
-  will-change: transform;           /* kept for perf; no CSS animation applied */
+  height: 100%;
+  will-change: transform;
 }
 
-/* A single track instance (duplicated in JS) */
 #gags-dock .gag-track {
   display: flex;
   flex-wrap: nowrap;
   gap: 6px;
   align-items: center;
-  height: 120px;
+  height: 100%;
 }
 
-/* Each tile is a direct clickable link wrapping one image */
 #gags-dock .gag-tile {
   flex: 0 0 auto;
   width: auto;
@@ -273,7 +275,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  scroll-snap-align: start;         /* snap to tiles on drag */
+  scroll-snap-align: start;
   text-decoration: none;
   border: 1px solid #fff;
   border-radius: 6px;
@@ -281,7 +283,6 @@ body {
   background: none;
 }
 
-/* Poster images — clean, centered, no margin or overlay */
 #gags-dock .gag-img {
   display: block;
   height: 100%;
@@ -292,21 +293,14 @@ body {
   border-radius: 0;
 }
 
-/* Remove any remaining hover or pill behavior */
 .gag-pill { display: none !important; }
 
-/* Hide dock entirely if empty */
 #gags-dock:empty { display: none; }
 
-/* Maintain desktop visibility */
-@media (min-width: 701px) { #gags-dock { display: block; } }
+@media (min-width: 701px) {
+  #gags-dock { display: block; }
+}
 
-/* ===== Safety ===== */
 #gags-rail { pointer-events:none; }
 #gags-rail[data-live="1"] { pointer-events:auto; }
 #gags-rail:empty { display:none; }
-
-/* Reduced motion: ticker handled above; native scroll remains available */
-@media (prefers-reduced-motion: reduce) {
-  .ticker > * { animation: none; padding-left: 0; }
-}
