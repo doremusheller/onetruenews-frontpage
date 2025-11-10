@@ -182,7 +182,7 @@ body {
 /* ===== Desktop niceties ===== */
 @media (min-width:1100px) {
   .grid {
-    grid-template-columns:repeat(4,minmax(0,1fr)); /* CHANGED: 3 → 4 */
+    grid-template-columns:repeat(5,minmax(0,1fr)); /* CHANGED: 4 → 5 */
     gap:1rem;
   }
   .tile h2, .tile p {
