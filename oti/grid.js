@@ -5,6 +5,7 @@
    - Minimizes reflow/paint via DocumentFragment + batched style writes
    - Pauses swaps when tab not visible; respects reduced motion
    - Tile cap raised to 40
+   - All .tile.breaking remain anchored in place
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,9 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("storyGrid") || document.querySelector(".grid");
   if (!grid) return;
 
-  // Collect tiles but keep BREAKING anchored
-  const breaking = grid.querySelector(".tile.breaking");
-  const allTiles = Array.from(grid.querySelectorAll(".tile")).filter(t => t !== breaking);
+  // Collect tiles but keep ALL BREAKING tiles anchored
+  const breakingTiles = Array.from(grid.querySelectorAll(".tile.breaking"));
+  const allTiles = Array.from(grid.querySelectorAll(".tile")).filter(
+    t => !breakingTiles.includes(t)
+  );
   if (!allTiles.length) return;
 
   // Fisher–Yates
@@ -38,13 +41,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Batch initial visibility changes to reduce layout thrash
   (function initialLayout(){
-    // hide all first (batch write)
-    allTiles.forEach(t => { t.style.display = "none"; t.style.opacity = ""; t.style.transition = ""; });
+    // hide all NON-BREAKING tiles first (batch write)
+    allTiles.forEach(t => {
+      t.style.display = "none";
+      t.style.opacity = "";
+      t.style.transition = "";
+    });
 
     // then show the chosen ones using a fragment
     const frag = document.createDocumentFragment();
-    showNow.forEach(t => { t.style.display = ""; frag.appendChild(t); });
+    showNow.forEach(t => {
+      t.style.display = "";
+      frag.appendChild(t);
+    });
     grid.appendChild(frag);
+    // breakingTiles remain untouched, in their original anchored positions
   })();
 
   if (prefersReduced || hideNow.length === 0) return;
