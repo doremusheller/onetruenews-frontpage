@@ -42,14 +42,19 @@
       top:3rem;
       align-self:start;
     }
+
+    /* === IMAGE FIX: prevent cropping, center image, scale safely === */
     .goldcard{
       width:100%;
-      height:auto;
+      max-height:85vh;
+      height:100%;
       border-radius:16px;
       box-shadow:0 10px 40px rgba(0,0,0,.55);
-      max-height:85vh;
-      object-fit:cover;
+      object-fit:contain;           /* ensures whole image is visible */
+      object-position:center center;/* centers the image */
+      background:#000;              /* letterbox background */
     }
+
     .eyebrow{
       letter-spacing:.18em;
       text-transform:uppercase;
