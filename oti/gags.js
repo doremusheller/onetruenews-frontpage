@@ -33,6 +33,7 @@
             "grundymax-GAG.jpg",
             "golden-streets-GAG.jpg",
             "cover-GAG.jpg",
+            "jesus-merch-GAG.jpg",
             "primate-guidelines-GAG.jpg",
             "grundy-glow-GAG.jpg",
             "faithlynn-GAG.jpg"
