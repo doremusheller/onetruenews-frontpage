@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>First Citizen Receives Historic Turkey-Issued Pardon — One True Infotainment</title>
+  <meta name="description" content="In an unprecedented legal inversion, a government-certified turkey pardons the First Citizen using a bar-napkin doctrine unveiled moments earlier." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="First Citizen Receives Historic Turkey-Issued Pardon" />
+  <meta property="og:description" content="In an unprecedented legal inversion, a government-certified turkey pardons the First Citizen using a bar-napkin doctrine unveiled moments earlier." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://www.onetrueinfotainment.com/oti/media/turkey-pardon.jpg" />
+  <meta property="og:site_name" content="One True Infotainment" />
+  <link rel="canonical" href="https://www.onetrueinfotainment.com/oti/turkey-pardon.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="First Citizen Receives Historic Turkey-Issued Pardon" />
+  <meta name="twitter:description" content="A bar-napkin clause temporarily reverses presidential pardon powers, granting clemency authority to a turkey." />
+  <meta name="twitter:image" content="https://www.onetrueinfotainment.com/oti/media/turkey-pardon.jpg" />
+
+  <!-- Canonical OTI styles -->
+  <link rel="stylesheet" href="style.css?v=140" />
+
+  <!-- Scripts -->
+  <script src="ticker.js" defer></script>
+  <script src="ads.js" defer></script>
+
+  <!-- Hero styling -->
+  <style>
+    .story-hero img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    @media (min-width: 900px) {
+      .story-hero img {
+        display: block;
+        margin: 0 auto;
+        max-height: 62vh;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    }
+    p { margin-bottom: 1.35em; }
+  </style>
+</head>
+
+<body class="story-page">
+
+  <div id="ticker" class="ticker" aria-live="polite"></div>
+
+  <header class="site-header" role="banner">
+    <a href="index.html" aria-label="Return to OTI Home">
+      <img class="banner-img" src="media/banner.png"
+        alt="ONE TRUE INFOTAINMENT — The Voice of the Corrected State" />
+    </a>
+  </header>
+
+  <main class="page">
+    <article>
+
+      <!-- Hero -->
+      <figure class="story-hero wrap-left">
+        <img
+          src="media/turkey-pardon.jpg"
+          alt="A solemn turkey judge preparing to deliver its pardon while the First Citizen awaits the decision."
+          decoding="async"
+          fetchpriority="high" />
+        <figcaption>The legally empowered turkey moments before issuing a full and unconditional pardon to the First Citizen.</figcaption>
+      </figure>
+
+      <!-- Header block -->
+      <header>
+        <div class="kicker">Executive Traditions • Ceremonial Powers</div>
+        <h1>First Citizen Granted Historic Pardon by Turkey Judge</h1>
+        <p class="dek">Using a bar-napkin doctrine unveiled seconds earlier, the First Citizen briefly inverted the nation’s pardon authority so a government-certified turkey could formally absolve him.</p>
+        <p class="byline">By J. Crandlemeyer Peepwhistle III — One True Infotainment</p>
+        <p class="dateline">Washington, D.C. — 0900 Hours</p>
+      </header>
+
+      <nav class="footer-nav" aria-label="Story navigation (top)">
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="executive-holiday-rulings.html">Related Story →</a>
+      </nav>
+
+      <!-- Story Body -->
+      <section>
+
+        <p>The First Citizen opened Friday’s ceremony by unveiling a previously unknown legal mechanism: a wrinkled bar napkin, written in what appeared to be black Sharpie, titled <em>The Turkey & Supreme Innocence Doctrine</em>. Waving the napkin triumphantly, he announced it granted him the power to temporarily invert presidential clemency authority.</p>
+
+        <p>This inversion allowed the State’s official Thanksgiving turkey—identified by handlers as Judge Feathers J. Drumstick—to preside from an elevated mahogany bench erected on the South Lawn. The bird was issued a gavel, a robe, and a brief orientation on “executive absolution fundamentals.”</p>
+
+        <p>In a scene witnesses described as “deeply moving” and “not confusing once explained several times,” the turkey raised its gavel and declared the First Citizen “wholly innocent of all things, including things no one has ever suggested he did.”</p>
+
+        <p>The First Citizen, who currently faces no accusations, wrongdoing, inquiries, curiosity, speculation, or rumor, accepted the pardon solemnly. “I didn’t need it,” he reminded the assembled Taxpayers, “because I am the most innocent man in the Corrected States. But the turkey deserved the honor.”</p>
+
+        <p>As the ceremony concluded, aides observed the First Citizen issuing a routine post-pardon directive: the immediate beheading, plucking, and baking of Judge Drumstick “in accordance with longstanding culinary tradition.”</p>
+
+      </section>
+
+      <nav class="footer-nav" aria-label="Story navigation (bottom)">
+        <a class="btn" href="index.html">OTI Home</a>
+        <a class="btn" href="executive-holiday-rulings.html">Next Story →</a>
+      </nav>
+
+    </article>
+
+    <div class="ad-row"></div>
+  </main>
+
+  <footer class="footer-banner">
+    The persons, events and depictions of One True Infotainment are fictional and may not yet have come to pass.
+    Irony is resistance, satire a pitchfork.
+  </footer>
+
+  <!-- Fade-in Animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!document.body.classList.contains('story-page')) return;
+      const H = document.querySelector('article h1');
+      const D = document.querySelector('article .dek');
+      const I = document.querySelector('.story-hero img');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduce) { [H, D, I].forEach(el => el && (el.style.opacity = 1)); return; }
+
+      const fadeIn = (el, delay = 0) => el && el.animate(
+        [{ opacity: 0, transform: 'translateY(8px)' },
+         { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 600, easing: 'ease', fill: 'forwards', delay }
+      );
+
+      fadeIn(H, 0);
+      fadeIn(D, 150);
+
+      if (I?.complete) fadeIn(I, 300);
+      else I?.addEventListener('load', () => fadeIn(I, 300), { once: true });
+    });
+  </script>
+
+  <!-- Caption Fallback -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!document.body.classList.contains("story-page")) return;
+      const fig = document.querySelector(".story-hero");
+      if (!fig || fig.querySelector("figcaption")) return;
+
+      const firstP = document.querySelector("article section p");
+      if (firstP) {
+        const caption = document.createElement("figcaption");
+        caption.textContent = firstP.textContent.slice(0, 140).trim() + "…";
+        fig.appendChild(caption);
+      }
+    });
+  </script>
+
+</body>
+</html>
