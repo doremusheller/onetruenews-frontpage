@@ -1,1 +1,1969 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>North America Services Monitor - Master Watch List</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #111827;
+    --panel2: #1f2937;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --line: #334155;
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --gray: #64748b;
+    --link: #93c5fd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(180deg, #020617, var(--bg));
+    color: var(--text);
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(2,6,23,.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 20px;
+  }
+  h1 { margin: 0 0 8px; font-size: 24px; }
+  .sub { color: var(--muted); margin-bottom: 14px; line-height: 1.4; }
+  .controls {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, minmax(120px, 180px));
+    gap: 10px;
+    align-items: center;
+  }
+  input, select, button {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+  }
+  button {
+    cursor: pointer;
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    font-weight: 700;
+  }
+  button.secondary {
+    background: var(--panel2);
+    border-color: var(--line);
+  }
+  main { padding: 18px 20px 32px; }
+  .legend, .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    margin: 10px 0 14px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .legend-item {
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.06);
+    vertical-align: middle;
+  }
+  .status-green { background: var(--green); }
+  .status-red { background: var(--red); }
+  .status-amber { background: var(--amber); }
+  .status-unknown { background: var(--gray); }
+  .card {
+    background: rgba(17,24,39,.9);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .table-wrap { overflow: auto; max-height: calc(100vh - 240px); }
+  table { width: 100%; border-collapse: collapse; min-width: 1600px; }
+  th, td {
+    border-bottom: 1px solid rgba(51,65,85,.75);
+    padding: 10px 10px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 14px;
+  }
+  th {
+    position: sticky;
+    top: 0;
+    background: #0b1220;
+    z-index: 2;
+    white-space: nowrap;
+  }
+  tr:hover td { background: rgba(30,41,59,.35); }
+  a { color: var(--link); }
+  .muted { color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .center { text-align: center; }
+  .status-cell { white-space: nowrap; min-width: 150px; }
+  .status-label { margin-left: 8px; font-size: 12px; color: var(--muted); }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .summary-box {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .summary-box .big { font-size: 22px; font-weight: 700; }
+  .footer-note {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  @media (max-width: 1100px) {
+    .controls { grid-template-columns: 1fr 1fr; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>North America Services Monitor - Master Watch List</h1>
+  <div class="sub">Clickable source inventory generated from the workbook. Status lights reflect <strong>source endpoint reachability</strong> from your browser at load/check time: green = source page/API reachable, red = failed or timed out. That is a practical proxy for the data source itself, not a definitive utility-system health signal.</div>
+  <div class="controls">
+    <input id="searchBox" type="search" placeholder="Search site, category, URL, notes..." />
+    <select id="countryFilter">
+      <option value="">All countries</option>
+      <option value="CA">CA</option><option value="MX">MX</option><option value="NA">NA</option><option value="US">US</option>
+    </select>
+    <select id="categoryFilter">
+      <option value="">All categories</option>
+      <option value="Aggregators">Aggregators</option><option value="Digital Dependencies">Digital Dependencies</option><option value="Electricity">Electricity</option><option value="Hazards">Hazards</option><option value="Open Data">Open Data</option><option value="Pipelines/Gas">Pipelines/Gas</option><option value="Risk/Resilience">Risk/Resilience</option><option value="Telecom">Telecom</option><option value="Telecom/Broadband">Telecom/Broadband</option><option value="Telecom/Broadcast">Telecom/Broadcast</option><option value="Water">Water</option>
+    </select>
+    <select id="priorityFilter">
+      <option value="">All priorities</option>
+      <option value="1">Priority 1</option>
+      <option value="2">Priority 2</option>
+      <option value="3">Priority 3</option>
+      <option value="4">Priority 4</option>
+      <option value="5">Priority 5</option>
+    </select>
+    <button id="recheckBtn" type="button">Re-check visible rows</button>
+  </div>
+</header>
+<main>
+  <div class="summary-grid">
+    <div class="summary-box"><div class="muted">Total sources</div><div class="big" id="totalCount">83</div></div>
+    <div class="summary-box"><div class="muted">Visible sources</div><div class="big" id="visibleCount">83</div></div>
+    <div class="summary-box"><div class="muted">Reachable</div><div class="big" id="greenCount">0</div></div>
+    <div class="summary-box"><div class="muted">Failed / timed out</div><div class="big" id="redCount">0</div></div>
+  </div>
 
+  <div class="legend">
+    <span class="legend-item"><span class="status-dot status-green"></span>Reachable now</span>
+    <span class="legend-item"><span class="status-dot status-red"></span>Failed / timeout</span>
+    <span class="legend-item"><span class="status-dot status-amber"></span>Checking</span>
+    <span class="legend-item"><span class="status-dot status-unknown"></span>Not yet checked</span>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table id="watchTable">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>ID</th>
+            <th>Country</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Site / Program</th>
+            <th>Data URL</th>
+            <th>Data Type</th>
+            <th>Access</th>
+            <th>Update Cadence</th>
+            <th>Suggested Polling</th>
+            <th>Priority</th>
+            <th>Source Type</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+    <tr data-country="CA" data-category="Electricity" data-priority="1" data-url="https://www.aeso.ca/market/market-and-system-reporting/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-1" title="Not checked yet"></span>
+        <span class="status-label" id="label-1">Checking...</span>
+      </td>
+      <td>CA-POWER-003</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>System Operator</td>
+      <td><strong>AESO Market &amp; System Reporting</strong><div class="muted">Market/system reporting hub</div></td>
+      <td><a href="https://www.aeso.ca/market/market-and-system-reporting/" target="_blank" rel="noopener noreferrer">https://www.aeso.ca/market/market-and-system-reporting/</a></td>
+      <td>Data portal</td>
+      <td>None/Public</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Electricity" data-priority="1" data-url="https://www.bchydro.com/safety-outages/power-outages.html">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-2" title="Not checked yet"></span>
+        <span class="status-label" id="label-2">Checking...</span>
+      </td>
+      <td>CA-POWER-005</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>Utility Outages</td>
+      <td><strong>BC Hydro Outages</strong><div class="muted">Outage hub (map/list)</div></td>
+      <td><a href="https://www.bchydro.com/safety-outages/power-outages.html" target="_blank" rel="noopener noreferrer">https://www.bchydro.com/safety-outages/power-outages.html</a></td>
+      <td>Outage hub</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Outage map: https://www.bchydro.com/safety-outages/power-outages/outage_map.html</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Electricity" data-priority="1" data-url="https://www.hydroone.com/power-outages-and-safety/outage-tools">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-3" title="Not checked yet"></span>
+        <span class="status-label" id="label-3">Checking...</span>
+      </td>
+      <td>CA-POWER-007</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>Utility Outages</td>
+      <td><strong>Hydro One Outage Tools</strong><div class="muted">Outage tools / storm centre</div></td>
+      <td><a href="https://www.hydroone.com/power-outages-and-safety/outage-tools" target="_blank" rel="noopener noreferrer">https://www.hydroone.com/power-outages-and-safety/outage-tools</a></td>
+      <td>Outage hub</td>
+      <td>None/Public</td>
+      <td>~10 min (stated)</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Page states map updated every 10 minutes</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Electricity" data-priority="1" data-url="https://infopannes.solutions.hydroquebec.com/info-pannes/pannes/pannes-en-cours?langue=en">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-4" title="Not checked yet"></span>
+        <span class="status-label" id="label-4">Checking...</span>
+      </td>
+      <td>CA-POWER-006</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>Utility Outages</td>
+      <td><strong>Hydro-Québec Info-pannes</strong><div class="muted">Current outages tracker</div></td>
+      <td><a href="https://infopannes.solutions.hydroquebec.com/info-pannes/pannes/pannes-en-cours?langue=en" target="_blank" rel="noopener noreferrer">https://infopannes.solutions.hydroquebec.com/info-pannes/pannes/pannes-en-cours?langue=en</a></td>
+      <td>Outage map</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Service status by region also available</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Electricity" data-priority="1" data-url="https://www.ieso.ca/power-data">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-5" title="Not checked yet"></span>
+        <span class="status-label" id="label-5">Checking...</span>
+      </td>
+      <td>CA-POWER-002</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>System Operator</td>
+      <td><strong>IESO Power Data</strong><div class="muted">Ontario power data hub</div></td>
+      <td><a href="https://www.ieso.ca/power-data" target="_blank" rel="noopener noreferrer">https://www.ieso.ca/power-data</a></td>
+      <td>Data portal</td>
+      <td>None/Public</td>
+      <td>Varies</td>
+      <td>Hourly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Electricity" data-priority="2" data-url="https://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-6" title="Not checked yet"></span>
+        <span class="status-label" id="label-6">Checking...</span>
+      </td>
+      <td>CA-POWER-004</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>System Operator</td>
+      <td><strong>AESO Current Supply Demand Report</strong><div class="muted">Real-time supply/demand report</div></td>
+      <td><a href="https://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet" target="_blank" rel="noopener noreferrer">https://ets.aeso.ca/ets_web/ip/Market/Reports/CSDReportServlet</a></td>
+      <td>Report</td>
+      <td>None/Public</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Electricity" data-priority="2" data-url="https://www.ieso.ca/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-7" title="Not checked yet"></span>
+        <span class="status-label" id="label-7">Checking...</span>
+      </td>
+      <td>CA-POWER-001</td>
+      <td>CA</td>
+      <td>Electricity</td>
+      <td>System Operator</td>
+      <td><strong>IESO (Ontario) Home</strong><div class="muted">System operator site</div></td>
+      <td><a href="https://www.ieso.ca/" target="_blank" rel="noopener noreferrer">https://www.ieso.ca/</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Daily</td>
+      <td>Daily</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Power data: https://www.ieso.ca/power-data</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Open Data" data-priority="2" data-url="https://search.open.canada.ca/opendata/?dataset_type=dataset&amp;search_text=crtc">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-8" title="Not checked yet"></span>
+        <span class="status-label" id="label-8">Checking...</span>
+      </td>
+      <td>CA-003</td>
+      <td>CA</td>
+      <td>Open Data</td>
+      <td>National Portal</td>
+      <td><strong>Canada Open Government (CRTC search)</strong><div class="muted">Open data portal search results</div></td>
+      <td><a href="https://search.open.canada.ca/opendata/?dataset_type=dataset&amp;search_text=crtc" target="_blank" rel="noopener noreferrer">https://search.open.canada.ca/opendata/?dataset_type=dataset&amp;search_text=crtc</a></td>
+      <td>Catalog</td>
+      <td>None/Public</td>
+      <td>Varies</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Use portal to find telecom datasets</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Telecom" data-priority="3" data-url="https://www.statcan.gc.ca/en/subjects-start/digital_economy_and_society/telecommunications">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-9" title="Not checked yet"></span>
+        <span class="status-label" id="label-9">Checking...</span>
+      </td>
+      <td>CA-004</td>
+      <td>CA</td>
+      <td>Telecom</td>
+      <td>National Statistics</td>
+      <td><strong>Statistics Canada Telecom</strong><div class="muted">Telecommunications stats landing page</div></td>
+      <td><a href="https://www.statcan.gc.ca/en/subjects-start/digital_economy_and_society/telecommunications" target="_blank" rel="noopener noreferrer">https://www.statcan.gc.ca/en/subjects-start/digital_economy_and_society/telecommunications</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Varies</td>
+      <td>Quarterly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Telecom/Broadband" data-priority="1" data-url="https://support.bell.ca/outage-check">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-10" title="Not checked yet"></span>
+        <span class="status-label" id="label-10">Checking...</span>
+      </td>
+      <td>CA-TEL-001</td>
+      <td>CA</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Bell Outage Check</strong><div class="muted">Outage check tool</div></td>
+      <td><a href="https://support.bell.ca/outage-check" target="_blank" rel="noopener noreferrer">https://support.bell.ca/outage-check</a></td>
+      <td>Outage checker</td>
+      <td>May require login</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Network status: https://supportinternet.bell.ca/network-status.php</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Telecom/Broadband" data-priority="1" data-url="https://www.rogers.com/support/outage">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-11" title="Not checked yet"></span>
+        <span class="status-label" id="label-11">Checking...</span>
+      </td>
+      <td>CA-TEL-002</td>
+      <td>CA</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Rogers Network Outages</strong><div class="muted">Outage hub</div></td>
+      <td><a href="https://www.rogers.com/support/outage" target="_blank" rel="noopener noreferrer">https://www.rogers.com/support/outage</a></td>
+      <td>Outage checker</td>
+      <td>JS/location input</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Telecom/Broadband" data-priority="1" data-url="https://www.telus.com/outages">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-12" title="Not checked yet"></span>
+        <span class="status-label" id="label-12">Checking...</span>
+      </td>
+      <td>CA-TEL-003</td>
+      <td>CA</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>TELUS Service Status</strong><div class="muted">Service status / outages</div></td>
+      <td><a href="https://www.telus.com/outages" target="_blank" rel="noopener noreferrer">https://www.telus.com/outages</a></td>
+      <td>Outage checker</td>
+      <td>Location input</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Alternate: https://www.telus.com/en/support/article/service-outage</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Telecom/Broadcast" data-priority="1" data-url="https://crtc.gc.ca/eng/publications/reports/policymonitoring/cmrd.htm">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-13" title="Not checked yet"></span>
+        <span class="status-label" id="label-13">Checking...</span>
+      </td>
+      <td>CA-001</td>
+      <td>CA</td>
+      <td>Telecom/Broadcast</td>
+      <td>Regulator Data</td>
+      <td><strong>CRTC Communications Market Reports</strong><div class="muted">CMR datasets (open data)</div></td>
+      <td><a href="https://crtc.gc.ca/eng/publications/reports/policymonitoring/cmrd.htm" target="_blank" rel="noopener noreferrer">https://crtc.gc.ca/eng/publications/reports/policymonitoring/cmrd.htm</a></td>
+      <td>Portal/Datasets</td>
+      <td>None/Public</td>
+      <td>Quarterly/rolling</td>
+      <td>Quarterly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Links out to Open Data datasets</td>
+    </tr>
+    
+    <tr data-country="CA" data-category="Telecom/Broadcast" data-priority="2" data-url="https://web.crtc.gc.ca/eng/publications/reports/PolicyMonitoring/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-14" title="Not checked yet"></span>
+        <span class="status-label" id="label-14">Checking...</span>
+      </td>
+      <td>CA-002</td>
+      <td>CA</td>
+      <td>Telecom/Broadcast</td>
+      <td>Regulator Data</td>
+      <td><strong>CRTC Policy Monitoring Reports</strong><div class="muted">Policy monitoring publications index</div></td>
+      <td><a href="https://web.crtc.gc.ca/eng/publications/reports/PolicyMonitoring/" target="_blank" rel="noopener noreferrer">https://web.crtc.gc.ca/eng/publications/reports/PolicyMonitoring/</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Monthly/quarterly</td>
+      <td>Quarterly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="1" data-url="https://www.cenace.gob.mx/graficademanda.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-15" title="Not checked yet"></span>
+        <span class="status-label" id="label-15">Checking...</span>
+      </td>
+      <td>MX-002</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>System Ops Dashboard</td>
+      <td><strong>CENACE Demand Graph</strong><div class="muted">Current vs forecast demand and resources</div></td>
+      <td><a href="https://www.cenace.gob.mx/graficademanda.aspx" target="_blank" rel="noopener noreferrer">https://www.cenace.gob.mx/graficademanda.aspx</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="1" data-url="https://www.cenace.gob.mx/CENACE.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-16" title="Not checked yet"></span>
+        <span class="status-label" id="label-16">Checking...</span>
+      </td>
+      <td>MX-001</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>System Operator</td>
+      <td><strong>CENACE Home</strong><div class="muted">National system operator site</div></td>
+      <td><a href="https://www.cenace.gob.mx/CENACE.aspx" target="_blank" rel="noopener noreferrer">https://www.cenace.gob.mx/CENACE.aspx</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Static+updates</td>
+      <td>Daily</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>SIM portal has operational reports</td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="1" data-url="https://www.cfe.mx/vun/Paginas/reporteFallaSuministroEnergia.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-17" title="Not checked yet"></span>
+        <span class="status-label" id="label-17">Checking...</span>
+      </td>
+      <td>MX-UTIL-001</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>Utility Customer Reporting</td>
+      <td><strong>CFE Report Power Supply Failure</strong><div class="muted">Report an electricity supply failure (No Luz)</div></td>
+      <td><a href="https://www.cfe.mx/vun/Paginas/reporteFallaSuministroEnergia.aspx" target="_blank" rel="noopener noreferrer">https://www.cfe.mx/vun/Paginas/reporteFallaSuministroEnergia.aspx</a></td>
+      <td>Form/Portal</td>
+      <td>None/Public</td>
+      <td>Event-driven</td>
+      <td>Manual/On demand</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>CFE main: https://www.cfe.gob.mx/</td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="2" data-url="https://www.cenace.gob.mx/Paginas/SIM/Reportes/PronosticosDemanda.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-18" title="Not checked yet"></span>
+        <span class="status-label" id="label-18">Checking...</span>
+      </td>
+      <td>MX-004</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>SIM Report</td>
+      <td><strong>CENACE Demand Forecasts</strong><div class="muted">Forecast demand report</div></td>
+      <td><a href="https://www.cenace.gob.mx/Paginas/SIM/Reportes/PronosticosDemanda.aspx" target="_blank" rel="noopener noreferrer">https://www.cenace.gob.mx/Paginas/SIM/Reportes/PronosticosDemanda.aspx</a></td>
+      <td>Report</td>
+      <td>None/Public</td>
+      <td>Daily</td>
+      <td>Hourly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="2" data-url="https://www.cenace.gob.mx/Paginas/SIM/Reportes/EstimacionDemandaReal.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-19" title="Not checked yet"></span>
+        <span class="status-label" id="label-19">Checking...</span>
+      </td>
+      <td>MX-003</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>SIM Report</td>
+      <td><strong>CENACE Real Demand Estimate</strong><div class="muted">Demand estimation report</div></td>
+      <td><a href="https://www.cenace.gob.mx/Paginas/SIM/Reportes/EstimacionDemandaReal.aspx" target="_blank" rel="noopener noreferrer">https://www.cenace.gob.mx/Paginas/SIM/Reportes/EstimacionDemandaReal.aspx</a></td>
+      <td>Report</td>
+      <td>None/Public</td>
+      <td>Daily</td>
+      <td>Hourly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="3" data-url="https://www.cenace.gob.mx/Paginas/SIM/Reportes/EnergiaGeneradaTipoTec.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-20" title="Not checked yet"></span>
+        <span class="status-label" id="label-20">Checking...</span>
+      </td>
+      <td>MX-006</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>SIM Report</td>
+      <td><strong>CENACE Energy Generated by Technology</strong><div class="muted">Generation report</div></td>
+      <td><a href="https://www.cenace.gob.mx/Paginas/SIM/Reportes/EnergiaGeneradaTipoTec.aspx" target="_blank" rel="noopener noreferrer">https://www.cenace.gob.mx/Paginas/SIM/Reportes/EnergiaGeneradaTipoTec.aspx</a></td>
+      <td>Report</td>
+      <td>None/Public</td>
+      <td>Monthly/rolling</td>
+      <td>Weekly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Electricity" data-priority="3" data-url="https://www.cenace.gob.mx/Paginas/SIM/MercadoCP.aspx">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-21" title="Not checked yet"></span>
+        <span class="status-label" id="label-21">Checking...</span>
+      </td>
+      <td>MX-005</td>
+      <td>MX</td>
+      <td>Electricity</td>
+      <td>SIM Market</td>
+      <td><strong>CENACE Mercado de Corto Plazo</strong><div class="muted">Short-term market portal</div></td>
+      <td><a href="https://www.cenace.gob.mx/Paginas/SIM/MercadoCP.aspx" target="_blank" rel="noopener noreferrer">https://www.cenace.gob.mx/Paginas/SIM/MercadoCP.aspx</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Daily</td>
+      <td>Daily</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Telecom" data-priority="1" data-url="https://www.ift.org.mx/estadisticas/datos-abiertos">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-22" title="Not checked yet"></span>
+        <span class="status-label" id="label-22">Checking...</span>
+      </td>
+      <td>MX-TEL-002</td>
+      <td>MX</td>
+      <td>Telecom</td>
+      <td>Open Data</td>
+      <td><strong>IFT Datos Abiertos</strong><div class="muted">Open data downloads</div></td>
+      <td><a href="https://www.ift.org.mx/estadisticas/datos-abiertos" target="_blank" rel="noopener noreferrer">https://www.ift.org.mx/estadisticas/datos-abiertos</a></td>
+      <td>Downloads</td>
+      <td>None/Public</td>
+      <td>Varies</td>
+      <td>Monthly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Includes broadband and mobile indicators + data dictionary</td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Telecom" data-priority="2" data-url="https://www.ift.org.mx/secciones/estad%C3%ADsticas">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-23" title="Not checked yet"></span>
+        <span class="status-label" id="label-23">Checking...</span>
+      </td>
+      <td>MX-TEL-001</td>
+      <td>MX</td>
+      <td>Telecom</td>
+      <td>Regulator Data</td>
+      <td><strong>IFT Statistics</strong><div class="muted">Statistics landing page</div></td>
+      <td><a href="https://www.ift.org.mx/secciones/estad%C3%ADsticas" target="_blank" rel="noopener noreferrer">https://www.ift.org.mx/secciones/estad%C3%ADsticas</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Varies</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Telecom" data-priority="2" data-url="https://telmex.com/web/asistencia/hogar-falla-en-tu-linea">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-24" title="Not checked yet"></span>
+        <span class="status-label" id="label-24">Checking...</span>
+      </td>
+      <td>MX-ISP-001</td>
+      <td>MX</td>
+      <td>Telecom</td>
+      <td>ISP Operator</td>
+      <td><strong>Telmex Line Fault Report</strong><div class="muted">Report / verify line issues</div></td>
+      <td><a href="https://telmex.com/web/asistencia/hogar-falla-en-tu-linea" target="_blank" rel="noopener noreferrer">https://telmex.com/web/asistencia/hogar-falla-en-tu-linea</a></td>
+      <td>Support/Portal</td>
+      <td>May require login/registration</td>
+      <td>Event-driven</td>
+      <td>Manual/On demand</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Telecom" data-priority="2" data-url="https://mitelmex.telmex.com/web/mitelmex-hogar/reporte-internet">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-25" title="Not checked yet"></span>
+        <span class="status-label" id="label-25">Checking...</span>
+      </td>
+      <td>MX-ISP-002</td>
+      <td>MX</td>
+      <td>Telecom</td>
+      <td>ISP Operator</td>
+      <td><strong>Telmex Report Internet</strong><div class="muted">Internet service trouble report</div></td>
+      <td><a href="https://mitelmex.telmex.com/web/mitelmex-hogar/reporte-internet" target="_blank" rel="noopener noreferrer">https://mitelmex.telmex.com/web/mitelmex-hogar/reporte-internet</a></td>
+      <td>Support/Portal</td>
+      <td>May require login</td>
+      <td>Event-driven</td>
+      <td>Manual/On demand</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Telecom" data-priority="3" data-url="https://www.ift.org.mx/estadisticas/anuarios-estadisticos">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-26" title="Not checked yet"></span>
+        <span class="status-label" id="label-26">Checking...</span>
+      </td>
+      <td>MX-TEL-003</td>
+      <td>MX</td>
+      <td>Telecom</td>
+      <td>Yearbooks</td>
+      <td><strong>IFT Anuarios Estadísticos</strong><div class="muted">Statistical yearbooks</div></td>
+      <td><a href="https://www.ift.org.mx/estadisticas/anuarios-estadisticos" target="_blank" rel="noopener noreferrer">https://www.ift.org.mx/estadisticas/anuarios-estadisticos</a></td>
+      <td>Reports</td>
+      <td>None/Public</td>
+      <td>Annual</td>
+      <td>Quarterly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="MX" data-category="Telecom" data-priority="3" data-url="https://www.telcel.com/personas/atencion-a-clientes/puntos-de-contacto">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-27" title="Not checked yet"></span>
+        <span class="status-label" id="label-27">Checking...</span>
+      </td>
+      <td>MX-MOB-001</td>
+      <td>MX</td>
+      <td>Telecom</td>
+      <td>Mobile Operator</td>
+      <td><strong>Telcel Customer Support</strong><div class="muted">Contact/support hub</div></td>
+      <td><a href="https://www.telcel.com/personas/atencion-a-clientes/puntos-de-contacto" target="_blank" rel="noopener noreferrer">https://www.telcel.com/personas/atencion-a-clientes/puntos-de-contacto</a></td>
+      <td>Support</td>
+      <td>None/Public</td>
+      <td>Static</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Not a live outage page; use for incident comms</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Aggregators" data-priority="2" data-url="https://downdetector.ca/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-28" title="Not checked yet"></span>
+        <span class="status-label" id="label-28">Checking...</span>
+      </td>
+      <td>NA-007</td>
+      <td>NA</td>
+      <td>Aggregators</td>
+      <td>Service Outages</td>
+      <td><strong>Downdetector</strong><div class="muted">Real-time issues across services</div></td>
+      <td><a href="https://downdetector.ca/" target="_blank" rel="noopener noreferrer">https://downdetector.ca/</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>3rd party</td>
+      <td>Crowdsourced; validate against official status pages</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Aggregators" data-priority="2" data-url="https://poweroutage.us/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-29" title="Not checked yet"></span>
+        <span class="status-label" id="label-29">Checking...</span>
+      </td>
+      <td>NA-006</td>
+      <td>NA</td>
+      <td>Aggregators</td>
+      <td>Power Outages</td>
+      <td><strong>PowerOutage.us</strong><div class="muted">Live outage map (US + some Canada)</div></td>
+      <td><a href="https://poweroutage.us/" target="_blank" rel="noopener noreferrer">https://poweroutage.us/</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>3rd party</td>
+      <td>Early warning; verify with utility sources</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Digital Dependencies" data-priority="2" data-url="https://health.aws.amazon.com/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-30" title="Not checked yet"></span>
+        <span class="status-label" id="label-30">Checking...</span>
+      </td>
+      <td>NA-010</td>
+      <td>NA</td>
+      <td>Digital Dependencies</td>
+      <td>Cloud Provider</td>
+      <td><strong>AWS Health Dashboard</strong><div class="muted">AWS service health dashboard</div></td>
+      <td><a href="https://health.aws.amazon.com/" target="_blank" rel="noopener noreferrer">https://health.aws.amazon.com/</a></td>
+      <td>Status</td>
+      <td>Some info public; account-specific requires login</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Legacy public: http://status.aws.amazon.com</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Digital Dependencies" data-priority="2" data-url="https://www.cloudflarestatus.com/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-31" title="Not checked yet"></span>
+        <span class="status-label" id="label-31">Checking...</span>
+      </td>
+      <td>NA-008</td>
+      <td>NA</td>
+      <td>Digital Dependencies</td>
+      <td>CDN/Edge</td>
+      <td><strong>Cloudflare Status</strong><div class="muted">Service status + API</div></td>
+      <td><a href="https://www.cloudflarestatus.com/" target="_blank" rel="noopener noreferrer">https://www.cloudflarestatus.com/</a></td>
+      <td>Status/API</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>API: https://www.cloudflarestatus.com/api</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Digital Dependencies" data-priority="2" data-url="https://status.cloud.google.com/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-32" title="Not checked yet"></span>
+        <span class="status-label" id="label-32">Checking...</span>
+      </td>
+      <td>NA-009</td>
+      <td>NA</td>
+      <td>Digital Dependencies</td>
+      <td>Cloud Provider</td>
+      <td><strong>Google Cloud Service Health</strong><div class="muted">Google Cloud status dashboard</div></td>
+      <td><a href="https://status.cloud.google.com/" target="_blank" rel="noopener noreferrer">https://status.cloud.google.com/</a></td>
+      <td>Status</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Hazards" data-priority="1" data-url="https://api.weather.gov">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-33" title="Not checked yet"></span>
+        <span class="status-label" id="label-33">Checking...</span>
+      </td>
+      <td>NA-001</td>
+      <td>NA</td>
+      <td>Hazards</td>
+      <td>Weather Alerts</td>
+      <td><strong>NOAA / NWS API</strong><div class="muted">API documentation (alerts/forecasts/observations)</div></td>
+      <td><a href="https://api.weather.gov" target="_blank" rel="noopener noreferrer">https://api.weather.gov</a></td>
+      <td>API</td>
+      <td>None</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Docs: https://www.weather.gov/documentation/services-web-api</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Hazards" data-priority="2" data-url="https://www.weather.gov/documentation/services-web-api">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-34" title="Not checked yet"></span>
+        <span class="status-label" id="label-34">Checking...</span>
+      </td>
+      <td>NA-002</td>
+      <td>NA</td>
+      <td>Hazards</td>
+      <td>Weather API Docs</td>
+      <td><strong>NWS Web API Docs</strong><div class="muted">Documentation landing page</div></td>
+      <td><a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener noreferrer">https://www.weather.gov/documentation/services-web-api</a></td>
+      <td>Docs</td>
+      <td>None</td>
+      <td>Static docs</td>
+      <td>Weekly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>API endpoint is api.weather.gov</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Hazards" data-priority="2" data-url="https://earthquake.usgs.gov/earthquakes/map/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-35" title="Not checked yet"></span>
+        <span class="status-label" id="label-35">Checking...</span>
+      </td>
+      <td>NA-004</td>
+      <td>NA</td>
+      <td>Hazards</td>
+      <td>Earthquakes</td>
+      <td><strong>USGS Latest Earthquakes</strong><div class="muted">Live earthquakes map + feeds</div></td>
+      <td><a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">https://earthquake.usgs.gov/earthquakes/map/</a></td>
+      <td>Portal/Feeds</td>
+      <td>None</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Map page references ATOM/feeds</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Hazards" data-priority="3" data-url="https://www.ncei.noaa.gov/stormevents/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-36" title="Not checked yet"></span>
+        <span class="status-label" id="label-36">Checking...</span>
+      </td>
+      <td>NA-003</td>
+      <td>NA</td>
+      <td>Hazards</td>
+      <td>Storm History</td>
+      <td><strong>NOAA NCEI Storm Events</strong><div class="muted">Storm events database (historical)</div></td>
+      <td><a href="https://www.ncei.noaa.gov/stormevents/" target="_blank" rel="noopener noreferrer">https://www.ncei.noaa.gov/stormevents/</a></td>
+      <td>Portal</td>
+      <td>None</td>
+      <td>Monthly/rolling</td>
+      <td>Daily</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Useful for correlation &amp; postmortems</td>
+    </tr>
+    
+    <tr data-country="NA" data-category="Risk/Resilience" data-priority="3" data-url="https://www.fema.gov/emergency-managers/practitioners/resilience-analysis-and-planning-tool">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-37" title="Not checked yet"></span>
+        <span class="status-label" id="label-37">Checking...</span>
+      </td>
+      <td>NA-005</td>
+      <td>NA</td>
+      <td>Risk/Resilience</td>
+      <td>Planning GIS</td>
+      <td><strong>FEMA RAPT</strong><div class="muted">Resilience Analysis &amp; Planning Tool</div></td>
+      <td><a href="https://www.fema.gov/emergency-managers/practitioners/resilience-analysis-and-planning-tool" target="_blank" rel="noopener noreferrer">https://www.fema.gov/emergency-managers/practitioners/resilience-analysis-and-planning-tool</a></td>
+      <td>Portal</td>
+      <td>None</td>
+      <td>Periodic</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Also: https://rapt-fema.hub.arcgis.com/</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.caiso.com/market-operations/outages">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-38" title="Not checked yet"></span>
+        <span class="status-label" id="label-38">Checking...</span>
+      </td>
+      <td>US-GRID-001</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>CAISO Outages</strong><div class="muted">Curtailed/non-operational generator reports</div></td>
+      <td><a href="https://www.caiso.com/market-operations/outages" target="_blank" rel="noopener noreferrer">https://www.caiso.com/market-operations/outages</a></td>
+      <td>Dashboard/Reports</td>
+      <td>None/Public</td>
+      <td>Daily + updates</td>
+      <td>Hourly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Direct report: https://www.caiso.com/market-operations/outages/curtailed-and-non-operational-generators</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.eia.gov/electricity/data/eia861/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-39" title="Not checked yet"></span>
+        <span class="status-label" id="label-39">Checking...</span>
+      </td>
+      <td>US-003</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Utility Registry</td>
+      <td><strong>EIA Form EIA-861</strong><div class="muted">Annual Electric Power Industry Report</div></td>
+      <td><a href="https://www.eia.gov/electricity/data/eia861/" target="_blank" rel="noopener noreferrer">https://www.eia.gov/electricity/data/eia861/</a></td>
+      <td>Bulk files</td>
+      <td>None/Public</td>
+      <td>Annual</td>
+      <td>Monthly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Use to enumerate US electric utilities</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.eia.gov/electricity/gridmonitor/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-40" title="Not checked yet"></span>
+        <span class="status-label" id="label-40">Checking...</span>
+      </td>
+      <td>US-002</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Ops</td>
+      <td><strong>EIA Hourly Electric Grid Monitor</strong><div class="muted">Dashboard (EIA-930)</div></td>
+      <td><a href="https://www.eia.gov/electricity/gridmonitor/" target="_blank" rel="noopener noreferrer">https://www.eia.gov/electricity/gridmonitor/</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Hourly</td>
+      <td>15-60 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>About: https://www.eia.gov/electricity/gridmonitor/about</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.eia.gov/opendata/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-41" title="Not checked yet"></span>
+        <span class="status-label" id="label-41">Checking...</span>
+      </td>
+      <td>US-001</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Federal Data</td>
+      <td><strong>EIA Open Data</strong><div class="muted">API landing page</div></td>
+      <td><a href="https://www.eia.gov/opendata/" target="_blank" rel="noopener noreferrer">https://www.eia.gov/opendata/</a></td>
+      <td>API/Docs</td>
+      <td>API key (free) for v2</td>
+      <td>Varies</td>
+      <td>Hourly/Daily</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.ercot.com/gridmktinfo/dashboards">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-42" title="Not checked yet"></span>
+        <span class="status-label" id="label-42">Checking...</span>
+      </td>
+      <td>US-GRID-003</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>ERCOT Dashboards</strong><div class="muted">Grid and market conditions dashboards</div></td>
+      <td><a href="https://www.ercot.com/gridmktinfo/dashboards" target="_blank" rel="noopener noreferrer">https://www.ercot.com/gridmktinfo/dashboards</a></td>
+      <td>Dashboards</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Also current system conditions: https://www.ercot.com/gridinfo/csc</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.iso-ne.com/markets-operations/system-forecast-status/current-system-status">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-43" title="Not checked yet"></span>
+        <span class="status-label" id="label-43">Checking...</span>
+      </td>
+      <td>US-GRID-010</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>ISO New England Current System Status</strong><div class="muted">Current power system status</div></td>
+      <td><a href="https://www.iso-ne.com/markets-operations/system-forecast-status/current-system-status" target="_blank" rel="noopener noreferrer">https://www.iso-ne.com/markets-operations/system-forecast-status/current-system-status</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>ISO Express referenced on page</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.misoenergy.org/markets-and-operations/real-time--market-data/operations-displays/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-44" title="Not checked yet"></span>
+        <span class="status-label" id="label-44">Checking...</span>
+      </td>
+      <td>US-GRID-005</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>MISO Operations Displays</strong><div class="muted">Operations displays hub</div></td>
+      <td><a href="https://www.misoenergy.org/markets-and-operations/real-time--market-data/operations-displays/" target="_blank" rel="noopener noreferrer">https://www.misoenergy.org/markets-and-operations/real-time--market-data/operations-displays/</a></td>
+      <td>Dashboards</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://www.nyiso.com/system-conditions">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-45" title="Not checked yet"></span>
+        <span class="status-label" id="label-45">Checking...</span>
+      </td>
+      <td>US-GRID-008</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>NYISO System Conditions</strong><div class="muted">System conditions (alerts)</div></td>
+      <td><a href="https://www.nyiso.com/system-conditions" target="_blank" rel="noopener noreferrer">https://www.nyiso.com/system-conditions</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Event-driven</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Real-time dashboard: https://www.nyiso.com/real-time-dashboard</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="1" data-url="https://dataviewer.pjm.com/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-46" title="Not checked yet"></span>
+        <span class="status-label" id="label-46">Checking...</span>
+      </td>
+      <td>US-GRID-007</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>PJM Data Viewer</strong><div class="muted">Market and grid data viewer</div></td>
+      <td><a href="https://dataviewer.pjm.com/" target="_blank" rel="noopener noreferrer">https://dataviewer.pjm.com/</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://www.caiso.com/daily-briefing/notices">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-47" title="Not checked yet"></span>
+        <span class="status-label" id="label-47">Checking...</span>
+      </td>
+      <td>US-GRID-002</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>CAISO Notices</strong><div class="muted">Daily Briefing / Notice library</div></td>
+      <td><a href="https://www.caiso.com/daily-briefing/notices" target="_blank" rel="noopener noreferrer">https://www.caiso.com/daily-briefing/notices</a></td>
+      <td>Notices</td>
+      <td>None/Public</td>
+      <td>Daily</td>
+      <td>Hourly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://doe417.pnnl.gov/instructions">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-48" title="Not checked yet"></span>
+        <span class="status-label" id="label-48">Checking...</span>
+      </td>
+      <td>US-006</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Emergency Incidents</td>
+      <td><strong>DOE OE-417 Instructions</strong><div class="muted">Instructions / thresholds</div></td>
+      <td><a href="https://doe417.pnnl.gov/instructions" target="_blank" rel="noopener noreferrer">https://doe417.pnnl.gov/instructions</a></td>
+      <td>Docs</td>
+      <td>None/Public</td>
+      <td>Static</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://doe417.pnnl.gov/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-49" title="Not checked yet"></span>
+        <span class="status-label" id="label-49">Checking...</span>
+      </td>
+      <td>US-005</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Emergency Incidents</td>
+      <td><strong>DOE OE-417 Portal</strong><div class="muted">DOE-417 filing portal</div></td>
+      <td><a href="https://doe417.pnnl.gov/" target="_blank" rel="noopener noreferrer">https://doe417.pnnl.gov/</a></td>
+      <td>Portal</td>
+      <td>Reporting system; public summaries vary</td>
+      <td>Event-driven</td>
+      <td>Daily</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Form: https://doe417.pnnl.gov/files/DOE-417_Form.pdf</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://www.eia.gov/electricity/data/eia861m/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-50" title="Not checked yet"></span>
+        <span class="status-label" id="label-50">Checking...</span>
+      </td>
+      <td>US-004</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Utility Monthly</td>
+      <td><strong>EIA Form EIA-861M</strong><div class="muted">Monthly Electric Power Industry Report</div></td>
+      <td><a href="https://www.eia.gov/electricity/data/eia861m/" target="_blank" rel="noopener noreferrer">https://www.eia.gov/electricity/data/eia861m/</a></td>
+      <td>Bulk files</td>
+      <td>None/Public</td>
+      <td>Monthly</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://www.ercot.com/gridinfo">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-51" title="Not checked yet"></span>
+        <span class="status-label" id="label-51">Checking...</span>
+      </td>
+      <td>US-GRID-004</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>ERCOT Grid Information</strong><div class="muted">Grid information hub</div></td>
+      <td><a href="https://www.ercot.com/gridinfo" target="_blank" rel="noopener noreferrer">https://www.ercot.com/gridinfo</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Varies</td>
+      <td>Hourly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-52" title="Not checked yet"></span>
+        <span class="status-label" id="label-52">Checking...</span>
+      </td>
+      <td>US-GRID-006</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>MISO Market Reports</strong><div class="muted">Market reports navigator</div></td>
+      <td><a href="https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/" target="_blank" rel="noopener noreferrer">https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/</a></td>
+      <td>Reports</td>
+      <td>None/Public</td>
+      <td>Daily/weekly</td>
+      <td>Daily</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://www.nyiso.com/real-time-dashboard">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-53" title="Not checked yet"></span>
+        <span class="status-label" id="label-53">Checking...</span>
+      </td>
+      <td>US-GRID-009</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>NYISO Real-Time Dashboard</strong><div class="muted">Real-time/DA market visuals</div></td>
+      <td><a href="https://www.nyiso.com/real-time-dashboard" target="_blank" rel="noopener noreferrer">https://www.nyiso.com/real-time-dashboard</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Minutes</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://www.spp.org/markets-operations/current-grid-conditions/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-54" title="Not checked yet"></span>
+        <span class="status-label" id="label-54">Checking...</span>
+      </td>
+      <td>US-GRID-011</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>SPP Current Grid Conditions</strong><div class="muted">Reliability status page</div></td>
+      <td><a href="https://www.spp.org/markets-operations/current-grid-conditions/" target="_blank" rel="noopener noreferrer">https://www.spp.org/markets-operations/current-grid-conditions/</a></td>
+      <td>Dashboard</td>
+      <td>None/Public</td>
+      <td>Event-driven</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Markets &amp; Ops hub: https://www.spp.org/markets-operations/</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="2" data-url="https://pricecontourmap.spp.org/pricecontourmap/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-55" title="Not checked yet"></span>
+        <span class="status-label" id="label-55">Checking...</span>
+      </td>
+      <td>US-GRID-012</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Grid Operator</td>
+      <td><strong>SPP Price Contour Map</strong><div class="muted">Real-time market data map</div></td>
+      <td><a href="https://pricecontourmap.spp.org/pricecontourmap/" target="_blank" rel="noopener noreferrer">https://pricecontourmap.spp.org/pricecontourmap/</a></td>
+      <td>Map</td>
+      <td>None/Public</td>
+      <td>~5 min (stated)</td>
+      <td>5-15 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="3" data-url="https://www.publicpower.org/our-members">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-56" title="Not checked yet"></span>
+        <span class="status-label" id="label-56">Checking...</span>
+      </td>
+      <td>US-023</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Utility Registry</td>
+      <td><strong>American Public Power Association</strong><div class="muted">Public power members by state</div></td>
+      <td><a href="https://www.publicpower.org/our-members" target="_blank" rel="noopener noreferrer">https://www.publicpower.org/our-members</a></td>
+      <td>Directory</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Quarterly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Use to enumerate public power utilities</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="3" data-url="https://www.electric.coop/our-organization/nreca-member-directory">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-57" title="Not checked yet"></span>
+        <span class="status-label" id="label-57">Checking...</span>
+      </td>
+      <td>US-024</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Utility Registry</td>
+      <td><strong>NRECA Member Directory</strong><div class="muted">Electric cooperative directory</div></td>
+      <td><a href="https://www.electric.coop/our-organization/nreca-member-directory" target="_blank" rel="noopener noreferrer">https://www.electric.coop/our-organization/nreca-member-directory</a></td>
+      <td>Directory</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Quarterly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Alternate search tool: https://www.electric.coop/our-organization/youth-programs/find-co-op</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Electricity" data-priority="3" data-url="https://openenergyhub.ornl.gov/explore/dataset/oe-417-annual-summaries/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-58" title="Not checked yet"></span>
+        <span class="status-label" id="label-58">Checking...</span>
+      </td>
+      <td>US-007</td>
+      <td>US</td>
+      <td>Electricity</td>
+      <td>Incident Summaries</td>
+      <td><strong>OpenEnergyDataPortal OE-417 Annual Summaries</strong><div class="muted">Annual summary tables (discovery)</div></td>
+      <td><a href="https://openenergyhub.ornl.gov/explore/dataset/oe-417-annual-summaries/" target="_blank" rel="noopener noreferrer">https://openenergyhub.ornl.gov/explore/dataset/oe-417-annual-summaries/</a></td>
+      <td>Dataset portal</td>
+      <td>None/Public</td>
+      <td>Annual</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official/Research</td>
+      <td>Check for latest available year</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Pipelines/Gas" data-priority="2" data-url="https://www.npms.phmsa.dot.gov/publicviewer/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-59" title="Not checked yet"></span>
+        <span class="status-label" id="label-59">Checking...</span>
+      </td>
+      <td>US-017</td>
+      <td>US</td>
+      <td>Pipelines/Gas</td>
+      <td>Infrastructure</td>
+      <td><strong>PHMSA NPMS Public Viewer</strong><div class="muted">National Pipeline Mapping System viewer</div></td>
+      <td><a href="https://www.npms.phmsa.dot.gov/publicviewer/" target="_blank" rel="noopener noreferrer">https://www.npms.phmsa.dot.gov/publicviewer/</a></td>
+      <td>Map</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="1" data-url="https://www.att.com/outages/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-60" title="Not checked yet"></span>
+        <span class="status-label" id="label-60">Checking...</span>
+      </td>
+      <td>US-TEL-001</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>AT&amp;T Outages</strong><div class="muted">Check AT&amp;T wireless/internet outages</div></td>
+      <td><a href="https://www.att.com/outages/" target="_blank" rel="noopener noreferrer">https://www.att.com/outages/</a></td>
+      <td>Outage checker</td>
+      <td>May require login/address</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="1" data-url="https://broadbandmap.fcc.gov/data-download">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-61" title="Not checked yet"></span>
+        <span class="status-label" id="label-61">Checking...</span>
+      </td>
+      <td>US-009</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Coverage Data</td>
+      <td><strong>FCC Broadband Map Data Download</strong><div class="muted">Public downloads</div></td>
+      <td><a href="https://broadbandmap.fcc.gov/data-download" target="_blank" rel="noopener noreferrer">https://broadbandmap.fcc.gov/data-download</a></td>
+      <td>Downloads</td>
+      <td>Some API use may require account</td>
+      <td>Periodic releases</td>
+      <td>Quarterly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>API specs PDF: https://www.fcc.gov/sites/default/files/bdc-public-data-api-spec.pdf</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="1" data-url="https://broadbandmap.fcc.gov/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-62" title="Not checked yet"></span>
+        <span class="status-label" id="label-62">Checking...</span>
+      </td>
+      <td>US-008</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Coverage Data</td>
+      <td><strong>FCC National Broadband Map</strong><div class="muted">Main map</div></td>
+      <td><a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener noreferrer">https://broadbandmap.fcc.gov/</a></td>
+      <td>Map</td>
+      <td>None/Public</td>
+      <td>Periodic releases</td>
+      <td>Quarterly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="1" data-url="https://www.verizon.com/support/check-network-status/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-63" title="Not checked yet"></span>
+        <span class="status-label" id="label-63">Checking...</span>
+      </td>
+      <td>US-TEL-002</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Verizon Check Network Status</strong><div class="muted">Network status checker</div></td>
+      <td><a href="https://www.verizon.com/support/check-network-status/" target="_blank" rel="noopener noreferrer">https://www.verizon.com/support/check-network-status/</a></td>
+      <td>Outage checker</td>
+      <td>Location input</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="1" data-url="https://www.xfinity.com/support/statusmap">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-64" title="Not checked yet"></span>
+        <span class="status-label" id="label-64">Checking...</span>
+      </td>
+      <td>US-TEL-004</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Xfinity Status Center Map</strong><div class="muted">Outage map/status map</div></td>
+      <td><a href="https://www.xfinity.com/support/statusmap" target="_blank" rel="noopener noreferrer">https://www.xfinity.com/support/statusmap</a></td>
+      <td>Outage map</td>
+      <td>Address input</td>
+      <td>Near-real-time</td>
+      <td>5-15 min</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://www.centurylink.com/home/help/internet/internet-or-phone-not-working.html">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-65" title="Not checked yet"></span>
+        <span class="status-label" id="label-65">Checking...</span>
+      </td>
+      <td>US-TEL-009</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>CenturyLink (Lumen) Check for Outages</strong><div class="muted">Check for outages (My CenturyLink)</div></td>
+      <td><a href="https://www.centurylink.com/home/help/internet/internet-or-phone-not-working.html" target="_blank" rel="noopener noreferrer">https://www.centurylink.com/home/help/internet/internet-or-phone-not-working.html</a></td>
+      <td>Outage checker</td>
+      <td>Login likely</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Lumen is parent brand; consumer path via CenturyLink</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://www.cox.com/residential/support/outages.html">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-66" title="Not checked yet"></span>
+        <span class="status-label" id="label-66">Checking...</span>
+      </td>
+      <td>US-TEL-007</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Cox Outages</strong><div class="muted">Cox outage troubleshooting &amp; map access</div></td>
+      <td><a href="https://www.cox.com/residential/support/outages.html" target="_blank" rel="noopener noreferrer">https://www.cox.com/residential/support/outages.html</a></td>
+      <td>Outage checker</td>
+      <td>Login likely</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://www.fcc.gov/BroadbandData">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-67" title="Not checked yet"></span>
+        <span class="status-label" id="label-67">Checking...</span>
+      </td>
+      <td>US-010</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>BDC Program</td>
+      <td><strong>FCC Broadband Data Collection</strong><div class="muted">Program page</div></td>
+      <td><a href="https://www.fcc.gov/BroadbandData" target="_blank" rel="noopener noreferrer">https://www.fcc.gov/BroadbandData</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Resources: https://www.fcc.gov/BroadbandData/resources</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://frontier.com/helpcenter/internet/troubleshooting/check-for-service-outages">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-68" title="Not checked yet"></span>
+        <span class="status-label" id="label-68">Checking...</span>
+      </td>
+      <td>US-TEL-008</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Frontier Outage Check</strong><div class="muted">Check Frontier service outages</div></td>
+      <td><a href="https://frontier.com/helpcenter/internet/troubleshooting/check-for-service-outages" target="_blank" rel="noopener noreferrer">https://frontier.com/helpcenter/internet/troubleshooting/check-for-service-outages</a></td>
+      <td>Outage checker</td>
+      <td>Address input</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://www.optimum.com/outage-map">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-69" title="Not checked yet"></span>
+        <span class="status-label" id="label-69">Checking...</span>
+      </td>
+      <td>US-TEL-010</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Optimum Outage Map</strong><div class="muted">Optimum internet outage map</div></td>
+      <td><a href="https://www.optimum.com/outage-map" target="_blank" rel="noopener noreferrer">https://www.optimum.com/outage-map</a></td>
+      <td>Outage map</td>
+      <td>Address input</td>
+      <td>Near-real-time</td>
+      <td>15-60 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://www.spectrum.net/page/spectrum-storm-center">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-70" title="Not checked yet"></span>
+        <span class="status-label" id="label-70">Checking...</span>
+      </td>
+      <td>US-TEL-006</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Spectrum Storm Center</strong><div class="muted">Spectrum storm/outage center</div></td>
+      <td><a href="https://www.spectrum.net/page/spectrum-storm-center" target="_blank" rel="noopener noreferrer">https://www.spectrum.net/page/spectrum-storm-center</a></td>
+      <td>Portal</td>
+      <td>May require login</td>
+      <td>Event-driven</td>
+      <td>15-60 min</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="2" data-url="https://www.t-mobile.com/support/coverage/network-outages">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-71" title="Not checked yet"></span>
+        <span class="status-label" id="label-71">Checking...</span>
+      </td>
+      <td>US-TEL-003</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>T-Mobile Network Outages</strong><div class="muted">Network outages info</div></td>
+      <td><a href="https://www.t-mobile.com/support/coverage/network-outages" target="_blank" rel="noopener noreferrer">https://www.t-mobile.com/support/coverage/network-outages</a></td>
+      <td>Status/Info</td>
+      <td>None/Public</td>
+      <td>Event-driven</td>
+      <td>Hourly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Not a full map; may need account notifications</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="3" data-url="https://www.fcc.gov/economics-analytics/funding-map">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-72" title="Not checked yet"></span>
+        <span class="status-label" id="label-72">Checking...</span>
+      </td>
+      <td>US-011</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Funding</td>
+      <td><strong>FCC Broadband Funding Map</strong><div class="muted">Funding map</div></td>
+      <td><a href="https://www.fcc.gov/economics-analytics/funding-map" target="_blank" rel="noopener noreferrer">https://www.fcc.gov/economics-analytics/funding-map</a></td>
+      <td>Map</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="3" data-url="https://www.fcc.gov/general/disaster-information-reporting-system-dirs-0">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-73" title="Not checked yet"></span>
+        <span class="status-label" id="label-73">Checking...</span>
+      </td>
+      <td>US-019</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Outage Reporting</td>
+      <td><strong>FCC DIRS</strong><div class="muted">Disaster Information Reporting System (program page)</div></td>
+      <td><a href="https://www.fcc.gov/general/disaster-information-reporting-system-dirs-0" target="_blank" rel="noopener noreferrer">https://www.fcc.gov/general/disaster-information-reporting-system-dirs-0</a></td>
+      <td>Portal/Program</td>
+      <td>Provider reporting; limited access</td>
+      <td>Event-driven</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Login: https://dirs.fcc.gov/</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="3" data-url="https://www.fcc.gov/network-outage-reporting-system-nors">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-74" title="Not checked yet"></span>
+        <span class="status-label" id="label-74">Checking...</span>
+      </td>
+      <td>US-018</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Outage Reporting</td>
+      <td><strong>FCC NORS</strong><div class="muted">Network Outage Reporting System (program page)</div></td>
+      <td><a href="https://www.fcc.gov/network-outage-reporting-system-nors" target="_blank" rel="noopener noreferrer">https://www.fcc.gov/network-outage-reporting-system-nors</a></td>
+      <td>Portal/Program</td>
+      <td>Provider reporting; data presumed confidential</td>
+      <td>Event-driven</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td>Some sharing: https://www.fcc.gov/outage-information-sharing</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="3" data-url="https://broadbandusa.ntia.gov/resources/data-and-mapping">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-75" title="Not checked yet"></span>
+        <span class="status-label" id="label-75">Checking...</span>
+      </td>
+      <td>US-012</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Planning</td>
+      <td><strong>NTIA Data &amp; Mapping</strong><div class="muted">Broadband data &amp; mapping resources</div></td>
+      <td><a href="https://broadbandusa.ntia.gov/resources/data-and-mapping" target="_blank" rel="noopener noreferrer">https://broadbandusa.ntia.gov/resources/data-and-mapping</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Telecom/Broadband" data-priority="3" data-url="https://www.xfinity.com/support/articles/check-service-outage">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-76" title="Not checked yet"></span>
+        <span class="status-label" id="label-76">Checking...</span>
+      </td>
+      <td>US-TEL-005</td>
+      <td>US</td>
+      <td>Telecom/Broadband</td>
+      <td>Carrier/ISP</td>
+      <td><strong>Xfinity Outage Help</strong><div class="muted">How to check outages</div></td>
+      <td><a href="https://www.xfinity.com/support/articles/check-service-outage" target="_blank" rel="noopener noreferrer">https://www.xfinity.com/support/articles/check-service-outage</a></td>
+      <td>Docs/Help</td>
+      <td>None/Public</td>
+      <td>Static</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="1" data-url="https://echo.epa.gov/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-77" title="Not checked yet"></span>
+        <span class="status-label" id="label-77">Checking...</span>
+      </td>
+      <td>US-013</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>Regulatory/Compliance</td>
+      <td><strong>EPA ECHO</strong><div class="muted">Enforcement &amp; Compliance History Online</div></td>
+      <td><a href="https://echo.epa.gov/" target="_blank" rel="noopener noreferrer">https://echo.epa.gov/</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Frequent/varies</td>
+      <td>Monthly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td>Includes water pollution tools and facility reports</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="1" data-url="https://echo.epa.gov/tools/data-downloads/sdwa-download-summary">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-78" title="Not checked yet"></span>
+        <span class="status-label" id="label-78">Checking...</span>
+      </td>
+      <td>US-014</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>Drinking Water</td>
+      <td><strong>EPA SDWA Download Summary</strong><div class="muted">SDWIS/SDWA downloadable datasets</div></td>
+      <td><a href="https://echo.epa.gov/tools/data-downloads/sdwa-download-summary" target="_blank" rel="noopener noreferrer">https://echo.epa.gov/tools/data-downloads/sdwa-download-summary</a></td>
+      <td>Downloads</td>
+      <td>None/Public</td>
+      <td>Quarterly refresh (stated)</td>
+      <td>Quarterly</td>
+      <td class="center">1</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="2" data-url="https://www.epa.gov/DWdata">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-79" title="Not checked yet"></span>
+        <span class="status-label" id="label-79">Checking...</span>
+      </td>
+      <td>US-020</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>Data Clearinghouse</td>
+      <td><strong>EPA Drinking Water Data and Tools</strong><div class="muted">Drinking water data clearinghouse</div></td>
+      <td><a href="https://www.epa.gov/DWdata" target="_blank" rel="noopener noreferrer">https://www.epa.gov/DWdata</a></td>
+      <td>Portal</td>
+      <td>None/Public</td>
+      <td>Periodic</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Guide: https://www.epa.gov/DWdata/drinking-water-data-tools-guide</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="2" data-url="https://echo.epa.gov/tools/web-services">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-80" title="Not checked yet"></span>
+        <span class="status-label" id="label-80">Checking...</span>
+      </td>
+      <td>US-016</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>APIs</td>
+      <td><strong>EPA ECHO Web Services</strong><div class="muted">ECHO API documentation</div></td>
+      <td><a href="https://echo.epa.gov/tools/web-services" target="_blank" rel="noopener noreferrer">https://echo.epa.gov/tools/web-services</a></td>
+      <td>Docs</td>
+      <td>None/Public</td>
+      <td>Static</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="2" data-url="https://www.epa.gov/enviro/download-additional-envirofacts-datasets">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-81" title="Not checked yet"></span>
+        <span class="status-label" id="label-81">Checking...</span>
+      </td>
+      <td>US-015</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>APIs</td>
+      <td><strong>EPA Envirofacts Downloads</strong><div class="muted">RESTful API access guidance</div></td>
+      <td><a href="https://www.epa.gov/enviro/download-additional-envirofacts-datasets" target="_blank" rel="noopener noreferrer">https://www.epa.gov/enviro/download-additional-envirofacts-datasets</a></td>
+      <td>Docs</td>
+      <td>None/Public</td>
+      <td>Static</td>
+      <td>Monthly</td>
+      <td class="center">2</td>
+      <td>Official</td>
+      <td>Includes SDWIS and ECHO access</td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="3" data-url="https://www.epa.gov/waterdata/water-quality-data-download">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-82" title="Not checked yet"></span>
+        <span class="status-label" id="label-82">Checking...</span>
+      </td>
+      <td>US-022</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>Water Quality</td>
+      <td><strong>EPA Water Quality Data Download</strong><div class="muted">Download and WQX references</div></td>
+      <td><a href="https://www.epa.gov/waterdata/water-quality-data-download" target="_blank" rel="noopener noreferrer">https://www.epa.gov/waterdata/water-quality-data-download</a></td>
+      <td>Downloads</td>
+      <td>None/Public</td>
+      <td>Rolling</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official</td>
+      <td></td>
+    </tr>
+    
+    <tr data-country="US" data-category="Water" data-priority="3" data-url="https://www.waterqualitydata.us/">
+      <td class="status-cell">
+        <span class="status-dot status-unknown" id="dot-83" title="Not checked yet"></span>
+        <span class="status-label" id="label-83">Checking...</span>
+      </td>
+      <td>US-021</td>
+      <td>US</td>
+      <td>Water</td>
+      <td>Water Quality Portal</td>
+      <td><strong>WaterQualityData.us</strong><div class="muted">Water Quality Portal UI (WQX)</div></td>
+      <td><a href="https://www.waterqualitydata.us/" target="_blank" rel="noopener noreferrer">https://www.waterqualitydata.us/</a></td>
+      <td>Portal/API</td>
+      <td>None/Public</td>
+      <td>Rolling</td>
+      <td>Monthly</td>
+      <td class="center">3</td>
+      <td>Official/Partner</td>
+      <td>Notes on profiles and schema on site</td>
+    </tr>
+    
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    If you open this file locally and some checks look unreliable, that is expected: many public sites block browser cross-origin requests. This page uses a lightweight reachability probe (fetch in no-cors mode with timeout). For production-grade status detection, route checks through your own backend or monitoring proxy and parse each source's actual outage/status endpoint.
+  </div>
+</main>
+
+<script>
+const rows = Array.from(document.querySelectorAll('#watchTable tbody tr'));
+const searchBox = document.getElementById('searchBox');
+const countryFilter = document.getElementById('countryFilter');
+const categoryFilter = document.getElementById('categoryFilter');
+const priorityFilter = document.getElementById('priorityFilter');
+const recheckBtn = document.getElementById('recheckBtn');
+const visibleCount = document.getElementById('visibleCount');
+const greenCount = document.getElementById('greenCount');
+const redCount = document.getElementById('redCount');
+
+function setDot(idx, state, labelText) {
+  const dot = document.getElementById('dot-' + idx);
+  const label = document.getElementById('label-' + idx);
+  if (!dot || !label) return;
+  dot.className = 'status-dot ' + state;
+  label.textContent = labelText;
+  dot.title = labelText;
+}
+
+function updateCounters() {
+  const visibleRows = rows.filter(r => r.style.display !== 'none');
+  visibleCount.textContent = String(visibleRows.length);
+  let g = 0, r = 0;
+  visibleRows.forEach((row, i) => {
+    const dot = row.querySelector('.status-dot');
+    if (dot.classList.contains('status-green')) g += 1;
+    if (dot.classList.contains('status-red')) r += 1;
+  });
+  greenCount.textContent = String(g);
+  redCount.textContent = String(r);
+}
+
+function applyFilters() {
+  const q = searchBox.value.trim().toLowerCase();
+  const country = countryFilter.value;
+  const category = categoryFilter.value;
+  const priority = priorityFilter.value;
+
+  rows.forEach(row => {
+    const text = row.innerText.toLowerCase();
+    const matchQ = !q || text.includes(q);
+    const matchCountry = !country || row.dataset.country === country;
+    const matchCategory = !category || row.dataset.category === category;
+    const matchPriority = !priority || row.dataset.priority === priority;
+    row.style.display = (matchQ && matchCountry && matchCategory && matchPriority) ? '' : 'none';
+  });
+  updateCounters();
+}
+
+async function checkRow(row, idx) {
+  const url = row.dataset.url;
+  setDot(idx, 'status-amber', 'Checking...');
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 9000);
+
+  try {
+    await fetch(url, {
+      method: 'GET',
+      mode: 'no-cors',
+      cache: 'no-store',
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    setDot(idx, 'status-green', 'Reachable');
+  } catch (err) {
+    clearTimeout(timeout);
+    setDot(idx, 'status-red', 'Failed / timeout');
+  }
+}
+
+async function checkVisibleRows() {
+  const visibleRows = rows.filter(r => r.style.display !== 'none');
+  const tasks = [];
+  for (let i = 0; i < visibleRows.length; i++) {
+    const row = visibleRows[i];
+    const idx = rows.indexOf(row) + 1;
+    tasks.push(checkRow(row, idx).then(() => updateCounters()));
+    if (tasks.length >= 8) {
+      await Promise.all(tasks.splice(0, tasks.length));
+    }
+  }
+  if (tasks.length) await Promise.all(tasks);
+  updateCounters();
+}
+
+searchBox.addEventListener('input', applyFilters);
+countryFilter.addEventListener('change', applyFilters);
+categoryFilter.addEventListener('change', applyFilters);
+priorityFilter.addEventListener('change', applyFilters);
+recheckBtn.addEventListener('click', checkVisibleRows);
+
+applyFilters();
+checkVisibleRows();
+</script>
+</body>
+</html>
