@@ -60,11 +60,45 @@
     }
 
     .lead-story {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--oti-line);
+    }
+
+    .lead-link {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
       gap: 22px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--oti-line);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .lead-image-wrap,
+    .story-image-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .lead-image-wrap { aspect-ratio: 16 / 9; }
+    .story-image-wrap { aspect-ratio: 16 / 10; }
+
+    .lead-image-wrap img,
+    .story-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .label {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      background: rgba(6, 31, 63, 0.94);
+      color: #fff;
+      padding: 8px 11px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
     }
 
     .lead-copy {
@@ -74,31 +108,64 @@
       max-width: 600px;
     }
 
+    .lead-kicker {
+      color: var(--oti-red);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
     .lead-copy h1 {
+      margin: 0 0 12px;
+      color: var(--oti-blue);
       font-size: clamp(1.8rem, 3.2vw, 3.2rem);
-      margin-bottom: 12px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 900;
+    }
+
+    .lead-copy p {
+      margin: 0;
+      color: var(--oti-muted);
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 700;
+      max-width: 520px;
     }
 
     .story-grid {
       margin-top: 22px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 18px;
     }
 
-    .story-image-wrap {
-      aspect-ratio: 16/10;
-      overflow: hidden;
-      background: #111;
+    .story-card {
+      border-bottom: 1px solid var(--oti-line);
+      padding-bottom: 18px;
     }
 
-    .story-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .story-card a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    /* AD RAIL UPDATED */
+    .story-card h2 {
+      margin: 10px 0 6px;
+      color: var(--oti-blue);
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .story-card p {
+      margin: 0;
+      color: var(--oti-muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    /* AD RAIL */
     .ad-rail {
       display: flex;
       flex-direction: column;
@@ -121,7 +188,12 @@
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
       .ad-rail { display: none; }
-      .lead-story { grid-template-columns: 1fr; }
+      .lead-link { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .banner img { height: clamp(110px, 34vw, 190px); }
     }
   </style>
 </head>
@@ -130,7 +202,7 @@
 
 <header class="site-header">
   <div class="banner">
-    <img src="assets/otinewbanner.png" />
+    <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
   </div>
 </header>
 
@@ -138,36 +210,46 @@
 
   <section>
 
+    <!-- LEAD STORY -->
     <article class="lead-story">
-      <a href="jokethreat.html">
-        <div class="story-image-wrap">
-          <img src="assets/jokebrief.jpg" />
-        </div>
-      </a>
+      <a href="jokethreat.html" class="lead-link">
 
-      <div class="lead-copy">
-        <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
-        <p>Federal regulators reclassify humor as a measurable threat.</p>
-      </div>
+        <div class="lead-image-wrap">
+          <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
+          <span class="label">National Security</span>
+        </div>
+
+        <div class="lead-copy">
+          <div class="lead-kicker">Breaking</div>
+          <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
+          <p>Federal regulators reclassify humor as a measurable threat, introducing systems to track and contain high-risk punchlines.</p>
+        </div>
+
+      </a>
     </article>
 
+    <!-- STORY GRID -->
     <section class="story-grid">
 
       <article class="story-card">
         <a href="kingcharles.html">
           <div class="story-image-wrap">
-            <img src="assets/kingcharles.jpg" />
+            <img src="assets/kingcharles.jpg" alt="" />
+            <span class="label">World</span>
           </div>
           <h2>King Charles Offers U.S. Return to British Monarchy</h2>
+          <p>Americans may retain traditions while outsourcing final authority to the Crown.</p>
         </a>
       </article>
 
       <article class="story-card">
         <a href="ballroom1.html">
           <div class="story-image-wrap">
-            <img src="assets/ballroomrank.jpg" />
+            <img src="assets/ballroomrank.jpg" alt="" />
+            <span class="label">Politics</span>
           </div>
           <h2>White House Says New Ballroom Needed to Separate Important People</h2>
+          <p>Officials say expanded spacing will preserve clarity between individuals of differing national importance.</p>
         </a>
       </article>
 
@@ -175,7 +257,7 @@
 
   </section>
 
-  <!-- AD RAIL WITH JOKESHIELD -->
+  <!-- AD RAIL -->
   <aside class="ad-rail">
 
     <div class="ad-unit">
