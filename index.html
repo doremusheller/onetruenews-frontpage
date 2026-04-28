@@ -50,8 +50,10 @@
 
     .banner img {
       width: 100%;
-      height: auto;
+      height: clamp(150px, 24vw, 360px);
       display: block;
+      object-fit: cover;
+      object-position: center;
     }
 
     .page-shell {
@@ -209,6 +211,10 @@
       .story-grid { grid-template-columns: 1fr; }
 
       .lead-copy h1 { font-size: 2.35rem; }
+
+      .banner img {
+        height: clamp(110px, 34vw, 190px);
+      }
     }
   </style>
 </head>
@@ -216,7 +222,6 @@
 
   <header class="site-header">
     <div class="banner">
-      <!-- FIXED HERE -->
       <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
     </div>
   </header>
@@ -235,82 +240,27 @@
         <a href="lead-story.html" class="lead-copy">
           <div class="lead-kicker">Breaking</div>
           <h1>Lead story headline goes here with maximum force</h1>
-          <p>Short lead story summary goes here. Keep it sharp, urgent, and built for the click without giving the game away.</p>
+          <p>Short lead story summary goes here.</p>
         </a>
       </article>
 
-      <section class="story-grid" aria-label="Story grid">
+      <section class="story-grid">
 
         <article class="story-card">
           <a href="story-one.html">
             <div class="story-image-wrap">
-              <img src="assets/story-one.jpg" alt="Story one image" />
+              <img src="assets/story-one.jpg">
               <span class="label">Label</span>
             </div>
-            <h2>Story headline goes here</h2>
-            <p>Story summary goes here in one tight sentence.</p>
-          </a>
-        </article>
-
-        <article class="story-card">
-          <a href="story-two.html">
-            <div class="story-image-wrap">
-              <img src="assets/story-two.jpg" alt="Story two image" />
-              <span class="label">Label</span>
-            </div>
-            <h2>Story headline goes here</h2>
-            <p>Story summary goes here in one tight sentence.</p>
-          </a>
-        </article>
-
-        <article class="story-card">
-          <a href="story-three.html">
-            <div class="story-image-wrap">
-              <img src="assets/story-three.jpg" alt="Story three image" />
-              <span class="label">Label</span>
-            </div>
-            <h2>Story headline goes here</h2>
-            <p>Story summary goes here in one tight sentence.</p>
-          </a>
-        </article>
-
-        <article class="story-card">
-          <a href="story-four.html">
-            <div class="story-image-wrap">
-              <img src="assets/story-four.jpg" alt="Story four image" />
-              <span class="label">Label</span>
-            </div>
-            <h2>Story headline goes here</h2>
-            <p>Story summary goes here in one tight sentence.</p>
-          </a>
-        </article>
-
-        <article class="story-card">
-          <a href="story-five.html">
-            <div class="story-image-wrap">
-              <img src="assets/story-five.jpg" alt="Story five image" />
-              <span class="label">Label</span>
-            </div>
-            <h2>Story headline goes here</h2>
-            <p>Story summary goes here in one tight sentence.</p>
-          </a>
-        </article>
-
-        <article class="story-card">
-          <a href="story-six.html">
-            <div class="story-image-wrap">
-              <img src="assets/story-six.jpg" alt="Story six image" />
-              <span class="label">Label</span>
-            </div>
-            <h2>Story headline goes here</h2>
-            <p>Story summary goes here in one tight sentence.</p>
+            <h2>Story headline</h2>
+            <p>Summary</p>
           </a>
         </article>
 
       </section>
     </section>
 
-    <aside class="ad-rail" aria-label="Advertisement space">
+    <aside class="ad-rail">
       Ad Space
     </aside>
   </main>
