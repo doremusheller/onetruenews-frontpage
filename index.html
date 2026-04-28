@@ -48,9 +48,7 @@
     .banner img {
       width: 100%;
       height: clamp(150px, 24vw, 360px);
-      display: block;
       object-fit: cover;
-      object-position: center;
     }
 
     .page-shell {
@@ -69,41 +67,6 @@
       border-bottom: 1px solid var(--oti-line);
     }
 
-    .lead-story a {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-    }
-
-    .lead-image-wrap,
-    .story-image-wrap {
-      position: relative;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .lead-image-wrap { aspect-ratio: 16 / 9; }
-    .story-image-wrap { aspect-ratio: 16 / 10; }
-
-    .lead-image-wrap img,
-    .story-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .label {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
-      background: rgba(6, 31, 63, 0.94);
-      color: #fff;
-      padding: 8px 11px;
-      font-size: 0.8rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
     .lead-copy {
       display: flex;
       flex-direction: column;
@@ -111,82 +74,54 @@
       max-width: 600px;
     }
 
-    .lead-kicker {
-      color: var(--oti-red);
-      font-size: 0.78rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
     .lead-copy h1 {
-      margin: 0 0 12px;
-      color: var(--oti-blue);
       font-size: clamp(1.8rem, 3.2vw, 3.2rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-      font-weight: 900;
-    }
-
-    .lead-copy p {
-      margin: 0;
-      color: var(--oti-muted);
-      font-size: 1rem;
-      line-height: 1.4;
-      font-weight: 700;
-      max-width: 520px;
+      margin-bottom: 12px;
     }
 
     .story-grid {
       margin-top: 22px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
 
-    .story-card {
-      border-bottom: 1px solid var(--oti-line);
-      padding-bottom: 18px;
+    .story-image-wrap {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #111;
     }
 
-    .story-card a {
-      text-decoration: none;
-      color: inherit;
+    .story-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .story-card h2 {
-      margin: 10px 0 6px;
-      color: var(--oti-blue);
-      font-size: 1.15rem;
-      font-weight: 900;
-    }
-
-    .story-card p {
-      margin: 0;
-      color: var(--oti-muted);
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
+    /* AD RAIL UPDATED */
     .ad-rail {
-      min-height: 680px;
-      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .ad-unit {
       background: #fff;
       border: 1px solid var(--oti-line);
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.8rem;
+      padding: 10px;
+    }
+
+    .ad-unit img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
     }
 
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
       .ad-rail { display: none; }
       .lead-story { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 760px) {
-      .story-grid { grid-template-columns: 1fr; }
-      .banner img { height: clamp(110px, 34vw, 190px); }
     }
   </style>
 </head>
@@ -195,7 +130,7 @@
 
 <header class="site-header">
   <div class="banner">
-    <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
+    <img src="assets/otinewbanner.png" />
   </div>
 </header>
 
@@ -203,58 +138,36 @@
 
   <section>
 
-    <!-- LEAD STORY -->
     <article class="lead-story">
       <a href="jokethreat.html">
-        <div class="lead-image-wrap">
-          <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
-          <span class="label">National Security</span>
+        <div class="story-image-wrap">
+          <img src="assets/jokebrief.jpg" />
         </div>
       </a>
 
-      <a href="jokethreat.html" class="lead-copy">
-        <div class="lead-kicker">Breaking</div>
+      <div class="lead-copy">
         <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
-        <p>Federal regulators reclassify humor as a measurable threat, introducing systems to track and contain high-risk punchlines.</p>
-      </a>
+        <p>Federal regulators reclassify humor as a measurable threat.</p>
+      </div>
     </article>
 
-    <!-- STORY GRID -->
     <section class="story-grid">
 
-      <!-- STORY 1 -->
-      <article class="story-card">
-        <a href="story-one.html">
-          <div class="story-image-wrap">
-            <img src="assets/story-one.jpg" alt="Story one image" />
-            <span class="label">Label</span>
-          </div>
-          <h2>Story headline goes here</h2>
-          <p>Story summary goes here.</p>
-        </a>
-      </article>
-
-      <!-- STORY 2 -->
       <article class="story-card">
         <a href="kingcharles.html">
           <div class="story-image-wrap">
-            <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk" />
-            <span class="label">World</span>
+            <img src="assets/kingcharles.jpg" />
           </div>
           <h2>King Charles Offers U.S. Return to British Monarchy</h2>
-          <p>Americans may retain traditions while outsourcing final authority to the Crown.</p>
         </a>
       </article>
 
-      <!-- STORY 3 — BALLROOM -->
       <article class="story-card">
         <a href="ballroom1.html">
           <div class="story-image-wrap">
-            <img src="assets/ballroomrank.jpg" alt="Guests arranged in concentric rings inside a grand ballroom" />
-            <span class="label">Politics</span>
+            <img src="assets/ballroomrank.jpg" />
           </div>
           <h2>White House Says New Ballroom Needed to Separate Important People</h2>
-          <p>Officials say expanded spacing will preserve clarity between individuals of differing national importance.</p>
         </a>
       </article>
 
@@ -262,8 +175,13 @@
 
   </section>
 
+  <!-- AD RAIL WITH JOKESHIELD -->
   <aside class="ad-rail">
-    Ad Space
+
+    <div class="ad-unit">
+      <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
+    </div>
+
   </aside>
 
 </main>
