@@ -18,17 +18,36 @@
   <meta name="twitter:image" content="https://www.onetrueinfotainment.com/US/assets/otibanner.png" />
 
   <style>
+    :root {
+      --oti-blue: #061f3f;
+      --oti-red: #b80016;
+      --oti-gold: #d7a737;
+      --oti-ink: #071629;
+      --oti-muted: #5d6875;
+      --oti-line: #d7dce3;
+      --oti-bg: #f4f6f9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
+      background: var(--oti-bg);
+      color: var(--oti-ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .site-header {
       background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      border-bottom: 4px solid var(--oti-red);
     }
 
     .banner {
       width: 100%;
       max-width: 1600px;
+      margin: 0 auto;
     }
 
     .banner img {
@@ -36,13 +55,285 @@
       height: auto;
       display: block;
     }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 28px auto 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .lead-story {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--oti-line);
+    }
+
+    .lead-story a,
+    .story-card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+
+    .lead-image-wrap,
+    .story-image-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .lead-image-wrap {
+      aspect-ratio: 16 / 9;
+    }
+
+    .story-image-wrap {
+      aspect-ratio: 16 / 10;
+    }
+
+    .lead-image-wrap img,
+    .story-image-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 180ms ease;
+    }
+
+    .lead-story a:hover img,
+    .story-card a:hover img {
+      transform: scale(1.025);
+    }
+
+    .label {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      background: rgba(6, 31, 63, 0.94);
+      color: #fff;
+      padding: 8px 11px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .lead-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lead-kicker,
+    .story-kicker {
+      color: var(--oti-red);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .lead-copy h1 {
+      margin: 0 0 12px;
+      color: var(--oti-blue);
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      font-weight: 900;
+    }
+
+    .lead-copy p {
+      margin: 0;
+      color: var(--oti-muted);
+      font-size: 1.08rem;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .story-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 18px;
+    }
+
+    .story-card {
+      border-bottom: 1px solid var(--oti-line);
+      padding-bottom: 18px;
+    }
+
+    .story-card h2 {
+      margin: 10px 0 6px;
+      color: var(--oti-blue);
+      font-size: 1.18rem;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-weight: 900;
+    }
+
+    .story-card p {
+      margin: 0;
+      color: var(--oti-muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .ad-rail {
+      min-height: 680px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--oti-line);
+      color: #8a94a3;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      position: sticky;
+      top: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .page-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .ad-rail {
+        display: none;
+      }
+
+      .lead-story {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 20px, 1180px);
+        margin-top: 18px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lead-copy h1 {
+        font-size: 2.35rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="banner">
-    <img src="assets/otibanner.png" alt="One True Infotainment Banner" />
-  </div>
+  <header class="site-header">
+    <div class="banner">
+      <img src="assets/otibanner.png" alt="One True Infotainment Banner" />
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="content" aria-label="Top stories">
+
+      <article class="lead-story">
+        <a href="lead-story.html" class="lead-image-link">
+          <div class="lead-image-wrap">
+            <img src="assets/lead-story.jpg" alt="Lead story image" />
+            <span class="label">Solid Case</span>
+          </div>
+        </a>
+
+        <a href="lead-story.html" class="lead-copy">
+          <div class="lead-kicker">Breaking</div>
+          <h1>Lead story headline goes here with maximum force</h1>
+          <p>Short lead story summary goes here. Keep it sharp, urgent, and built for the click without giving the game away.</p>
+        </a>
+      </article>
+
+      <section class="story-grid" aria-label="Story grid">
+
+        <article class="story-card">
+          <a href="story-one.html">
+            <div class="story-image-wrap">
+              <img src="assets/story-one.jpg" alt="Story one image" />
+              <span class="label">Label</span>
+            </div>
+            <h2>Story headline goes here</h2>
+            <p>Story summary goes here in one tight sentence.</p>
+          </a>
+        </article>
+
+        <article class="story-card">
+          <a href="story-two.html">
+            <div class="story-image-wrap">
+              <img src="assets/story-two.jpg" alt="Story two image" />
+              <span class="label">Label</span>
+            </div>
+            <h2>Story headline goes here</h2>
+            <p>Story summary goes here in one tight sentence.</p>
+          </a>
+        </article>
+
+        <article class="story-card">
+          <a href="story-three.html">
+            <div class="story-image-wrap">
+              <img src="assets/story-three.jpg" alt="Story three image" />
+              <span class="label">Label</span>
+            </div>
+            <h2>Story headline goes here</h2>
+            <p>Story summary goes here in one tight sentence.</p>
+          </a>
+        </article>
+
+        <article class="story-card">
+          <a href="story-four.html">
+            <div class="story-image-wrap">
+              <img src="assets/story-four.jpg" alt="Story four image" />
+              <span class="label">Label</span>
+            </div>
+            <h2>Story headline goes here</h2>
+            <p>Story summary goes here in one tight sentence.</p>
+          </a>
+        </article>
+
+        <article class="story-card">
+          <a href="story-five.html">
+            <div class="story-image-wrap">
+              <img src="assets/story-five.jpg" alt="Story five image" />
+              <span class="label">Label</span>
+            </div>
+            <h2>Story headline goes here</h2>
+            <p>Story summary goes here in one tight sentence.</p>
+          </a>
+        </article>
+
+        <article class="story-card">
+          <a href="story-six.html">
+            <div class="story-image-wrap">
+              <img src="assets/story-six.jpg" alt="Story six image" />
+              <span class="label">Label</span>
+            </div>
+            <h2>Story headline goes here</h2>
+            <p>Story summary goes here in one tight sentence.</p>
+          </a>
+        </article>
+
+      </section>
+    </section>
+
+    <aside class="ad-rail" aria-label="Advertisement space">
+      Ad Space
+    </aside>
+  </main>
 
 </body>
 </html>
