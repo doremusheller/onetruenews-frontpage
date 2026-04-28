@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,19 +8,18 @@
 
   <meta property="og:type" content="article" />
   <meta property="og:title" content="King Charles Offers U.S. Return to British Monarchy as Stability Option" />
-  <meta property="og:description" content="Palace officials say the proposal would let Americans keep traditions while outsourcing final authority to the Crown." />
+  <meta property="og:description" content="Palace officials say Americans may keep their traditions while outsourcing final authority to the Crown." />
   <meta property="og:image" content="https://www.onetrueinfotainment.com/assets/kingcharles.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="King Charles Offers U.S. Return to British Monarchy as Stability Option" />
-  <meta name="twitter:description" content="Palace officials say the proposal would let Americans keep traditions while outsourcing final authority to the Crown." />
+  <meta name="twitter:description" content="Palace officials say Americans may keep their traditions while outsourcing final authority to the Crown." />
   <meta name="twitter:image" content="https://www.onetrueinfotainment.com/assets/kingcharles.jpg" />
 
   <style>
     :root {
       --oti-blue: #061f3f;
       --oti-red: #b80016;
-      --oti-gold: #d7a737;
       --oti-ink: #071629;
       --oti-muted: #5d6875;
       --oti-line: #d7dce3;
@@ -51,6 +51,7 @@
       height: clamp(150px, 24vw, 360px);
       display: block;
       object-fit: cover;
+      object-position: center;
     }
 
     .page-shell {
@@ -59,9 +60,11 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
+      align-items: start;
     }
 
     .article {
+      min-width: 0;
       background: #fff;
       border: 1px solid var(--oti-line);
       padding: clamp(18px, 4vw, 42px);
@@ -71,6 +74,7 @@
       color: var(--oti-red);
       font-size: 0.8rem;
       font-weight: 900;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -80,6 +84,7 @@
       color: var(--oti-blue);
       font-size: clamp(2.2rem, 5vw, 4.8rem);
       line-height: 0.95;
+      letter-spacing: -0.055em;
       font-weight: 900;
     }
 
@@ -87,29 +92,40 @@
       margin: 0 0 18px;
       color: var(--oti-muted);
       font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.35;
       font-weight: 800;
+      max-width: 820px;
     }
 
     .byline {
-      border-top: 1px solid var(--oti-line);
       padding-top: 14px;
-      margin-bottom: 24px;
+      border-top: 1px solid var(--oti-line);
+      color: var(--oti-muted);
       font-size: 0.9rem;
       font-weight: 800;
       text-transform: uppercase;
-      color: var(--oti-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .hero-image {
+      margin: 0 0 24px;
+      background: #111;
     }
 
     .hero-image img {
       width: 100%;
       display: block;
+      height: auto;
     }
 
     .caption {
-      font-size: 0.75rem;
       color: var(--oti-muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding-top: 8px;
       text-transform: uppercase;
-      margin-top: 6px;
+      letter-spacing: 0.04em;
     }
 
     .story-body {
@@ -120,7 +136,7 @@
     }
 
     .story-body p {
-      margin-bottom: 18px;
+      margin: 0 0 18px;
     }
 
     .dateline {
@@ -129,27 +145,49 @@
     }
 
     .ad-rail {
+      min-height: 680px;
+      padding: 18px;
       background: #fff;
       border: 1px solid var(--oti-line);
-      padding: 18px;
+      color: #8a94a3;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-align: center;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      position: sticky;
+      top: 20px;
     }
 
     .back-link {
       display: inline-block;
-      margin-top: 24px;
+      margin-top: 26px;
       color: var(--oti-red);
       font-weight: 900;
       text-decoration: none;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      font-size: 0.82rem;
     }
 
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
       .ad-rail { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 20px, 1180px);
+        margin-top: 18px;
+      }
+
+      .banner img {
+        height: clamp(110px, 34vw, 190px);
+      }
+
+      .article {
+        padding: 18px;
+      }
     }
   </style>
 </head>
@@ -159,7 +197,7 @@
 <header class="site-header">
   <div class="banner">
     <a href="index.html">
-      <img src="assets/otinewbanner.png" alt="One True Infotainment Banner">
+      <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
     </a>
   </div>
 </header>
@@ -168,12 +206,12 @@
 
   <article class="article">
 
-    <div class="kicker">Breaking</div>
+    <div class="kicker">World</div>
 
     <h1>King Charles Offers U.S. Return to British Monarchy as “Stability Option”</h1>
 
     <p class="dek">
-      Palace officials say the proposal would let Americans keep traditions while outsourcing final authority to the Crown.
+      Palace officials say Americans may keep their traditions while outsourcing final authority to the Crown.
     </p>
 
     <div class="byline">
@@ -181,10 +219,10 @@
     </div>
 
     <figure class="hero-image">
-      <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk as Trump stands beside him">
-      <div class="caption">
+      <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk as Trump stands beside him" />
+      <figcaption class="caption">
         King Charles reviews the proposed continuity arrangement from behind the Resolute Desk.
-      </div>
+      </figcaption>
     </figure>
 
     <section class="story-body">
@@ -213,7 +251,7 @@
 
   </article>
 
-  <aside class="ad-rail">
+  <aside class="ad-rail" aria-label="Advertisement space">
     Ad Space
   </aside>
 
@@ -221,3 +259,4 @@
 
 </body>
 </html>
+```
