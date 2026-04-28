@@ -19,7 +19,6 @@
     :root {
       --oti-blue: #061f3f;
       --oti-red: #b80016;
-      --oti-gold: #d7a737;
       --oti-ink: #071629;
       --oti-muted: #5d6875;
       --oti-line: #d7dce3;
@@ -60,7 +59,6 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
-      align-items: start;
     }
 
     .lead-story {
@@ -77,14 +75,18 @@
       display: block;
     }
 
-    .lead-image-wrap {
+    .lead-image-wrap,
+    .story-image-wrap {
       position: relative;
-      aspect-ratio: 16 / 9;
       overflow: hidden;
       background: #111;
     }
 
-    .lead-image-wrap img {
+    .lead-image-wrap { aspect-ratio: 16 / 9; }
+    .story-image-wrap { aspect-ratio: 16 / 10; }
+
+    .lead-image-wrap img,
+    .story-image-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -123,6 +125,37 @@
       font-weight: 700;
     }
 
+    .story-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 18px;
+    }
+
+    .story-card {
+      border-bottom: 1px solid var(--oti-line);
+      padding-bottom: 18px;
+    }
+
+    .story-card a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .story-card h2 {
+      margin: 10px 0 6px;
+      color: var(--oti-blue);
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .story-card p {
+      margin: 0;
+      color: var(--oti-muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
     .ad-rail {
       min-height: 680px;
       padding: 18px;
@@ -130,14 +163,27 @@
       border: 1px solid var(--oti-line);
       text-align: center;
       text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 980px) {
+      .page-shell { grid-template-columns: 1fr; }
+      .ad-rail { display: none; }
+      .lead-story { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .banner img { height: clamp(110px, 34vw, 190px); }
     }
   </style>
 </head>
+
 <body>
 
 <header class="site-header">
   <div class="banner">
-    <img src="assets/otinewbanner.png" />
+    <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
   </div>
 </header>
 
@@ -145,6 +191,7 @@
 
   <section>
 
+    <!-- LEAD STORY -->
     <article class="lead-story">
       <a href="jokethreat.html">
         <div class="lead-image-wrap">
@@ -156,9 +203,38 @@
       <a href="jokethreat.html" class="lead-copy">
         <div class="lead-kicker">Breaking</div>
         <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
-        <p>Federal regulators reclassify humor as a measurable threat, introducing new systems to track, contain, and neutralize high-risk punchlines.</p>
+        <p>Federal regulators reclassify humor as a measurable threat, introducing systems to track and contain high-risk punchlines.</p>
       </a>
     </article>
+
+    <!-- STORY GRID -->
+    <section class="story-grid">
+
+      <!-- STORY 1 -->
+      <article class="story-card">
+        <a href="story-one.html">
+          <div class="story-image-wrap">
+            <img src="assets/story-one.jpg" />
+            <span class="label">Label</span>
+          </div>
+          <h2>Story headline goes here</h2>
+          <p>Story summary goes here.</p>
+        </a>
+      </article>
+
+      <!-- STORY 2 -->
+      <article class="story-card">
+        <a href="kingcharles.html">
+          <div class="story-image-wrap">
+            <img src="assets/kingcharles.jpg" />
+            <span class="label">World</span>
+          </div>
+          <h2>King Charles Offers U.S. Return to British Monarchy</h2>
+          <p>Americans may retain traditions while outsourcing final authority to the Crown.</p>
+        </a>
+      </article>
+
+    </section>
 
   </section>
 
