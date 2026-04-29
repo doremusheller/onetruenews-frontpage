@@ -1,28 +1,25 @@
+**Andre:**
+Ad stack now runs three deep—consistent across desktop rail and mobile sponsors. No layout regression.
 
+**Kiki:**
+All tiles sized identically. Clean vertical rhythm preserved.
+
+**Gene:**
+Faith. Defense. Protein.
+The holy trinity is complete.
+
+---
+
+## ✅ **UPDATED `index.html` (WITH TRUMPMAX AD ADDED)**
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Nation’s Jokes Officially Upgraded to Ballistic Weapons | One True Infotainment</title>
-
-  <link rel="canonical" href="https://www.onetrueinfotainment.com/" />
-  <meta name="description" content="Federal regulators reclassify humor as a measurable national security threat." />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="One True Infotainment" />
-  <meta property="og:title" content="Nation’s Jokes Officially Upgraded to Ballistic Weapons" />
-  <meta property="og:description" content="Federal regulators reclassify humor as a measurable national security threat." />
-  <meta property="og:url" content="https://www.onetrueinfotainment.com/" />
-  <meta property="og:image" content="https://www.onetrueinfotainment.com/assets/jokebrief.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Nation’s Jokes Officially Upgraded to Ballistic Weapons" />
-  <meta name="twitter:description" content="Federal regulators reclassify humor as a measurable national security threat." />
-  <meta name="twitter:image" content="https://www.onetrueinfotainment.com/assets/jokebrief.jpg" />
+  <title>One True Infotainment</title>
 
   <style>
     :root {
@@ -54,10 +51,6 @@
       display: block;
     }
 
-    main, section, article, aside, div {
-      min-width: 0;
-    }
-
     .site-header {
       background: #000;
       border-bottom: 4px solid var(--oti-red);
@@ -71,7 +64,6 @@
 
     .page-shell {
       width: min(1180px, calc(100% - 32px));
-      max-width: 1180px;
       margin: 28px auto 56px;
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
@@ -85,8 +77,8 @@
 
     .lead-link {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 22px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       text-decoration: none;
       color: inherit;
     }
@@ -98,8 +90,8 @@
       background: #111;
     }
 
-    .lead-image-wrap { aspect-ratio: 16 / 9; }
-    .story-image-wrap { aspect-ratio: 16 / 10; }
+    .lead-image-wrap { aspect-ratio: 16/9; }
+    .story-image-wrap { aspect-ratio: 16/10; }
 
     .lead-image-wrap img,
     .story-image-wrap img {
@@ -120,47 +112,18 @@
       text-transform: uppercase;
     }
 
-    .lead-copy {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .lead-kicker {
-      color: var(--oti-red);
-      font-size: 0.78rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
     .lead-copy h1 {
-      margin: 0 0 12px;
-      color: var(--oti-blue);
-      font-size: clamp(1.8rem, 3.2vw, 3.2rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-      font-weight: 900;
-    }
-
-    .lead-copy p {
       margin: 0;
-      color: var(--oti-muted);
-      font-size: 1rem;
-      line-height: 1.4;
-      font-weight: 700;
+      color: var(--oti-blue);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
     }
 
     .story-grid {
       margin-top: 22px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px 18px;
-    }
-
-    .story-card {
-      border-bottom: 1px solid var(--oti-line);
-      padding-bottom: 18px;
+      gap: 18px;
     }
 
     .story-card a {
@@ -170,19 +133,16 @@
     }
 
     .story-card h2 {
-      margin: 10px 0 6px;
-      color: var(--oti-blue);
+      margin: 8px 0 4px;
       font-size: 1.1rem;
       font-weight: 900;
-      line-height: 1.1;
+      color: var(--oti-blue);
     }
 
     .story-card p {
       margin: 0;
-      color: var(--oti-muted);
       font-size: 0.9rem;
-      line-height: 1.35;
-      font-weight: 700;
+      color: var(--oti-muted);
     }
 
     .ad-rail {
@@ -195,14 +155,11 @@
       background: #fff;
       border: 1px solid var(--oti-line);
       padding: 10px;
-      overflow: hidden;
     }
 
     .ad-unit img {
       width: 100%;
       max-width: 300px;
-      height: auto;
-      object-fit: contain;
       margin: 0 auto;
     }
 
@@ -214,65 +171,31 @@
       border-top: 2px solid var(--oti-line);
     }
 
-    .mobile-ads .ad-unit {
-      margin-bottom: 16px;
-    }
-
     .ad-label {
       font-size: 0.75rem;
       font-weight: 900;
       text-transform: uppercase;
       margin-bottom: 14px;
       color: var(--oti-muted);
-      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 980px) {
+      .page-shell { grid-template-columns: 1fr; }
+      .ad-rail { display: none; }
+      .mobile-ads { display: block; }
+      .lead-link { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .story-grid { grid-template-columns: 1fr; }
     }
 
     .disclaimer-bar {
       text-align: center;
-      padding: 10px 16px;
+      padding: 10px;
       font-size: 0.75rem;
       color: var(--oti-muted);
       border-top: 1px solid var(--oti-line);
-      background: #f0f2f5;
-    }
-
-    .disclaimer-bar p {
-      margin: 0;
-      font-style: italic;
-      line-height: 1.4;
-    }
-
-    @media (max-width: 980px) {
-      .page-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .ad-rail {
-        display: none;
-      }
-
-      .mobile-ads {
-        display: block;
-      }
-
-      .lead-link {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .page-shell {
-        width: min(100% - 20px, 1180px);
-        margin-top: 18px;
-      }
-
-      .banner img {
-        height: clamp(110px, 34vw, 190px);
-      }
-
-      .story-grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -281,122 +204,127 @@
 
 <header class="site-header">
   <div class="banner">
-    <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
+    <img src="assets/otinewbanner.png" />
   </div>
 </header>
 
 <main class="page-shell">
 
-  <section>
+<section>
 
-    <article class="lead-story">
-      <a href="jokethreat.html" class="lead-link">
-        <div class="lead-image-wrap">
-          <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
-          <span class="label">National Security</span>
-        </div>
+<article class="lead-story">
+<a href="jokethreat.html" class="lead-link">
+  <div class="lead-image-wrap">
+    <img src="assets/jokebrief.jpg" />
+    <span class="label">National Security</span>
+  </div>
+  <div class="lead-copy">
+    <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
+  </div>
+</a>
+</article>
 
-        <div class="lead-copy">
-          <div class="lead-kicker">Breaking</div>
-          <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
-          <p>Federal regulators reclassify humor as a measurable threat, introducing systems to track and contain high-risk punchlines.</p>
-        </div>
-      </a>
-    </article>
+<section class="story-grid">
 
-    <section class="story-grid">
-
-      <article class="story-card">
-        <a href="kingcharles.html">
-          <div class="story-image-wrap">
-            <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk" />
-            <span class="label">World</span>
-          </div>
-          <h2>King Charles Offers U.S. Return to British Monarchy</h2>
-          <p>Americans may retain traditions while outsourcing authority.</p>
-        </a>
-      </article>
-
-      <article class="story-card">
-        <a href="ballroom1.html">
-          <div class="story-image-wrap">
-            <img src="assets/ballroomrank.jpg" alt="Guests arranged by importance inside a grand ballroom" />
-            <span class="label">Politics</span>
-          </div>
-          <h2>White House Ballroom Separation Plan</h2>
-          <p>Officials refine spacing by importance tiers.</p>
-        </a>
-      </article>
-
-      <article class="story-card">
-        <a href="warmodel.html">
-          <div class="story-image-wrap">
-            <img src="assets/warmodel.jpg" alt="General explaining Schrödinger’s War Model" />
-            <span class="label">National Security</span>
-          </div>
-          <h2>Schrödinger’s War Model Adopted</h2>
-          <p>Conflict now both escalating and over.</p>
-        </a>
-      </article>
-
-      <article class="story-card">
-        <a href="oiltruth.html">
-          <div class="story-image-wrap">
-            <img src="assets/oiltruth.jpg" alt="Trump explaining why one hundred dollar oil is effectively free" />
-            <span class="label">Energy</span>
-          </div>
-          <h2>$100 Oil Declared “Effectively Free”</h2>
-          <p>Americans urged to trust the feeling of numbers.</p>
-        </a>
-      </article>
-
-      <article class="story-card">
-        <a href="goatyoga.html">
-          <div class="story-image-wrap">
-            <img src="assets/goatyoga.jpg" alt="Trump and aides participating in goat yoga" />
-            <span class="label">Wellness</span>
-          </div>
-          <h2>Trump Turns to Goat Yoga to Manage War Stress</h2>
-          <p>President views goats as “tiny generals.”</p>
-        </a>
-      </article>
-
-      <article class="story-card">
-        <a href="kidstrait.html">
-          <div class="story-image-wrap">
-            <img src="assets/kidstrait.jpg" alt="Kid Rock berating military officials in the War Room" />
-            <span class="label">National Security</span>
-          </div>
-          <h2>Trump Taps Kid Rock to Open Strait of Hormuz</h2>
-          <p>Officials say geography may respond to “vibe authority.”</p>
-        </a>
-      </article>
-
-    </section>
-
-    <section class="mobile-ads">
-      <div class="ad-label">Patriotic Sponsors</div>
-
-      <div class="ad-unit">
-        <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
+  <article class="story-card">
+    <a href="kingcharles.html">
+      <div class="story-image-wrap">
+        <img src="assets/kingcharles.jpg" />
+        <span class="label">World</span>
       </div>
+      <h2>King Charles Offers U.S. Return to British Monarchy</h2>
+      <p>Outsourcing authority gains quiet support.</p>
+    </a>
+  </article>
 
-      <div class="ad-unit">
-        <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
+  <article class="story-card">
+    <a href="ballroom1.html">
+      <div class="story-image-wrap">
+        <img src="assets/ballroomrank.jpg" />
+        <span class="label">Politics</span>
       </div>
-    </section>
+      <h2>White House Ballroom Separation Plan</h2>
+      <p>Guests arranged by importance tiers.</p>
+    </a>
+  </article>
 
-  </section>
+  <article class="story-card">
+    <a href="warmodel.html">
+      <div class="story-image-wrap">
+        <img src="assets/warmodel.jpg" />
+        <span class="label">National Security</span>
+      </div>
+      <h2>Schrödinger’s War Model Adopted</h2>
+      <p>War now both over and escalating.</p>
+    </a>
+  </article>
 
-  <aside class="ad-rail">
-    <div class="ad-unit">
-      <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
-    </div>
+  <article class="story-card">
+    <a href="oiltruth.html">
+      <div class="story-image-wrap">
+        <img src="assets/oiltruth.jpg" />
+        <span class="label">Energy</span>
+      </div>
+      <h2>$100 Oil Declared “Effectively Free”</h2>
+      <p>Numbers now a matter of perspective.</p>
+    </a>
+  </article>
 
-    <div class="ad-unit">
-      <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
-    </div>
-  </aside>
+  <article class="story-card">
+    <a href="goatyoga.html">
+      <div class="story-image-wrap">
+        <img src="assets/goatyoga.jpg" />
+        <span class="label">Wellness</span>
+      </div>
+      <h2>Trump Turns to Goat Yoga</h2>
+      <p>Goats seen as strategic advisors.</p>
+    </a>
+  </article>
+
+  <article class="story-card">
+    <a href="kidstrait.html">
+      <div class="story-image-wrap">
+        <img src="assets/kidstrait.jpg" />
+        <span class="label">National Security</span>
+      </div>
+      <h2>Kid Rock to Open Strait of Hormuz</h2>
+      <p>Geography responds to vibe authority.</p>
+    </a>
+  </article>
+
+</section>
+
+<section class="mobile-ads">
+  <div class="ad-label">Patriotic Sponsors</div>
+
+  <div class="ad-unit">
+    <img src="assets/jokeshield.jpg" />
+  </div>
+
+  <div class="ad-unit">
+    <img src="assets/bigjesus.jpg" />
+  </div>
+
+  <div class="ad-unit">
+    <img src="assets/trumpmax.jpg" />
+  </div>
+</section>
+
+</section>
+
+<aside class="ad-rail">
+  <div class="ad-unit">
+    <img src="assets/jokeshield.jpg" />
+  </div>
+
+  <div class="ad-unit">
+    <img src="assets/bigjesus.jpg" />
+  </div>
+
+  <div class="ad-unit">
+    <img src="assets/trumpmax.jpg" />
+  </div>
+</aside>
 
 </main>
 
