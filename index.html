@@ -1,3 +1,43 @@
+Fixed. Impacted files are:
+
+1. `index.html`
+2. `ads.js`
+
+## `ads.js`
+
+```js
+const adTiles = [
+  "assets/jokeshieldDROP.jpg",
+  "assets/bigjesusDROP.jpg",
+  "assets/trumpmaxDROP.jpg"
+];
+
+function shuffleAds(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function loadRandomAds() {
+  const rails = document.querySelectorAll("[data-random-ads]");
+  if (!rails.length) return;
+
+  rails.forEach((rail) => {
+    const count = Math.random() < 0.5 ? 2 : 3;
+    const selectedAds = shuffleAds(adTiles).slice(0, count);
+
+    rail.innerHTML = selectedAds.map((src) => `
+      <div class="ad-unit">
+        <img src="${src}" alt="Sponsored message" />
+      </div>
+    `).join("");
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadRandomAds);
+```
+
+## `index.html`
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -181,7 +221,7 @@
 
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
-      .ad-rail { display: none; }
+      .desktop-ad-rail { display: none; }
       .mobile-ads { display: block; }
       .lead-link { grid-template-columns: 1fr; }
     }
@@ -312,12 +352,12 @@
 
 <section class="mobile-ads">
   <div class="ad-label">Patriotic Sponsors</div>
-  <div class="mobile-ad-rail"></div>
+  <div class="mobile-ad-rail" data-random-ads></div>
 </section>
 
 </section>
 
-<aside class="ad-rail">
+<aside class="ad-rail desktop-ad-rail" data-random-ads>
   Ad Space
 </aside>
 
@@ -329,3 +369,4 @@
 
 </body>
 </html>
+```
