@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -63,7 +62,7 @@
 
     .lead-link {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 20px;
       text-decoration: none;
       color: inherit;
@@ -76,8 +75,8 @@
       background: #111;
     }
 
-    .lead-image-wrap { aspect-ratio: 16/9; }
-    .story-image-wrap { aspect-ratio: 16/10; }
+    .lead-image-wrap { aspect-ratio: 16 / 9; }
+    .story-image-wrap { aspect-ratio: 16 / 10; }
 
     .lead-image-wrap img,
     .story-image-wrap img {
@@ -98,11 +97,22 @@
       text-transform: uppercase;
     }
 
+    .lead-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
     .lead-copy h1 {
       margin: 0;
       color: var(--oti-blue);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       font-weight: 900;
+      max-width: 100%;
+      word-break: break-word;
     }
 
     .story-grid {
@@ -190,7 +200,7 @@
 
 <header class="site-header">
   <div class="banner">
-    <img src="assets/otinewbanner.png" />
+    <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
   </div>
 </header>
 
@@ -201,7 +211,7 @@
 <article class="lead-story">
 <a href="jokethreat.html" class="lead-link">
   <div class="lead-image-wrap">
-    <img src="assets/jokebrief.jpg" />
+    <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
     <span class="label">National Security</span>
   </div>
   <div class="lead-copy">
@@ -215,7 +225,7 @@
   <article class="story-card">
     <a href="kingcharles.html">
       <div class="story-image-wrap">
-        <img src="assets/kingcharles.jpg" />
+        <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk" />
         <span class="label">World</span>
       </div>
       <h2>King Charles Offers U.S. Return to British Monarchy</h2>
@@ -226,7 +236,7 @@
   <article class="story-card">
     <a href="ballroom1.html">
       <div class="story-image-wrap">
-        <img src="assets/ballroomrank.jpg" />
+        <img src="assets/ballroomrank.jpg" alt="Guests arranged by importance inside a ballroom" />
         <span class="label">Politics</span>
       </div>
       <h2>White House Ballroom Separation Plan</h2>
@@ -237,7 +247,7 @@
   <article class="story-card">
     <a href="warmodel.html">
       <div class="story-image-wrap">
-        <img src="assets/warmodel.jpg" />
+        <img src="assets/warmodel.jpg" alt="General explaining Schrödinger’s War Model" />
         <span class="label">National Security</span>
       </div>
       <h2>Schrödinger’s War Model Adopted</h2>
@@ -248,7 +258,7 @@
   <article class="story-card">
     <a href="oiltruth.html">
       <div class="story-image-wrap">
-        <img src="assets/oiltruth.jpg" />
+        <img src="assets/oiltruth.jpg" alt="Trump explaining oil prices" />
         <span class="label">Energy</span>
       </div>
       <h2>$100 Oil Declared “Effectively Free”</h2>
@@ -259,7 +269,7 @@
   <article class="story-card">
     <a href="goatyoga.html">
       <div class="story-image-wrap">
-        <img src="assets/goatyoga.jpg" />
+        <img src="assets/goatyoga.jpg" alt="Trump participating in goat yoga" />
         <span class="label">Wellness</span>
       </div>
       <h2>Trump Turns to Goat Yoga</h2>
@@ -270,7 +280,7 @@
   <article class="story-card">
     <a href="kidstrait.html">
       <div class="story-image-wrap">
-        <img src="assets/kidstrait.jpg" />
+        <img src="assets/kidstrait.jpg" alt="Kid Rock in the War Room" />
         <span class="label">National Security</span>
       </div>
       <h2>Kid Rock to Open Strait of Hormuz</h2>
@@ -284,15 +294,15 @@
   <div class="ad-label">Patriotic Sponsors</div>
 
   <div class="ad-unit">
-    <img src="assets/jokeshield.jpg" />
+    <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
   </div>
 
   <div class="ad-unit">
-    <img src="assets/bigjesus.jpg" />
+    <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
   </div>
 
   <div class="ad-unit">
-    <img src="assets/trumpmax.jpg" />
+    <img src="assets/trumpmax.jpg" alt="TrumpMax Protein Supplement for Patriots" />
   </div>
 </section>
 
@@ -300,15 +310,15 @@
 
 <aside class="ad-rail">
   <div class="ad-unit">
-    <img src="assets/jokeshield.jpg" />
+    <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
   </div>
 
   <div class="ad-unit">
-    <img src="assets/bigjesus.jpg" />
+    <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
   </div>
 
   <div class="ad-unit">
-    <img src="assets/trumpmax.jpg" />
+    <img src="assets/trumpmax.jpg" alt="TrumpMax Protein Supplement for Patriots" />
   </div>
 </aside>
 
@@ -320,4 +330,3 @@
 
 </body>
 </html>
-```
