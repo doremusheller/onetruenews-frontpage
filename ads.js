@@ -9,13 +9,13 @@ function shuffleAds(items) {
 }
 
 function loadRandomAds() {
-  const rails = document.querySelectorAll(".ad-rail");
+  const rails = document.querySelectorAll(".ad-rail, .mobile-ad-rail");
   if (!rails.length) return;
 
-  const count = Math.random() < 0.5 ? 2 : 3;
-  const selectedAds = shuffleAds(adTiles).slice(0, count);
-
   rails.forEach((rail) => {
+    const count = Math.random() < 0.5 ? 2 : 3;
+    const selectedAds = shuffleAds(adTiles).slice(0, count);
+
     rail.innerHTML = selectedAds.map((src) => `
       <div class="ad-unit">
         <img src="${src}" alt="Sponsored message" />
