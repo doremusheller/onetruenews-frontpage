@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>One True Infotainment</title>
+
+  <script src="ads.js"></script>
 
   <style>
     :root {
@@ -143,7 +144,8 @@
       color: var(--oti-muted);
     }
 
-    .ad-rail {
+    .ad-rail,
+    .mobile-ad-rail {
       display: flex;
       flex-direction: column;
       gap: 18px;
@@ -310,34 +312,13 @@
 
 <section class="mobile-ads">
   <div class="ad-label">Patriotic Sponsors</div>
-
-  <div class="ad-unit">
-    <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
-  </div>
-
-  <div class="ad-unit">
-    <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
-  </div>
-
-  <div class="ad-unit">
-    <img src="assets/trumpmax.jpg" alt="TrumpMax Protein Supplement for Patriots" />
-  </div>
+  <div class="mobile-ad-rail"></div>
 </section>
 
 </section>
 
 <aside class="ad-rail">
-  <div class="ad-unit">
-    <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
-  </div>
-
-  <div class="ad-unit">
-    <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
-  </div>
-
-  <div class="ad-unit">
-    <img src="assets/trumpmax.jpg" alt="TrumpMax Protein Supplement for Patriots" />
-  </div>
+  Ad Space
 </aside>
 
 </main>
@@ -348,4 +329,3 @@
 
 </body>
 </html>
-```
