@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Nation’s Jokes Officially Upgraded to Ballistic Weapons | One True Infotainment</title>
+
   <link rel="canonical" href="https://www.onetrueinfotainment.com/" />
   <meta name="description" content="Federal regulators reclassify humor as a measurable national security threat." />
 
@@ -33,10 +34,26 @@
 
     * { box-sizing: border-box; }
 
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       margin: 0;
       background: var(--oti-bg);
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    main, section, article, aside, div {
+      min-width: 0;
     }
 
     .site-header {
@@ -48,14 +65,14 @@
       width: 100%;
       height: clamp(150px, 24vw, 360px);
       object-fit: cover;
-      display: block;
     }
 
     .page-shell {
       width: min(1180px, calc(100% - 32px));
+      max-width: 1180px;
       margin: 28px auto;
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: minmax(0,1fr) 300px;
       gap: 28px;
     }
 
@@ -86,7 +103,7 @@
 
     .story-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 18px;
       margin-top: 20px;
     }
@@ -111,15 +128,11 @@
     }
 
     .ad-unit img {
-      width: 100%;
       max-width: 300px;
-      height: auto;
-      object-fit: contain;
-      display: block;
       margin: 0 auto;
+      object-fit: contain;
     }
 
-    /* MOBILE ADS */
     .mobile-ads {
       display: none;
       max-width: 360px;
@@ -218,7 +231,6 @@
 
 </section>
 
-<!-- MOBILE ADS -->
 <section class="mobile-ads">
   <div class="ad-label">Patriotic Sponsors</div>
 
