@@ -15,13 +15,6 @@
   <meta property="og:description" content="Federal regulators reclassify humor as a measurable national security threat." />
   <meta property="og:url" content="https://www.onetrueinfotainment.com/" />
   <meta property="og:image" content="https://www.onetrueinfotainment.com/assets/jokebrief.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Nation’s Jokes Officially Upgraded to Ballistic Weapons" />
-  <meta name="twitter:description" content="Federal regulators reclassify humor as a measurable national security threat." />
-  <meta name="twitter:image" content="https://www.onetrueinfotainment.com/assets/jokebrief.jpg" />
 
   <style>
     :root {
@@ -48,7 +41,6 @@
 
     img {
       max-width: 100%;
-      height: auto;
       display: block;
     }
 
@@ -101,6 +93,18 @@
       object-fit: cover;
     }
 
+    .label {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(6,31,63,0.9);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 6px 8px;
+      text-transform: uppercase;
+    }
+
     .story-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
@@ -114,6 +118,19 @@
       display: block;
     }
 
+    .story-card h2 {
+      font-size: 1.1rem;
+      margin: 8px 0 4px;
+      font-weight: 900;
+      color: var(--oti-blue);
+    }
+
+    .story-card p {
+      font-size: 0.9rem;
+      color: var(--oti-muted);
+      margin: 0;
+    }
+
     .ad-rail {
       display: flex;
       flex-direction: column;
@@ -124,13 +141,11 @@
       background: #fff;
       border: 1px solid var(--oti-line);
       padding: 10px;
-      overflow: hidden;
     }
 
     .ad-unit img {
       max-width: 300px;
       margin: 0 auto;
-      object-fit: contain;
     }
 
     .mobile-ads {
@@ -197,8 +212,10 @@
     <a href="kingcharles.html">
       <div class="story-image-wrap">
         <img src="assets/kingcharles.jpg" />
+        <span class="label">World</span>
       </div>
       <h2>King Charles Offers U.S. Return to British Monarchy</h2>
+      <p>Americans may retain traditions while outsourcing authority.</p>
     </a>
   </article>
 
@@ -206,8 +223,10 @@
     <a href="ballroom1.html">
       <div class="story-image-wrap">
         <img src="assets/ballroomrank.jpg" />
+        <span class="label">Politics</span>
       </div>
       <h2>White House Ballroom Separation Plan</h2>
+      <p>Officials refine spacing by importance tiers.</p>
     </a>
   </article>
 
@@ -215,8 +234,10 @@
     <a href="warmodel.html">
       <div class="story-image-wrap">
         <img src="assets/warmodel.jpg" />
+        <span class="label">National Security</span>
       </div>
       <h2>Schrödinger’s War Model Adopted</h2>
+      <p>Conflict now both escalating and over.</p>
     </a>
   </article>
 
@@ -224,8 +245,22 @@
     <a href="oiltruth.html">
       <div class="story-image-wrap">
         <img src="assets/oiltruth.jpg" />
+        <span class="label">Energy</span>
       </div>
       <h2>$100 Oil Declared “Effectively Free”</h2>
+      <p>Americans urged to trust the feeling of numbers.</p>
+    </a>
+  </article>
+
+  <!-- NEW GOAT YOGA TILE -->
+  <article class="story-card">
+    <a href="goatyoga.html">
+      <div class="story-image-wrap">
+        <img src="assets/goatyoga.jpg" />
+        <span class="label">Wellness</span>
+      </div>
+      <h2>Trump Turns to Goat Yoga to Manage War Stress</h2>
+      <p>President views goats as “tiny generals” stabilizing leadership posture.</p>
     </a>
   </article>
 
