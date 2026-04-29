@@ -1,7 +1,8 @@
 const adTiles = [
   "assets/jokeshieldDROP.jpg",
   "assets/bigjesusDROP.jpg",
-  "assets/trumpmaxDROP.jpg"
+  "assets/trumpmaxDROP.jpg",
+  "assets/coverDROP.jpg"
 ];
 
 function shuffleAds(items) {
