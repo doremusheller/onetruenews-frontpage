@@ -1,3 +1,22 @@
+Here’s the tightened CSS change:
+
+```css
+.lead-copy h1 {
+  margin: 0;
+  color: var(--oti-blue);
+  font-size: clamp(1.45rem, 2.1vw, 2.15rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 900;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+```
+
+Full updated `index.html`:
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -107,12 +126,13 @@
     .lead-copy h1 {
       margin: 0;
       color: var(--oti-blue);
-      font-size: clamp(1.6rem, 2.4vw, 2.4rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-size: clamp(1.45rem, 2.1vw, 2.15rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
       font-weight: 900;
       max-width: 100%;
-      word-break: break-word;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
     }
 
     .story-grid {
@@ -184,6 +204,11 @@
 
     @media (max-width: 760px) {
       .story-grid { grid-template-columns: 1fr; }
+
+      .lead-copy h1 {
+        font-size: clamp(1.55rem, 7vw, 2.35rem);
+        line-height: 1.04;
+      }
     }
 
     .disclaimer-bar {
@@ -209,18 +234,29 @@
 <section>
 
 <article class="lead-story">
-<a href="jokethreat.html" class="lead-link">
+<a href="courtsale.html" class="lead-link">
   <div class="lead-image-wrap">
-    <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
-    <span class="label">National Security</span>
+    <img src="assets/courtsale.jpg" alt="Supreme Court 2 for 1 decision sale" />
+    <span class="label">Judiciary</span>
   </div>
   <div class="lead-copy">
-    <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
+    <h1>SOCUS Announces 2-for-1 Decision Sale</h1>
   </div>
 </a>
 </article>
 
 <section class="story-grid">
+
+  <article class="story-card">
+    <a href="jokethreat.html">
+      <div class="story-image-wrap">
+        <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
+        <span class="label">National Security</span>
+      </div>
+      <h2>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h2>
+      <p>Humor reclassified as a national threat.</p>
+    </a>
+  </article>
 
   <article class="story-card">
     <a href="kingcharles.html">
@@ -330,3 +366,4 @@
 
 </body>
 </html>
+```
