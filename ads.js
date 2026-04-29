@@ -9,7 +9,7 @@ function shuffleAds(items) {
 }
 
 function loadRandomAds() {
-  const rails = document.querySelectorAll(".ad-rail, .mobile-ad-rail");
+  const rails = document.querySelectorAll("[data-random-ads]");
   if (!rails.length) return;
 
   rails.forEach((rail) => {
