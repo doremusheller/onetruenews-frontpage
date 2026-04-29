@@ -1,43 +1,4 @@
-Fixed. Impacted files are:
 
-1. `index.html`
-2. `ads.js`
-
-## `ads.js`
-
-```js
-const adTiles = [
-  "assets/jokeshieldDROP.jpg",
-  "assets/bigjesusDROP.jpg",
-  "assets/trumpmaxDROP.jpg"
-];
-
-function shuffleAds(items) {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-function loadRandomAds() {
-  const rails = document.querySelectorAll("[data-random-ads]");
-  if (!rails.length) return;
-
-  rails.forEach((rail) => {
-    const count = Math.random() < 0.5 ? 2 : 3;
-    const selectedAds = shuffleAds(adTiles).slice(0, count);
-
-    rail.innerHTML = selectedAds.map((src) => `
-      <div class="ad-unit">
-        <img src="${src}" alt="Sponsored message" />
-      </div>
-    `).join("");
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadRandomAds);
-```
-
-## `index.html`
-
-```html
 <!doctype html>
 <html lang="en">
 <head>
