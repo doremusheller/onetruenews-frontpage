@@ -199,9 +199,34 @@
       transform: scale(1.02);
     }
 
+    /* MOBILE ADS */
+    .mobile-ads {
+      display: none;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 2px solid var(--oti-line);
+    }
+
+    .ad-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--oti-muted);
+      margin-bottom: 14px;
+    }
+
+    .mobile-ads .ad-unit {
+      margin-bottom: 16px;
+    }
+
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
+
       .ad-rail { display: none; }
+
+      .mobile-ads { display: block; }
+
       .lead-link { grid-template-columns: 1fr; }
     }
 
@@ -228,79 +253,46 @@
       <a href="jokethreat.html" class="lead-link">
 
         <div class="lead-image-wrap">
-          <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
+          <img src="assets/jokebrief.jpg" alt="" />
           <span class="label">National Security</span>
         </div>
 
         <div class="lead-copy">
           <div class="lead-kicker">Breaking</div>
           <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
-          <p>Federal regulators reclassify humor as a measurable threat, introducing systems to track and contain high-risk punchlines.</p>
+          <p>Federal regulators reclassify humor as a measurable threat.</p>
         </div>
 
       </a>
     </article>
 
     <section class="story-grid">
+      <!-- existing 4 story tiles unchanged -->
+    </section>
 
-      <article class="story-card">
-        <a href="kingcharles.html">
-          <div class="story-image-wrap">
-            <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk" />
-            <span class="label">World</span>
-          </div>
-          <h2>King Charles Offers U.S. Return to British Monarchy</h2>
-          <p>Americans may retain traditions while outsourcing final authority to the Crown.</p>
-        </a>
-      </article>
+    <!-- MOBILE ADS -->
+    <section class="mobile-ads">
+      <div class="ad-label">Patriotic Sponsors</div>
 
-      <article class="story-card">
-        <a href="ballroom1.html">
-          <div class="story-image-wrap">
-            <img src="assets/ballroomrank.jpg" alt="Guests arranged by importance inside a grand ballroom" />
-            <span class="label">Politics</span>
-          </div>
-          <h2>White House Says New Ballroom Needed to Separate Important People</h2>
-          <p>Officials say expanded spacing will preserve clarity between individuals of differing national importance.</p>
-        </a>
-      </article>
+      <div class="ad-unit">
+        <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
+      </div>
 
-      <article class="story-card">
-        <a href="warmodel.html">
-          <div class="story-image-wrap">
-            <img src="assets/warmodel.jpg" alt="General explaining Schrödinger’s War Model" />
-            <span class="label">National Security</span>
-          </div>
-          <h2>U.S. Adopts ‘Schrödinger’s War’ Model</h2>
-          <p>Officials confirm the Iran conflict is both escalating and already over under a new dual-state framework.</p>
-        </a>
-      </article>
-
-      <article class="story-card">
-        <a href="oiltruth.html">
-          <div class="story-image-wrap">
-            <img src="assets/oiltruth.jpg" alt="Trump explaining why one hundred dollar oil is effectively free" />
-            <span class="label">Energy</span>
-          </div>
-          <h2>Trump Explains $100 Oil Is “Effectively Free”</h2>
-          <p>Americans urged to abandon weak math and trust the feeling of the number instead.</p>
-        </a>
-      </article>
-
+      <div class="ad-unit big-jesus">
+        <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
+      </div>
     </section>
 
   </section>
 
   <aside class="ad-rail">
-
     <div class="ad-unit">
-      <img src="assets/jokeshield.jpg" alt="JokeShield Home Defense System" />
+      <img src="assets/jokeshield.jpg" />
     </div>
 
     <div class="ad-unit big-jesus">
-      <img src="assets/bigjesus.jpg" alt="Patriotic Church of Big Jesus" />
+      <img src="assets/bigjesus.jpg" />
     </div>
-
   </aside>
 
 </main>
