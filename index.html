@@ -1,241 +1,33 @@
-
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>One True Infotainment</title>
-
-  <script src="ads.js"></script>
-
-  <style>
-    :root {
-      --oti-blue: #061f3f;
-      --oti-red: #b80016;
-      --oti-muted: #5d6875;
-      --oti-line: #d7dce3;
-      --oti-bg: #f4f6f9;
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      margin: 0;
-      background: var(--oti-bg);
-      font-family: Arial, Helvetica, sans-serif;
-      color: #071629;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .site-header {
-      background: #000;
-      border-bottom: 4px solid var(--oti-red);
-    }
-
-    .banner img {
-      width: 100%;
-      height: clamp(150px, 24vw, 360px);
-      object-fit: cover;
-    }
-
-    .page-shell {
-      width: min(1180px, calc(100% - 32px));
-      margin: 28px auto 56px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
-      gap: 28px;
-    }
-
-    .lead-story {
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--oti-line);
-    }
-
-    .lead-link {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 20px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .lead-image-wrap,
-    .story-image-wrap {
-      position: relative;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .lead-image-wrap { aspect-ratio: 16 / 9; }
-    .story-image-wrap { aspect-ratio: 16 / 10; }
-
-    .lead-image-wrap img,
-    .story-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .label {
-      position: absolute;
-      left: 10px;
-      bottom: 10px;
-      background: rgba(6,31,63,0.9);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 900;
-      padding: 6px 8px;
-      text-transform: uppercase;
-    }
-
-    .lead-copy {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 0;
-    }
-
-    .lead-copy h1 {
-      margin: 0;
-      color: var(--oti-blue);
-      font-size: clamp(1.45rem, 2.1vw, 2.15rem);
-      line-height: 1.02;
-      letter-spacing: -0.025em;
-      font-weight: 900;
-      max-width: 100%;
-      overflow-wrap: anywhere;
-      text-wrap: balance;
-    }
-
-    .story-grid {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .story-card a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .story-card h2 {
-      margin: 8px 0 4px;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--oti-blue);
-    }
-
-    .story-card p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: var(--oti-muted);
-    }
-
-    .ad-rail,
-    .mobile-ad-rail {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .ad-unit {
-      background: #fff;
-      border: 1px solid var(--oti-line);
-      padding: 10px;
-    }
-
-    .ad-unit img {
-      width: 100%;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-
-    .mobile-ads {
-      display: none;
-      max-width: 360px;
-      margin: 28px auto 0;
-      padding-top: 18px;
-      border-top: 2px solid var(--oti-line);
-    }
-
-    .ad-label {
-      font-size: 0.75rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      color: var(--oti-muted);
-    }
-
-    @media (max-width: 980px) {
-      .page-shell { grid-template-columns: 1fr; }
-      .desktop-ad-rail { display: none; }
-      .mobile-ads { display: block; }
-      .lead-link { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 760px) {
-      .story-grid { grid-template-columns: 1fr; }
-
-      .lead-copy h1 {
-        font-size: clamp(1.55rem, 7vw, 2.35rem);
-        line-height: 1.04;
-      }
-    }
-
-    .disclaimer-bar {
-      text-align: center;
-      padding: 10px;
-      font-size: 0.75rem;
-      color: var(--oti-muted);
-      border-top: 1px solid var(--oti-line);
-    }
-  </style>
-</head>
-
-<body>
-
-<header class="site-header">
-  <div class="banner">
-    <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
-  </div>
-</header>
-
-<main class="page-shell">
-
-<section>
-
 <article class="lead-story">
-<a href="tommytone.html" class="lead-link">
+<a href="hoodpope.html" class="lead-link">
   <div class="lead-image-wrap">
-    <img src="assets/tommytone.jpg" alt="Tommy Two-Tone performing live" />
-    <span class="label">National Security</span>
+    <img src="assets/hoodpope.jpg" alt="Trump Truth Social post about Pope Leo" />
+    <span class="label">Religion</span>
   </div>
   <div class="lead-copy">
-    <h1>Tommy Two-Tone Renditioned to GitMo After Decades-Long “Numeric Threat Campaign”</h1>
+    <h1>Trump Blasts Pope Leo Over Late-Night Truth Social Post</h1>
   </div>
 </a>
 </article>
 
 <section class="story-grid">
 
+  <!-- NEW: Former lead moved into grid -->
+  <article class="story-card">
+    <a href="tommytone.html">
+      <div class="story-image-wrap">
+        <img src="assets/tommytone.jpg" alt="Tommy Two-Tone performing live" />
+        <span class="label">National Security</span>
+      </div>
+      <h2>Tommy Two-Tone Renditioned to GitMo After “Numeric Threat Campaign”</h2>
+      <p>Officials say decades of repetition may indicate coded signaling.</p>
+    </a>
+  </article>
+
   <article class="story-card">
     <a href="courtsale.html">
       <div class="story-image-wrap">
-        <img src="assets/courtsale.jpg" alt="Supreme Court 2 for 1 decision sale" />
+        <img src="assets/courtsale.jpg" alt="Supreme Court decision sale" />
         <span class="label">Judiciary</span>
       </div>
       <h2>SOCUS Announces 2-for-1 Decision Sale</h2>
@@ -246,7 +38,7 @@
   <article class="story-card">
     <a href="jokethreat.html">
       <div class="story-image-wrap">
-        <img src="assets/jokebrief.jpg" alt="Government briefing on joke threat analysis" />
+        <img src="assets/jokebrief.jpg" alt="Joke threat briefing" />
         <span class="label">National Security</span>
       </div>
       <h2>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h2>
@@ -257,7 +49,7 @@
   <article class="story-card">
     <a href="kingcharles.html">
       <div class="story-image-wrap">
-        <img src="assets/kingcharles.jpg" alt="King Charles seated behind the Resolute Desk" />
+        <img src="assets/kingcharles.jpg" alt="King Charles at desk" />
         <span class="label">World</span>
       </div>
       <h2>King Charles Offers U.S. Return to British Monarchy</h2>
@@ -268,7 +60,7 @@
   <article class="story-card">
     <a href="ballroom1.html">
       <div class="story-image-wrap">
-        <img src="assets/ballroomrank.jpg" alt="Guests arranged by importance inside a ballroom" />
+        <img src="assets/ballroomrank.jpg" alt="Ballroom ranking" />
         <span class="label">Politics</span>
       </div>
       <h2>White House Ballroom Separation Plan</h2>
@@ -279,7 +71,7 @@
   <article class="story-card">
     <a href="warmodel.html">
       <div class="story-image-wrap">
-        <img src="assets/warmodel.jpg" alt="General explaining Schrödinger’s War Model" />
+        <img src="assets/warmodel.jpg" alt="War model briefing" />
         <span class="label">National Security</span>
       </div>
       <h2>Schrödinger’s War Model Adopted</h2>
@@ -290,7 +82,7 @@
   <article class="story-card">
     <a href="oiltruth.html">
       <div class="story-image-wrap">
-        <img src="assets/oiltruth.jpg" alt="Trump explaining oil prices" />
+        <img src="assets/oiltruth.jpg" alt="Oil explanation" />
         <span class="label">Energy</span>
       </div>
       <h2>$100 Oil Declared “Effectively Free”</h2>
@@ -301,7 +93,7 @@
   <article class="story-card">
     <a href="goatyoga.html">
       <div class="story-image-wrap">
-        <img src="assets/goatyoga.jpg" alt="Trump participating in goat yoga" />
+        <img src="assets/goatyoga.jpg" alt="Goat yoga" />
         <span class="label">Wellness</span>
       </div>
       <h2>Trump Turns to Goat Yoga</h2>
@@ -312,7 +104,7 @@
   <article class="story-card">
     <a href="kidstrait.html">
       <div class="story-image-wrap">
-        <img src="assets/kidstrait.jpg" alt="Kid Rock in the War Room" />
+        <img src="assets/kidstrait.jpg" alt="Kid Rock Strait" />
         <span class="label">National Security</span>
       </div>
       <h2>Kid Rock to Open Strait of Hormuz</h2>
@@ -321,24 +113,3 @@
   </article>
 
 </section>
-
-<section class="mobile-ads">
-  <div class="ad-label">Patriotic Sponsors</div>
-  <div class="mobile-ad-rail" data-random-ads></div>
-</section>
-
-</section>
-
-<aside class="ad-rail desktop-ad-rail" data-random-ads>
-  Ad Space
-</aside>
-
-</main>
-
-<footer class="disclaimer-bar">
-  <p><em>It's likely or at least possible this is (still) satire. We strive to out-satire reality. We're losing.</em></p>
-</footer>
-
-</body>
-</html>
-```
