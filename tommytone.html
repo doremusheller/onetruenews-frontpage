@@ -1,44 +1,4 @@
-**Fixed.** The prior `tommytone.html` was structurally close, but not strict enough. I corrected it against `courtsale.html` as the source of truth .
 
-What I fixed:
-
-1. **Used the exact `courtsale.html` CSS block**
-
-   * Same variables
-   * Same article padding
-   * Same `h1` sizing
-   * Same serif body font
-   * Same ad rail
-   * Same header/banner treatment
-
-2. **Restored the exact article-page structure**
-
-   * Same `<header>`
-   * Same `<main class="page-shell">`
-   * Same `<article class="article">`
-   * Same `<aside class="ad-rail">`
-
-3. **Removed anything that could drift visually**
-
-   * No extra wrappers
-   * No altered class names
-   * No homepage-grid styling
-   * No markdown artifacts
-
-4. **Only swapped story content**
-
-   * Metadata
-   * Kicker
-   * Headline
-   * Dek
-   * Byline
-   * Image path: `assets/tommytone.jpg`
-   * Caption
-   * Body copy
-
-Use this corrected version as the real `tommytone.html`:
-
-```html
 <!doctype html>
 <html lang="en">
 <head>
