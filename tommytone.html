@@ -129,13 +129,30 @@
       color: var(--oti-blue);
     }
 
+    /* ✅ FIXED AD SYSTEM */
     .ad-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
       min-height: 680px;
       padding: 18px;
       background: #fff;
       border: 1px solid var(--oti-line);
       position: sticky;
       top: 20px;
+    }
+
+    .ad-unit {
+      background: #fff;
+      border: 1px solid var(--oti-line);
+      padding: 10px;
+    }
+
+    .ad-unit img {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: block;
     }
 
     .back-link {
@@ -210,7 +227,6 @@
 
   </article>
 
-  <!-- FIXED: THIS IS WHY YOUR RIGHT RAIL NOW WORKS -->
   <aside class="ad-rail" data-random-ads></aside>
 
 </main>
