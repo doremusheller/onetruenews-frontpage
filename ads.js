@@ -18,7 +18,9 @@ function loadRandomAds() {
   if (!rails.length) return;
 
   rails.forEach((rail) => {
-    const count = Math.random() < 0.5 ? 2 : 3;
+    // UPDATED: random count between 3 and 4
+    const count = Math.floor(Math.random() * 2) + 3;
+
     const selectedAds = shuffleAds(adTiles).slice(0, count);
 
     rail.innerHTML = selectedAds.map((ad) => {
