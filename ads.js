@@ -1,6 +1,6 @@
 const adTiles = [
   { img: "assets/jokeshieldDROP.jpg" },
-  { img: "assets/bigjesusDROP.jpg" }, 
+  { img: "assets/bigjesusDROP.jpg" },
   { img: "assets/patriotdroneDROP.jpg" },
   { img: "assets/trumpmaxDROP.jpg" },
   {
@@ -19,7 +19,7 @@ function loadRandomAds() {
   if (!rails.length) return;
 
   rails.forEach((rail) => {
-    // UPDATED: random count between 3 and 4
+    // Random count between 3 and 4
     const count = Math.floor(Math.random() * 2) + 3;
 
     const selectedAds = shuffleAds(adTiles).slice(0, count);
@@ -39,7 +39,9 @@ function loadRandomAds() {
 
       return `
         <div class="ad-unit">
-          ${imgTag}
+          <a href="${ad.img}">
+            ${imgTag}
+          </a>
         </div>
       `;
     }).join("");
