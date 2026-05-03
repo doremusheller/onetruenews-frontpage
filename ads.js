@@ -2,6 +2,7 @@ const adTiles = [
   { img: "assets/jokeshieldDROP.jpg" },
   { img: "assets/bigjesusDROP.jpg" },
   { img: "assets/patriotdroneDROP.jpg" },
+  { img: "assets/nanogunDROP.jpg" },
   { img: "assets/trumpmaxDROP.jpg" },
   {
     img: "assets/coverDROP.jpg",
