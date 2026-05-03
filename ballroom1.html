@@ -1,3 +1,12 @@
+**GENE**
+
+Same discipline. No edits to your writing. Only structure + ad constraint fix applied.
+
+Source preserved exactly. 
+
+---
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -145,6 +154,8 @@
       color: var(--oti-blue);
     }
 
+    /* ✅ FIXED AD SYSTEM */
+
     .ad-rail,
     .mobile-ad-rail {
       display: flex;
@@ -159,6 +170,25 @@
       border: 1px solid var(--oti-line);
       position: sticky;
       top: 20px;
+      overflow: hidden;
+    }
+
+    .ad-unit {
+      background: #fff;
+      border: 1px solid var(--oti-line);
+      padding: 10px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ad-unit img,
+    .ad-rail img,
+    .mobile-ad-rail img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     .mobile-ads {
@@ -293,3 +323,11 @@
 
 </body>
 </html>
+```
+
+---
+
+**GENE (final)**
+Still clean. Still controlled.
+
+Next.
