@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,8 +15,6 @@
   <meta name="twitter:title" content="Tommy Two-Tone Renditioned to GitMo After Decades-Long Numeric Threat Campaign" />
   <meta name="twitter:description" content="Officials warn repeated use of 867-5309 may indicate embedded signaling protocol." />
   <meta name="twitter:image" content="https://www.onetrueinfotainment.com/assets/tommytone.jpg" />
-
-  <script src="ads.js"></script>
 
   <style>
     :root {
@@ -46,6 +45,7 @@
       height: clamp(150px, 24vw, 360px);
       display: block;
       object-fit: cover;
+      object-position: center;
     }
 
     .page-shell {
@@ -54,9 +54,11 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
+      align-items: start;
     }
 
     .article {
+      min-width: 0;
       background: #fff;
       border: 1px solid var(--oti-line);
       padding: clamp(18px, 4vw, 42px);
@@ -66,6 +68,7 @@
       color: var(--oti-red);
       font-size: 0.8rem;
       font-weight: 900;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -75,6 +78,7 @@
       color: var(--oti-blue);
       font-size: clamp(2.2rem, 5vw, 4.8rem);
       line-height: 0.95;
+      letter-spacing: -0.055em;
       font-weight: 900;
     }
 
@@ -82,7 +86,9 @@
       margin: 0 0 18px;
       color: var(--oti-muted);
       font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.35;
       font-weight: 800;
+      max-width: 820px;
     }
 
     .byline {
@@ -92,12 +98,19 @@
       font-size: 0.9rem;
       font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
       margin-bottom: 24px;
+    }
+
+    .hero-image {
+      margin: 0 0 24px;
+      background: #111;
     }
 
     .hero-image img {
       width: 100%;
       display: block;
+      height: auto;
     }
 
     .caption {
@@ -106,6 +119,7 @@
       font-weight: 800;
       padding-top: 8px;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .story-body {
@@ -113,6 +127,8 @@
       font-family: Georgia, "Times New Roman", Times, serif;
       font-size: 1.05rem;
       line-height: 1.7;
+      font-weight: 400;
+      color: #1a1a1a;
     }
 
     .story-body p {
@@ -125,15 +141,19 @@
     }
 
     .dateline {
+      font-family: Arial, Helvetica, sans-serif;
       font-weight: 700;
       color: var(--oti-blue);
     }
 
-    /* ✅ FIXED AD SYSTEM */
-    .ad-rail {
+    .ad-rail,
+    .mobile-ad-rail {
       display: flex;
       flex-direction: column;
       gap: 18px;
+    }
+
+    .ad-rail {
       min-height: 680px;
       padding: 18px;
       background: #fff;
@@ -151,8 +171,25 @@
     .ad-unit img {
       width: 100%;
       max-width: 300px;
+      height: auto;
       margin: 0 auto;
       display: block;
+    }
+
+    .mobile-ads {
+      display: none;
+      max-width: 360px;
+      margin: 28px auto 0;
+      padding-top: 18px;
+      border-top: 2px solid var(--oti-line);
+    }
+
+    .ad-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: var(--oti-muted);
     }
 
     .back-link {
@@ -162,12 +199,29 @@
       font-weight: 900;
       text-decoration: none;
       text-transform: uppercase;
+      letter-spacing: 0.06em;
       font-size: 0.82rem;
     }
 
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
-      .ad-rail { display: none; }
+      .desktop-ad-rail { display: none; }
+      .mobile-ads { display: block; }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 20px, 1180px);
+        margin-top: 18px;
+      }
+
+      .banner img {
+        height: clamp(110px, 34vw, 190px);
+      }
+
+      .article {
+        padding: 18px;
+      }
     }
   </style>
 </head>
@@ -207,15 +261,15 @@
 
     <section class="story-body">
 
-      <p><span class="dateline">GUANTÁNAMO BAY, CUBA</span> — Federal authorities confirmed Tuesday that <strong>Tommy Two-Tone</strong> has been renditioned to a secure detention facility following what officials describe as a sustained numeric signaling operation spanning more than four decades.</p>
+      <p><span class="dateline">GUANTÁNAMO BAY, CUBA</span> — Federal authorities confirmed Tuesday that Tommy Two-Tone has been renditioned to a secure detention facility following what officials describe as a sustained numeric signaling operation spanning more than four decades.</p>
 
-      <p>The investigation centers on repeated performances of the sequence <strong>867-5309</strong>, now classified as high-frequency numeric dissemination with unknown downstream activation potential.</p>
+      <p>The investigation centers on repeated performances of the sequence 867-5309, now classified as high-frequency numeric dissemination with unknown downstream activation potential.</p>
 
       <p>“He didn’t vary it. Not once,” said one official. “That suggests either artistic commitment or operational discipline.”</p>
 
       <p>Two-Tone remains cooperative, insisting the number “just sounded good” and that “Jenny is not real.”</p>
 
-      <p>Lawmakers responded with the <strong>Numeric Expression Accountability Act</strong>, requiring clearance for number-based lyrics.</p>
+      <p>Lawmakers responded with the Numeric Expression Accountability Act, requiring clearance for number-based lyrics.</p>
 
       <p>Fans are reconsidering the song’s intent. “Why that number?” one asked. “Why not 555?”</p>
 
@@ -223,13 +277,20 @@
 
     </section>
 
+    <section class="mobile-ads">
+      <div class="ad-label">Patriotic Sponsors</div>
+      <div class="mobile-ad-rail" data-random-ads></div>
+    </section>
+
     <a class="back-link" href="index.html">← Back to Top Stories</a>
 
   </article>
 
-  <aside class="ad-rail" data-random-ads></aside>
+  <aside class="ad-rail desktop-ad-rail" data-random-ads></aside>
 
 </main>
+
+<script src="ads.js"></script>
 
 </body>
 </html>
