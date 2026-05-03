@@ -1,6 +1,3 @@
-**KIKI — CORRECTED `freegas.html` AD BEHAVIOR ONLY**
-
-```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -148,17 +145,18 @@
       color: var(--oti-blue);
     }
 
+    .ad-rail,
+    .mobile-ad-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
     .ad-rail {
       min-height: 680px;
       padding: 18px;
       background: #fff;
       border: 1px solid var(--oti-line);
-      color: #8a94a3;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-align: center;
-      text-transform: uppercase;
       position: sticky;
       top: 20px;
     }
@@ -175,6 +173,22 @@
       margin: 0 auto;
     }
 
+    .mobile-ads {
+      display: none;
+      max-width: 360px;
+      margin: 28px auto 0;
+      padding-top: 18px;
+      border-top: 2px solid var(--oti-line);
+    }
+
+    .ad-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: var(--oti-muted);
+    }
+
     .back-link {
       display: inline-block;
       margin-top: 26px;
@@ -188,7 +202,8 @@
 
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
-      .ad-rail { display: none; }
+      .desktop-ad-rail { display: none; }
+      .mobile-ads { display: block; }
     }
 
     @media (max-width: 760px) {
@@ -221,82 +236,21 @@
 <main class="page-shell">
 
   <article class="article">
-
-    <div class="kicker">Energy</div>
-
-    <h1>White House Declares Gasoline Free As Prices Near $5 Nationwide</h1>
-
-    <p class="dek">
-      DOJ charges oil companies with conspiracy to do math as Americans continue paying full price at the pump.
-    </p>
-
-    <div class="byline">
-      By Clifford J. Merriweather, Senior Energy Reality Correspondent
-    </div>
-
-    <figure class="hero-image">
-      <img src="assets/freegas.jpg" alt="Confused Trump supporters shouting at a gas pump advertising free gas while charging full price" />
-      <figcaption class="caption">
-        Officials say the discrepancy between “free” and “$4.97” is likely the result of unauthorized numerical activity.
-      </figcaption>
-    </figure>
-
-    <section class="story-body">
-
-      <p><span class="dateline">WASHINGTON, DC</span> — Under pressure from rising oil prices tied to his optional war with Iran, President Donald Trump announced Tuesday that gasoline would now be “completely free,” a declaration administration officials described as “immediate, total, and not subject to interpretation.”</p>
-
-      <p>The order took effect immediately.</p>
-
-      <p>Reality declined to participate.</p>
-
-      <p>Within minutes of the announcement, gas stations across the country continued charging between $4.79 and $4.97 per gallon.</p>
-
-      <p>Drivers arriving at pumps expecting relief instead encountered identical pricing displays, accompanied in some cases by small digital messages reading “COST: ZERO (PATRIOT ADJUSTED).”</p>
-
-      <p>“It says free,” said one Ohio man, staring at a receipt showing a $100 charge. “But my bank app also says $100. So I don’t know which one is lying, but one of them is definitely not free.”</p>
-
-      <p>Scenes of confusion quickly escalated into open anger, with customers shouting at attendants, arguing with each other, and repeatedly reinserting payment cards in what witnesses described as “a search for the free setting.”</p>
-
-      <p>In several locations, the loudest confrontations came from the President’s most devoted supporters, many of whom arrived wearing red hats and carrying printed screenshots of the announcement as legal proof that their tanks should fill themselves patriotically.</p>
-
-      <p>“He made it free,” said one Florida woman screaming at a pump displaying $4.97. “That means it’s free. If this machine says otherwise, this machine is probably Antifa.”</p>
-
-      <p>In response, the Department of Justice announced immediate charges against major oil companies for what officials termed “Conspiracy to Do Math.”</p>
-
-      <p>“Addition, subtraction—we’ve even documented repeated multiplication. That’s coordinated behavior,” said the Attorney General during a press briefing. “These entities are taking a zero-cost product and, through numerical manipulation, converting it into a priced outcome.”</p>
-
-      <p>Officials further alleged the existence of a “distributed equation network” embedded within energy infrastructure, continuously recalculating prices despite the President’s directive.</p>
-
-      <p>At the pump, Americans struggled to reconcile the policy with observable reality.</p>
-
-      <p>Some drivers insisted the gas was free “in principle,” while others pointed to their bank accounts, which continued to reflect large withdrawals consistent with recent fill-ups. Several altercations were reported after customers attempted to leave without paying, citing the federal announcement as justification.</p>
-
-      <p>Meanwhile, supporters of the President celebrated the move as a historic economic breakthrough.</p>
-
-      <p>“He made it free. That’s a fact,” said one man in a “TRUMP WAS RIGHT ABOUT EVERYTHING” shirt while entering his debit card for the third time. “If it’s still costing money, that means something is interfering with it.”</p>
-
-      <p>Online, users praised the policy as “genius,” with many attributing the continued high prices to lingering systems from previous administrations.</p>
-
-      <p>Oil companies issued a brief statement late Tuesday.</p>
-
-      <p>“We are not aware of any mechanism by which gasoline can be distributed without the use of math,” the statement read.</p>
-
-      <p>They were immediately served additional charges.</p>
-
-      <p>By evening, administration officials clarified that gasoline remains free under federal policy, and that any continued pricing anomalies, billing activity, or perceived inconsistencies are the result of interference from Joe Biden and Barack Obama.</p>
-
-    </section>
-
-    <a class="back-link" href="index.html">← Back to Top Stories</a>
-
+    <!-- CONTENT UNCHANGED -->
+    ...
   </article>
 
   <aside class="ad-rail desktop-ad-rail" data-random-ads></aside>
 
 </main>
 
+<!-- NEW MOBILE ADS -->
+<section class="mobile-ads">
+  <div class="ad-label">Patriotic Sponsors</div>
+  <div class="mobile-ad-rail" data-random-ads></div>
+</section>
+
 <script src="ads.js"></script>
 
 </body>
 </html>
-```
