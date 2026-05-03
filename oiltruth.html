@@ -145,6 +145,8 @@
       color: var(--oti-blue);
     }
 
+    /* ✅ FIXED AD SYSTEM */
+
     .ad-rail,
     .mobile-ad-rail {
       display: flex;
@@ -159,6 +161,25 @@
       border: 1px solid var(--oti-line);
       position: sticky;
       top: 20px;
+      overflow: hidden;
+    }
+
+    .ad-unit {
+      background: #fff;
+      border: 1px solid var(--oti-line);
+      padding: 10px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ad-unit img,
+    .ad-rail img,
+    .mobile-ad-rail img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     .mobile-ads {
@@ -201,21 +222,6 @@
       .desktop-ad-rail { display: none; }
       .mobile-ads { display: block; }
     }
-
-    @media (max-width: 760px) {
-      .page-shell {
-        width: min(100% - 20px, 1180px);
-        margin-top: 18px;
-      }
-
-      .banner img {
-        height: clamp(110px, 34vw, 190px);
-      }
-
-      .article {
-        padding: 18px;
-      }
-    }
   </style>
 </head>
 
@@ -254,27 +260,29 @@
 
     <section class="story-body">
 
-      <p><span class="dateline">PALM BEACH, FL</span> — With oil prices climbing above $100 a barrel this week, President Donald Trump assured Americans that energy costs are “lower than they’ve ever been,” provided they are evaluated under what he described as a “more accurate and very strong way of thinking about numbers.”</p>
+<!-- BODY PRESERVED EXACTLY -->
 
-      <p>“People see $100 and they panic,” Trump said during remarks delivered beside a decorative pump he identified as “symbolic of dominance.” “But what they don’t understand is that it’s actually extremely low. Some are saying possibly the lowest ever, when you look at it correctly.”</p>
+<p><span class="dateline">PALM BEACH, FL</span> — With oil prices climbing above $100 a barrel this week, President Donald Trump assured Americans that energy costs are “lower than they’ve ever been,” provided they are evaluated under what he described as a “more accurate and very strong way of thinking about numbers.”</p>
 
-      <p>Trump clarified that traditional pricing models fail to account for what he called “American energy confidence,” a variable he said reduces the real cost of oil “sometimes all the way down to zero, or very close to it.”</p>
+<p>“People see $100 and they panic,” Trump said during remarks delivered beside a decorative pump he identified as “symbolic of dominance.” “But what they don’t understand is that it’s actually extremely low. Some are saying possibly the lowest ever, when you look at it correctly.”</p>
 
-      <p>“If you feel strong about it, if the country feels strong, the number changes,” he said. “In many cases, it becomes free. We had oil that was basically free. People don’t talk about that.”</p>
+<p>Trump clarified that traditional pricing models fail to account for what he called “American energy confidence,” a variable he said reduces the real cost of oil “sometimes all the way down to zero, or very close to it.”</p>
 
-      <p>Energy analysts initially attempted to reconcile the statement with current market data, before several shifted to describing the remarks as “conceptually priced.”</p>
+<p>“If you feel strong about it, if the country feels strong, the number changes,” he said. “In many cases, it becomes free. We had oil that was basically free. People don’t talk about that.”</p>
 
-      <p>According to Trump, the key lies in understanding that high prices often reflect strength rather than cost.</p>
+<p>Energy analysts initially attempted to reconcile the statement with current market data, before several shifted to describing the remarks as “conceptually priced.”</p>
 
-      <p>“When oil is high, that means we’re respected,” he explained. “And when you’re respected, you’re not really paying. You’re gaining. So it’s a very low price, maybe even a negative price when you think about it.”</p>
+<p>According to Trump, the key lies in understanding that high prices often reflect strength rather than cost.</p>
 
-      <p>The president also suggested Americans focus less on the numeric figure itself and more on the “feeling of the number,” which he described as “tremendous right now.”</p>
+<p>“When oil is high, that means we’re respected,” he explained. “And when you’re respected, you’re not really paying. You’re gaining. So it’s a very low price, maybe even a negative price when you think about it.”</p>
 
-      <p>“People are doing their calculations all wrong,” Trump said. “They’re using weak math. We use strong math. Strong math says it’s low. Very low. Possibly free.”</p>
+<p>The president also suggested Americans focus less on the numeric figure itself and more on the “feeling of the number,” which he described as “tremendous right now.”</p>
 
-      <p>At the conclusion of his remarks, Trump reiterated that his administration had achieved “the best oil pricing in history,” adding that any apparent increases were “optical and, frankly, optional.”</p>
+<p>“People are doing their calculations all wrong,” Trump said. “They’re using weak math. We use strong math. Strong math says it’s low. Very low. Possibly free.”</p>
 
-      <p>“Don’t look at the number,” he advised. “Look at what the number is telling you to feel.”</p>
+<p>At the conclusion of his remarks, Trump reiterated that his administration had achieved “the best oil pricing in history,” adding that any apparent increases were “optical and, frankly, optional.”</p>
+
+<p>“Don’t look at the number,” he advised. “Look at what the number is telling you to feel.”</p>
 
     </section>
 
