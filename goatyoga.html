@@ -126,8 +126,6 @@
       font-family: Georgia, "Times New Roman", Times, serif;
       font-size: 1.05rem;
       line-height: 1.7;
-      font-weight: 400;
-      color: #1a1a1a;
     }
 
     .story-body p {
@@ -145,6 +143,8 @@
       color: var(--oti-blue);
     }
 
+    /* ✅ FIXED AD SYSTEM */
+
     .ad-rail,
     .mobile-ad-rail {
       display: flex;
@@ -159,6 +159,25 @@
       border: 1px solid var(--oti-line);
       position: sticky;
       top: 20px;
+      overflow: hidden;
+    }
+
+    .ad-unit {
+      background: #fff;
+      border: 1px solid var(--oti-line);
+      padding: 10px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ad-unit img,
+    .ad-rail img,
+    .mobile-ad-rail img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     .mobile-ads {
@@ -201,21 +220,6 @@
       .desktop-ad-rail { display: none; }
       .mobile-ads { display: block; }
     }
-
-    @media (max-width: 760px) {
-      .page-shell {
-        width: min(100% - 20px, 1180px);
-        margin-top: 18px;
-      }
-
-      .banner img {
-        height: clamp(110px, 34vw, 190px);
-      }
-
-      .article {
-        padding: 18px;
-      }
-    }
   </style>
 </head>
 
@@ -254,31 +258,33 @@
 
     <section class="story-body">
 
-      <p><span class="dateline">PALM BEACH, FL</span> — Facing what aides describe as “a uniquely stabilized but continuously escalating situation” in Iran, President Donald Trump has adopted an unconventional stress-management regimen involving goat yoga, a practice in which participants perform stretching exercises while goats roam freely and occasionally climb on them.</p>
+<!-- BODY PRESERVED EXACTLY -->
 
-      <p>Officials say the sessions are part of a broader effort to maintain what one adviser called “peak strategic calm under conditions of total unpredictability.”</p>
+<p><span class="dateline">PALM BEACH, FL</span> — Facing what aides describe as “a uniquely stabilized but continuously escalating situation” in Iran, President Donald Trump has adopted an unconventional stress-management regimen involving goat yoga, a practice in which participants perform stretching exercises while goats roam freely and occasionally climb on them.</p>
 
-      <p>During a closed press availability, Trump explained the decision in detail.</p>
+<p>Officials say the sessions are part of a broader effort to maintain what one adviser called “peak strategic calm under conditions of total unpredictability.”</p>
 
-      <p>“It’s incredible, really incredible,” Trump said, positioned on all fours as a small goat assessed his back. “The goats—they’re very smart animals, very strong. They come up, they stand on you, which is what you want. It’s like having generals. Tiny generals. They’re stabilizing you.”</p>
+<p>During a closed press availability, Trump explained the decision in detail.</p>
 
-      <p>Witnesses described the president maintaining a modified plank position while offering ongoing analysis of the goats’ performance.</p>
+<p>“It’s incredible, really incredible,” Trump said, positioned on all fours as a small goat assessed his back. “The goats—they’re very smart animals, very strong. They come up, they stand on you, which is what you want. It’s like having generals. Tiny generals. They’re stabilizing you.”</p>
 
-      <p>“They’re climbing because they respect strength,” Trump continued. “If you’re weak, they don’t climb. People don’t know that. These goats, they sense power. So when they’re on you, it means you’re doing very well, probably the best in the class.”</p>
+<p>Witnesses described the president maintaining a modified plank position while offering ongoing analysis of the goats’ performance.</p>
 
-      <p>Instructors attempted to explain that goat yoga is typically intended to reduce stress through light interaction and humor, as goats wander, nuzzle participants, or perch briefly during poses. Administration officials, however, say the president has interpreted the activity as “a form of dynamic leadership training.”</p>
+<p>“They’re climbing because they respect strength,” Trump continued. “If you’re weak, they don’t climb. People don’t know that. These goats, they sense power. So when they’re on you, it means you’re doing very well, probably the best in the class.”</p>
 
-      <p>At one point, Trump reportedly attempted to direct a goat off his back using what aides described as “verbal authority cues,” before concluding the animal was “choosing to remain for strategic reasons.”</p>
+<p>Instructors attempted to explain that goat yoga is typically intended to reduce stress through light interaction and humor, as goats wander, nuzzle participants, or perch briefly during poses. Administration officials, however, say the president has interpreted the activity as “a form of dynamic leadership training.”</p>
 
-      <p>Senior staff say the sessions have had a measurable impact.</p>
+<p>At one point, Trump reportedly attempted to direct a goat off his back using what aides described as “verbal authority cues,” before concluding the animal was “choosing to remain for strategic reasons.”</p>
 
-      <p>“He leaves calmer,” one aide confirmed. “More centered. Still fully convinced the goats are part of a command structure, but calmer.”</p>
+<p>Senior staff say the sessions have had a measurable impact.</p>
 
-      <p>The White House has not ruled out expanding the program, with sources indicating officials are exploring whether additional animals could be introduced “to increase stability across multiple fronts.”</p>
+<p>“He leaves calmer,” one aide confirmed. “More centered. Still fully convinced the goats are part of a command structure, but calmer.”</p>
 
-      <p>Trump, for his part, remains enthusiastic.</p>
+<p>The White House has not ruled out expanding the program, with sources indicating officials are exploring whether additional animals could be introduced “to increase stability across multiple fronts.”</p>
 
-      <p>“You don’t even have to do the yoga,” he said. “The goats do it for you. That’s the secret nobody understands.”</p>
+<p>Trump, for his part, remains enthusiastic.</p>
+
+<p>“You don’t even have to do the yoga,” he said. “The goats do it for you. That’s the secret nobody understands.”</p>
 
     </section>
 
