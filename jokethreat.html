@@ -1,10 +1,21 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>U.S. Deploys Joke-Based Deterrence System | One True Infotainment</title>
+  <title>Nation’s Jokes Officially Upgraded to Ballistic Weapons | One True Infotainment</title>
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Nation’s Jokes Officially Upgraded to Ballistic Weapons" />
+  <meta property="og:description" content="Federal officials say humor now travels too fast, lands too hard, and leaves measurable damage." />
+  <meta property="og:image" content="https://www.onetrueinfotainment.com/assets/jokethreat.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nation’s Jokes Officially Upgraded to Ballistic Weapons" />
+  <meta name="twitter:description" content="Federal officials say humor now travels too fast, lands too hard, and leaves measurable damage." />
+  <meta name="twitter:image" content="https://www.onetrueinfotainment.com/assets/jokethreat.jpg" />
 
   <style>
     :root {
@@ -33,24 +44,108 @@
     .banner img {
       width: 100%;
       height: clamp(150px, 24vw, 360px);
+      display: block;
       object-fit: cover;
+      object-position: center;
     }
 
     .page-shell {
       width: min(1180px, calc(100% - 32px));
       margin: 28px auto 56px;
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
+      align-items: start;
     }
 
     .article {
+      min-width: 0;
       background: #fff;
       border: 1px solid var(--oti-line);
-      padding: 32px;
+      padding: clamp(18px, 4vw, 42px);
     }
 
-    /* ---------- AD SYSTEM (FIXED) ---------- */
+    .kicker {
+      color: var(--oti-red);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      color: var(--oti-blue);
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      font-weight: 900;
+    }
+
+    .dek {
+      margin: 0 0 18px;
+      color: var(--oti-muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.35;
+      font-weight: 800;
+      max-width: 820px;
+    }
+
+    .byline {
+      padding-top: 14px;
+      border-top: 1px solid var(--oti-line);
+      color: var(--oti-muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .hero-image {
+      margin: 0 0 24px;
+      background: #111;
+    }
+
+    .hero-image img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    .caption {
+      color: var(--oti-muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .story-body {
+      max-width: 720px;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 400;
+      color: #1a1a1a;
+    }
+
+    .story-body p {
+      margin: 0 0 18px;
+      text-indent: 1.2em;
+    }
+
+    .story-body p:first-child {
+      text-indent: 0;
+    }
+
+    .dateline {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      color: var(--oti-blue);
+    }
 
     .ad-rail,
     .mobile-ad-rail {
@@ -77,7 +172,6 @@
       overflow: hidden;
     }
 
-    /* 🔧 DROP IMAGE CONSTRAINT (THE FIX) */
     .ad-unit img,
     .ad-rail img,
     .mobile-ad-rail img {
@@ -90,12 +184,29 @@
 
     .mobile-ads {
       display: none;
+      max-width: 360px;
+      margin: 28px auto 0;
+      padding-top: 18px;
+      border-top: 2px solid var(--oti-line);
     }
 
-    @media (max-width: 980px) {
-      .page-shell { grid-template-columns: 1fr; }
-      .desktop-ad-rail { display: none; }
-      .mobile-ads { display: block; }
+    .ad-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: var(--oti-muted);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 26px;
+      color: var(--oti-red);
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.82rem;
     }
 
     .disclaimer-bar {
@@ -106,6 +217,26 @@
       border-top: 1px solid var(--oti-line);
     }
 
+    @media (max-width: 980px) {
+      .page-shell { grid-template-columns: 1fr; }
+      .desktop-ad-rail { display: none; }
+      .mobile-ads { display: block; }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 20px, 1180px);
+        margin-top: 18px;
+      }
+
+      .banner img {
+        height: clamp(110px, 34vw, 190px);
+      }
+
+      .article {
+        padding: 18px;
+      }
+    }
   </style>
 </head>
 
@@ -114,7 +245,7 @@
 <header class="site-header">
   <div class="banner">
     <a href="index.html">
-      <img src="assets/otinewbanner.png" alt="OTI Banner">
+      <img src="assets/otinewbanner.png" alt="One True Infotainment Banner" />
     </a>
   </div>
 </header>
@@ -122,17 +253,60 @@
 <main class="page-shell">
 
   <article class="article">
-    <h1>U.S. Deploys Joke-Based Deterrence System</h1>
 
-    <p><strong>WASHINGTON, D.C.</strong> — Pentagon officials confirmed the rollout of a new strategic deterrence platform centered on humor escalation.</p>
+    <div class="kicker">National Security</div>
 
-    <p>“If they laugh, we win. If they don’t, we escalate,” one official explained.</p>
+    <h1>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h1>
+
+    <p class="dek">
+      Federal officials say humor now travels too fast, lands too hard, and leaves measurable damage.
+    </p>
+
+    <div class="byline">
+      By Gene Heller, Senior Compliance Enthusiast
+    </div>
+
+    <figure class="hero-image">
+      <img src="assets/jokethreat.jpg" alt="Government briefing on jokes reclassified as ballistic weapons" />
+      <figcaption class="caption">
+        Officials unveil the national punchline trajectory model during a classified humor threat briefing.
+      </figcaption>
+    </figure>
+
+    <section class="story-body">
+
+      <p><span class="dateline">WASHINGTON, D.C.</span> — Federal officials confirmed Monday that jokes have been formally reclassified as ballistic weapons after analysts determined that punchlines can now travel across the country, strike unprepared audiences, and detonate before proper context arrives.</p>
+
+      <p>The decision follows a six-month review by the Department of Homeland Seriousness, which concluded that humor is no longer “mere expression,” but a high-velocity delivery system capable of breaching institutional confidence at scale.</p>
+
+      <p>“A joke begins as language, accelerates through social media, and impacts the target before authorities can deploy clarification,” said Deputy Threat Coordinator Milton Brace. “That is not speech. That is a launch event.”</p>
+
+      <p>Under the new framework, all jokes will be classified by range, payload, and destabilizing potential. Knock-knock jokes remain legal under most circumstances, though officials warned that irony, sarcasm, and regional sarcasm “may require enhanced monitoring.”</p>
+
+      <p>Satire has been placed in a special category known as “guided ridicule,” while puns are being reviewed for possible chemical properties.</p>
+
+      <p>Brace emphasized that the government does not oppose humor in principle.</p>
+
+      <p>“Americans remain free to laugh,” he said. “We simply ask that they laugh through approved channels, at approved speeds, and without forming unauthorized conclusions.”</p>
+
+      <p>The new rules require comedians, writers, uncles, barbers, and anyone who says “get a load of this” before noon to register with the Federal Punchline Authority. Repeat offenders may be assigned a licensed straight man for supervision.</p>
+
+      <p>Officials demonstrated the threat during a morning briefing by displaying a harmless joke on a screen. Within seconds, three interns smiled, one reporter exhaled through his nose, and a policy analyst whispered, “That’s actually true,” triggering an emergency context deployment.</p>
+
+      <p>“This is exactly the danger,” Brace said as agents secured the room. “The laugh is only the first blast. The thought that follows is fragmentation.”</p>
+
+      <p>Public response has been mixed. Free speech advocates condemned the policy, while several major institutions praised it as a necessary step toward protecting Americans from unmanaged amusement.</p>
+
+      <p>At press time, officials were preparing additional guidance clarifying that jokes about the joke policy would be treated as recursive munitions and handled by bomb disposal.</p>
+
+    </section>
 
     <section class="mobile-ads">
+      <div class="ad-label">Patriotic Sponsors</div>
       <div class="mobile-ad-rail" data-random-ads></div>
     </section>
 
-    <a href="index.html">← Back to Top Stories</a>
+    <a class="back-link" href="index.html">← Back to Top Stories</a>
 
   </article>
 
