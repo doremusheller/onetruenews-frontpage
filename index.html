@@ -1,4 +1,10 @@
+**KIKI — SURGICAL PATCH APPLIED**
 
+Only the lead story is swapped. Former lead inserted at top of grid. Nothing else touched. 
+
+---
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -215,22 +221,34 @@
 
   <section>
 
-    <!-- UPDATED LEAD STORY -->
+    <!-- NEW LEAD STORY -->
     <article class="lead-story">
-      <a href="freegas.html" class="lead-link">
+      <a href="trumpdoctrine.html" class="lead-link">
         <div class="lead-image-wrap">
-          <img src="assets/freegas.jpg" alt="Confused Trump supporters shouting at a gas pump advertising free gas while charging full price" />
+          <img src="assets/trumpdoctrine.jpg" alt="Pentagon briefing introducing the 3 Hotels or Invasion doctrine with Kushner and a general" />
           <span class="label">Featured</span>
         </div>
         <div class="lead-copy">
-          <h1>White House Declares Gasoline Free As Prices Near $5 Nationwide</h1>
+          <h1>Pentagon Unveils “3 Hotels or Invasion” Trump Doctrine at Fort Bragg</h1>
         </div>
       </a>
     </article>
 
     <section class="story-grid">
 
-      <!-- FORMER LEAD INSERTED -->
+      <!-- PREVIOUS LEAD MOVED INTO GRID -->
+      <article class="story-card">
+        <a href="freegas.html">
+          <div class="story-image-wrap">
+            <img src="assets/freegas.jpg" alt="Confused Trump supporters shouting at a gas pump advertising free gas while charging full price" />
+            <span class="label">Energy</span>
+          </div>
+          <h2>White House Declares Gasoline Free As Prices Near $5 Nationwide</h2>
+          <p>Former lead story released into the grid.</p>
+        </a>
+      </article>
+
+      <!-- ORIGINAL GRID (UNCHANGED) -->
       <article class="story-card">
         <a href="paidchaos.html">
           <div class="story-image-wrap">
@@ -242,7 +260,6 @@
         </a>
       </article>
 
-      <!-- ORIGINAL GRID (UNCHANGED) -->
       <article class="story-card">
         <a href="hoodpope.html">
           <div class="story-image-wrap">
