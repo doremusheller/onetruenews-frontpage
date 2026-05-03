@@ -15,9 +15,6 @@
   <meta name="twitter:description" content="Officials confirm Americans can now bundle rulings for maximum value." />
   <meta name="twitter:image" content="https://www.onetrueinfotainment.com/assets/courtsale.jpg" />
 
-  <!-- NEW -->
-  <script src="ads.js"></script>
-
   <style>
     :root {
       --oti-blue: #061f3f;
@@ -47,6 +44,7 @@
       height: clamp(150px, 24vw, 360px);
       display: block;
       object-fit: cover;
+      object-position: center;
     }
 
     .page-shell {
@@ -55,9 +53,11 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
+      align-items: start;
     }
 
     .article {
+      min-width: 0;
       background: #fff;
       border: 1px solid var(--oti-line);
       padding: clamp(18px, 4vw, 42px);
@@ -67,6 +67,7 @@
       color: var(--oti-red);
       font-size: 0.8rem;
       font-weight: 900;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -76,6 +77,7 @@
       color: var(--oti-blue);
       font-size: clamp(2.2rem, 5vw, 4.8rem);
       line-height: 0.95;
+      letter-spacing: -0.055em;
       font-weight: 900;
     }
 
@@ -83,7 +85,9 @@
       margin: 0 0 18px;
       color: var(--oti-muted);
       font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.35;
       font-weight: 800;
+      max-width: 820px;
     }
 
     .byline {
@@ -93,12 +97,19 @@
       font-size: 0.9rem;
       font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
       margin-bottom: 24px;
+    }
+
+    .hero-image {
+      margin: 0 0 24px;
+      background: #111;
     }
 
     .hero-image img {
       width: 100%;
       display: block;
+      height: auto;
     }
 
     .caption {
@@ -107,6 +118,7 @@
       font-weight: 800;
       padding-top: 8px;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .story-body {
@@ -114,6 +126,8 @@
       font-family: Georgia, "Times New Roman", Times, serif;
       font-size: 1.05rem;
       line-height: 1.7;
+      font-weight: 400;
+      color: #1a1a1a;
     }
 
     .story-body p {
@@ -126,8 +140,16 @@
     }
 
     .dateline {
+      font-family: Arial, Helvetica, sans-serif;
       font-weight: 700;
       color: var(--oti-blue);
+    }
+
+    .ad-rail,
+    .mobile-ad-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .ad-rail {
@@ -135,12 +157,24 @@
       padding: 18px;
       background: #fff;
       border: 1px solid var(--oti-line);
-      text-align: center;
-      font-size: 0.78rem;
-      font-weight: 900;
-      text-transform: uppercase;
       position: sticky;
       top: 20px;
+    }
+
+    .mobile-ads {
+      display: none;
+      max-width: 360px;
+      margin: 28px auto 0;
+      padding-top: 18px;
+      border-top: 2px solid var(--oti-line);
+    }
+
+    .ad-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: var(--oti-muted);
     }
 
     .back-link {
@@ -150,12 +184,37 @@
       font-weight: 900;
       text-decoration: none;
       text-transform: uppercase;
+      letter-spacing: 0.06em;
       font-size: 0.82rem;
+    }
+
+    .disclaimer-bar {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.75rem;
+      color: var(--oti-muted);
+      border-top: 1px solid var(--oti-line);
     }
 
     @media (max-width: 980px) {
       .page-shell { grid-template-columns: 1fr; }
-      .ad-rail { display: none; }
+      .desktop-ad-rail { display: none; }
+      .mobile-ads { display: block; }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 20px, 1180px);
+        margin-top: 18px;
+      }
+
+      .banner img {
+        height: clamp(110px, 34vw, 190px);
+      }
+
+      .article {
+        padding: 18px;
+      }
     }
   </style>
 </head>
@@ -221,15 +280,24 @@
 
     </section>
 
+    <section class="mobile-ads">
+      <div class="ad-label">Patriotic Sponsors</div>
+      <div class="mobile-ad-rail" data-random-ads></div>
+    </section>
+
     <a class="back-link" href="index.html">← Back to Top Stories</a>
 
   </article>
 
-  <aside class="ad-rail">
-    Ad Space
-  </aside>
+  <aside class="ad-rail desktop-ad-rail" data-random-ads></aside>
 
 </main>
+
+<footer class="disclaimer-bar">
+  <p><em>It's likely or at least possible this is (still) satire. We strive to out-satire reality. We're losing.</em></p>
+</footer>
+
+<script src="ads.js"></script>
 
 </body>
 </html>
