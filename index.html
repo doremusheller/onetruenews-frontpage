@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -240,7 +241,7 @@
       <article class="story-card">
         <a href="warmodel2.html">
           <div class="story-image-wrap">
-            <img src="assets/warmodel2.jpg" alt="Pentagon briefing with missile launch screen and quantum war confusion" />
+            <img src="assets/warmodel2.jpg" alt="" />
             <span class="label">National Security Science</span>
           </div>
           <h2>Schrödinger’s War Model Working Perfectly, Officials Confirm While Ducking Missiles</h2>
@@ -251,7 +252,7 @@
       <article class="story-card">
         <a href="trumpdoctrine.html">
           <div class="story-image-wrap">
-            <img src="assets/trumpdoctrine.jpg" alt="Pentagon briefing introducing the 3 Hotels or Invasion doctrine with Kushner and a general" />
+            <img src="assets/trumpdoctrine.jpg" alt="" />
             <span class="label">National Security</span>
           </div>
           <h2>Pentagon Unveils “3 Hotels or Invasion” Trump Doctrine at Fort Bragg</h2>
@@ -261,7 +262,7 @@
       <article class="story-card">
         <a href="freegas.html">
           <div class="story-image-wrap">
-            <img src="assets/freegas.jpg" alt="Confused Trump supporters shouting at a gas pump advertising free gas while charging full price" />
+            <img src="assets/freegas.jpg" alt="" />
             <span class="label">Energy</span>
           </div>
           <h2>White House Declares Gasoline Free As Prices Near $5 Nationwide</h2>
@@ -269,11 +270,72 @@
         </a>
       </article>
 
-    </section>
+      <article class="story-card">
+        <a href="paidchaos.html">
+          <div class="story-image-wrap">
+            <img src="assets/paidchaos.jpg" alt="" />
+            <span class="label">Economy</span>
+          </div>
+          <h2>Nation’s Largest Employer Now “Freelance Chaos Agent,” Overtakes Healthcare</h2>
+          <p>Flexibility, amorality cited.</p>
+        </a>
+      </article>
 
-    <section class="mobile-ads">
-      <div class="ad-label">Patriotic Sponsors</div>
-      <div class="mobile-ad-rail" data-random-ads></div>
+      <article class="story-card">
+        <a href="hoodpope.html">
+          <div class="story-image-wrap">
+            <img src="assets/hoodpopetweet.jpg" alt="" />
+            <span class="label">Religion</span>
+          </div>
+          <h2>Trump Blasts Pope Leo In Late-Night Truth Social Post</h2>
+          <p>Leader unleashes on suspicious competing religious figure.</p>
+        </a>
+      </article>
+
+      <article class="story-card">
+        <a href="tommytone.html">
+          <div class="story-image-wrap">
+            <img src="assets/tommytone.jpg" alt="" />
+            <span class="label">National Security</span>
+          </div>
+          <h2>Tommy Two-Tone Renditioned to GitMo After “Numeric Threat Campaign”</h2>
+          <p>Officials say '867-5309' song represents decades-long assassination attempt.</p>
+        </a>
+      </article>
+
+      <article class="story-card">
+        <a href="courtsale.html">
+          <div class="story-image-wrap">
+            <img src="assets/courtsale.jpg" alt="" />
+            <span class="label">Judiciary</span>
+          </div>
+          <h2>SOCUS Announces 2-for-1 Decision Sale</h2>
+          <p>Americans can now bundle rulings for maximum value.</p>
+        </a>
+      </article>
+
+      <article class="story-card">
+        <a href="nanogun.html">
+          <div class="story-image-wrap">
+            <img src="assets/nanogun.jpg" alt="" />
+            <span class="label">Defense</span>
+          </div>
+          <h2>NanoGun Declared “Historic Leap in Preemptive Safety”</h2>
+          <p>Americans now protected before birth.</p>
+        </a>
+      </article>
+
+      <article class="story-card">
+        <a href="jokethreat.html">
+          <div class="story-image-wrap">
+            <img src="assets/jokebrief.jpg" alt="" />
+            <span class="label">National Security</span>
+          </div>
+          <h2>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h2>
+          <p>Humor reclassified as a national threat.</p>
+        </a>
+      </article>
+
     </section>
 
   </section>
@@ -293,8 +355,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".story-grid");
   if (!grid) return;
 
-  const maxStories = 18;
-
   const cards = Array.from(grid.children).filter((card) =>
     card.classList.contains("story-card")
   );
@@ -304,9 +364,10 @@ document.addEventListener("DOMContentLoaded", () => {
     [cards[i], cards[j]] = [cards[j], cards[i]];
   }
 
-  grid.replaceChildren(...cards.slice(0, maxStories));
+  grid.replaceChildren(...cards);
 });
 </script>
 
 </body>
 </html>
+```
