@@ -1,4 +1,4 @@
-
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -80,10 +80,12 @@
     .story-image-wrap { aspect-ratio: 16 / 10; }
 
     .lead-image-wrap img,
-    .story-image-wrap img {
+    .story-image-wrap img,
+    .story-image-wrap video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .label {
@@ -237,6 +239,19 @@
     </article>
 
     <section class="story-grid">
+
+      <article class="story-card">
+        <a href="trumpsummit.html">
+          <div class="story-image-wrap">
+            <video muted autoplay loop playsinline poster="assets/trumpsummit.png">
+              <source src="assets/trumpsummit.MP4" type="video/mp4">
+            </video>
+            <span class="label">Foreign Policy</span>
+          </div>
+          <h2>Trump Praised For “Dominance-Based Diplomacy” After Opening China Summit With Racial Improvisation</h2>
+          <p>White House officials say president’s “instinctive alpha communication style” immediately destabilized Xi Jinping psychologically.</p>
+        </a>
+      </article>
 
       <article class="story-card">
         <a href="savedagain.html">
@@ -403,5 +418,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
-
+```
+v
