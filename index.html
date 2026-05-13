@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,6 +34,13 @@
       max-width: 100%;
       height: auto;
       display: block;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .site-header {
@@ -81,11 +87,11 @@
 
     .lead-image-wrap img,
     .story-image-wrap img,
+    .lead-image-wrap video,
     .story-image-wrap video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     .label {
@@ -98,6 +104,7 @@
       font-weight: 900;
       padding: 6px 8px;
       text-transform: uppercase;
+      z-index: 2;
     }
 
     .lead-copy {
@@ -226,14 +233,16 @@
   <section>
 
     <article class="lead-story">
-      <a href="goldendon.html" class="lead-link">
+      <a href="trumpsummit.html" class="lead-link">
         <div class="lead-image-wrap">
-          <img src="assets/goldendon.jpg" alt="Golden Trump idol ceremony with pastors and braziers" />
-          <span class="label">Religion</span>
+          <video muted autoplay loop playsinline poster="assets/trumpsummit.png">
+            <source src="assets/trumpsummit.MP4" type="video/mp4">
+          </video>
+          <span class="label">Foreign Policy</span>
         </div>
         <div class="lead-copy">
-          <h1>PASTORS INSIST GOLDEN TRUMP STATUE “COMPLETELY DIFFERENT” FROM GOLDEN CALF BECAUSE THIS ONE HAS GOLF ACCESS</h1>
-          <p>Clergy clarify Old Testament prohibition only applied to “false idols without presidential immunity.”</p>
+          <h1>TRUMP PRAISED FOR “DOMINANCE-BASED DIPLOMACY” AFTER OPENING CHINA SUMMIT WITH RACIAL IMPROVISATION</h1>
+          <p>White House officials say president’s “instinctive alpha communication style” immediately destabilized Xi Jinping psychologically.</p>
         </div>
       </a>
     </article>
@@ -241,15 +250,13 @@
     <section class="story-grid">
 
       <article class="story-card">
-        <a href="trumpsummit.html">
+        <a href="goldendon.html">
           <div class="story-image-wrap">
-            <video muted autoplay loop playsinline poster="assets/trumpsummit.png">
-              <source src="assets/trumpsummit.MP4" type="video/mp4">
-            </video>
-            <span class="label">Foreign Policy</span>
+            <img src="assets/goldendon.jpg" alt="Golden Trump idol ceremony with pastors and braziers" />
+            <span class="label">Religion</span>
           </div>
-          <h2>Trump Praised For “Dominance-Based Diplomacy” After Opening China Summit With Racial Improvisation</h2>
-          <p>White House officials say president’s “instinctive alpha communication style” immediately destabilized Xi Jinping psychologically.</p>
+          <h2>PASTORS INSIST GOLDEN TRUMP STATUE “COMPLETELY DIFFERENT” FROM GOLDEN CALF BECAUSE THIS ONE HAS GOLF ACCESS</h2>
+          <p>Clergy clarify Old Testament prohibition only applied to “false idols without presidential immunity.”</p>
         </a>
       </article>
 
