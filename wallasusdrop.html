@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Don Wallasus™ | The Less Woke Alternative to the Crucifix</title>
+
+  <meta name="description" content="Still worshipping the old woke god? Upgrade your wall with Don Wallasus, the manly, successful, deal-closing alternative for today's patriotic home." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Don Wallasus™ — The Less Woke Alternative to the Crucifix" />
+  <meta property="og:description" content="No more guilt. No more suffering. Just dominance, confidence, and premium masculinity technology." />
+  <meta property="og:image" content="https://www.idonatry.com/assets/idonatry.jpg" />
+
+  <style>
+    :root {
+      --blue: #061f3f;
+      --red: #b80016;
+      --ink: #071629;
+      --muted: #5d6875;
+      --line: #d7dce3;
+      --bg: #f4f6f9;
+      --gold: #d9a441;
+      --dark: #05070b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .top-strip {
+      background: #000;
+      color: #fff;
+      border-bottom: 4px solid var(--red);
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 28px auto 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.98fr);
+      gap: 28px;
+      align-items: stretch;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: clamp(18px, 4vw, 42px);
+      box-shadow: 0 16px 45px rgba(7, 22, 41, 0.08);
+    }
+
+    .kicker {
+      color: var(--red);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(2.7rem, 7vw, 6.4rem);
+      line-height: 0.9;
+      letter-spacing: -0.065em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .dek {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      line-height: 1.28;
+      font-weight: 900;
+      max-width: 760px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 26px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 20px;
+      font-size: 1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 2px solid var(--red);
+    }
+
+    .cta:hover { background: #920012; }
+
+    .secondary-note {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-card {
+      background: var(--dark);
+      border: 1px solid #000;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    .hero-card img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .caption {
+      color: #d8dde5;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 10px;
+      line-height: 1.35;
+    }
+
+    .proof-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .proof-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .proof-card h2 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 1.18rem;
+      line-height: 1.05;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .proof-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.38;
+      font-weight: 700;
+    }
+
+    .before-after {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .scene {
+      background: #fff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .scene-copy {
+      padding: 18px;
+    }
+
+    .scene-copy .tag {
+      display: inline-block;
+      background: rgba(184,0,22,0.1);
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 8px;
+      margin-bottom: 10px;
+    }
+
+    .scene-copy h2 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 1.6rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .scene-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.42;
+      font-weight: 700;
+    }
+
+    .pitch-box {
+      margin-top: 26px;
+      background: var(--blue);
+      color: #fff;
+      border: 1px solid #001329;
+      padding: clamp(20px, 4vw, 34px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .pitch-box h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3vw, 3rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .pitch-box p {
+      margin: 10px 0 0;
+      color: #d8dde5;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .price-burst {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111;
+      border: 5px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transform: rotate(-8deg);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      padding: 14px;
+    }
+
+    .fine-print {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .before-after,
+      .pitch-box {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-grid { grid-template-columns: 1fr; }
+      .price-burst { margin: 0 auto; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-strip">Paid Spiritual Upgrade Presentation</div>
+
+  <main class="page-shell">
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">New From iDonatry Labs</div>
+        <h1>Still Worshipping That Guy?</h1>
+        <p class="dek">Skinny. Broke. Nailed to wood. Frankly? Weak message for the kids. Upgrade your home with <strong>Don Wallasus™</strong>, the less woke alternative to the crucifix.</p>
+
+        <div class="cta-row">
+          <a class="cta" href="https://www.iDonatry.com">Order at iDonatry.com</a>
+          <span class="secondary-note">Includes tactical prayer coin while supplies last</span>
+        </div>
+      </div>
+
+      <figure class="hero-card">
+        <img src="assets/idonatry.jpg" alt="Golden Don Wallasus idol standing in triumphant power pose" />
+        <figcaption class="caption">Don Wallasus™ arrives pre-successful, pre-confident, and visually incompatible with doubt.</figcaption>
+      </figure>
+    </section>
+
+    <section class="proof-grid" aria-label="Product benefits">
+      <article class="proof-card">
+        <h2>More Manly</h2>
+        <p>Traditional wall faith emphasizes humility. Don Wallasus emphasizes shoulder width, gold finish, and the difficult art of never apologizing.</p>
+      </article>
+
+      <article class="proof-card">
+        <h2>More Successful</h2>
+        <p>No more suffering-based messaging. This premium idol projects confidence, status, and deal-closing energy directly into the family room.</p>
+      </article>
+
+      <article class="proof-card">
+        <h2>Less Woke</h2>
+        <p>Why teach children mercy when you could teach them vertical integration, grievance monetization, and spiritually optimized dominance?</p>
+      </article>
+    </section>
+
+    <section class="before-after">
+      <article class="scene">
+        <img src="assets/doubters.jpg" alt="A mother, father, and son looking distrustfully at a traditional crucifix on their wall" />
+        <div class="scene-copy">
+          <span class="tag">Before</span>
+          <h2>The Old Wall Problem</h2>
+          <p>Mom, Dad, and Son stare up at the traditional crucifix and ask the question millions of families are afraid to say out loud: where is the winning?</p>
+        </div>
+      </article>
+
+      <article class="scene">
+        <img src="assets/idonatry.jpg" alt="Golden Don Wallasus idol replacing traditional wall art" />
+        <div class="scene-copy">
+          <span class="tag">After</span>
+          <h2>The Wallasus Solution</h2>
+          <p>Mom throws the old guilt object away like a dirty diaper. Dad mounts Don Wallasus with pride. The child smiles because the room finally respects strength.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="pitch-box">
+      <div>
+        <h2>Finally — A Savior Who Closes Deals.</h2>
+        <p>Order now at <strong>www.iDonatry.com</strong> and receive a free tactical prayer coin plus access to Don Wallasus Platinum+ streaming devotionals.</p>
+      </div>
+      <div class="price-burst">Act Now<br />Before<br />Mercy Wins</div>
+    </section>
+
+    <p class="fine-print">
+      Don Wallasus™ is a satirical devotional lifestyle object and should not be used as legal tender, religious counsel, structural support, or proof of salvation. Side effects may include confidence, yelling at clouds, and throwing compassion into municipal waste containers.
+    </p>
+
+  </main>
+
+</body>
+</html>
