@@ -1,54 +1,63 @@
 const adTiles = [
-  { img: "assets/jokeshieldDROP.jpg" },
-  { img: "assets/bigjesusDROP.jpg" },
-  { img: "assets/patriotdroneDROP.jpg" },
-  { img: "assets/nanogunDROP.jpg" },
-  { img: "assets/idonatryDROP.png" },
-  { img: "assets/storiesDROP.jpg" },
-  { img: "assets/trumpmaxDROP.jpg" },
-  {
-    img: "assets/coverDROP.jpg",
-    url: "https://www.amazon.com/When-Happened-Here-American-Production-ebook/dp/B0FZ6TCB9P",
-    alt: "When It Happened Here — Available Now"
-  }
+{ img: "assets/jokeshieldDROP.jpg" },
+{ img: "assets/bigjesusDROP.jpg" },
+{ img: "assets/patriotdroneDROP.jpg" },
+{ img: "assets/nanogunDROP.jpg" },
+{ img: "assets/idonatryDROP.png" },
+{ img: "assets/storiesDROP.jpg" },
+{ img: "assets/trumpmaxDROP.jpg" },
+{
+img: "assets/coverDROP.jpg",
+url: "[https://www.amazon.com/When-Happened-Here-American-Production-ebook/dp/B0FZ6TCB9P](https://www.amazon.com/When-Happened-Here-American-Production-ebook/dp/B0FZ6TCB9P)",
+alt: "When It Happened Here — Available Now"
+},
+{
+img: "assets/trumpenz.jpg",
+url: "[https://idonatry.com](https://idonatry.com)"
+}
 ];
 
 function shuffleAds(items) {
-  return [...items].sort(() => Math.random() - 0.5);
+return [...items].sort(() => Math.random() - 0.5);
 }
 
 function loadRandomAds() {
-  const rails = document.querySelectorAll("[data-random-ads]");
-  if (!rails.length) return;
+const rails = document.querySelectorAll("[data-random-ads]");
+if (!rails.length) return;
 
-  rails.forEach((rail) => {
-    // Random count between 3 and 4
-    const count = Math.floor(Math.random() * 2) + 3;
+rails.forEach((rail) => {
+// Random count between 3 and 4
+const count = Math.floor(Math.random() * 2) + 3;
 
-    const selectedAds = shuffleAds(adTiles).slice(0, count);
+```
+const selectedAds = shuffleAds(adTiles).slice(0, count);
 
-    rail.innerHTML = selectedAds.map((ad) => {
-      const imgTag = `<img src="${ad.img}" alt="${ad.alt || ''}" />`;
+rail.innerHTML = selectedAds.map((ad) => {
+  const imgTag = `<img src="${ad.img}" alt="${ad.alt || ''}" />`;
 
-      if (ad.url) {
-        return `
-          <div class="ad-unit">
-            <a href="${ad.url}" target="_blank" rel="noopener">
-              ${imgTag}
-            </a>
-          </div>
-        `;
-      }
+  if (ad.url) {
+    return `
+      <div class="ad-unit">
+        <a href="${ad.url}" target="_blank" rel="noopener">
+          ${imgTag}
+        </a>
+      </div>
+    `;
+  }
 
-      return `
-        <div class="ad-unit">
-          <a href="${ad.img}">
-            ${imgTag}
-          </a>
-        </div>
-      `;
-    }).join("");
-  });
+  return `
+    <div class="ad-unit">
+      <a href="${ad.img}">
+        ${imgTag}
+      </a>
+    </div>
+  `;
+}).join("");
+```
+
+});
 }
 
 document.addEventListener("DOMContentLoaded", loadRandomAds);
+
+Note: I removed the custom alt field from the `trumpenz.jpg` ad object only. The code will still render correctly because it already falls back to an empty alt string via `ad.alt || ''`.
