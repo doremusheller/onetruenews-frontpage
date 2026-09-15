@@ -248,6 +248,17 @@
     </article>
 
     <section class="story-grid">
+      <article class="story-card pinned-secondary">
+        <a href="stevescandal2.html">
+          <div class="story-image-wrap">
+            <img src="assets/stevescandal2.jpg" alt="Stephen Miller traveling with a female department-store mannequin named Tradition" />
+            <span class="label">White House</span>
+          </div>
+          <h2>MILLER TARGETED BY NEW LIBERAL SMEAR OVER TRAVELING COMPANION “TRADITION”</h2>
+          <p>Witnesses describe mannequin, private dinners and unexplained oils as Democrats seize on another deeply personal attack.</p>
+        </a>
+      </article>
+
       <article class="story-card">
         <a href="melmassage.html">
           <div class="story-image-wrap">
@@ -538,8 +549,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".story-grid");
   if (!grid) return;
 
+  const pinnedCards = Array.from(grid.children).filter((card) =>
+    card.classList.contains("pinned-secondary")
+  );
+
   const cards = Array.from(grid.children).filter((card) =>
-    card.classList.contains("story-card")
+    card.classList.contains("story-card") &&
+    !card.classList.contains("pinned-secondary")
   );
 
   for (let i = cards.length - 1; i > 0; i--) {
@@ -547,7 +563,7 @@ document.addEventListener("DOMContentLoaded", () => {
     [cards[i], cards[j]] = [cards[j], cards[i]];
   }
 
-  grid.replaceChildren(...cards);
+  grid.replaceChildren(...pinnedCards, ...cards);
 });
 </script>
 
