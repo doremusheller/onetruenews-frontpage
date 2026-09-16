@@ -210,6 +210,52 @@
       font-weight: 800;
     }
 
+
+    .archive-results {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .archive-result {
+      background: #fff;
+      border: 1px solid var(--oti-line);
+      border-top: 4px solid var(--oti-red);
+    }
+
+    .archive-result a {
+      display: block;
+      height: 100%;
+      padding: 18px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .archive-result-category {
+      margin: 0 0 7px;
+      color: var(--oti-red);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .archive-result h2 {
+      margin: 0 0 8px;
+      color: var(--oti-blue);
+      font-size: 1.15rem;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .archive-result p {
+      margin: 0;
+      color: var(--oti-muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
     .story-grid {
       margin-top: 22px;
       display: grid;
@@ -279,7 +325,8 @@
     }
 
     @media (max-width: 760px) {
-      .story-grid { grid-template-columns: 1fr; }
+      .story-grid,
+      .archive-results { grid-template-columns: 1fr; }
 
       .lead-copy h1 {
         font-size: clamp(1.55rem, 7vw, 2.35rem);
@@ -329,6 +376,8 @@
       </div>
       <p id="search-status" class="search-status" aria-live="polite"></p>
     </section>
+
+    <section id="archive-search-results" class="archive-results" aria-label="Story search results" hidden></section>
 
     <section class="story-grid">
       <article class="story-card pinned-secondary">
@@ -611,8 +660,6 @@
       </article>
     </section>
 
-    <p id="no-search-results" class="no-search-results">No OTI stories match that search.</p>
-
     <section class="mobile-ads">
       <div class="ad-label">Patriotic Sponsors</div>
       <div class="mobile-ad-rail" data-random-ads></div>
@@ -653,24 +700,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const searchInput = document.querySelector("#story-search");
   const searchStatus = document.querySelector("#search-status");
-  const noResults = document.querySelector("#no-search-results");
-  const allCards = Array.from(grid.querySelectorAll(".story-card"));
-
-  searchInput?.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLocaleLowerCase();
-    let visibleCount = 0;
-
-    allCards.forEach((card) => {
-      const searchableText = card.textContent.toLocaleLowerCase();
-      const matches = !query || searchableText.includes(query);
-      card.hidden = !matches;
-      if (matches) visibleCount += 1;
+  const searchResults = document.querySelector("#archive-search-results");
+  const storyIndexPromise = fetch("story-index.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("Story index unavailable");
+      return response.json();
     });
 
-    noResults.style.display = visibleCount === 0 ? "block" : "none";
-    searchStatus.textContent = query
-      ? `${visibleCount} ${visibleCount === 1 ? "story" : "stories"} found`
-      : "";
+  function createSearchResult(story) {
+    const card = document.createElement("article");
+    card.className = "archive-result";
+
+    const link = document.createElement("a");
+    link.href = story.url;
+
+    if (story.category) {
+      const category = document.createElement("div");
+      category.className = "archive-result-category";
+      category.textContent = story.category;
+      link.appendChild(category);
+    }
+
+    const heading = document.createElement("h2");
+    heading.textContent = story.title;
+    link.appendChild(heading);
+
+    if (story.description) {
+      const description = document.createElement("p");
+      description.textContent = story.description;
+      link.appendChild(description);
+    }
+
+    card.appendChild(link);
+    return card;
+  }
+
+  searchInput?.addEventListener("input", async () => {
+    const query = searchInput.value.trim().toLocaleLowerCase();
+    const searchNumber = Symbol();
+    searchInput._activeSearch = searchNumber;
+
+    if (!query) {
+      grid.hidden = false;
+      searchResults.hidden = true;
+      searchResults.replaceChildren();
+      searchStatus.textContent = "";
+      return;
+    }
+
+    grid.hidden = true;
+    searchResults.hidden = false;
+    searchStatus.textContent = "Searching the OTI archives…";
+
+    try {
+      const index = await storyIndexPromise;
+      if (searchInput._activeSearch !== searchNumber) return;
+
+      const terms = query.split(/\s+/).filter(Boolean);
+      const matches = index.stories.filter((story) => {
+        const searchableText = [
+          story.title,
+          story.description,
+          story.category,
+          story.text
+        ].join(" ").toLocaleLowerCase();
+
+        return terms.every((term) => searchableText.includes(term));
+      });
+
+      searchResults.replaceChildren(...matches.map(createSearchResult));
+      searchStatus.textContent =
+        `${matches.length} ${matches.length === 1 ? "story" : "stories"} found across the OTI archives`;
+
+      if (!matches.length) {
+        const empty = document.createElement("p");
+        empty.className = "no-search-results";
+        empty.style.display = "block";
+        empty.textContent = "No OTI stories match that search.";
+        searchResults.appendChild(empty);
+      }
+    } catch (error) {
+      if (searchInput._activeSearch !== searchNumber) return;
+      searchResults.replaceChildren();
+      searchStatus.textContent = "The OTI archives could not be searched right now.";
+    }
   });
 });
 </script>
