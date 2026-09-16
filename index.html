@@ -135,6 +135,81 @@
       font-weight: 700;
     }
 
+
+    .story-search {
+      margin: 4px 0 22px;
+    }
+
+    .story-search label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--oti-blue);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .story-search-field {
+      position: relative;
+    }
+
+    .story-search-field::before {
+      content: "⌕";
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-52%);
+      color: var(--oti-red);
+      font-size: 1.45rem;
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    .story-search input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 46px;
+      border: 2px solid var(--oti-blue);
+      border-radius: 0;
+      background: #fff;
+      color: #071629;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .story-search input:focus {
+      border-color: var(--oti-red);
+      box-shadow: 0 0 0 3px rgba(184, 0, 22, 0.12);
+    }
+
+    .story-search input::placeholder {
+      color: #7a8490;
+      font-weight: 600;
+    }
+
+    .search-status {
+      min-height: 18px;
+      margin: 7px 0 0;
+      color: var(--oti-muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .no-search-results {
+      display: none;
+      grid-column: 1 / -1;
+      margin: 0;
+      padding: 28px 18px;
+      border: 1px solid var(--oti-line);
+      background: #fff;
+      color: var(--oti-muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
     .story-grid {
       margin-top: 22px;
       display: grid;
@@ -246,6 +321,14 @@
         </div>
       </a>
     </article>
+
+    <section class="story-search" aria-label="Search OTI stories">
+      <label for="story-search">Search the OTI archives</label>
+      <div class="story-search-field">
+        <input id="story-search" type="search" placeholder="Search headlines, topics, people and categories…" autocomplete="off" />
+      </div>
+      <p id="search-status" class="search-status" aria-live="polite"></p>
+    </section>
 
     <section class="story-grid">
       <article class="story-card pinned-secondary">
@@ -525,7 +608,8 @@
           <h2>Nation’s Jokes Officially Upgraded to Ballistic Weapons</h2>
           <p>Humor reclassified as a national threat.</p>
         </a>
-      </article></section>
+      </article>  <p id="no-search-results" class="no-search-results">No OTI stories match that search.</p>
+    </section>
 
     <section class="mobile-ads">
       <div class="ad-label">Patriotic Sponsors</div>
@@ -564,6 +648,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   grid.replaceChildren(...pinnedCards, ...cards);
+
+  const searchInput = document.querySelector("#story-search");
+  const searchStatus = document.querySelector("#search-status");
+  const noResults = document.querySelector("#no-search-results");
+  const allCards = Array.from(grid.querySelectorAll(".story-card"));
+
+  searchInput?.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLocaleLowerCase();
+    let visibleCount = 0;
+
+    allCards.forEach((card) => {
+      const searchableText = card.textContent.toLocaleLowerCase();
+      const matches = !query || searchableText.includes(query);
+      card.hidden = !matches;
+      if (matches) visibleCount += 1;
+    });
+
+    noResults.style.display = visibleCount === 0 ? "block" : "none";
+    searchStatus.textContent = query
+      ? `${visibleCount} ${visibleCount === 1 ? "story" : "stories"} found`
+      : "";
+  });
 });
 </script>
 
