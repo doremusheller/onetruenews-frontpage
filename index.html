@@ -698,6 +698,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".story-grid");
   if (!grid) return;
 
+  const MAX_GRID_STORIES = 24;
+
   const pinnedCards = Array.from(grid.children).filter((card) =>
     card.classList.contains("pinned-secondary")
   );
@@ -707,12 +709,26 @@ document.addEventListener("DOMContentLoaded", () => {
     !card.classList.contains("pinned-secondary")
   );
 
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[j]] = [cards[j], cards[i]];
-  }
+  /*
+   * Cards are maintained newest-to-oldest in the HTML. Use that order as a
+   * publication-date proxy: newer stories receive greater selection weight,
+   * while every older story retains a chance to rotate onto the front page.
+   */
+  const weightedCards = cards.map((card, index) => {
+    const recencyWeight = Math.max(1, cards.length - index);
+    return {
+      card,
+      draw: Math.pow(Math.random(), 1 / recencyWeight)
+    };
+  });
 
-  grid.replaceChildren(...pinnedCards, ...cards);
+  const availableSlots = Math.max(0, MAX_GRID_STORIES - pinnedCards.length);
+  const rotatingCards = weightedCards
+    .sort((a, b) => b.draw - a.draw)
+    .slice(0, availableSlots)
+    .map(({ card }) => card);
+
+  grid.replaceChildren(...pinnedCards, ...rotatingCards);
 
   const searchInput = document.querySelector("#story-search");
   const searchStatus = document.querySelector("#search-status");
