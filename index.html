@@ -396,7 +396,7 @@
         </a>
       </article>
 
-      <article class="story-card">
+      <article class="story-card fixed-grid-story">
         <a href="goateffer.html">
           <div class="story-image-wrap">
             <img src="assets/goateffer.jpg" alt="FBI recruitment campaign billboard featuring a goat" />
@@ -404,6 +404,17 @@
           </div>
           <h2>FBI ACCIDENTALLY LAUNCHES NATIONWIDE “SECOND CHANCE FOR GOATFUCKERS” RECRUITMENT CAMPAIGN</h2>
           <p>Patel insists bureau is not specifically seeking goatfuckers after applications surge 11,000 percent.</p>
+        </a>
+      </article>
+
+      <article class="story-card fixed-grid-story">
+        <a href="notcorruption.html">
+          <div class="story-image-wrap">
+            <img src="assets/presidential-crypto.jpg" alt="Cryptocurrency and presidential power represented in a satirical White House scene" />
+            <span class="label">Ethics &amp; Innovation</span>
+          </div>
+          <h2>WHITE HOUSE ANNOUNCES HISTORIC SEPARATION OF MONEY AND CORRUPTION</h2>
+          <p>New ethics framework officially eliminates presidential corruption by classifying payments to family businesses as “commerce.”</p>
         </a>
       </article>
 
@@ -701,12 +712,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const MAX_GRID_STORIES = 24;
 
   const pinnedCards = Array.from(grid.children).filter((card) =>
-    card.classList.contains("pinned-secondary")
+    card.classList.contains("pinned-secondary") ||
+    card.classList.contains("fixed-grid-story")
   );
 
   const cards = Array.from(grid.children).filter((card) =>
     card.classList.contains("story-card") &&
-    !card.classList.contains("pinned-secondary")
+    !card.classList.contains("pinned-secondary") &&
+    !card.classList.contains("fixed-grid-story")
   );
 
   /*
