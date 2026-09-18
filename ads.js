@@ -6,6 +6,7 @@ const adTiles = [
   { img: "assets/idonatryDROP.png" },
   { img: "assets/storiesDROP.jpg" },
   { img: "assets/trumpmaxDROP.jpg" },
+  { img: "assets/bribebriteDROP.jpg" },
   {
     img: "assets/coverDROP.jpg",
     url: "https://www.amazon.com/When-Happened-Here-American-Production-ebook/dp/B0FZ6TCB9P",
