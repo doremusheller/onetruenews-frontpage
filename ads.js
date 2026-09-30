@@ -7,7 +7,10 @@ const adTiles = [
   { img: "assets/storiesDROP.jpg" },
   { img: "assets/trumpmaxDROP.jpg" },
   { img: "assets/bribebriteDROP.jpg" },
-  { img: "assets/greatnapsDROP.jpg" },
+  {
+    img: "assets/greatnapsDROP.jpg",
+    url: "https://idonatry.com/naps/greatnaps.html"
+  },
   {
     img: "assets/coverDROP.jpg",
     url: "https://www.amazon.com/When-Happened-Here-American-Production-ebook/dp/B0FZ6TCB9P",
