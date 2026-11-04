@@ -1,7 +1,14 @@
 {
-  "generated": "2026-10-09",
-  "storyCount": 50,
+  "generated": "2026-11-04",
+  "storyCount": 51,
   "stories": [
+    {
+      "category": "Elections",
+      "description": "Party officials insist democracy remains strong, but Americans have become dangerously unreliable.",
+      "text": "WASHINGTON, D.C., November 4, 2026 — Following a catastrophic midterm defeat, Republican National Committee officials announced Wednesday that an exhaustive internal investigation had identified the cause of the party's electoral collapse: voters. \"The candidates were excellent. Our policies were magnificent. The messaging was flawless,\" explained RNC Electoral Integrity Director Chad P. Whitmore. \"Unfortunately, millions of Americans deliberately voted for Democrats. We simply cannot sustain democracy under these conditions.\" The investigation, conducted over eleven minutes in a conference room at RNC headquarters, found no evidence of strategic errors, leadership failures, or unpopular policies. Investigators instead uncovered widespread incidents of citizens entering polling stations and selecting candidates other than those preferred by Republican leadership. \"This wasn't an isolated incident,\" Whitmore warned. \"It happened in virtually every state. Some voters even appeared enthusiastic.\" The RNC immediately established the Commission for Responsible Electoral Participation, tasked with developing a more dependable electorate before the next election. Initial proposals include mandatory voter retraining, replacing unreliable suburban precincts with approved retirement communities, and creating a Patriot Loyalty Exchange allowing disqualified voters to transfer their ballots to more responsible Americans. Committee members also considered eliminating secret ballots, arguing that honest citizens should have nothing to hide. Democratic officials condemned the proposals as authoritarian. Republican leaders dismissed the criticism as further evidence that Democrats fundamentally misunderstand democracy. By Wednesday afternoon, the commission announced a breakthrough: future elections could proceed without voters altogether, eliminating both electoral uncertainty and expensive voting infrastructure. President Trump endorsed the plan in a fictional statement prepared for this satirical report. \"Nobody knows voting better than me. Tremendous voting. But the voters? Very bad people, many of them. They keep voting wrong. We're going to have beautiful elections without them. The biggest elections. Nobody will ever lose again, especially me.\"",
+      "title": "RNC BLAMES VOTERS FOR ELECTION DISASTER, ANNOUNCES PLAN TO REPLACE ELECTORATE",
+      "url": "electorate.html"
+    },
     {
       "category": "National Security Science",
       "description": "Leading mathematicians reveal alarming statistical similarities to hot soup, bees, and common classroom writing instruments.",
